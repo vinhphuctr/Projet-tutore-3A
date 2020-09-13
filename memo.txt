@@ -1,0 +1,18 @@
+Installation de Angular.
+
+1) Dans un premier temps installez NodeJs via l'installation graphique 12.18.3 LTS dans notre cas à l'adresse suivante : https://nodejs.org/en/
+2) Ouvrir l'invite de commande
+3) Tapez la commande "npm install -g @angular/cli" (installation de Angular et de son interface console et outils integrés)
+
+Quelques petites commande de la CLI utiles:
+  - ng g class <Nom de la classe>
+  - ng g component <Nom du composent>
+  - ng g directive <Nom de la directive>
+  - ng g service <Nom du service>
+  - ng serve (Lance le serveur local de test)
+  - ng build (compilation) --output-path="dir"(change le répértoire des fichiers compiler) --watch(recompile sans refresh)
+ 
+ Pour plus de confort dans votre IDE (VSCode) télécharger le plugin suivant ('Angular Essentials (Version 9)')
+ 
+
+
