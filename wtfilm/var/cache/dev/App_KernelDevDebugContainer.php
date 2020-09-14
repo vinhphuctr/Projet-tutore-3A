@@ -16,6 +16,6 @@ if (!\class_exists(App_KernelDevDebugContainer::class, false)) {
 
 return new \ContainerGLryzOT\App_KernelDevDebugContainer([
     'container.build_hash' => 'GLryzOT',
-    'container.build_id' => 'b66564b6',
-    'container.build_time' => 1600078410,
+    'container.build_id' => '8c3c5335',
+    'container.build_time' => 1600080305,
 ], __DIR__.\DIRECTORY_SEPARATOR.'ContainerGLryzOT');
