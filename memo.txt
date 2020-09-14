@@ -1,3 +1,34 @@
+Installation de PHP, Composer & Symfony
+Plus de détails: https://davidperonne.com/installation-de-php-7-et-composer-sur-windows-10-en-mode-natif/
+
+1. PHP
+
+ - Télécharger et installer Visual C++ (prendre la version x86 : vc_redist.x86.exe) : https://support.microsoft.com/fr-fr/help/2977003/the-latest-supported-visual-c-downloads
+ - Récupérer php7.zip sur le repo
+ - Créer le dossier "C:\php7" et y extraire le contenu du zip
+ - Ouvrir la recherche windows, puis "Modifier les variables d'environnement systèmes"
+ - En cliquant sur le bouuton "Variables d'environnement", une fenêtre s'ouvre
+ - Choisir PATH, Modifier la variable et ajouter à la liste en cliquant sur Nouveau : C:\php7
+ - Faire OK, fermer les fenêtres et démarrer un nouveau cmd avec Windows + R
+ - Entrer "php -v" sans les guillements et vérifier que l'invite retourne bien PHP 7.4.10 etc...
+ => S'il y a une erreur, tester les autres versions de Visual C++ sur la page de téléchargement.
+
+2. Composer
+
+  - Télécharger l'installateur windows de Composer (lien direct): https://getcomposer.org/Composer-Setup.exe
+  - Suivre le wizard d'installation (éviter de changer le répertoire d'installation)
+  - Même manip pour la variable d'environnement, vérifier que ceci a bien été ajouté : C:\Users\Epulapp\AppData\Roaming\Composer\vendor\bin
+  - Ouvrir un nouveau cmd et tester "composer -V" sans les guillements
+  
+3. Symfony
+
+  - Télécharger symfony sur https://symfony.com/download (bouton bleu download setup.exe)
+  - Suivre le wizard d'installation
+  - Ouvrir un nouveau cmd et tester "symfony version" sans les guillements
+  
+
+-----
+
 Installation de Angular.
 
 1) Dans un premier temps installez NodeJs via l'installation graphique 12.18.3 LTS dans notre cas à l'adresse suivante : https://nodejs.org/en/
