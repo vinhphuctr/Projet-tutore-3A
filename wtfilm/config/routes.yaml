@@ -1,7 +1,11 @@
 index:
    path: /
-   controller: App\Controller\DefaultController::index
+   controller: App\Controller\HomeController::index
 
 film:
    path: /film
    controller: App\Controller\FilmController::index
+
+serie:
+   path: /serie
+   controller: App\Controller\SerieController::index
