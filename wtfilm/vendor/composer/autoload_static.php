@@ -89,7 +89,6 @@ class ComposerStaticInitfe2f38519aa843f6adb2895a999147c8
             'Symfony\\Component\\Config\\' => 25,
             'Symfony\\Component\\Cache\\' => 24,
             'Symfony\\Component\\BrowserKit\\' => 29,
-            'Symfony\\Component\\Asset\\' => 24,
             'Symfony\\Bundle\\WebProfilerBundle\\' => 33,
             'Symfony\\Bundle\\TwigBundle\\' => 26,
             'Symfony\\Bundle\\SecurityBundle\\' => 30,
@@ -380,10 +379,6 @@ class ComposerStaticInitfe2f38519aa843f6adb2895a999147c8
         array (
             0 => __DIR__ . '/..' . '/symfony/browser-kit',
         ),
-        'Symfony\\Component\\Asset\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/asset',
-        ),
         'Symfony\\Bundle\\WebProfilerBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/web-profiler-bundle',
@@ -558,6 +553,8 @@ class ComposerStaticInitfe2f38519aa843f6adb2895a999147c8
     );
 
     public static $classMap = array (
+        'App\\Controller\\FilmController' => __DIR__ . '/../..' . '/src/Controller/FilmController.php',
+        'App\\Kernel' => __DIR__ . '/../..' . '/src/Kernel.php',
         'Collator' => __DIR__ . '/..' . '/symfony/intl/Resources/stubs/Collator.php',
         'Doctrine\\Bundle\\DoctrineBundle\\Command\\CreateDatabaseDoctrineCommand' => __DIR__ . '/..' . '/doctrine/doctrine-bundle/Command/CreateDatabaseDoctrineCommand.php',
         'Doctrine\\Bundle\\DoctrineBundle\\Command\\DoctrineCommand' => __DIR__ . '/..' . '/doctrine/doctrine-bundle/Command/DoctrineCommand.php',
@@ -2692,22 +2689,6 @@ class ComposerStaticInitfe2f38519aa843f6adb2895a999147c8
         'Symfony\\Bundle\\WebProfilerBundle\\Profiler\\TemplateManager' => __DIR__ . '/..' . '/symfony/web-profiler-bundle/Profiler/TemplateManager.php',
         'Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension' => __DIR__ . '/..' . '/symfony/web-profiler-bundle/Twig/WebProfilerExtension.php',
         'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle' => __DIR__ . '/..' . '/symfony/web-profiler-bundle/WebProfilerBundle.php',
-        'Symfony\\Component\\Asset\\Context\\ContextInterface' => __DIR__ . '/..' . '/symfony/asset/Context/ContextInterface.php',
-        'Symfony\\Component\\Asset\\Context\\NullContext' => __DIR__ . '/..' . '/symfony/asset/Context/NullContext.php',
-        'Symfony\\Component\\Asset\\Context\\RequestStackContext' => __DIR__ . '/..' . '/symfony/asset/Context/RequestStackContext.php',
-        'Symfony\\Component\\Asset\\Exception\\ExceptionInterface' => __DIR__ . '/..' . '/symfony/asset/Exception/ExceptionInterface.php',
-        'Symfony\\Component\\Asset\\Exception\\InvalidArgumentException' => __DIR__ . '/..' . '/symfony/asset/Exception/InvalidArgumentException.php',
-        'Symfony\\Component\\Asset\\Exception\\LogicException' => __DIR__ . '/..' . '/symfony/asset/Exception/LogicException.php',
-        'Symfony\\Component\\Asset\\Package' => __DIR__ . '/..' . '/symfony/asset/Package.php',
-        'Symfony\\Component\\Asset\\PackageInterface' => __DIR__ . '/..' . '/symfony/asset/PackageInterface.php',
-        'Symfony\\Component\\Asset\\Packages' => __DIR__ . '/..' . '/symfony/asset/Packages.php',
-        'Symfony\\Component\\Asset\\PathPackage' => __DIR__ . '/..' . '/symfony/asset/PathPackage.php',
-        'Symfony\\Component\\Asset\\UrlPackage' => __DIR__ . '/..' . '/symfony/asset/UrlPackage.php',
-        'Symfony\\Component\\Asset\\VersionStrategy\\EmptyVersionStrategy' => __DIR__ . '/..' . '/symfony/asset/VersionStrategy/EmptyVersionStrategy.php',
-        'Symfony\\Component\\Asset\\VersionStrategy\\JsonManifestVersionStrategy' => __DIR__ . '/..' . '/symfony/asset/VersionStrategy/JsonManifestVersionStrategy.php',
-        'Symfony\\Component\\Asset\\VersionStrategy\\RemoteJsonManifestVersionStrategy' => __DIR__ . '/..' . '/symfony/asset/VersionStrategy/RemoteJsonManifestVersionStrategy.php',
-        'Symfony\\Component\\Asset\\VersionStrategy\\StaticVersionStrategy' => __DIR__ . '/..' . '/symfony/asset/VersionStrategy/StaticVersionStrategy.php',
-        'Symfony\\Component\\Asset\\VersionStrategy\\VersionStrategyInterface' => __DIR__ . '/..' . '/symfony/asset/VersionStrategy/VersionStrategyInterface.php',
         'Symfony\\Component\\BrowserKit\\AbstractBrowser' => __DIR__ . '/..' . '/symfony/browser-kit/AbstractBrowser.php',
         'Symfony\\Component\\BrowserKit\\Cookie' => __DIR__ . '/..' . '/symfony/browser-kit/Cookie.php',
         'Symfony\\Component\\BrowserKit\\CookieJar' => __DIR__ . '/..' . '/symfony/browser-kit/CookieJar.php',

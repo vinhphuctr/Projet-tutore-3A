@@ -1,3 +1,7 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+   path: /
+   controller: App\Controller\DefaultController::index
+
+film:
+   path: /film
+   controller: App\Controller\FilmController::index
