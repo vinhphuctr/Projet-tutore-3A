@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 16 sep. 2020 à 06:49
+-- Généré le : mer. 16 sep. 2020 à 07:02
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -197,7 +197,6 @@ DROP TABLE IF EXISTS `serie`;
 CREATE TABLE IF NOT EXISTS `serie` (
   `id_video` int(11) NOT NULL,
   `nb_saison` int(4) NOT NULL,
-  `nb_episode` int(4) NOT NULL,
   PRIMARY KEY (`id_video`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
