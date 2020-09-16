@@ -17,8 +17,8 @@
 /var/SymfonyRequirements.php
 /var/cache/*
 !/var/cache/.gitkeep
-/var/logs/*
-!/var/logs/.gitkeep
+/var/log/*
+!/var/log/.gitkeep
 /var/sessions/*
 !/var/sessions/.gitkeep
 /phpunit.xml

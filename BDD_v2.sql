@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 15 sep. 2020 à 18:58
+-- Généré le : mer. 16 sep. 2020 à 06:49
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `wtf`
 --
-CREATE DATABASE IF NOT EXISTS `wtf` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `wtf`;
 
 -- --------------------------------------------------------
 
@@ -145,9 +143,7 @@ DROP TABLE IF EXISTS `production`;
 CREATE TABLE IF NOT EXISTS `production` (
   `id_prod` int(254) NOT NULL AUTO_INCREMENT,
   `nom` varchar(30) NOT NULL,
-  `id_video` int(11) NOT NULL,
-  PRIMARY KEY (`id_prod`),
-  KEY `c_prod` (`id_video`)
+  PRIMARY KEY (`id_prod`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -187,7 +183,7 @@ CREATE TABLE IF NOT EXISTS `role` (
 DROP TABLE IF EXISTS `score`;
 CREATE TABLE IF NOT EXISTS `score` (
   `id_score` int(254) NOT NULL AUTO_INCREMENT,
-  `note` int(1) NOT NULL,
+  `note` int(3) NOT NULL COMMENT 'note en pourcentage',
   PRIMARY KEY (`id_score`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -297,12 +293,6 @@ ALTER TABLE `participer`
 ALTER TABLE `posseder`
   ADD CONSTRAINT `c_posseder_personne` FOREIGN KEY (`id_personne`) REFERENCES `personne` (`id_personne`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `c_posseder_role` FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`);
-
---
--- Contraintes pour la table `production`
---
-ALTER TABLE `production`
-  ADD CONSTRAINT `c_prod` FOREIGN KEY (`id_video`) REFERENCES `video` (`id_video`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `regarder`
