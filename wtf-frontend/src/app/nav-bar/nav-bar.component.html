@@ -12,13 +12,13 @@
       <button mat-raised-button color="warn">Déconnexion</button>
     </mat-toolbar-row>
   </mat-toolbar>
-  
+
   <mat-sidenav-container class="body_content">
     <mat-sidenav #sidenav [autoFocus]="false">
       <mat-nav-list>
         <h3 matSubheader>Division d'un menu</h3>
-        <a mat-list-item (click)='sidenav.close()'>
-          <mat-icon mat-list-icon color="primary">videocam</mat-icon> Mon premier menu
+        <a routerLink="/profil" mat-list-item (click)='sidenav.close()'>
+          <mat-icon mat-list-icon color="primary">account_circle</mat-icon> Mon Profil
         </a>
         <br /><mat-divider></mat-divider>
         <h3 matSubheader>Autres</h3>
