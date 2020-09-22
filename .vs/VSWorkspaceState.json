@@ -1,6 +1,15 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\wtf-frontend",
+    "\\wtf-frontend\\src",
+    "\\wtf-frontend\\src\\app",
+    "\\wtf-frontend\\src\\app\\footer",
+    "\\wtf-frontend\\src\\app\\home",
+    "\\wtf-frontend\\src\\app\\material",
+    "\\wtf-frontend\\src\\app\\modeles",
+    "\\wtf-frontend\\src\\app\\nav-bar"
   ],
+  "SelectedNode": "\\wtf-frontend\\src\\app\\footer\\footer.component.ts",
   "PreviewInSolutionExplorer": false
 }
