@@ -1,5 +1,23 @@
-.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.m-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+  }
+
+  img {
+      width: 35%;
+  }
+
+  .mat-raised-button {
+    background-color: rgb(42, 61, 102) ;
+  }
+
+  button {
+      width: 35%;
+  }
+
+  .subscribe {
+    margin-top: 1%;
   }
