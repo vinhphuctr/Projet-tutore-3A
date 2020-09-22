@@ -10,6 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { ProfilComponent } from './profil/profil.component';
 import { FooterComponent } from './footer/footer.component';
+import { FaqComponent } from './faq/faq.component';
+import { QuiSommesNousComponent } from './qui-sommes-nous/qui-sommes-nous.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { FooterComponent } from './footer/footer.component';
     HomeComponent,
     NavBarComponent,
     ProfilComponent,
-    FooterComponent
+    FooterComponent,
+    FaqComponent,
+    QuiSommesNousComponent
   ],
   imports: [
     BrowserModule,
