@@ -1,5 +1,5 @@
 .footer {
-  position: fixed;
+  position: relative;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -7,6 +7,10 @@
 
 }
 
+img{
+  width: 30px;
+  position: relative;
+}
 
 .example-spacer {
   flex: 1 1 auto;
@@ -16,4 +20,10 @@
 .example-spacer > a{
   text-decoration:none;
   color:white;
+}
+
+@media (max-width: 500px) {
+  .footer {
+    display: none;
+  }
 }
