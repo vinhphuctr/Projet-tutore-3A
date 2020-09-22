@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { ProfilComponent } from './profil/profil.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ProfilComponent } from './profil/profil.component';
     AppComponent,
     HomeComponent,
     NavBarComponent,
-    ProfilComponent
+    ProfilComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
