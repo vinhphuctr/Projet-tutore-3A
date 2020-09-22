@@ -1,7 +1,6 @@
 .footer {
   width: 100%;
   height: 2rem;
-  text-align: center;
   flex-shrink: 0;
 }
 
@@ -10,30 +9,30 @@ img{
   position: relative;
 }
 
+.reseau-sociaux{
+  margin-left: auto;
+  margin-right: auto;
+}
 .example-spacer {
-  flex: 1 1 auto;
-  font-size: 14px;
+  width: 100%;
 }
 
 .example-spacer > a{
   text-decoration:none;
+  font-size:14px;
   color:white;
-}
-
-.example-logo {
-  flex: 1 1 auto;
-  font-size: 14px;
+  width:33.33%;
+  text-align: center;
+  display: inline-block;
+  margin-right: -0.25em;;
 }
 
 .mat-toolbar{
-  background-color: rgb(93,64,184);
+  background-color: rgb(92,84,164);
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .footer {
     display: none;
   }
 }
-
-
-
