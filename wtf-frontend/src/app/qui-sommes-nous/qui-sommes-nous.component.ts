@@ -9,13 +9,13 @@ export class QuiSommesNousComponent implements OnInit {
 
 
 
-  members: { title: string, subtitle: string, content: string, url: string }[] = [
-    { title: 'Alexis PETRAZ', subtitle: 'Subtitle', content: 'Content here', url: 'https://material.angular.io/assets/img/examples/shiba2.jpg' },
-    { title: 'Vinh Phuc TRUONG', subtitle: 'Subtitle', content: 'Content here', url: 'https://material.angular.io/assets/img/examples/shiba2.jpg' },
-    { title: 'Julien GODEST', subtitle: 'Subtitle', content: 'Content here', url: 'https://material.angular.io/assets/img/examples/shiba2.jpg' },
-    { title: 'Julie HUA ', subtitle: 'Subtitle', content: 'Content here', url: 'https://material.angular.io/assets/img/examples/shiba2.jpg' },
-    { title: 'Baptiste AUBERT', subtitle: 'Subtitle', content: 'Content here', url: 'https://material.angular.io/assets/img/examples/shiba2.jpg' },
-    { title: 'Rémi MARTINEZ', subtitle: 'Subtitle', content: 'Content here', url: 'https://material.angular.io/assets/img/examples/shiba2.jpg' },
+  members: { nom: string, developpeur: string, langage: string, url: string }[] = [
+    { nom: 'Alexis PETRAZ', developpeur: 'front', langage: 'TypeScript', url: 'https://material.angular.io/assets/img/examples/shiba2.jpg' },
+    { nom: 'Vinh Phuc TRUONG', developpeur: 'back', langage: 'PHP', url: 'https://material.angular.io/assets/img/examples/shiba2.jpg' },
+    { nom: 'Julien GODEST', developpeur: 'front', langage: 'TypeScript', url: 'https://material.angular.io/assets/img/examples/shiba2.jpg' },
+    { nom: 'Julie HUA ', developpeur: 'front', langage: 'TypeScript', url: 'https://material.angular.io/assets/img/examples/shiba2.jpg' },
+    { nom: 'Baptiste AUBERT', developpeur: 'back', langage: 'TypeScript', url: 'https://material.angular.io/assets/img/examples/shiba2.jpg' },
+    { nom: 'Rémi MARTINEZ', developpeur: 'back', langage: 'PHP', url: 'https://material.angular.io/assets/img/examples/shiba2.jpg' },
    
   ];
 
