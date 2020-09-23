@@ -1,10 +1,83 @@
-<p>qui-sommes-nous works!</p>
-  Qui sommes-nous ?
+<div class="faq">
+  <h1>Qui sommes-nous ? </h1>
 
 
 
-  Présentation
+  <h3>Présentation </h3>
 
   What The Film, c'est quoi concrètement ?
   Un projet rassemblant 6 développeurs. Elèves de Polytech Lyon en troisième année d'informatique (par alternance), nous avons réalisé WhatTheFilm
+  <br />
+  <br />
+  <h3>Notre équipe </h3>
 
+
+
+  <!--<mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Shiba Inu</mat-card-title>
+      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p>
+        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+        bred for hunting.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>-->
+  <!--<div fxLayout="row" fxLayoutAlign="space-around none">
+    <mat-card *ngFor="let member of members" fxFlex="25px" fxFlex.sm="25px">
+      <div>
+        <mat-card-header>-->
+  <!-- <div mat-card-avatar class="example-header-image"></div>-->
+  <!--<mat-card-title>{{member.title}}</mat-card-title>
+           <mat-card-subtitle>{{member.subtitle}}</mat-card-subtitle>
+         </mat-card-header>
+         <img mat-card-image [src]="member.url" alt="Photo of {{member.title}}" class="images_petit">
+         <mat-card-content>
+           <p>
+             {{member.content}}
+           </p>
+         </mat-card-content>
+         </div>
+  </mat-card>
+  </div>-->
+
+
+
+
+  <div class="content" fxLayout="row wrap" fxLayoutGap="100px grid" >
+    <div [fxFlex]="(100/2) + '%'" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let num of [1,2,3,4,5,6]">
+      <mat-card class="mat-elevation-z4">
+        <mat-card-header>
+          <mat-card-title>Mountains {{num}}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image  src="https://material.angular.io/assets/img/examples/shiba2.jpg" class="images_petit"/>
+        <mat-card-content>
+          <p>
+            The Himalayas is a mountain range in Asia.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  <br />
+  <br />
+  <h3>Mentions légales</h3>
+</div>
+
+
+
+
+  <app-footer></app-footer>

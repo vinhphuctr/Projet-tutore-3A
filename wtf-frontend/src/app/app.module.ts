@@ -16,6 +16,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 
 @NgModule({
@@ -38,7 +40,8 @@ import { MatInputModule } from '@angular/material/input';
     MatExpansionModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
