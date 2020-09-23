@@ -12,6 +12,10 @@ import { ProfilComponent } from './profil/profil.component';
 import { FooterComponent } from './footer/footer.component';
 import { FaqComponent } from './faq/faq.component';
 import { QuiSommesNousComponent } from './qui-sommes-nous/qui-sommes-nous.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -22,7 +26,7 @@ import { QuiSommesNousComponent } from './qui-sommes-nous/qui-sommes-nous.compon
     ProfilComponent,
     FooterComponent,
     FaqComponent,
-    QuiSommesNousComponent
+    QuiSommesNousComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +34,11 @@ import { QuiSommesNousComponent } from './qui-sommes-nous/qui-sommes-nous.compon
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    MatExpansionModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
