@@ -1,0 +1,14 @@
+.faq {
+  height: 600px;
+  padding:5%;
+}
+
+mat-expansion-panel{
+  width: 50%;
+  margin : 30px auto;
+}
+
+mat-expansion-panel > p{
+  margin : 30px;
+}
+
