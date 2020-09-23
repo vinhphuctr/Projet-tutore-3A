@@ -1,10 +1,21 @@
 .faq{
-padding: 5%;
+  padding: 5%;
 }
 
 mat-expansion-panel{
   width: 50%;
+  background-color: rgb(93,84,164);
   margin : 26px auto;
 }
+
+h2{
+  color: white;
+  padding-top:10px;
+}
+p {
+  padding-top: 10px;
+}
+
+
 
 
