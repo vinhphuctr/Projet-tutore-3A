@@ -24,12 +24,10 @@
         <h3 matSubheader>Autres</h3>
       </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content>
-      <div style="min-height:88vh;">
-        <div class="container">
-          <router-outlet></router-outlet>
-        </div>
-        <app-footer></app-footer>
-      </div>
-    </mat-sidenav-content>
   </mat-sidenav-container>
+  <div>
+    <div class="container" style="height: max-content;">
+      <router-outlet></router-outlet>
+    </div>
+    <app-footer></app-footer>
+  </div>
