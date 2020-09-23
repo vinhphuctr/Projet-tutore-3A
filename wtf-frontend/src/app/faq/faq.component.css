@@ -1,6 +1,5 @@
-.faq {
-  height: 600px;
-  padding:5%;
+.faq{
+padding: 5%;
 }
 
 mat-expansion-panel{
