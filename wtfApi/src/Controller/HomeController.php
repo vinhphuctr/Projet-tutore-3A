@@ -12,9 +12,6 @@ class HomeController extends AbstractController
      */
     public function index()
     {
-        $repository = $this->getDoctrine()->getRepository(Video::class);
-        $video = $repository->find($id);
-
         return $this->json([
             'message' => 'Welcome to your new controller!',
             'path' => 'src/Controller/HomeController.php',

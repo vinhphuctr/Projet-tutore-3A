@@ -28,5 +28,22 @@ class Score
      */
     private $note;
 
+    public function getIdScore(): ?int
+    {
+        return $this->idScore;
+    }
+
+    public function getNote(): ?int
+    {
+        return $this->note;
+    }
+
+    public function setNote(int $note): self
+    {
+        $this->note = $note;
+
+        return $this;
+    }
+
 
 }
