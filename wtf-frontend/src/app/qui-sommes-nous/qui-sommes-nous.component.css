@@ -16,6 +16,20 @@ h2 {
   padding-top: 10px;
 }
 
+
+h1 {
+  color: rgb(93,84,164);
+}
+
+hr {
+  margin: 10px auto;
+  margin-bottom: 4%;
+  width: 16%;
+  height: 1px;
+  text-align: center;
+  background-color: rgb(93,84,164);
+  border: none; /*on supprime le style par défaut*/
+}
 p {
   padding-top: 30px;
 }
