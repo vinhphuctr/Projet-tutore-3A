@@ -55,6 +55,10 @@ mat-toolbar {
   object-fit: contain;
 }
 
+.equipe {
+  background-color: rgb(93,84,164);
+}
+
 
 .example-card {
   max-width: 10px;
