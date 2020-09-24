@@ -79,17 +79,14 @@ img {
   padding:40px;
 }
 
+.blank{
+  height: 30px;
+}
+
 p{
   color:white;
 }
 
-.equipe{
-
-}
-
-
-
-.
 .paragraphe{
   font-size: 20px;
   text-align: justify;
@@ -111,8 +108,9 @@ p{
 .example-header-image {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
+  width:150px;
+  height: 150px;
 }
-
 
 
 .alignleft {
