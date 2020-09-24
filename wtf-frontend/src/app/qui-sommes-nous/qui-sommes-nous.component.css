@@ -142,8 +142,16 @@ p{
 
 .alignleft {
   float: left;
-  width:90%;
+  width:100%;
 }
 .alignright {
 	float: right;
+}
+
+
+@media (max-width: 1200px) {
+  .alignright {
+    float:left;
+    width:100%;
+  }
 }
