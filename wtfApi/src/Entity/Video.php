@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Video
  *
  * @ORM\Table(name="video")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\VideoRepository")
  */
 class Video
 {
@@ -123,6 +125,203 @@ class Video
         $this->idPlateforme = new \Doctrine\Common\Collections\ArrayCollection();
         $this->idPersonne = new \Doctrine\Common\Collections\ArrayCollection();
         $this->idUtilisateur = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function getIdVideo(): ?int
+    {
+        return $this->idVideo;
+    }
+
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
+
+    public function setTitre(string $titre): self
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    public function getDateSortie(): ?\DateTimeInterface
+    {
+        return $this->dateSortie;
+    }
+
+    public function setDateSortie(\DateTimeInterface $dateSortie): self
+    {
+        $this->dateSortie = $dateSortie;
+
+        return $this;
+    }
+
+    public function getPoster(): ?string
+    {
+        return $this->poster;
+    }
+
+    public function setPoster(string $poster): self
+    {
+        $this->poster = $poster;
+
+        return $this;
+    }
+
+    public function getPlot(): ?string
+    {
+        return $this->plot;
+    }
+
+    public function setPlot(?string $plot): self
+    {
+        $this->plot = $plot;
+
+        return $this;
+    }
+
+    public function getTrailer(): ?string
+    {
+        return $this->trailer;
+    }
+
+    public function setTrailer(?string $trailer): self
+    {
+        $this->trailer = $trailer;
+
+        return $this;
+    }
+
+    public function getVo(): ?string
+    {
+        return $this->vo;
+    }
+
+    public function setVo(?string $vo): self
+    {
+        $this->vo = $vo;
+
+        return $this;
+    }
+
+    public function getIdProd(): ?int
+    {
+        return $this->idProd;
+    }
+
+    public function setIdProd(?int $idProd): self
+    {
+        $this->idProd = $idProd;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Categorie[]
+     */
+    public function getIdCateg(): Collection
+    {
+        return $this->idCateg;
+    }
+
+    public function addIdCateg(Categorie $idCateg): self
+    {
+        if (!$this->idCateg->contains($idCateg)) {
+            $this->idCateg[] = $idCateg;
+        }
+
+        return $this;
+    }
+
+    public function removeIdCateg(Categorie $idCateg): self
+    {
+        if ($this->idCateg->contains($idCateg)) {
+            $this->idCateg->removeElement($idCateg);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Plateforme[]
+     */
+    public function getIdPlateforme(): Collection
+    {
+        return $this->idPlateforme;
+    }
+
+    public function addIdPlateforme(Plateforme $idPlateforme): self
+    {
+        if (!$this->idPlateforme->contains($idPlateforme)) {
+            $this->idPlateforme[] = $idPlateforme;
+        }
+
+        return $this;
+    }
+
+    public function removeIdPlateforme(Plateforme $idPlateforme): self
+    {
+        if ($this->idPlateforme->contains($idPlateforme)) {
+            $this->idPlateforme->removeElement($idPlateforme);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Personne[]
+     */
+    public function getIdPersonne(): Collection
+    {
+        return $this->idPersonne;
+    }
+
+    public function addIdPersonne(Personne $idPersonne): self
+    {
+        if (!$this->idPersonne->contains($idPersonne)) {
+            $this->idPersonne[] = $idPersonne;
+            $idPersonne->addIdVideo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdPersonne(Personne $idPersonne): self
+    {
+        if ($this->idPersonne->contains($idPersonne)) {
+            $this->idPersonne->removeElement($idPersonne);
+            $idPersonne->removeIdVideo($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Utilisateur[]
+     */
+    public function getIdUtilisateur(): Collection
+    {
+        return $this->idUtilisateur;
+    }
+
+    public function addIdUtilisateur(Utilisateur $idUtilisateur): self
+    {
+        if (!$this->idUtilisateur->contains($idUtilisateur)) {
+            $this->idUtilisateur[] = $idUtilisateur;
+            $idUtilisateur->addIdVideo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdUtilisateur(Utilisateur $idUtilisateur): self
+    {
+        if ($this->idUtilisateur->contains($idUtilisateur)) {
+            $this->idUtilisateur->removeElement($idUtilisateur);
+            $idUtilisateur->removeIdVideo($this);
+        }
+
+        return $this;
     }
 
 }
