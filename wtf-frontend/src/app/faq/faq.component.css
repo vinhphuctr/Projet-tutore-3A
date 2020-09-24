@@ -1,6 +1,5 @@
 .faq{
   padding: 5%;
-  text-align: center;
 }
 
 mat-expansion-panel{
@@ -32,6 +31,7 @@ p {
   }
 
   h1{
+    text-align: center;
     color:rgb(93,84,164);
   }
 
