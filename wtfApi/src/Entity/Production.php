@@ -28,5 +28,22 @@ class Production
      */
     private $nom;
 
+    public function getIdProd(): ?int
+    {
+        return $this->idProd;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
 
 }

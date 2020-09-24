@@ -31,5 +31,29 @@ class Film
      */
     private $idVideo;
 
+    public function getDuree(): ?int
+    {
+        return $this->duree;
+    }
+
+    public function setDuree(?int $duree): self
+    {
+        $this->duree = $duree;
+
+        return $this;
+    }
+
+    public function getIdVideo(): ?Video
+    {
+        return $this->idVideo;
+    }
+
+    public function setIdVideo(?Video $idVideo): self
+    {
+        $this->idVideo = $idVideo;
+
+        return $this;
+    }
+
 
 }
