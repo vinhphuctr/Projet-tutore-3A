@@ -1,6 +1,15 @@
 .qsn {
   padding: 5%;
+  overflow : hidden; 
 }
+
+html {
+  overflow-x: hidden !important;
+}
+body {
+  overflow-y: auto
+}
+
 
 fieldset {
   border: none;
