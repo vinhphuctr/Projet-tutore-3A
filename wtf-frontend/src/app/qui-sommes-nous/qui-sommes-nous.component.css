@@ -65,6 +65,7 @@ mat-toolbar {
   max-width: 50%;
   margin: auto;
   object-fit: contain;
+  border-radius: 50%;
 }
 
 img {
