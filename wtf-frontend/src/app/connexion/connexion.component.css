@@ -1,0 +1,19 @@
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 3%;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 5%;
+}
+
+.mat-raised-button {
+    background-color: rgb(42, 61, 102);
+    color: white;
+  }

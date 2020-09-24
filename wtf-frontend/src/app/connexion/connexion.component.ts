@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { NavbarService } from '../services/navbar.service';
 
 @Component({
@@ -8,9 +9,15 @@ import { NavbarService } from '../services/navbar.service';
 })
 export class ConnexionComponent implements OnInit {
 
-  constructor(private nav: NavbarService) { nav.show() }
+  connexionForm: FormGroup;
+
+  constructor(private nav: NavbarService, private formBuilder: FormBuilder) { nav.hide() }
 
   ngOnInit(): void {
+    this.connexionForm = new FormGroup({
+      email: new FormControl("", [Validators.required]),
+      password: new FormControl("", [Validators.required])
+    })
   }
 
 }
