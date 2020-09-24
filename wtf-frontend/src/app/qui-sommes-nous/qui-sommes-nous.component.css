@@ -88,6 +88,11 @@ img {
   font-size: 50px;
 }
 
+.mentionslegales{
+  font-size: 14x;
+}
+
+
 .blank{
   height: 30px;
 }
@@ -116,7 +121,7 @@ p{
   box-shadow: none;
 
   background-color: rgb(43,63,104);
-  
+
 }
 
 .photo-alexis {
