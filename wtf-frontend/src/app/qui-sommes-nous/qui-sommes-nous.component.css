@@ -87,25 +87,6 @@ p{
 }
 
 
-.left,
-.right {
-  width: 40%;
-  height: 100px;
-  float: left;
-  clear: left;
-  background: red;
-  margin: 5px;
-}
-
-.right {
-  float: right;
-  clear: right;
-  background: green;
-  text-align: right;
-  position: relative;
-  top: -110px;
-}
-
 
 .paragraphe{
   font-size: 20px;
@@ -128,4 +109,14 @@ p{
 .example-header-image {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
+}
+
+
+
+.alignleft {
+  float: left;
+  width:90%;
+}
+.alignright {
+	float: right;
 }
