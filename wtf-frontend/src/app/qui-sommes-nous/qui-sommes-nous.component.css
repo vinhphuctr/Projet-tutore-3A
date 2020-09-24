@@ -72,10 +72,21 @@ mat-toolbar {
   border-radius: 50%;
 }
 
-img {
+.logo {
   position: relative;
   width: 100%;
 }
+
+.cat {
+  margin: 3%;
+  position: relative;
+  width: 20%;
+}
+
+.center {
+  text-align: center;
+}
+
 .presentation {
   background-color: rgb(43,63,104);
   width: 60%;
@@ -112,9 +123,6 @@ p{
 
 .example-card {
   max-width: 100%;
-
-
-
   border: none !important;
   margin:auto;
   color:white;
