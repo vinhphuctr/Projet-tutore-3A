@@ -102,15 +102,19 @@ p{
 
 .example-card {
   max-width: 100%;
-  outline: none;
-  margin: auto;
-  color: white;
-  border: none;
+
+
+
+  border: none !important;
+  margin:auto;
+  color:white;
+  box-shadow: none;
+
   background-color: rgb(43,63,104);
   
 }
 
-.example-header-image {
+.photo-alexis {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
   width:150px;
