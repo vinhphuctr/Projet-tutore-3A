@@ -13,8 +13,8 @@ mat-expansion-panel{
 
 mat-expansion-panel-header{
   background-color: rgb(93,84,164);
+  height: auto;
 }
-
 
 h2{
   color: white;
@@ -48,5 +48,4 @@ p {
     background-color: rgb(93,84,164);
     border: none; /*on supprime le style par défaut*/
   }
-
 
