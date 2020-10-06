@@ -1,13 +1,6 @@
 .qsn {
-  padding: 5%;
+  padding: 10%;
   overflow : hidden; 
-}
-
-html {
-  overflow-x: hidden !important;
-}
-body {
-  overflow-y: auto
 }
 
 
@@ -100,7 +93,7 @@ mat-toolbar {
   background-color: rgb(43,63,104);
   width: 60%;
   margin: 10px auto;
-  padding:40px;
+  padding:50px;
   border-radius: 30px;
 }
 
