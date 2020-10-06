@@ -1,6 +1,8 @@
 .qsn {
+
   padding: 10%;
   overflow : hidden; 
+
 }
 
 
@@ -28,15 +30,16 @@ h1 {
   text-align:center;
 }
 
-hr {
-  margin: 10px auto;
+hr{
+  margin: 40px auto;
   margin-bottom: 4%;
   width: 16%;
-  height: 1px;
+  height: 3px;
   text-align: center;
   background-color: rgb(93,84,164);
   border: none; /*on supprime le style par défaut*/
 }
+
 p {
   padding-top: 30px;
 }
