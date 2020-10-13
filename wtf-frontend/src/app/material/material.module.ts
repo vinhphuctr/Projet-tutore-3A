@@ -19,7 +19,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
-//import YouTubeIcon from '@material-ui/icons/actUnit'; 
+import {MatDatepickerModule} from '@angular/material/datepicker'; 
+import { MatNativeDateModule } from '@angular/material/core';
 
 const MaterialComponents = [
   MatDialogModule,
@@ -42,7 +43,9 @@ const MaterialComponents = [
   MatSelectModule,
   MatCardModule,
   MatBottomSheetModule,
-  MatGridListModule
+  MatGridListModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 ];
 
 @NgModule({

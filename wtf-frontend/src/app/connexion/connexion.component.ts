@@ -15,7 +15,7 @@ export class ConnexionComponent implements OnInit {
 
   ngOnInit(): void {
     this.connexionForm = new FormGroup({
-      email: new FormControl("", [Validators.required]),
+      email: new FormControl("", [Validators.required, Validators.email]),
       password: new FormControl("", [Validators.required])
     })
   }
