@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,51 @@ class Categorie
     public function __construct()
     {
         $this->idVideo = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function getIdCateg(): ?int
+    {
+        return $this->idCateg;
+    }
+
+    public function getLibelle(): ?string
+    {
+        return $this->libelle;
+    }
+
+    public function setLibelle(string $libelle): self
+    {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Video[]
+     */
+    public function getIdVideo(): Collection
+    {
+        return $this->idVideo;
+    }
+
+    public function addIdVideo(Video $idVideo): self
+    {
+        if (!$this->idVideo->contains($idVideo)) {
+            $this->idVideo[] = $idVideo;
+            $idVideo->addIdCateg($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdVideo(Video $idVideo): self
+    {
+        if ($this->idVideo->contains($idVideo)) {
+            $this->idVideo->removeElement($idVideo);
+            $idVideo->removeIdCateg($this);
+        }
+
+        return $this;
     }
 
 }

@@ -16,7 +16,7 @@ class HomeController extends AbstractController
         //$video = $repository->find($id);
 
         return $this->json([
-            'message' => 'Welcome to your new controller!',
+            'message' => 'Welcome to your new controller! test2',
             'path' => 'src/Controller/HomeController.php',
         ]);
     }

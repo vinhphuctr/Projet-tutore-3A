@@ -31,5 +31,29 @@ class Serie
      */
     private $idVideo;
 
+    public function getNbSaison(): ?int
+    {
+        return $this->nbSaison;
+    }
+
+    public function setNbSaison(int $nbSaison): self
+    {
+        $this->nbSaison = $nbSaison;
+
+        return $this;
+    }
+
+    public function getIdVideo(): ?Video
+    {
+        return $this->idVideo;
+    }
+
+    public function setIdVideo(?Video $idVideo): self
+    {
+        $this->idVideo = $idVideo;
+
+        return $this;
+    }
+
 
 }

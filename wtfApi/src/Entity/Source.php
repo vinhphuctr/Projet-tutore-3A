@@ -38,5 +38,34 @@ class Source
      */
     private $idScore;
 
+    public function getIdSource(): ?int
+    {
+        return $this->idSource;
+    }
+
+    public function getNomSource(): ?string
+    {
+        return $this->nomSource;
+    }
+
+    public function setNomSource(string $nomSource): self
+    {
+        $this->nomSource = $nomSource;
+
+        return $this;
+    }
+
+    public function getIdScore(): ?Score
+    {
+        return $this->idScore;
+    }
+
+    public function setIdScore(?Score $idScore): self
+    {
+        $this->idScore = $idScore;
+
+        return $this;
+    }
+
 
 }
