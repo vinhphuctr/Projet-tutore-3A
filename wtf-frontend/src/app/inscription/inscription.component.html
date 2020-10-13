@@ -1,0 +1,68 @@
+<div class="header">
+    <h1>INSCRIPT<img id="img_carac" src="/assets/images/wtf_unique_final_trans.png" width="26">N</h1>
+    <button mat-button><mat-icon>arrow_left_alt</mat-icon>Page d'accueil</button>
+</div>
+
+<form class="form" [formGroup]="inscriptionForm">
+    <div class="connexion_info">
+        <div class="email">
+            <mat-form-field appearance="standard">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="wtf-client@msn.fr" formControlName="email">
+            <mat-icon matSuffix color="primary">email</mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="password">
+            <mat-form-field appearance="standard">
+            <mat-label>Mot de passe</mat-label>
+            <input matInput type="password" formControlName="password">
+            <mat-icon matSuffix color="primary">vpn_key</mat-icon>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="info_perso">
+        <div class="nom">
+            <mat-form-field appearance="standard">
+            <mat-label>Votre nom</mat-label>
+            <input matInput formControlName="nom">
+            <mat-icon matSuffix color="primary">account_box</mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="prenom">
+            <mat-form-field appearance="standard">
+            <mat-label>Votre prénom</mat-label>
+            <input matInput formControlName="prenom">
+            <mat-icon matSuffix color="primary">account_box</mat-icon>
+            </mat-form-field>
+        </div>
+    </div>
+    <p>
+        <mat-form-field appearance="fill">
+            <mat-label>Genre</mat-label>
+            <select matNativeControl required>
+              <option value="Femme">Femme</option>
+              <option value="Homme">Homme</option>
+              <option value="Indeterminé">Indeterminé</option>
+            </select>
+        </mat-form-field>
+    </p>
+    <div class="info_tiers">
+        <div class="tel">
+            <mat-form-field appearance="standard">
+            <mat-label>Téléphone</mat-label>
+            <input matInput formControlName="telephone">
+            <mat-icon matSuffix color="primary">phone_iphone</mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="pays">
+            <mat-form-field appearance="standard">
+            <mat-label>Pays</mat-label>
+            <input matInput formControlName="pays">
+            <mat-icon matSuffix color="primary">flag</mat-icon>
+            </mat-form-field>
+        </div>
+    </div>
+    <div mat-dialog-actions style="text-align: center; margin-top: 3%;" class="mb-1">
+        <button mat-raised-button type="submit" [disabled]="!inscriptionForm.valid"> S'inscrire </button>
+  </div>
+</form>

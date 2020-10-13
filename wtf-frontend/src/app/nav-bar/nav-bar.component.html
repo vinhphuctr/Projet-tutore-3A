@@ -1,0 +1,33 @@
+<mat-toolbar color="primary" *ngIf="nav.visible">
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="menu-spacer"></span>
+      <span class="menu-spacer"></span>
+      <button class="md-raised" mat-button [routerLink]="'/'" (click)="sidenav.close()">
+        <h2>What The Film</h2>
+      </button>
+      <span class="example-spacer"></span>
+      <button mat-raised-button color="warn">Déconnexion</button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="body_content">
+    <mat-sidenav #sidenav [autoFocus]="false">
+      <mat-nav-list>
+        <h3 matSubheader>Division d'un menu</h3>
+        <a routerLink="/profil" mat-list-item (click)='sidenav.close()'>
+          <mat-icon mat-list-icon color="primary">account_circle</mat-icon> Mon Profil
+        </a>
+        <br /><mat-divider></mat-divider>
+        <h3 matSubheader>Autres</h3>
+      </mat-nav-list>
+    </mat-sidenav>
+  </mat-sidenav-container>
+  <div>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>    
+  </div>
+  <app-footer></app-footer>
