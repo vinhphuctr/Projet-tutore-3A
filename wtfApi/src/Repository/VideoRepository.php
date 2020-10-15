@@ -23,20 +23,19 @@ class VideoRepository extends ServiceEntityRepository
     public function findVideo($arrayParams){
 
         $qbuilder = $this->createQueryBuilder('v');
-        //
+        
         foreach ($arrayParams as $k => $v) {
             if(strpos($v, '%') === false){ // Utilisation du LIKE ou du = dans un WHERE
-                $qbuilder->andWhere('v.' . $k . ' = :val')->setParameter('val', $v);
+                $qbuilder->andWhere('v.' . $k . ' = :' . $k)->setParameter(':'.$k, $v);
             } else {
-                $qbuilder->andWhere('v.' . $k . ' LIKE :val')->setParameter('val', $v);
+                $qbuilder->andWhere('v.' . $k . ' LIKE :' . $k)->setParameter(':'.$k, $v);
             }
         }
-        // $qbuilder
-        // ->where('v.plot LIKE ?', '%gambling')
-        // ->andWhere('v.titre LIKE ?', '%asino%');
 
         $results = $qbuilder->setMaxResults(100)->getQuery()->getArrayResult();
         $results['returnedResults'] = count($results);
+        $results['searchParameters'] = $arrayParams;
+        
 
         return $results;
     }

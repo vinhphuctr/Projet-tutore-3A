@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class VideoController extends AbstractController
 {
+    // Paramètres de recherche autorisés dans le GET
+    const AUTORIZED_PARAMETERS = array('idVideo', 'titre', 'plot', 'vo', 'idProd');
     /**
      * @Route("/video", name="video")
      */
@@ -27,20 +29,32 @@ class VideoController extends AbstractController
         $parameters = $request->query->all();
 
         if(count($parameters) < 1) return new Response('Aucun paramètre GET renseigné');
+        foreach($parameters as $key=>$param) {
+            if(!in_array($key, self::AUTORIZED_PARAMETERS)){
+                $json = json_encode(array("message" => "Paramètre GET non reconnu : " . $key));
+                $response = new Response($json);
+                $response->headers->set('Content-Type', 'application/json');
+                return $response;
+            }
+        }
 
         $repository = $this->getDoctrine()->getRepository(Video::class);
-        $search = array(
-            // 'plot' => 'life'
-            'plot' => '%gambling%'
-            // 'idVideo' => 524
-        );
-        $videos = $repository->findVideo($search);
-        // dump(json_encode($videos));
-
+        $videos = $repository->findVideo($parameters);
         $json = json_encode($videos);
         $response = new Response($json);
         $response->headers->set('Content-Type', 'application/json');
         return $response;
-        // return new Response("<html><body>$json</body></html>");
+    }
+
+    /**
+    * @Route("/video/get/all/", name="getAllVideo")
+    */
+    public function getAllVideos(){
+        $repository = $this->getDoctrine()->getRepository(Video::class);
+        $videos = $repository->findAll();
+        $json = json_encode($videos);
+        $response = new Response($json);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 }
