@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavbarService } from '../services/navbar.service';
 
 
 @Component({
@@ -8,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FaqComponent implements OnInit {
   panelOpenState = false;
-  constructor() { }
+
+  constructor(private nav: NavbarService) { nav.show() }
+
 
   ngOnInit(): void {
   }

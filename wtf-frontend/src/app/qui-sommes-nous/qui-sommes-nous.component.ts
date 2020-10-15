@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavbarService } from '../services/navbar.service';
 
 @Component({
   selector: 'app-qui-sommes-nous',
@@ -8,18 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class QuiSommesNousComponent implements OnInit {
 
 
-
-  //members: { nom: string, developpeur: string, langage: string, url: string }[] = [
-  //  { nom: 'Alexis PETRAZ', developpeur: 'front', langage: 'TypeScript', url: 'https://material.angular.io/assets/img/examples/shiba2.jpg' },
-  //  { nom: 'Vinh Phuc TRUONG', developpeur: 'back', langage: 'PHP', url: 'https://material.angular.io/assets/img/examples/shiba2.jpg' },
-  //  { nom: 'Julien GODEST', developpeur: 'front', langage: 'TypeScript', url: 'https://material.angular.io/assets/img/examples/shiba2.jpg' },
-  //  { nom: 'Julie HUA ', developpeur: 'front', langage: 'TypeScript', url: 'https://material.angular.io/assets/img/examples/shiba2.jpg' },
-  //  { nom: 'Baptiste AUBERT', developpeur: 'back', langage: 'TypeScript', url: 'https://material.angular.io/assets/img/examples/shiba2.jpg' },
-  //  { nom: 'Rémi MARTINEZ', developpeur: 'back', langage: 'PHP', url: 'https://material.angular.io/assets/img/examples/shiba2.jpg' },
-   
-  //];
-
-  constructor() { }
+  constructor(private nav: NavbarService) { nav.show() }
 
   ngOnInit(): void {
   }
