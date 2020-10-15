@@ -8,8 +8,9 @@
     "\\wtf-frontend\\src\\app\\home",
     "\\wtf-frontend\\src\\app\\material",
     "\\wtf-frontend\\src\\app\\modeles",
-    "\\wtf-frontend\\src\\app\\nav-bar"
+    "\\wtf-frontend\\src\\app\\nav-bar",
+    "\\wtf-frontend\\src\\app\\qui-sommes-nous"
   ],
-  "SelectedNode": "\\wtf-frontend\\src\\app\\footer\\footer.component.ts",
+  "SelectedNode": "\\wtf-frontend\\src\\app\\qui-sommes-nous\\qui-sommes-nous.component.css",
   "PreviewInSolutionExplorer": false
 }

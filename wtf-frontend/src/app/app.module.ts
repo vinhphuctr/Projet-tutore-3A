@@ -11,8 +11,12 @@ import { ProfilComponent } from './profil/profil.component';
 import { FooterComponent } from './footer/footer.component';
 import { FaqComponent } from './faq/faq.component';
 import { QuiSommesNousComponent } from './qui-sommes-nous/qui-sommes-nous.component';
-import { ConnexionComponent } from './connexion/connexion.component';
-import { InscriptionComponent } from './inscription/inscription.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 
 @NgModule({
@@ -24,8 +28,6 @@ import { InscriptionComponent } from './inscription/inscription.component';
     FooterComponent,
     FaqComponent,
     QuiSommesNousComponent,
-    ConnexionComponent,
-    InscriptionComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,12 @@ import { InscriptionComponent } from './inscription/inscription.component';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    MatExpansionModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FlexLayoutModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

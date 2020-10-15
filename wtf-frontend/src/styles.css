@@ -3,3 +3,7 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; display: flex; flex-direction: column;}
 
+/* Changement couleur fleche Page FAQ en blanc" */
+.mat-expansion-indicator::after {
+  color: white;
+}

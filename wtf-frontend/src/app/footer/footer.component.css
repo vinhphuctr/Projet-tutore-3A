@@ -1,6 +1,15 @@
 .footer {
+
+  background-color: black;
+  color: white;
+  clear: both;
+  text-align: center;
+  padding: 1px;
   width: 100%;
-  height: 2rem;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  box-sizing: border-box;
   flex-shrink: 0;
 }
 
@@ -28,6 +37,7 @@ img{
   margin-right: -0.25em;;
 }
 
+
 .mat-toolbar{
   background-color: rgb(92,84,164);
   position: absolute;
@@ -39,3 +49,5 @@ img{
     display: none;
   }
 }
+
+
