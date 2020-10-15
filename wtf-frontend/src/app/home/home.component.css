@@ -10,6 +10,11 @@
   transform: translateY(-50%);
 }
 
+.master{
+  margin-bottom: 16%;
+
+}
+
 img {
     width: 30%;
 }

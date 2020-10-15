@@ -40,8 +40,6 @@ img{
 
 .mat-toolbar{
   background-color: rgb(92,84,164);
-  position: absolute;
-  bottom: 0%;
 }
 
 @media (max-width: 600px) {
