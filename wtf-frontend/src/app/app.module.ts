@@ -18,6 +18,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MonProfilComponent } from './mon-profil/mon-profil.component';
+import { MesHistoriquesComponent } from './mes-historiques/mes-historiques.component';
+import { MesFavorisComponent } from './mes-favoris/mes-favoris.component';
+import { BesoinAideComponent } from './besoin-aide/besoin-aide.component';
+
 
 
 
@@ -31,7 +36,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FaqComponent,
     QuiSommesNousComponent,
     InscriptionComponent ,
-    ConnexionComponent
+    ConnexionComponent,
+    MonProfilComponent,
+    MesHistoriquesComponent,
+    MesFavorisComponent,
+    BesoinAideComponent
 
   ],
   imports: [

@@ -6,6 +6,11 @@ import {QuiSommesNousComponent} from './qui-sommes-nous/qui-sommes-nous.componen
 import {FaqComponent} from './faq/faq.component';
 import { ConnexionComponent } from './connexion/connexion.component';
 import { InscriptionComponent } from './inscription/inscription.component';
+import { MonProfilComponent } from './mon-profil/mon-profil.component';
+import { MesHistoriquesComponent } from './mes-historiques/mes-historiques.component';
+import { MesFavorisComponent } from './mes-favoris/mes-favoris.component';
+import { BesoinAideComponent } from './besoin-aide/besoin-aide.component';
+ 
 
 
 const routes: Routes = [
@@ -14,7 +19,11 @@ const routes: Routes = [
   { path:"connexion", component: ConnexionComponent },
   { path: "inscription", component: InscriptionComponent },
   { path: "quisommesnous",  component: QuiSommesNousComponent },
-  { path: "faq",  component: FaqComponent }
+  { path: "faq", component: FaqComponent },
+  { path: "monprofil", component: MonProfilComponent },
+  { path: "meshistoriques", component: MesHistoriquesComponent },
+  { path: "mesfavoris", component: MesFavorisComponent },
+  { path: "besoinaide", component: BesoinAideComponent }
 ];
 
 @NgModule({

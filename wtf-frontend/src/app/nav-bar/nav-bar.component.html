@@ -20,23 +20,29 @@
       <h3 matSubheader>Division d'un menu</h3>
       <mat-divider></mat-divider>
       <!--<a routerLink="/profil" mat-list-item (click)='sidenav.close()'>
-        <mat-icon mat-list-icon color="primary">account_circle</mat-icon> Mon Profil
-      </a>-->
-      <h3 matSubheader>Mon profil</h3>
+    <mat-icon mat-list-icon color="primary">account_circle</mat-icon> Mon Profil
+  </a>-->
+      <button mat-button>
+        <h3 matSubheader [routerLink]="'/monprofil'">Mon profil</h3>
+      </button>
+      <br />
+      <button mat-button>
 
-      <h3 matSubheader>Mes historiques</h3>
-
-
-
-      <h3 matSubheader>Mes favoris</h3>
-
-
-
-      <h3 matSubheader>Besoin d'aide</h3>
-
-
-
-      <h3 matSubheader>Déconnexion</h3>
+        <h3 matSubheader [routerLink]="'/meshistoriques'">Mes historiques</h3>
+      </button>
+      <br />
+      <button mat-button>
+        <h3 matSubheader [routerLink]="'/mesfavoris'">Mes favoris</h3>
+      </button>
+      <br />
+      <button mat-button>
+        <h3 matSubheader [routerLink]="'/besoinaide'">Besoin d'aide</h3>
+      </button>
+      <br />
+      <button mat-button>
+        <h3 matSubheader [routerLink]="'/connexion'">Déconnexion</h3>
+      </button>
+      <br />
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
