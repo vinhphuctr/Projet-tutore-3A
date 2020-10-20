@@ -15,32 +15,27 @@
   </mat-toolbar>
 
 <mat-sidenav-container class="body_content">
-  <mat-sidenav #sidenav [autoFocus]="false">
+  <mat-sidenav class="side_nav" #sidenav [autoFocus]="false">
     <mat-nav-list>
-      <h3 matSubheader>Division d'un menu</h3>
-      <mat-divider></mat-divider>
-      <!--<a routerLink="/profil" mat-list-item (click)='sidenav.close()'>
-    <mat-icon mat-list-icon color="primary">account_circle</mat-icon> Mon Profil
-  </a>-->
+      <br>
       <button mat-button>
-        <h3 matSubheader [routerLink]="'/monprofil'">Mon profil</h3>
+        <h3 matSubheader (click)='sidenav.close()' [routerLink]="'/monprofil'"><img src="https://cdn.discordapp.com/attachments/755462909911629907/766182890605772820/icon_Profil.png">Mon profil</h3>
       </button>
       <br />
       <button mat-button>
-
-        <h3 matSubheader [routerLink]="'/meshistoriques'">Mes historiques</h3>
+        <h3 matSubheader (click)='sidenav.close()' [routerLink]="'/meshistoriques'"><img src="https://cdn.discordapp.com/attachments/755462909911629907/766182864449962014/icon_History.png">Mes historiques</h3>
       </button>
       <br />
       <button mat-button>
-        <h3 matSubheader [routerLink]="'/mesfavoris'">Mes favoris</h3>
+        <h3 matSubheader (click)='sidenav.close()' [routerLink]="'/mesfavoris'"><img src="https://cdn.discordapp.com/attachments/755462909911629907/766182885501698048/icon_Star.png">Mes favoris</h3>
       </button>
       <br />
       <button mat-button>
-        <h3 matSubheader [routerLink]="'/besoinaide'">Besoin d'aide</h3>
+        <h3 matSubheader (click)='sidenav.close()'[routerLink]="'/faq'"><img src="https://cdn.discordapp.com/attachments/755462909911629907/766182874805305344/icon_Aide.png">Besoin d'aide</h3>
       </button>
       <br />
       <button mat-button>
-        <h3 matSubheader [routerLink]="'/connexion'">Déconnexion</h3>
+        <h3 style="color:rgb(231,28,2)" matSubheader (click)='sidenav.close()' [routerLink]="'/connexion'"><img src="https://cdn.discordapp.com/attachments/755462909911629907/766182897773182986/icon_Deconnexion.png">Déconnexion</h3>
       </button>
       <br />
     </mat-nav-list>

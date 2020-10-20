@@ -9,8 +9,7 @@ import { InscriptionComponent } from './inscription/inscription.component';
 import { MonProfilComponent } from './mon-profil/mon-profil.component';
 import { MesHistoriquesComponent } from './mes-historiques/mes-historiques.component';
 import { MesFavorisComponent } from './mes-favoris/mes-favoris.component';
-import { BesoinAideComponent } from './besoin-aide/besoin-aide.component';
- 
+
 
 
 const routes: Routes = [
@@ -23,7 +22,6 @@ const routes: Routes = [
   { path: "monprofil", component: MonProfilComponent },
   { path: "meshistoriques", component: MesHistoriquesComponent },
   { path: "mesfavoris", component: MesFavorisComponent },
-  { path: "besoinaide", component: BesoinAideComponent }
 ];
 
 @NgModule({

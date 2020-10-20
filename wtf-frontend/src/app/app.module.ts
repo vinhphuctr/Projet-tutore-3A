@@ -21,8 +21,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MonProfilComponent } from './mon-profil/mon-profil.component';
 import { MesHistoriquesComponent } from './mes-historiques/mes-historiques.component';
 import { MesFavorisComponent } from './mes-favoris/mes-favoris.component';
-import { BesoinAideComponent } from './besoin-aide/besoin-aide.component';
-
 
 
 
@@ -40,7 +38,6 @@ import { BesoinAideComponent } from './besoin-aide/besoin-aide.component';
     MonProfilComponent,
     MesHistoriquesComponent,
     MesFavorisComponent,
-    BesoinAideComponent
 
   ],
   imports: [
