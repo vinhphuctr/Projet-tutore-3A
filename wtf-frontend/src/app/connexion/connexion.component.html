@@ -4,7 +4,7 @@
 </div>
 
 <div class="form">
-    <form [formGroup]="connexionForm">
+    <form (ngSubmit)="testerConnexion()" [formGroup]="connexionForm">
         <p>
             <mat-form-field appearance="legacy">
             <mat-label>Email</mat-label>

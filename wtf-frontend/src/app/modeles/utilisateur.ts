@@ -4,7 +4,7 @@ export class Utilisateur {
     nom: string;
     prenom: string;
     date_inscription: string;
-    date_naissance: Date;
+    date_naissance: string;
     mail: string;
     mdp: string;
     genre: string;
