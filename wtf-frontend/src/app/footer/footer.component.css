@@ -42,7 +42,7 @@ img{
   background-color: rgb(92,84,164);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
   .footer {
     display: none;
   }
