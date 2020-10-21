@@ -46,6 +46,7 @@ export class connexionService {
     return JSON.parse(localStorage.getItem('user'));
   }
 
+
   setUser(user : any) {
     localStorage.setItem('user', JSON.stringify(user));
   }

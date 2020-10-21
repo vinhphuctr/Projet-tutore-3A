@@ -11,16 +11,9 @@ export class MesFavorisComponent implements OnInit {
 
   UtilisateurData: Utilisateur;
 
-  constructor(private ConnexionService: connexionService) { }
+  constructor(private connexionService: connexionService) { }
 
   ngOnInit(): void {
-    this.getUser();
-
+    this.UtilisateurData = this.connexionService.getUser();
   }
-
-  getUser(): void {
-    this.UtilisateurData = this.ConnexionService.getUser();
-
-  }
-
 }

@@ -10,6 +10,16 @@
         <h2>What The Film</h2>
       </button>
       <span class="example-spacer"></span>
+      <span class="example-spacer"></span>
+      <span class="example-spacer"></span>
+      <span class="example-spacer"></span>
+      <span class="example-spacer"></span>
+      <span class="example-spacer"></span>
+      <span class="example-spacer"></span>
+      <span class="example-spacer"></span>
+      <span class="example-spacer"></span>
+      <h2>{{UtilisateurData.prenom | uppercase}} {{UtilisateurData.nom | uppercase}}</h2>
+      <span class="example-spacer"></span>
       <button (click)="logout()" mat-raised-button color="warn">Déconnexion</button>
     </mat-toolbar-row>
   </mat-toolbar>
@@ -17,6 +27,8 @@
 <mat-sidenav-container class="body_content">
   <mat-sidenav class="side_nav" #sidenav [autoFocus]="false">
     <mat-nav-list>
+      <h3 matSubHeader style="padding:auto; text-align:center; margin-bottom: 22px; margin-top: 22px;" >{{lettresInitiales | uppercase}}</h3>
+      <mat-divider></mat-divider>
       <br>
       <button mat-button>
         <h3 matSubheader (click)='sidenav.close()' [routerLink]="'/monprofil'"><img src="https://cdn.discordapp.com/attachments/755462909911629907/766182890605772820/icon_Profil.png">Mon profil</h3>
