@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Utilisateur } from '../modeles/utilisateur';
+import { connexionService } from '../services/connexion.service';
 @Component({
   selector: 'app-mes-favoris',
   templateUrl: './mes-favoris.component.html',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MesFavorisComponent implements OnInit {
 
-  constructor() { }
+
+  UtilisateurData: Utilisateur;
+
+  constructor(private ConnexionService: connexionService) { }
 
   ngOnInit(): void {
+    this.getUser();
+
+  }
+
+  getUser(): void {
+    this.UtilisateurData = this.ConnexionService.getUser();
+
   }
 
 }
