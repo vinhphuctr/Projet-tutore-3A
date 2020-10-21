@@ -1,30 +1,38 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UtilisateurService } from '../services/utilisateur.service';
+import { Utilisateur } from '../modeles/utilisateur';
 
 @Injectable()
 export class connexionService {
 
+  tabUsers : Utilisateur[];
+
   constructor(
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _utilisateurService : UtilisateurService
   ) { }
 
   connexion(loginForm: any) {
+
+    // Recupération des users existants
+    this._utilisateurService.getUsers().subscribe(tabUsers => this.tabUsers = tabUsers);
+
     console.log('Tentative de connexion');
-    var abc = 1;
-    if(abc == 1){
-      console.log('Connexion réussie');
-      this.setUser({login : loginForm.username});
 
-      // On récupère l'url de redirection
-      const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/faq';
+    this.tabUsers.forEach(element => {
+      if(element.mail === loginForm.value["email"] && element.mdp == loginForm.value["password"]){
+        console.log('Connexion réussie');
+        this.setUser(element);
 
-      // On accède à la page souhaitée
-      this.router.navigate([redirectUrl]);
-    }
-    else {
-      console.log('Echec de connexion')
-    }
+        // On récupère l'url de redirection
+        const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/faq';
+
+        // On accède à la page souhaitée
+        this.router.navigate([redirectUrl]);
+      }
+    });
   }
 
   logout() {
@@ -38,7 +46,7 @@ export class connexionService {
     return JSON.parse(localStorage.getItem('user'));
   }
 
-  setUser(user: any) {
+  setUser(user : any) {
     localStorage.setItem('user', JSON.stringify(user));
   }
 

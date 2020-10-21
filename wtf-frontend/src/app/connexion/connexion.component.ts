@@ -62,7 +62,6 @@ import { NavbarService } from '../services/navbar.service';
 export class ConnexionComponent implements OnInit {
 
   connexionForm: FormGroup;
-  model: any = {};
 
   constructor(private connexionService: connexionService,private nav: NavbarService, private formBuilder: FormBuilder) {
     nav.hide()
@@ -76,6 +75,6 @@ export class ConnexionComponent implements OnInit {
   }
 
   connexion() {
-    this.connexionService.connexion(this.model);
+    this.connexionService.connexion(this.connexionForm);
   }
 }
