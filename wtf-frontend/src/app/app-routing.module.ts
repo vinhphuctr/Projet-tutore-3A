@@ -24,6 +24,8 @@ const routes: Routes = [
   { path: "mesfavoris", component: MesFavorisComponent },
 ];
 
+
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
