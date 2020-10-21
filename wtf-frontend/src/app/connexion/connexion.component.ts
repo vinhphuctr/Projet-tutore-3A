@@ -1,4 +1,4 @@
-
+import { Observable } from 'rxjs'; 
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { connexionService } from '../services/connexion.service';
@@ -15,7 +15,8 @@ export class ConnexionComponent implements OnInit {
   connexionForm: FormGroup;
 
   constructor(private connexionService: connexionService,private nav: NavbarService, private formBuilder: FormBuilder) {
-    nav.hide()
+    nav.hide();
+     
   }
 
   ngOnInit() {
@@ -28,4 +29,26 @@ export class ConnexionComponent implements OnInit {
   connexion() {
     this.connexionService.connexion(this.connexionForm);
   }
+
+
+
+  //canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  //  if (this.isLoggedIn) {
+  //    return true;
+  //  } else {
+  //    alert('Please log in')
+  //    this.connexionService.navigate(['']);
+  //    return false;
+  //  }
+  //}
+
+ // canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean
+
+
+ // {
+ //  console.log("verification"); 
+ //  return this.connexionService.connexion(this.connexionForm);
+   
+ //}
 }
+
