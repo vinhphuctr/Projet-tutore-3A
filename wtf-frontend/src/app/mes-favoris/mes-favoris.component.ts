@@ -15,7 +15,7 @@ export class MesFavorisComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
-
+    console.log(this.ConnexionService.isActive())
   }
 
   getUser(): void {

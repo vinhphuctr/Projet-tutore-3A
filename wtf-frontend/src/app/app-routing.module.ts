@@ -9,6 +9,7 @@ import { InscriptionComponent } from './inscription/inscription.component';
 import { MonProfilComponent } from './mon-profil/mon-profil.component';
 import { MesHistoriquesComponent } from './mes-historiques/mes-historiques.component';
 import { MesFavorisComponent } from './mes-favoris/mes-favoris.component';
+import { connexionService } from './services/connexion.service'; 
 
 
 
@@ -19,13 +20,14 @@ const routes: Routes = [
   { path: "inscription", component: InscriptionComponent },
   { path: "quisommesnous",  component: QuiSommesNousComponent },
   { path: "faq", component: FaqComponent },
-  { path: "monprofil", component: MonProfilComponent },
-  { path: "meshistoriques", component: MesHistoriquesComponent },
-  { path: "mesfavoris", component: MesFavorisComponent },
+  { path: "monprofil", component: MonProfilComponent, canActivate:[connexionService] },
+  { path: "meshistoriques", component: MesHistoriquesComponent, canActivate: [connexionService] },
+  { path: "mesfavoris", component: MesFavorisComponent, canActivate: [connexionService] },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [connexionService]
 })
 export class AppRoutingModule { }
