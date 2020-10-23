@@ -78,7 +78,8 @@ export class connexionService implements CanActivate {
   }
 
 
-  setUser(user : any) {
+  setUser(user: any) {
+    console.log(user);
     localStorage.setItem('user', JSON.stringify(user));
   }
 
