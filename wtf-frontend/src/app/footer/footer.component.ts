@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import YoutubeIcon from '@material-ui/icons/YouTube';
+import { NavbarService } from '../services/navbar.service';
 
 @Component({
   selector: 'app-footer',
@@ -8,7 +8,7 @@ import YoutubeIcon from '@material-ui/icons/YouTube';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(public nav: NavbarService,) { }
 
   ngOnInit(): void {
   }

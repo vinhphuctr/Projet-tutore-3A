@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavbarService } from '../services/navbar.service';
+import { SuggestionService} from '../services/suggestion.service';
+import { Video } from '../modeles/video';
+
 
 
 @Component({
@@ -9,9 +12,14 @@ import { NavbarService } from '../services/navbar.service';
 })
 export class MainComponent implements OnInit {
 
-  constructor(private nav: NavbarService) { nav.show() }
+  tabSuggestion : Video[];
+
+  constructor(private nav: NavbarService, private suggestionService: SuggestionService) { nav.show() }
 
   ngOnInit(): void {
+    this.tabSuggestion = JSON.parse(this.suggestionService.getSuggestions());
+    console.log(this.tabSuggestion);
   }
-
 }
+
+

@@ -55,8 +55,6 @@ export class connexionService implements CanActivate {
   }
 
 
-
-
   logout() {
     console.log('Déconnexion');
 

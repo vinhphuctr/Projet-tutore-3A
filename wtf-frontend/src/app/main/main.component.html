@@ -1,17 +1,16 @@
 <div class="main-content">
 
+<h1 matSubheader><img id="etoile" src="https://media.discordapp.net/attachments/757219550663147592/769167745320484944/etoile.png?width=668&height=670">Commencez votre scoring now !</h1>
+<h3>Nos recommandations</h3>
 
-<p>dzadaz</p>
-<p>dzadaz</p>
+<div aria-label="gallery" >
+  <ul>
 
-<p>dzadaz</p>
-
-<p>dzadaz</p>
-
-<p>dzadaz</p>
-
-<p>dzadaz</p>
-
-<p>dzadaz</p>
-
+    <li *ngFor="let suggestion of tabSuggestion">
+      <img src="{{suggestion.poster}}" ><button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button>
+  </li>
+  </ul>
+</div>
 </div>
