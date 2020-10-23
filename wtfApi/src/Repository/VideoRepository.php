@@ -22,7 +22,9 @@ class VideoRepository extends ServiceEntityRepository
 
     public function findVideo($arrayParams){
 
-        $qbuilder = $this->createQueryBuilder('v');
+        $qbuilder = $this->createQueryBuilder('v')
+                    ->addSelect('p')
+                    ->leftJoin('v.production','p');
         
         foreach ($arrayParams as $k => $v) {
             if(strpos($v, '%') === false){ // Utilisation du LIKE ou du = dans un WHERE
@@ -33,8 +35,10 @@ class VideoRepository extends ServiceEntityRepository
         }
 
         $results = $qbuilder->setMaxResults(100)->getQuery()->getArrayResult();
+        // print_r($results);
         $results['returnedResults'] = count($results);
         $results['searchParameters'] = $arrayParams;
+        
         
 
         return $results;

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,11 +17,13 @@ class Production
     /**
      * @var int
      *
-     * @ORM\Column(name="id_prod", type="integer", nullable=false)
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     * 
      */
-    private $idProd;
+    private $id;
+    // @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="idProd")
 
     /**
      * @var string
@@ -28,21 +32,60 @@ class Production
      */
     private $nom;
 
-    public function getIdProd(): ?int
+    /**
+     * @ORM\OneToMany(targetEntity=Video::class, mappedBy="production")
+     */
+    private $video;
+
+    public function __construct()
     {
-        return $this->idProd;
+        $this->video = new ArrayCollection();
     }
 
-    public function getNom(): ?string
+    /**
+     * @return Collection|Video[]
+     */
+    public function getVideo(): Collection
     {
+        return $this->video;
+    }
+
+    public function addVideo(Video $video): self
+    {
+        if (!$this->video->contains($video)) {
+            $this->video[] = $video;
+            $video->setProduction($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideo(Video $video): self
+    {
+        if ($this->video->contains($video)) {
+            $this->video->removeElement($video);
+            // set the owning side to null (unless already changed)
+            if ($video->getProduction() === $this) {
+                $video->setProduction(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getNom(): ?string {
         return $this->nom;
     }
 
     public function setNom(string $nom): self
     {
         $this->nom = $nom;
-
         return $this;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 
 

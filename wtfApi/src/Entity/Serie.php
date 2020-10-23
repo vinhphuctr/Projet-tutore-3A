@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="serie")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\SerieRepository")
  */
 class Serie
 {
@@ -24,7 +25,7 @@ class Serie
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\OneToOne(targetEntity="Video")
+     * @ORM\OneToOne(targetEntity="Video", fetch="EAGER")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_video", referencedColumnName="id_video")
      * })

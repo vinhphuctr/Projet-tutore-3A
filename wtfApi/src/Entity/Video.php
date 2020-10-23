@@ -67,15 +67,17 @@ class Video
 
     /**
      * @var int|null
-     *
+     * 
      * @ORM\Column(name="id_prod", type="integer", nullable=true)
      */
-    private $idProd;
+    // private $idProd;
+    // @ORM\ManyToOne(targetEntity="App\Entity\Production", inversedBy="idProd")
+
 
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Categorie", inversedBy="idVideo")
+     * @ORM\ManyToMany(targetEntity="Categorie", inversedBy="idVideo", fetch="EAGER")
      * @ORM\JoinTable(name="appartenir",
      *   joinColumns={
      *     @ORM\JoinColumn(name="id_video", referencedColumnName="id_video")
@@ -117,6 +119,11 @@ class Video
     private $idUtilisateur;
 
     /**
+     * @ORM\ManyToOne(targetEntity=Production::class, inversedBy="video", fetch="EAGER")
+     */
+    private $production;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -125,6 +132,19 @@ class Video
         $this->idPlateforme = new \Doctrine\Common\Collections\ArrayCollection();
         $this->idPersonne = new \Doctrine\Common\Collections\ArrayCollection();
         $this->idUtilisateur = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->idProd = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function getProduction(): ?Production
+    {
+        return $this->production;
+    }
+
+    public function setProduction(?Production $production): self
+    {
+        $this->production = $production;
+
+        return $this;
     }
 
     public function getIdVideo(): ?int
@@ -200,18 +220,6 @@ class Video
     public function setVo(?string $vo): self
     {
         $this->vo = $vo;
-
-        return $this;
-    }
-
-    public function getIdProd(): ?int
-    {
-        return $this->idProd;
-    }
-
-    public function setIdProd(?int $idProd): self
-    {
-        $this->idProd = $idProd;
 
         return $this;
     }
