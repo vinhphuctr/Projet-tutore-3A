@@ -6,6 +6,10 @@ mat-sidenav {
     width  : 18%;
 }
 
+.mat-toolbar{
+  background-color: rgb(92,84,164);
+}
+
 h3{
     padding-left : 0px;
     padding-right:150px;

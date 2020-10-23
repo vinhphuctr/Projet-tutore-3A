@@ -9,6 +9,4 @@ export class Video {
     plot: string;
     trailer: string;
     vo: string;
-    production: Production;
-    
 }

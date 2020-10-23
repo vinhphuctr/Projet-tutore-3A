@@ -19,19 +19,10 @@ export class connexionService implements CanActivate {
   ) { }
 
 
-
-
-
-
-
-
-
-
-
   connexion(loginForm: any)  {
     // Recupération des users existants
     this._utilisateurService.getUsers().subscribe(tabUsers => this.tabUsers = tabUsers);
-     
+
 
     console.log('Tentative de connexion');
 
@@ -42,17 +33,17 @@ export class connexionService implements CanActivate {
         this.setUser(element);
 
         // On récupère l'url de redirection
-        const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/faq';
+        const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/main';
 
         // On accède à la page souhaitée
         this.router.navigate([redirectUrl]);
 
       } else {
-        alert("Connexion échoué : le mot de passe/l'identifiant est incorrect"); 
+        alert("Connexion échoué : le mot de passe/l'identifiant est incorrect");
       }
 
     });
-   
+
   }
 
    isActive() {
@@ -63,8 +54,6 @@ export class connexionService implements CanActivate {
     }
   }
 
-
-  
 
   logout() {
     console.log('Déconnexion');
@@ -96,10 +85,10 @@ export class connexionService implements CanActivate {
     }
     if(this.isActive() == false)
     {
-      console.log('2'); 
+      console.log('2');
       alert('Veuillez vous identifier pour voir cette page');
       return false;
-      
+
     }
   }
 }

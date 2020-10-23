@@ -6,7 +6,7 @@
       </button>
       <span class="menu-spacer"></span>
       <span class="menu-spacer"></span>
-      <button class="md-raised" mat-button [routerLink]="'/'" (click)="sidenav.close()">
+      <button class="md-raised" mat-button [routerLink]="'/main'" (click)="sidenav.close()">
         <h2>What The Film</h2>
       </button>
       <span class="example-spacer"></span>
@@ -29,6 +29,10 @@
     <mat-nav-list>
       <h3 matSubHeader style="padding:auto; text-align:center; margin-bottom: 22px; margin-top: 22px;" >{{lettresInitiales | uppercase}}</h3>
       <mat-divider></mat-divider>
+      <br>
+      <button mat-button>
+        <h3 matSubheader (click)='sidenav.close()' [routerLink]="'/main'"><img src="https://media.discordapp.net/attachments/757219550663147592/769167750038945802/loupe.png?width=670&height=670">Rechercher</h3>
+      </button>
       <br>
       <button mat-button>
         <h3 matSubheader (click)='sidenav.close()' [routerLink]="'/monprofil'"><img src="https://cdn.discordapp.com/attachments/755462909911629907/766182890605772820/icon_Profil.png">Mon profil</h3>

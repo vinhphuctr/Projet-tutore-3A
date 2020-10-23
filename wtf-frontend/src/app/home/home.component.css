@@ -6,13 +6,12 @@
   align-self: end;
   position: absolute;
   width: 100%;
-  top: 45%;
+  top: 40%;
   transform: translateY(-50%);
 }
 
 .master{
   margin-bottom: 16%;
-
 }
 
 img {

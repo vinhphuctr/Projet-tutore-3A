@@ -6,6 +6,8 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { NavbarService } from '../services/navbar.service';
 import { connexionService } from '../services/connexion.service';
 
+
+
 @Component({
   selector: 'app-mon-profil',
   templateUrl: './mon-profil.component.html',
@@ -44,6 +46,9 @@ export class MonProfilComponent implements OnInit {
     //console.log(modifyForm.value["email"]); 
    
 
+ // constructor(private connexionService: connexionService, private nav: NavbarService) { nav.show} , à voir avec Julien
+
+
   }
 
 
@@ -56,5 +61,4 @@ export class MonProfilComponent implements OnInit {
   // Modifier local storage + modifier BD
 
 }
-
 

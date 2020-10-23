@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { ProfilComponent } from './profil/profil.component';
 import { FooterComponent } from './footer/footer.component';
 import { FaqComponent } from './faq/faq.component';
 import { QuiSommesNousComponent } from './qui-sommes-nous/qui-sommes-nous.component';
@@ -21,6 +20,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MonProfilComponent } from './mon-profil/mon-profil.component';
 import { MesHistoriquesComponent } from './mes-historiques/mes-historiques.component';
 import { MesFavorisComponent } from './mes-favoris/mes-favoris.component';
+import { MainComponent } from './main/main.component';
 
 
 
@@ -29,7 +29,6 @@ import { MesFavorisComponent } from './mes-favoris/mes-favoris.component';
     AppComponent,
     HomeComponent,
     NavBarComponent,
-    ProfilComponent,
     FooterComponent,
     FaqComponent,
     QuiSommesNousComponent,
@@ -38,6 +37,7 @@ import { MesFavorisComponent } from './mes-favoris/mes-favoris.component';
     MonProfilComponent,
     MesHistoriquesComponent,
     MesFavorisComponent,
+    MainComponent,
 
   ],
   imports: [
