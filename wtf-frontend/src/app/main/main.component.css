@@ -18,6 +18,45 @@ h3{
   color : rgb(93,84,164);
 }
 
+.titreRecherche {
+  margin-top: 3%;
+}
+
+.boutonRecherche {
+  margin-top: 1%;
+  margin-bottom: 3%;
+
+}
+
+.loupe {
+  height:34px;
+  width: 34px;
+}
+
+
+.form-control{
+  width: 36%;
+  height: 30px;
+  margin:0;
+  border: black solid 2px;
+  font-size: 20px;
+  padding-left: 20px;
+  padding-right: 100px;
+  color : rgb(93,84,164);
+  border-radius: 4px;
+}
+
+#button_left{
+  margin-right: 8%;
+}
+
+.mat-stroked-button {
+  border: rgb(93,84,164) solid;
+  border-radius: 8px;
+  padding:0px 20px;
+  color: rgb(93,84,164);
+}
+
 #etoile {
 height:100px;
 width: 100px;

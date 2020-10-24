@@ -13,4 +13,31 @@
   </li>
   </ul>
 </div>
+<h3 class="titreRecherche">Lancer vos recherches perso</h3>
+<div class="boutonRecherche">
+  <button (click)="afficherRapide()" mat-stroked-button id="button_left">Recherche rapide</button>
+  <button (click)="afficherAvance()"  mat-stroked-button>Recherche avancée</button>
+</div>
+<div *ngIf="isRechercheRapide" class="rechercheRapide">
+  <div class="input-field col s8 nopad">
+    <form  (submit)="rechercheRapide()" [formGroup]="rechercheRapideForm">
+    <input class="form-control" matInput placeholder="Chercher votre film" formControlName="recherche">
+    <button type="submit" mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+  </form>
+  </div>
+</div>
+<div *ngIf="isRechercheAvance" class="rechercheAvance">
+ <!--
+  <div class="input-field col s8 nopad">
+    <form  (submit)="rechercheRapide()" [formGroup]="rechercheRapideForm">
+    <input class="form-control" matInput placeholder="Chercher votre film" formControlName="recherche">
+    <button type="submit" mat-icon-button>
+      <mat-icon>search</mat-icon>
+    </button>
+  </form>
+  </div>
+  -->
+</div>
 </div>
