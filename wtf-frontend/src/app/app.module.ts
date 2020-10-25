@@ -21,6 +21,7 @@ import { MonProfilComponent } from './mon-profil/mon-profil.component';
 import { MesHistoriquesComponent } from './mes-historiques/mes-historiques.component';
 import { MesFavorisComponent } from './mes-favoris/mes-favoris.component';
 import { MainComponent } from './main/main.component';
+import { RechercheRapideComponent } from './recherche-rapide/recherche-rapide.component';
 
 
 
@@ -38,6 +39,7 @@ import { MainComponent } from './main/main.component';
     MesHistoriquesComponent,
     MesFavorisComponent,
     MainComponent,
+    RechercheRapideComponent,
 
   ],
   imports: [

@@ -4,13 +4,13 @@
     "\\wtf-frontend",
     "\\wtf-frontend\\src",
     "\\wtf-frontend\\src\\app",
-    "\\wtf-frontend\\src\\app\\main",
-    "\\wtf-frontend\\src\\app\\mes-favoris",
+    "\\wtf-frontend\\src\\app\\connexion",
     "\\wtf-frontend\\src\\app\\modeles",
     "\\wtf-frontend\\src\\app\\mon-profil",
     "\\wtf-frontend\\src\\app\\nav-bar",
+    "\\wtf-frontend\\src\\app\\recherche-rapide",
     "\\wtf-frontend\\src\\app\\services"
   ],
-  "SelectedNode": "\\wtf-frontend\\src\\app\\mockSuggestion.ts",
+  "SelectedNode": "\\wtf-frontend\\src\\app\\recherche-rapide\\recherche-rapide.component.ts",
   "PreviewInSolutionExplorer": false
 }
