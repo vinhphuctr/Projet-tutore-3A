@@ -40,6 +40,12 @@ export class MainComponent implements OnInit {
 
  rechercheRapide() {
    console.log(this.rechercheRapideForm.value['recherche']);
+   console.log (this.suggestionService.rechercheRapide(this.rechercheRapideForm.value['recherche']));  
+   console.log("julie");
+
+   
+
+ 
   }
 }
 
