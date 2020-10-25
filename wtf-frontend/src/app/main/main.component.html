@@ -1,43 +1,48 @@
 <div class="main-content">
 
-<h1 matSubheader><img id="etoile" src="https://media.discordapp.net/attachments/757219550663147592/769167745320484944/etoile.png?width=668&height=670">Commencez votre scoring now !</h1>
-<h3>Nos recommandations</h3>
+  <h1 matSubheader><img id="etoile" src="https://media.discordapp.net/attachments/757219550663147592/769167745320484944/etoile.png?width=668&height=670">Commencez votre scoring now !</h1>
+  <h3>Nos recommandations</h3>
 
-<div aria-label="gallery" >
-  <ul>
+  <div aria-label="gallery">
+    <ul>
 
-    <li *ngFor="let suggestion of tabSuggestion">
-      <img src="{{suggestion.poster}}" ><button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button>
-  </li>
-  </ul>
-</div>
-<h3 class="titreRecherche">Lancer vos recherches perso</h3>
-<div class="boutonRecherche">
-  <button (click)="afficherRapide()" mat-stroked-button id="button_left">Recherche rapide</button>
-  <button (click)="afficherAvance()"  mat-stroked-button>Recherche avancée</button>
-</div>
-<div *ngIf="isRechercheRapide" class="rechercheRapide">
-  <div class="input-field col s8 nopad">
-    <form  (submit)="rechercheRapide()" [formGroup]="rechercheRapideForm">
-    <input class="form-control" matInput placeholder="Chercher votre film" formControlName="recherche">
-    <button type="submit" mat-icon-button>
-      <mat-icon>search</mat-icon>
-    </button>
-  </form>
+      <li *ngFor="let suggestion of tabSuggestion">
+        <img src="{{suggestion.poster}}"><button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+          <mat-icon>favorite</mat-icon>
+        </button>
+      </li>
+    </ul>
   </div>
-</div>
-<div *ngIf="isRechercheAvance" class="rechercheAvance">
- <!--
-  <div class="input-field col s8 nopad">
-    <form  (submit)="rechercheRapide()" [formGroup]="rechercheRapideForm">
-    <input class="form-control" matInput placeholder="Chercher votre film" formControlName="recherche">
-    <button type="submit" mat-icon-button>
-      <mat-icon>search</mat-icon>
-    </button>
-  </form>
+  <h3 class="titreRecherche">Lancer vos recherches perso</h3>
+  <div class="boutonRecherche">
+    <button (click)="afficherRapide()" mat-stroked-button id="button_left">Recherche rapide</button>
+    <button (click)="afficherAvance()" mat-stroked-button>Recherche avancée</button>
   </div>
-  -->
+  <div *ngIf="isRechercheRapide" class="rechercheRapide">
+    <div class="input-field col s8 nopad">
+      <form (submit)="rechercheRapide()" [formGroup]="rechercheRapideForm">
+        <input class="form-control" matInput placeholder="Chercher votre film" formControlName="recherche">
+        <button type="submit" mat-icon-button>
+          <mat-icon>search</mat-icon>
+        </button>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="isRechercheAvance" class="rechercheAvance">
+    <!--
+     <div class="input-field col s8 nopad">
+       <form  (submit)="rechercheRapide()" [formGroup]="rechercheRapideForm">
+       <input class="form-control" matInput placeholder="Chercher votre film" formControlName="recherche">
+       <button type="submit" mat-icon-button>
+         <mat-icon>search</mat-icon>
+       </button>
+     </form>
+     </div>
+     -->
+  </div>
+  <!--"hok"
+  <app-recherche-rapide [app-recherche-rapideMessage]="parentMessage"></app-recherche-rapide>-->
+
 </div>
-</div>
+
+
