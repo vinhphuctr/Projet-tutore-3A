@@ -11,7 +11,7 @@ import { MesHistoriquesComponent } from './mes-historiques/mes-historiques.compo
 import { MesFavorisComponent } from './mes-favoris/mes-favoris.component';
 import { connexionService } from './services/connexion.service';
 import { RechercheRapideComponent } from './recherche-rapide/recherche-rapide.component';
- 
+
 
 
 
@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: "monprofil", component: MonProfilComponent, canActivate:[connexionService] },
   { path: "meshistoriques", component: MesHistoriquesComponent, canActivate: [connexionService] },
   { path: "mesfavoris", component: MesFavorisComponent, canActivate: [connexionService] },
-  { path: "rapiderecherche", component: RechercheRapideComponent },
+  { path: "rechercherapide", component: RechercheRapideComponent },
 ];
 
 

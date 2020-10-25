@@ -1,0 +1,21 @@
+.main-content{
+  padding-bottom: 20%;
+  background-color: white;
+  text-align: center;
+  color:black;
+}
+
+
+h1{
+  display: inline-block;
+  padding-bottom: 20px;
+  font-size : 40px;
+  color : rgb(93,84,164);
+}
+
+h3{
+  font-size : 22px;
+  color : rgb(93,84,164);
+}
+
+

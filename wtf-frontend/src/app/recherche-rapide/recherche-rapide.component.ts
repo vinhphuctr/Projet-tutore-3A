@@ -1,6 +1,7 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { MainComponent } from '../main/main.component';
 import { SuggestionService } from '../services/suggestion.service';
+import { Video } from '../modeles/video';
+
 @Component({
   selector: 'app-recherche-rapide',
   templateUrl: './recherche-rapide.component.html',
@@ -8,26 +9,26 @@ import { SuggestionService } from '../services/suggestion.service';
 })
 export class RechercheRapideComponent implements OnInit {
 
-  
+
   @Input() childMessage: string;
+
+  tabResultat : Video[];
 
 
   constructor(private suggestionService: SuggestionService) {
-    console.log(this.suggestionService.rechercheRapide(localStorage.getItem('keyword')));
-   
-
+    this.tabResultat = this.suggestionService.rechercheRapide(localStorage.getItem('keyword'));
   }
 
   ngOnInit(): void {
   }
 
-  
-
-   
-   
- 
 
 
- 
-  
+
+
+
+
+
+
+
 }

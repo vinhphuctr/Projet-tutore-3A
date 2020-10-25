@@ -1,1 +1,13 @@
-<p>recherche-rapide works!</p>
+<h1 matSubheader>Résultat de recherche</h1>
+<button [routerLink]="'/main'" mat-button><mat-icon>arrow_left_alt</mat-icon>Page d'accueil</button>
+<div aria-label="gallery">
+    <ul>
+      <li *ngFor="let item of tabResultat">
+          <p>{{item.titre}}</p>
+          <img src="{{item.poster}}">
+          <button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+            <mat-icon>favorite</mat-icon>
+            </button>
+      </li>
+    </ul>
+  </div>

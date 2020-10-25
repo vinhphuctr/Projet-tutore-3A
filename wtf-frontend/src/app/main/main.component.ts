@@ -13,7 +13,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  parentMessage = "message from parent"; 
+  parentMessage = "message from parent";
 
   tabSuggestion : Video[];
   isRechercheRapide: boolean = false ;
@@ -43,16 +43,9 @@ export class MainComponent implements OnInit {
   }
 
   rechercheRapide() {
-    localStorage.setItem('keyword', this.rechercheRapideForm.value['recherche']); 
-    const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/rapiderecherche';
+    localStorage.setItem('keyword', this.rechercheRapideForm.value['recherche']);
+    const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/rechercherapide';
     this.router.navigate([redirectUrl]);
-   
-  
-   
-
-   
-
- 
   }
 }
 
