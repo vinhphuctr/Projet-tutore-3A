@@ -6,7 +6,9 @@ import { SUGGESTION } from '../mockSuggestion';
 })
 export class SuggestionService {
 
-  constructor() { }
+
+  constructor() {
+   }
   getSuggestions()
   {
     return JSON.stringify(SUGGESTION);

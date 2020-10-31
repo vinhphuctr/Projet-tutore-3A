@@ -1,0 +1,13 @@
+<div class="main-content">
+  <h1 matSubheader>{{video.titre}}</h1>
+  <button (click)="goBack()" mat-stroked-button><mat-icon>arrow_left_alt</mat-icon>Retour</button>
+  <p>Titre : {{video.titre}}</p>
+  <p>Affichage poster : {{video.poster}}</p>
+  <p>Voir le trailer sur Youtube {{video.trailer}}</p>
+  <p>Langue original :{{video.vo}}</p>
+
+  <p>Résumé : {{video.plot}}</p>
+
+  <p>Date de sortie : {{video.date_sortie | date:'dd/mm/yyyy'}}</p>
+</div>
+

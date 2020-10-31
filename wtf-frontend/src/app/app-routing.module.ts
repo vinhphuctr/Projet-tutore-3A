@@ -7,11 +7,10 @@ import { ConnexionComponent } from './connexion/connexion.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { MonProfilComponent } from './mon-profil/mon-profil.component';
 import { MainComponent } from './main/main.component';
-import { MesHistoriquesComponent } from './mes-historiques/mes-historiques.component';
 import { MesFavorisComponent } from './mes-favoris/mes-favoris.component';
 import { connexionService } from './services/connexion.service';
 import { RechercheRapideComponent } from './recherche-rapide/recherche-rapide.component';
-
+import { MovieComponent } from './movie/movie.component';
 
 
 
@@ -21,9 +20,9 @@ const routes: Routes = [
   { path: "inscription", component: InscriptionComponent },
   { path: "quisommesnous",  component: QuiSommesNousComponent },
   { path: "faq", component: FaqComponent },
+  {path: "movie/:id", component:MovieComponent},
   { path: "main",  component: MainComponent, canActivate:[connexionService] },
   { path: "monprofil", component: MonProfilComponent, canActivate:[connexionService] },
-  { path: "meshistoriques", component: MesHistoriquesComponent, canActivate: [connexionService] },
   { path: "mesfavoris", component: MesFavorisComponent, canActivate: [connexionService] },
   { path: "rechercherapide", component: RechercheRapideComponent },
 ];

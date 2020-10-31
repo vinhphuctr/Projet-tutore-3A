@@ -15,7 +15,7 @@
                 <button id="button_left" mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
                   <mat-icon>favorite</mat-icon>
                 </button>
-                <button mat-stroked-button id="button_left">Détails</button>
+                <button  routerLink="/movie/{{item.id_video}}" mat-stroked-button id="button_left">Détails</button>
                 <button mat-stroked-button>Scorez !</button>
               </div>
             </div>
@@ -24,12 +24,3 @@
       </ul>
     </div>
 </div>
-<!--
-
-  <p>{{item.titre}} ({{item.date_sortie | date:'yyyy'}})</p>
-            <img src="{{item.poster}}">
-            <button mat-icon-button color="warn" aria-label="">
-              <mat-icon>favorite</mat-icon>
-              </button>
--->
-

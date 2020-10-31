@@ -18,10 +18,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MonProfilComponent } from './mon-profil/mon-profil.component';
-import { MesHistoriquesComponent } from './mes-historiques/mes-historiques.component';
 import { MesFavorisComponent } from './mes-favoris/mes-favoris.component';
 import { MainComponent } from './main/main.component';
 import { RechercheRapideComponent } from './recherche-rapide/recherche-rapide.component';
+import { MovieComponent } from './movie/movie.component';
 
 
 
@@ -36,10 +36,10 @@ import { RechercheRapideComponent } from './recherche-rapide/recherche-rapide.co
     InscriptionComponent ,
     ConnexionComponent,
     MonProfilComponent,
-    MesHistoriquesComponent,
     MesFavorisComponent,
     MainComponent,
     RechercheRapideComponent,
+    MovieComponent,
 
   ],
   imports: [
