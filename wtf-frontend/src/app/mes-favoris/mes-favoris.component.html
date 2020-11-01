@@ -1,3 +1,27 @@
-<p>mes-favoris works!</p>
-<h4>{{UtilisateurData.mail}}</h4>
+<div class="main-content">
+  <h1 matSubheader>Mes favoris : </h1>
+  <button [routerLink]="'/main'" mat-stroked-button><mat-icon>arrow_left_alt</mat-icon>Page d'accueil</button>
+  <div aria-label="gallery">
+    <ul>
+      <li *ngFor="let item of tabMesFavoris">
+        <div class="blocFilm">
+          <div id="bloc1">
+            <img src="{{item.poster}}">
+          </div>
+          <div id="bloc2">
+            <p id="film">{{item.titre}} ({{item.date_sortie | date:'yyyy'}})</p>
+            <p id="genre">{{item.vo}}</p>
+            <div class="boutonRecherche">
+              <button id="button_left" mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+                <mat-icon>favorite</mat-icon>
+              </button>
+              <button routerLink="/movie/{{item.id_video}}" mat-stroked-button id="button_left">Détails</button>
+              <button mat-stroked-button>Scorez !</button>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
 

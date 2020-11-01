@@ -3,14 +3,8 @@
     "",
     "\\wtf-frontend",
     "\\wtf-frontend\\src",
-    "\\wtf-frontend\\src\\app",
-    "\\wtf-frontend\\src\\app\\connexion",
-    "\\wtf-frontend\\src\\app\\modeles",
-    "\\wtf-frontend\\src\\app\\mon-profil",
-    "\\wtf-frontend\\src\\app\\nav-bar",
-    "\\wtf-frontend\\src\\app\\recherche-rapide",
-    "\\wtf-frontend\\src\\app\\services"
+    "\\wtf-frontend\\src\\app"
   ],
-  "SelectedNode": "\\wtf-frontend\\src\\app\\recherche-rapide\\recherche-rapide.component.ts",
+  "SelectedNode": "\\wtf-frontend\\src\\app\\app.component.ts",
   "PreviewInSolutionExplorer": false
 }

@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Utilisateur } from '../modeles/utilisateur';
 import { connexionService } from '../services/connexion.service';
+import { FavorisService } from '../services/favoris.service';
+import { Video } from '../modeles/video'; 
+
 @Component({
   selector: 'app-mes-favoris',
   templateUrl: './mes-favoris.component.html',
@@ -11,7 +14,13 @@ export class MesFavorisComponent implements OnInit {
 
   UtilisateurData: Utilisateur;
 
-  constructor(private connexionService: connexionService) { }
+  tabMesFavoris: Video[]; 
+
+  constructor(private connexionService: connexionService, private FavorisService: FavorisService) {
+
+    this.tabMesFavoris = this.FavorisService.getFavoris();
+   
+    }
 
   ngOnInit(): void {
 
@@ -21,3 +30,11 @@ export class MesFavorisComponent implements OnInit {
 
   }
 }
+
+
+
+
+
+
+
+
