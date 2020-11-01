@@ -45,6 +45,13 @@ class Role
         $this->idPersonne = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function serializePersonnes(){
+        return array(
+            'idRole' => $this->getIdRole(),
+            'libelleRole' => $this->getLibelleRole()
+        );
+    }
+
     public function getIdRole(): ?int
     {
         return $this->idRole;

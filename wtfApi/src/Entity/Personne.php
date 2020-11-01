@@ -62,7 +62,7 @@ class Personne
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Role", inversedBy="idPersonne")
+     * @ORM\ManyToMany(targetEntity="Role", inversedBy="idPersonne", fetch="EAGER")
      * @ORM\JoinTable(name="posseder",
      *   joinColumns={
      *     @ORM\JoinColumn(name="id_personne", referencedColumnName="id_personne")
@@ -81,6 +81,16 @@ class Personne
     {
         $this->idVideo = new \Doctrine\Common\Collections\ArrayCollection();
         $this->idRole = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function serializePersonnes(){
+        return array(
+            'idPersonne' => $this->getIdPersonne(),
+            'nom' => $this->getNom(),
+            'prenom' => $this->getPrenom(),
+            'nationalite' => $this->getNationalite(),
+            'role' => $this->getIdRole(),
+        );
     }
 
     public function getIdPersonne(): ?int

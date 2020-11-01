@@ -19,9 +19,13 @@ class VideoController extends AbstractController
      */
     public function index()
     {
-        return $this->json([
-            'message' => 'Ajoutez /get à cette route pour récupérer les vidéos'
-        ]);
+        return new Response(
+            '
+            <h1>Videos</h1>
+            <ul>
+                <li><a href="video/get/all">GET ALL</a></li>
+            </ul>'
+        );
     }
 
     /**
@@ -66,7 +70,7 @@ class VideoController extends AbstractController
 
         $data = array('videos' => array());
         foreach($videos as $video){
-            $data['videos'][] = $this->serializeVideos($video);
+            $data['videos'][] = $this->serializeVideos();
             // if(!is_null($video->getProduction()))
             //     dump($video->getProduction()->getNom());
         }
@@ -76,23 +80,6 @@ class VideoController extends AbstractController
         // $response = new Response(json_encode($data),200);
         // $response->headers->set('Content-Type', 'application/json');
         // return $response;
-    }
-
-    private function serializeVideos(Video $video){
-        return array(
-            'idVideo' => $video->getIdVideo(),
-            'titre' => $video->getTitre(),
-            'dateSortie' => $video->getDateSortie(),
-            'poster' => $video->getPoster(),
-            'plot' => $video->getPlot(),
-            'trailer' => $video->getTrailer(),
-            'vo' => $video->getVo(),
-            'production' => (!is_null($video->getProduction())) ? array(
-                 'id' => $video->getProduction()->getId(),
-                 'nom' => $video->getProduction()->getNom(),
-            ) : null,
-            'next' => null
-        );
     }
 
     /**

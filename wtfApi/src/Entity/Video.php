@@ -107,7 +107,7 @@ class Video
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Personne", mappedBy="idVideo")
+     * @ORM\ManyToMany(targetEntity="Personne", mappedBy="idVideo", fetch="EAGER")
      */
     private $idPersonne;
 
@@ -133,6 +133,43 @@ class Video
         $this->idPersonne = new \Doctrine\Common\Collections\ArrayCollection();
         $this->idUtilisateur = new \Doctrine\Common\Collections\ArrayCollection();
         $this->idProd = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function serializeVideos(){
+
+        // Production
+        $productionArray = array();
+        if(is_null($this->getProduction())) {
+            $productionArray = null;
+        } else {
+            $productionArray = array(
+            'id' => $this->getProduction()->getId(),
+            'nom' => $this->getProduction()->getNom(),
+            );
+        }
+
+        // Personnes
+        $personnesArray = array();
+        if(is_null($this->getIdPersonne())){
+            $personnesArray = null;
+        } else {
+            foreach ($this->getIdPersonne() as $value) {
+                $personnesArray[] = $value->serializePersonnes();
+            }
+        }        
+
+        return array(
+            'idVideo' => $this->getIdVideo(),
+            'titre' => $this->getTitre(),
+            'dateSortie' => $this->getDateSortie(),
+            'poster' => $this->getPoster(),
+            'plot' => $this->getPlot(),
+            'trailer' => $this->getTrailer(),
+            'vo' => $this->getVo(),
+            'production' => $productionArray,
+            'personnes' => $personnesArray,
+            'next' => null
+        );
     }
 
     public function getProduction(): ?Production
