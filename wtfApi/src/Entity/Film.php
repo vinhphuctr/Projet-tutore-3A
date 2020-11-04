@@ -54,4 +54,17 @@ class Film
 
         return $this;
     }
+
+    public function serializeFilm() {
+        return array_merge(
+            array(
+                'type' => 'film',
+                'duree' => [
+                    'total' => $this->getDuree(),
+                    'heures' => substr(date('H\hi\m', mktime(0,$this->getDuree())),1),
+                ]
+            ),
+            $this->getIdVideo()->serializeVideo()
+        );
+    }
 }

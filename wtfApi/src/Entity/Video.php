@@ -135,7 +135,7 @@ class Video
         $this->idProd = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    public function serializeVideos(){
+    public function serializeVideo(){
 
         // Production
         $productionArray = array();
@@ -156,7 +156,17 @@ class Video
             foreach ($this->getIdPersonne() as $value) {
                 $personnesArray[] = $value->serializePersonnes();
             }
-        }        
+        }
+        
+        // Plateformes
+        $plateformesArray = array();
+        if(is_null($this->getIdPlateforme())){
+            $plateformesArray = null;
+        } else {
+            foreach ($this->getIdPlateforme() as $value) {
+                $plateformesArray[] = $value->serializePlateformes();
+            }
+        }
 
         return array(
             'idVideo' => $this->getIdVideo(),
@@ -168,7 +178,7 @@ class Video
             'vo' => $this->getVo(),
             'production' => $productionArray,
             'personnes' => $personnesArray,
-            'next' => null
+            'plateformes' => $plateformesArray
         );
     }
 

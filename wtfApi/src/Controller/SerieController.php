@@ -29,10 +29,25 @@ class SerieController extends AbstractController
     public function getAllSeries(){
         $repository = $this->getDoctrine()->getRepository(Serie::class);
         $series = $repository->findAll();
+        $allSeries = array();
+        foreach ($series as $s) {
+            $allSeries[] = $s->serializeSerie();
+        }
+        $json = json_encode($allSeries);
+        $response = new Response($json);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
 
-        dump($series);
-        // TODO à continuer... il faut serializer comme dans vidéo
-
-        return new Response('<html><body>Coucou!</body></html>');
+    /**
+    * @Route("/api/serie/get/{id}", name="getSerieById")
+    */
+    public function getSerieById($id){
+        $repository = $this->getDoctrine()->getRepository(Serie::class);
+        $series = $repository->find($id);
+        $json = json_encode($series->serializeSerie());
+        $response = new Response($json);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 }

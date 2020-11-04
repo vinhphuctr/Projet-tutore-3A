@@ -56,5 +56,15 @@ class Serie
         return $this;
     }
 
+    public function serializeSerie() {
+        return array_merge(
+            array(
+                'type' => 'serie',
+                'saisons' => $this->getNbSaison()
+            ),
+            $this->getIdVideo()->serializeVideo()
+        );
+    }
+
 
 }

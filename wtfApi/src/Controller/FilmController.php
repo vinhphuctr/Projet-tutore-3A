@@ -35,30 +35,15 @@ class FilmController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Film::class);
         $films = $repository->find(5);
 
-        dump($films->getIdVideo()->serializeVideos());
-        dump($films->getIdVideo());
+        // dump($films->getIdVideo()->serializeVideo());
+        // dump($films->getIdVideo());
 
-        $response = new Response(json_encode($films->getIdVideo()->serializeVideos()),200);
+        $response = new Response(json_encode($films->serializeFilm()),200);
         $response->headers->set('Content-Type', 'application/json');
         return $response;
 
         return new Response('<html><body>Films</body></html>');
-
-
-        $result = $films[0];
-
-        $encoder = new JsonEncoder();
-        $normalizer = new ObjectNormalizer();
-        $serializer = new Serializer($normalizer, $encoder);
-
-        $jsonContent = $serializer->serialize($result, 'json');
-        echo $jsonContent;
-        
-        // var_dump($result);
-        // TODO à continuer... il faut serializer comme dans vidéo
-        // + fetch="EAGER" à retenir dans les entities !
-
-        return new Response('<html><body>Coucou!</body></html>');
+    
     }
 
     /**
@@ -66,13 +51,10 @@ class FilmController extends AbstractController
     */
     public function getFilmById($id){
         $repository = $this->getDoctrine()->getRepository(Film::class);
-        $video = $repository->find($id);        
-        $json = json_encode($video);
+        $films = $repository->find($id);        
+        $json = json_encode($films->serializeFilm());
         $response = new Response($json);
         $response->headers->set('Content-Type', 'application/json');
-
         return $response;
-
-        // return new Response("<html><body></body></html>");
     }
 }

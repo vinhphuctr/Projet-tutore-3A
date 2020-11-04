@@ -86,8 +86,8 @@ class Personne
     public function serializePersonnes(){
         return array(
             'idPersonne' => $this->getIdPersonne(),
-            'nom' => $this->getNom(),
             'prenom' => $this->getPrenom(),
+            'nom' => $this->getNom(),            
             'nationalite' => $this->getNationalite(),
             'role' => $this->getIdRole(),
         );
