@@ -33,17 +33,11 @@ class FilmController extends AbstractController
     */
     public function getAllFilms(){
         $repository = $this->getDoctrine()->getRepository(Film::class);
-        $films = $repository->find(5);
-
-        // dump($films->getIdVideo()->serializeVideo());
-        // dump($films->getIdVideo());
-
-        $response = new Response(json_encode($films->serializeFilm()),200);
+        $films = $repository->findAll();
+        $json = json_encode(Film::serializeFilms($films));
+        $response = new Response($json);
         $response->headers->set('Content-Type', 'application/json');
         return $response;
-
-        return new Response('<html><body>Films</body></html>');
-    
     }
 
     /**
@@ -51,8 +45,8 @@ class FilmController extends AbstractController
     */
     public function getFilmById($id){
         $repository = $this->getDoctrine()->getRepository(Film::class);
-        $films = $repository->find($id);        
-        $json = json_encode($films->serializeFilm());
+        $film = $repository->find($id);      
+        $json = json_encode($film->serializeFilm());
         $response = new Response($json);
         $response->headers->set('Content-Type', 'application/json');
         return $response;

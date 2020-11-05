@@ -67,4 +67,13 @@ class Film
             $this->getIdVideo()->serializeVideo()
         );
     }
+
+    public static function serializeFilms($array) {
+        dump($array);
+        $result = array();
+        foreach($array as $film) {
+            $result[] = $film->serializeFilm();
+        }
+        return $result;
+    }
 }
