@@ -59,13 +59,21 @@ class Plateforme
         $this->idVideo = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    public function serializePlateformes(){
+    public function serializePlateforme(){
         return array(
             'idPlateforme' => $this->getIdPlateforme(),
             'nom' => $this->getNom(),
             'redirection' => $this->getRedirection(),            
             'logo' => $this->getLogo()
         );
+    }
+
+    public static function serializePlateformes($plateformes) {
+        $result = array();
+        foreach($plateformes as $p) {
+            $result[] = $p->serializePlateforme();
+        }
+        return $result;
     }
 
     public function getIdPlateforme(): ?int

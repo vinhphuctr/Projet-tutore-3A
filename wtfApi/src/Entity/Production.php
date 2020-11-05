@@ -42,6 +42,14 @@ class Production
         $this->video = new ArrayCollection();
     }
 
+    public function serializeProduction() {
+        return array(
+            'id' => $this->getId(),
+            'nom' => $this->getNom(),
+        );
+    }
+
+
     /**
      * @return Collection|Video[]
      */

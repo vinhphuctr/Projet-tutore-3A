@@ -83,7 +83,7 @@ class Personne
         $this->idRole = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    public function serializePersonnes(){
+    public function serializePersonne(){
         return array(
             'idPersonne' => $this->getIdPersonne(),
             'prenom' => $this->getPrenom(),
@@ -91,6 +91,14 @@ class Personne
             'nationalite' => $this->getNationalite(),
             'role' => $this->getIdRole(),
         );
+    }
+
+    public static function serializePersonnes($personnes) {
+        $result = array();
+        foreach($personnes as $p) {
+            $result[] = $p->serializePersonne();
+        }
+        return $result;
     }
 
     public function getIdPersonne(): ?int

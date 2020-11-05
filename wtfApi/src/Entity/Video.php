@@ -107,7 +107,7 @@ class Video
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="Personne", mappedBy="idVideo", fetch="EAGER")
+     * @ORM\ManyToMany(targetEntity="Personne", mappedBy="idVideo")
      */
     private $idPersonne;
 
@@ -136,38 +136,6 @@ class Video
     }
 
     public function serializeVideo(){
-
-        // Production
-        $productionArray = array();
-        if(is_null($this->getProduction())) {
-            $productionArray = null;
-        } else {
-            $productionArray = array(
-            'id' => $this->getProduction()->getId(),
-            'nom' => $this->getProduction()->getNom(),
-            );
-        }
-
-        // Personnes
-        $personnesArray = array();
-        if(is_null($this->getIdPersonne())){
-            $personnesArray = null;
-        } else {
-            foreach ($this->getIdPersonne() as $value) {
-                $personnesArray[] = $value->serializePersonnes();
-            }
-        }
-        
-        // Plateformes
-        $plateformesArray = array();
-        if(is_null($this->getIdPlateforme())){
-            $plateformesArray = null;
-        } else {
-            foreach ($this->getIdPlateforme() as $value) {
-                $plateformesArray[] = $value->serializePlateformes();
-            }
-        }
-
         return array(
             'idVideo' => $this->getIdVideo(),
             'titre' => $this->getTitre(),
@@ -176,9 +144,9 @@ class Video
             'plot' => $this->getPlot(),
             'trailer' => $this->getTrailer(),
             'vo' => $this->getVo(),
-            'production' => $productionArray,
-            'personnes' => $personnesArray,
-            'plateformes' => $plateformesArray
+            'production' => $this->getProduction()->serializeProduction(),
+            'personnes' => Personne::serializePersonnes($this->getIdPersonne()),
+            'plateformes' => Plateforme::serializePlateformes($this->getIdPlateforme())
         );
     }
 

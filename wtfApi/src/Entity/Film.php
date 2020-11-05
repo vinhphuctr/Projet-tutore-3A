@@ -69,7 +69,6 @@ class Film
     }
 
     public static function serializeFilms($array) {
-        dump($array);
         $result = array();
         foreach($array as $film) {
             $result[] = $film->serializeFilm();
