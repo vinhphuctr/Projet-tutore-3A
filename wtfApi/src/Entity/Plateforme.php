@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Plateforme
  *
  * @ORM\Table(name="plateforme")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\PlateformeRepository")
  */
 class Plateforme
 {
@@ -57,23 +57,6 @@ class Plateforme
     public function __construct()
     {
         $this->idVideo = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    public function serializePlateforme(){
-        return array(
-            'idPlateforme' => $this->getIdPlateforme(),
-            'nom' => $this->getNom(),
-            'redirection' => $this->getRedirection(),            
-            'logo' => $this->getLogo()
-        );
-    }
-
-    public static function serializePlateformes($plateformes) {
-        $result = array();
-        foreach($plateformes as $p) {
-            $result[] = $p->serializePlateforme();
-        }
-        return $result;
     }
 
     public function getIdPlateforme(): ?int

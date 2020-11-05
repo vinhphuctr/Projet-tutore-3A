@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Video;
+use App\Entity\Personne;
+use App\Entity\Plateforme;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -42,5 +44,25 @@ class VideoRepository extends ServiceEntityRepository
         
 
         return $results;
+    }
+
+    public function serializeVideo($video){
+        if( $video->getProduction() !== null)
+            $production = $video->getProduction()->serializeProduction();
+        else
+            $production = null;
+
+        return array(
+            'idVideo' => $video->getIdVideo(),
+            'titre' => $video->getTitre(),
+            'dateSortie' => $video->getDateSortie(),
+            'poster' => $video->getPoster(),
+            'plot' => $video->getPlot(),
+            'trailer' => $video->getTrailer(),
+            'vo' => $video->getVo(),
+            'production' => $production,
+            'personnes' => $this->getEntityManager()->getRepository(Personne::class)->serializePersonnes($video->getIdPersonne()),
+            'plateformes' => $this->getEntityManager()->getRepository(Plateforme::class)->serializePlateformes($video->getIdPlateforme())
+        );
     }
 }

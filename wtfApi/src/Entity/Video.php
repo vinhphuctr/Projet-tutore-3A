@@ -135,21 +135,6 @@ class Video
         $this->idProd = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    public function serializeVideo(){
-        return array(
-            'idVideo' => $this->getIdVideo(),
-            'titre' => $this->getTitre(),
-            'dateSortie' => $this->getDateSortie(),
-            'poster' => $this->getPoster(),
-            'plot' => $this->getPlot(),
-            'trailer' => $this->getTrailer(),
-            'vo' => $this->getVo(),
-            'production' => $this->getProduction()->serializeProduction(),
-            'personnes' => Personne::serializePersonnes($this->getIdPersonne()),
-            'plateformes' => Plateforme::serializePlateformes($this->getIdPlateforme())
-        );
-    }
-
     public function getProduction(): ?Production
     {
         return $this->production;

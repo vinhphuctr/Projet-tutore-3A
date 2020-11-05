@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Personne
  *
  * @ORM\Table(name="personne")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\PersonneRepository")
  */
 class Personne
 {
@@ -81,24 +81,6 @@ class Personne
     {
         $this->idVideo = new \Doctrine\Common\Collections\ArrayCollection();
         $this->idRole = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    public function serializePersonne(){
-        return array(
-            'idPersonne' => $this->getIdPersonne(),
-            'prenom' => $this->getPrenom(),
-            'nom' => $this->getNom(),            
-            'nationalite' => $this->getNationalite(),
-            'role' => $this->getIdRole(),
-        );
-    }
-
-    public static function serializePersonnes($personnes) {
-        $result = array();
-        foreach($personnes as $p) {
-            $result[] = $p->serializePersonne();
-        }
-        return $result;
     }
 
     public function getIdPersonne(): ?int

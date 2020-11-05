@@ -66,29 +66,30 @@ class VideoController extends AbstractController
         $repository = $this->getDoctrine()->getRepository(Video::class);
         $videos = $repository->findAll();
         
-        dump($videos);
 
         $data = array('videos' => array());
         foreach($videos as $video){
-            $data['videos'][] = $this->serializeVideos();
+            $data['videos'][] = $repository->serializeVideo($video);
             // if(!is_null($video->getProduction()))
             //     dump($video->getProduction()->getNom());
         }
         
-        return new Response('<html><body></body></html>');
+        // return new Response('<html><body></body></html>');
 
-        // $response = new Response(json_encode($data),200);
-        // $response->headers->set('Content-Type', 'application/json');
-        // return $response;
+        $response = new Response(json_encode($data),200);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 
     /**
     * @Route("/api/video/get/{id}", name="getVideoById")
     */
     public function getVideoById($id){
+
         $repository = $this->getDoctrine()->getRepository(Video::class);
-        $video = $repository->findVideo(['idVideo' => $id]);
-        // $video = $this->getDoctrine()->getRepository(Video::class)->findBy(['idVideo' => $id]);
+        $video = $repository->findOneBy(['idVideo' => $id]);
+        
+        $video = $repository->serializeVideo($video);
         
         $json = json_encode($video);
         $response = new Response($json);
