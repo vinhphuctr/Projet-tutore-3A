@@ -1,0 +1,161 @@
+.qsn {
+
+  padding-top: 8%;
+  margin-bottom: 14%;
+}
+
+
+fieldset {
+  border: none;
+}
+
+mat-expansion-panel {
+  width: 50%;
+  margin: 26px auto;
+}
+
+mat-expansion-panel-header {
+  background-color: rgb(93,84,164);
+}
+
+h2 {
+  color: white;
+  padding-top: 10px;
+}
+
+
+h1 {
+  color: rgb(93,84,164);
+  text-align:center;
+}
+
+hr{
+  margin: 40px auto;
+  margin-bottom: 4%;
+  width: 16%;
+  height: 3px;
+  text-align: center;
+  background-color: rgb(93,84,164);
+  border: none; /*on supprime le style par défaut*/
+}
+
+p {
+  padding-top: 30px;
+}
+
+.disable_ripple {
+  background: rgb(93,84,164) !important;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+}
+
+
+mat-toolbar {
+  justify-content: space-between;
+}
+
+.content {
+  padding: 100px;
+  margin-right : 50px;
+}
+
+  .content > mat-card {
+    margin-bottom: 16px;
+    padding-right: 50px;
+  }
+
+.images_petit {
+  max-height: 50%;
+  max-width: 50%;
+  margin: auto;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.logo {
+  position: relative;
+  width: 100%;
+}
+
+.cat {
+  margin: 3%;
+  position: relative;
+  width: 20%;
+}
+
+.center {
+  text-align: center;
+}
+
+.presentation {
+  background-color: rgb(43,63,104);
+  width: 60%;
+  margin: 10px auto;
+  padding:50px;
+  border-radius: 30px;
+}
+
+.gros-Titre{
+  font-size: 50px;
+}
+
+.mentionslegales{
+  font-size: 14x;
+}
+
+
+.blank{
+  height: 30px;
+}
+
+p{
+  color:white;
+}
+
+.paragraphe{
+  font-size: 20px;
+  text-align: justify;
+}
+
+.titre{
+  font-size: 28px;
+}
+
+.example-card {
+  max-width: 100%;
+  border: none !important;
+  margin:auto;
+  color:white;
+  box-shadow: none;
+
+  background-color: rgb(43,63,104);
+
+}
+
+.photo-alexis {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+  width:150px;
+  height: 150px;
+}
+
+
+.alignleft {
+  float: left;
+  width:100%;
+}
+.alignright {
+	float: right;
+}
+
+
+@media (max-width: 1200px) {
+  .alignright {
+    float:left;
+    width:100%;
+  }
+}
