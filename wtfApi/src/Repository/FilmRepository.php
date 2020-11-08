@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Film;
+use App\Entity\Video;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -47,4 +48,26 @@ class FilmRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function serializeFilm($film) {
+        return array_merge(
+            array(
+                'type' => 'film',
+                'duree' => [
+                    'total' => $film->getDuree(),
+                    'heures' => substr(date('H\hi\m', mktime(0,$film->getDuree())),1),
+                ]
+            ),
+            $this->getEntityManager()->getRepository(Video::class)->serializeVideo($film->getIdVideo())
+            
+        );
+    }
+   
+    public function serializeFilms($array) {
+        $result = array();
+        foreach($array as $film) {
+            
+            $result[] = $this->getEntityManager()->getRepository(Film::class)->serializeFilm($film);
+        }
+        return $result;
+    }
 }
