@@ -47,6 +47,7 @@ class VideoRepository extends ServiceEntityRepository
     }
 
     public function serializeVideo($video){
+        
         if( $video->getProduction() !== null)
             $production = $video->getProduction()->serializeProduction();
         else

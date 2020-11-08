@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Serie;
+use App\Entity\Video;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -47,4 +48,14 @@ class SerieRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function serializeSerie($serie)
+    {
+        return array_merge(
+            array(
+                'type' => 'serie',
+                'saisons' => $serie->getNbSaison()
+            ),
+            $this->getEntityManager()->getRepository(Video::class)->serializeVideo($serie->getIdVideo())
+        );
+    }
 }

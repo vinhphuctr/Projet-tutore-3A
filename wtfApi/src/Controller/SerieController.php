@@ -43,11 +43,15 @@ class SerieController extends AbstractController
     * @Route("/api/serie/get/{id}", name="getSerieById")
     */
     public function getSerieById($id){
+
         $repository = $this->getDoctrine()->getRepository(Serie::class);
-        $series = $repository->find($id);
-        $json = json_encode($series->serializeSerie());
+
+        $serie = $repository->findOneBy(['idVideo'=>$id]);
+        $json = json_encode($repository->serializeSerie($serie));
+
         $response = new Response($json);
         $response->headers->set('Content-Type', 'application/json');
+
         return $response;
     }
 }
