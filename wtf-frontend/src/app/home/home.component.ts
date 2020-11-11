@@ -9,7 +9,11 @@ import { NavbarService } from '../services/navbar.service';
 export class HomeComponent implements OnInit {
 
 
-  constructor(private nav: NavbarService) { nav.hide() }
+  constructor(private nav: NavbarService) {
+    
+    nav.hide() 
+  
+  }
 
   ngOnInit(): void {
   }

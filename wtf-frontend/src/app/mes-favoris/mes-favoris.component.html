@@ -16,7 +16,31 @@
                 <mat-icon>favorite</mat-icon>
               </button>
               <button routerLink="/movie/{{item.id_video}}" mat-stroked-button id="button_left">Détails</button>
-              <button mat-stroked-button>Scorez !</button>
+
+              <div   [id]="item.id_video" style="visibility: hidden;">
+                <ngb-rating [(rate)]="currentRate"></ngb-rating>
+                <hr>
+                <pre [id]="item.id_video">Rate: <b>{{currentRate}}</b></pre>
+
+
+
+
+
+              </div>
+             
+         
+               <button  mat-stroked-button (click)="showHide(item.id_video)">Scorez !</button> 
+
+               <!-- <div  *ngIf="item.id_video" > haha</div>
+               
+               Toggle Show/hide:
+               <div [style.visibility]="toggleShowHide(item.id_video)">   
+                  Final Release Angular 2!
+               </div> -->
+               <!-- <div id='item.id_video.modRef' *ngIf="item.id_video.visible">my div</div>
+               <button (click)='showHide(item.id_video)'></button> -->
+               
+
             </div>
           </div>
         </div>
