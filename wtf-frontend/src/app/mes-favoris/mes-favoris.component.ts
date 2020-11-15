@@ -2,8 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Utilisateur } from '../modeles/utilisateur';
 import { connexionService } from '../services/connexion.service';
 import { FavorisService } from '../services/favoris.service';
-import { Video } from '../modeles/video'; 
-import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
+import { Video } from '../modeles/video';
 
 @Component({
   selector: 'app-mes-favoris',
@@ -15,19 +14,16 @@ export class MesFavorisComponent implements OnInit {
 
   UtilisateurData: Utilisateur;
 
-  tabMesFavoris: Video[]; 
+  tabMesFavoris: Video[];
 
-  constructor(private connexionService: connexionService, private FavorisService: FavorisService, config: NgbRatingConfig) {
+  constructor(private connexionService: connexionService, private FavorisService: FavorisService){//, config: NgbRatingConfig) {
 
     this.tabMesFavoris = this.FavorisService.getFavoris();
-    config.max = 5;
-    
-   
     }
 
   ngOnInit(): void {
 
- 
+
     console.log(this.connexionService.isActive())
     this.UtilisateurData = this.connexionService.getUser();
 
