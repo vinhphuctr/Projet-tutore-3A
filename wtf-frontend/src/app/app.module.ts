@@ -22,7 +22,7 @@ import { MesFavorisComponent } from './mes-favoris/mes-favoris.component';
 import { MainComponent } from './main/main.component';
 import { RechercheRapideComponent } from './recherche-rapide/recherche-rapide.component';
 import { MovieComponent } from './movie/movie.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -55,7 +55,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatFormFieldModule,
     MatInputModule,
     FlexLayoutModule,
-    NgbModule,
+   //NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
