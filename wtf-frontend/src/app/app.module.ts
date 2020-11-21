@@ -22,7 +22,13 @@ import { MesFavorisComponent } from './mes-favoris/mes-favoris.component';
 import { MainComponent } from './main/main.component';
 import { RechercheRapideComponent } from './recherche-rapide/recherche-rapide.component';
 import { MovieComponent } from './movie/movie.component';
-//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RatingModule } from 'ng-starrating';
+import { StarRatingComponent } from 'ng-starrating';
+import { TestComponent } from './test/test.component';
+
+
+
 
 
 
@@ -41,6 +47,9 @@ import { MovieComponent } from './movie/movie.component';
     MainComponent,
     RechercheRapideComponent,
     MovieComponent,
+    TestComponent,
+   
+  
 
   ],
   imports: [
@@ -55,7 +64,10 @@ import { MovieComponent } from './movie/movie.component';
     MatFormFieldModule,
     MatInputModule,
     FlexLayoutModule,
-   //NgbModule,
+    NgbModule,
+    RatingModule ,
+    
+   
   ],
   providers: [],
   bootstrap: [AppComponent]
