@@ -40,8 +40,7 @@ export class MesFavorisComponent implements OnInit {
   }
 
    
-  
- 
+
 
 
   toggleShowHide : string = "hidden"; 
@@ -88,6 +87,12 @@ showHide(modRef) {
       }
     
 }
+
+reply_click(id)
+{
+    console.log(id); 
+}
+
 
 
 
