@@ -17,22 +17,9 @@
               </button>
               <button routerLink="/movie/{{item.id_video}}" mat-stroked-button id="button_left">Détails</button>
 
-              <div   [id]="item.id_video" style="visibility: hidden;">
+              <div [id]="item.id_video" style="visibility: hidden;">
                 <!-- <star-rating value="5" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="24px" readonly="false" (rate)="onRate($event)"></star-rating> -->
-            
-                <h1>Pure CSS Star Rating Widget</h1>
-                <fieldset class="rating">
-                    <input type="radio" id="star5" (click)="reply_click(5)" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-                    <!-- <input type="radio" id="star4half" (click)="reply_click(4,5)" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label> -->
-                    <input type="radio" id="star4" (click)="reply_click(4)" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-                    <!-- <input type="radio" id="star3half"(click)="reply_click(3,5)" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label> -->
-                    <input type="radio" id="star3" (click)="reply_click(3)"name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-                    <!-- <input type="radio" id="star2half"(click)="reply_click(2,5)" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label> -->
-                    <input type="radio" id="star2" (click)="reply_click(2)"name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-                    <!-- <input type="radio" id="star1half" (click)="reply_click(1,5)" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label> -->
-                    <input type="radio" id="star1"(click)="reply_click(1)" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-                    <!-- <input type="radio" id="starhalf" (click)="reply_click(0,5)" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label> -->
-                </fieldset>
+                <p-rating [(ngModel)]="ratingValue" [cancel]="false" (onRate)="postRate($event, item)"></p-rating>
 
               </div>
 

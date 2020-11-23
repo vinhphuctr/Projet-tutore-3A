@@ -23,6 +23,7 @@ import { MainComponent } from './main/main.component';
 import { RechercheRapideComponent } from './recherche-rapide/recherche-rapide.component';
 import { MovieComponent } from './movie/movie.component';
 import { TestComponent } from './test/test.component';
+import { PrimengModule } from './primeng/primeng.module';
 
 
 
@@ -45,9 +46,6 @@ import { TestComponent } from './test/test.component';
     RechercheRapideComponent,
     MovieComponent,
     TestComponent,
-
-
-
   ],
   imports: [
     BrowserModule,
@@ -61,6 +59,7 @@ import { TestComponent } from './test/test.component';
     MatFormFieldModule,
     MatInputModule,
     FlexLayoutModule,
+    PrimengModule
   ],
   providers: [],
   bootstrap: [AppComponent]

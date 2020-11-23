@@ -4,9 +4,6 @@ import { connexionService } from '../services/connexion.service';
 import { FavorisService } from '../services/favoris.service';
 import { Video } from '../modeles/video';
 
-
-
-
 @Component({
   selector: 'app-mes-favoris',
   templateUrl: './mes-favoris.component.html',
@@ -16,8 +13,8 @@ export class MesFavorisComponent implements OnInit {
 
   name = 'Angular 5';
   UtilisateurData: Utilisateur;
-
   tabMesFavoris: Video[];
+  ratingValue: number = 3;
 
   constructor(private connexionService: connexionService, private FavorisService: FavorisService) {
 
@@ -33,6 +30,10 @@ export class MesFavorisComponent implements OnInit {
 
   }
 
+  postRate(event, item) {
+    console.log(event.value);
+    console.log(item);
+  }
 
 
 
