@@ -11,7 +11,7 @@ import { MesFavorisComponent } from './mes-favoris/mes-favoris.component';
 import { connexionService } from './services/connexion.service';
 import { RechercheRapideComponent } from './recherche-rapide/recherche-rapide.component';
 import { MovieComponent } from './movie/movie.component';
-import { TestComponent } from './test/test.component'; 
+import { TestComponent } from './test/test.component';
 
 
 
@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: "mesfavoris", component: MesFavorisComponent, canActivate: [connexionService] },
   { path: "rechercherapide", component: RechercheRapideComponent },
   { path: "test", component: TestComponent },
- 
+
 ];
 
 

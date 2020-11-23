@@ -2,11 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Utilisateur } from '../modeles/utilisateur';
 import { connexionService } from '../services/connexion.service';
 import { FavorisService } from '../services/favoris.service';
-import { Video } from '../modeles/video'; 
-import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
-import { StarRatingComponent } from 'ng-starrating';
-
-
+import { Video } from '../modeles/video';
 
 
 
@@ -21,52 +17,50 @@ export class MesFavorisComponent implements OnInit {
   name = 'Angular 5';
   UtilisateurData: Utilisateur;
 
-  tabMesFavoris: Video[]; 
+  tabMesFavoris: Video[];
 
-  constructor(private connexionService: connexionService, private FavorisService: FavorisService, config: NgbRatingConfig) {
+  constructor(private connexionService: connexionService, private FavorisService: FavorisService) {
 
     this.tabMesFavoris = this.FavorisService.getFavoris();
-    config.max = 5;
-    
-   
+
     }
 
   ngOnInit(): void {
 
- 
+
     console.log(this.connexionService.isActive())
     this.UtilisateurData = this.connexionService.getUser();
 
   }
 
-   
 
 
 
-  toggleShowHide : string = "hidden"; 
 
-   
- // showMyContainer1 : boolean ; 
+  toggleShowHide : string = "hidden";
+
+
+ // showMyContainer1 : boolean ;
   showUndoBtn(item) {
-    console.log(item); 
-    
-    this.toggleShowHide="visible"; 
-    
+    console.log(item);
+
+    this.toggleShowHide="visible";
+
     // show btn with id btnId in DOM
-  
-    //this.item=false; 
-   
+
+    //this.item=false;
+
    // this.showMyContainer=true;
     //item.showButton = true;
 }
 status: boolean = false;
-max : number =5; 
+max : number =5;
 showHide(modRef) {
     // hide the <div> with id == modRef
-  
+
     // this.status = !this.status;
     // // if(this.status ) {
-    
+
     // //   document.getElementById(modRef).style.display = 'none';
     // // } else {
     //   document.getElementById(modRef).style.display = 'block';
@@ -85,12 +79,12 @@ showHide(modRef) {
         document.getElementById(modRef).style.visibility = "hidden";
         document.getElementById(modRef).style.height = "0";			// Optionnel libérer l'espace
       }
-    
+
 }
 
 reply_click(id)
 {
-    console.log(id); 
+    console.log(id);
 }
 
 
