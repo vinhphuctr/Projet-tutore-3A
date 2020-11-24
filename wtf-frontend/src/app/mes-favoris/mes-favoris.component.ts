@@ -33,6 +33,7 @@ export class MesFavorisComponent implements OnInit {
   postRate(event, item) {
     console.log(event.value);
     console.log(item);
+    this.showHide(item.id_video);
   }
 
 
