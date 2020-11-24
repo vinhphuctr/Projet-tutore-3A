@@ -6,7 +6,7 @@ export const SUGGESTION: Video[] = [
     date_sortie: new Date(),
     poster: "https://m.media-amazon.com/images/M/MV5BMTgxOTY4Mjc0MF5BMl5BanBnXkFtZTcwNTA4MDQyMw@@._V1_SX300.jpg",
     plot: "histoir",
-    trailer: "youtube.fr",
+    trailer: "https://www.google.com/search?q=calculatrice&oq=calculatrice&aqs=chrome..69i57j35i39j0l6.1230j0j7&sourceid=chrome&ie=UTF-8",
     vo: "FR"},
   {id_video: 2,
       titre: "jull",

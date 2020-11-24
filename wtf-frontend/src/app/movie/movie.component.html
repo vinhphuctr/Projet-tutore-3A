@@ -1,29 +1,35 @@
 <div class="main-content">
-  <button (click)="goBack()" mat-stroked-button><mat-icon>arrow_left_alt</mat-icon>Retour</button>
+  <button class="return" (click)="goBack()" mat-stroked-button><mat-icon>arrow_left_alt</mat-icon>Retour</button>
 
-  <section class="container">
-    <div class="left">
-      <img routerLink="/movie/{{video.id_video}}" src="{{video.poster}}">
+  <section class="container" style="padding-top: 3%;">
+    <div style="width: 22%; height: 80%; float:left;">
+      <div style="position: relative; text-align: center;">
+        <img routerLink="/movie/{{video.id_video}}" src="{{video.poster}}">
+       </div>
+       <div style="position: relative; text-align: center; margin-top: 10px;">
+        <button id="button_left" mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+          <mat-icon>favorite</mat-icon>
+        </button>
+      </div>
+      <div style="position: relative; text-align: center; margin-top: 30px;">
+        <button class="button" mat-stroked-button (click)="redirectUrl(video.trailer)">Bande-annonce</button>
+      </div>
+      <div style="position: relative; text-align: center; margin-top: 16px;">
+        <button class="button" mat-stroked-button (click)="showHide(video.id_video)">SCOREZ !</button>
+        <div [id]="video.id_video" style="visibility: hidden; margin-top:30px">
+          <p-rating [(ngModel)]="ratingValue" [cancel]="false" (onRate)="postRate($event, video)"></p-rating>
+        </div>
+      </div>
     </div>
-    <div class="right">
-      <p>Titre : {{video.titre}}</p>
+    <div style="width: 4%; height: 80%; background-color: green; float:left;"></div>
+    <div style="width: 74%; height: 80%; background-color: blue; float:right;">
+      <h1>{{video.titre | uppercase}}</h1>
       <p>Affichage poster : {{video.poster}}</p>
       <p>Voir le trailer sur Youtube {{video.trailer}}</p>
       <p>Langue original :{{video.vo}}</p>
-
-    <p>Résumé : {{video.plot}}</p>
+      <p>Résumé : {{video.plot}}</p>
     </div>
+    <div style="width: 100%; height: 50%; background-color: red; clear:both">-</div>
   </section>
-
-  <div style="padding-top: 2%;">
-    <p>Titre : {{video.titre}}</p>
-    <p>Affichage poster : {{video.poster}}</p>
-    <p>Voir le trailer sur Youtube {{video.trailer}}</p>
-    <p>Langue original :{{video.vo}}</p>
-
-    <p>Résumé : {{video.plot}}</p>
-
-    <p>Date de sortie : {{video.date_sortie | date:'dd/mm/yyyy'}}</p>
-  </div>
 </div>
 

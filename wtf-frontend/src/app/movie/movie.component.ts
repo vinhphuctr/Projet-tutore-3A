@@ -11,6 +11,7 @@ import {MovieService} from '../services/movie.service';
 })
 export class MovieComponent implements OnInit {
 
+  ratingValue: number = 3;
   video : Video;
   constructor(
     private route: ActivatedRoute,
@@ -30,5 +31,40 @@ export class MovieComponent implements OnInit {
   goBack(): void {
     this._location.back();
   }
+
+  postRate(event, item) {
+    console.log(event.value);
+    console.log(item);
+    this.showHide(item.id_video);
+  }
+
+  redirectUrl(trailer){
+    window.open(trailer);
+  }
+
+  showHide(modRef) {
+    // hide the <div> with id == modRef
+
+    // this.status = !this.status;
+    // // if(this.status ) {
+
+    // //   document.getElementById(modRef).style.display = 'none';
+    // // } else {
+    //   document.getElementById(modRef).style.display = 'block';
+    // //}
+    ;
+
+    if (document.getElementById(modRef).style.visibility=="hidden")
+      {
+        // Contenu caché, le montrer
+        document.getElementById(modRef).style.visibility = "visible";
+      }
+      else
+      {
+        // Contenu visible, le cacher
+        document.getElementById(modRef).style.visibility = "hidden";
+      }
+
+}
 
 }

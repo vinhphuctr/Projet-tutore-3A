@@ -5,10 +5,8 @@
 
   <div aria-label="gallery">
     <ul>
-
       <li *ngFor="let suggestion of tabSuggestion">
         <img routerLink="/movie/{{suggestion.id_video}}" src="{{suggestion.poster}}"><button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
-          <mat-icon>favorite</mat-icon>
         </button>
       </li>
     </ul>
