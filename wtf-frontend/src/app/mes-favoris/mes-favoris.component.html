@@ -16,16 +16,13 @@
                 <mat-icon>favorite</mat-icon>
               </button>
               <button routerLink="/movie/{{item.id_video}}" mat-stroked-button id="button_left">Détails</button>
+              <button  mat-stroked-button (click)="showHide(item.id_video)">Scorez !</button>
 
-              <div [id]="item.id_video" style="visibility: hidden;">
+              <div [id]="item.id_video" style="visibility: hidden; margin:30px">
                 <!-- <star-rating value="5" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="24px" readonly="false" (rate)="onRate($event)"></star-rating> -->
                 <p-rating [(ngModel)]="ratingValue" [cancel]="false" (onRate)="postRate($event, item)"></p-rating>
 
               </div>
-
-
-               <button  mat-stroked-button (click)="showHide(item.id_video)">Scorez !</button> 
-
                <!-- <div  *ngIf="item.id_video" > haha</div>
 
                Toggle Show/hide:
