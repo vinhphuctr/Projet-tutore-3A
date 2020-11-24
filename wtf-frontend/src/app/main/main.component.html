@@ -7,7 +7,7 @@
     <ul>
 
       <li *ngFor="let suggestion of tabSuggestion">
-        <img src="{{suggestion.poster}}"><button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+        <img routerLink="/movie/{{suggestion.id_video}}" src="{{suggestion.poster}}"><button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
           <mat-icon>favorite</mat-icon>
         </button>
       </li>

@@ -1,13 +1,29 @@
 <div class="main-content">
-  <h1 matSubheader>{{video.titre}}</h1>
   <button (click)="goBack()" mat-stroked-button><mat-icon>arrow_left_alt</mat-icon>Retour</button>
-  <p>Titre : {{video.titre}}</p>
-  <p>Affichage poster : {{video.poster}}</p>
-  <p>Voir le trailer sur Youtube {{video.trailer}}</p>
-  <p>Langue original :{{video.vo}}</p>
 
-  <p>Résumé : {{video.plot}}</p>
+  <section class="container">
+    <div class="left">
+      <img routerLink="/movie/{{video.id_video}}" src="{{video.poster}}">
+    </div>
+    <div class="right">
+      <p>Titre : {{video.titre}}</p>
+      <p>Affichage poster : {{video.poster}}</p>
+      <p>Voir le trailer sur Youtube {{video.trailer}}</p>
+      <p>Langue original :{{video.vo}}</p>
 
-  <p>Date de sortie : {{video.date_sortie | date:'dd/mm/yyyy'}}</p>
+    <p>Résumé : {{video.plot}}</p>
+    </div>
+  </section>
+
+  <div style="padding-top: 2%;">
+    <p>Titre : {{video.titre}}</p>
+    <p>Affichage poster : {{video.poster}}</p>
+    <p>Voir le trailer sur Youtube {{video.trailer}}</p>
+    <p>Langue original :{{video.vo}}</p>
+
+    <p>Résumé : {{video.plot}}</p>
+
+    <p>Date de sortie : {{video.date_sortie | date:'dd/mm/yyyy'}}</p>
+  </div>
 </div>
 

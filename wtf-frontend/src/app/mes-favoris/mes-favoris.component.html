@@ -6,7 +6,7 @@
       <li *ngFor="let item of tabMesFavoris">
         <div class="blocFilm">
           <div id="bloc1">
-            <img src="{{item.poster}}">
+            <img routerLink="/movie/{{item.id_video}}" src="{{item.poster}}">
           </div>
           <div id="bloc2">
             <p id="film">{{item.titre}} ({{item.date_sortie | date:'yyyy'}})</p>

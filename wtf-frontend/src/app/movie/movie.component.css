@@ -1,8 +1,26 @@
 .main-content{
   padding-bottom: 20%;
   padding-top: 3%;
+  padding-left:14%;
+  padding-right:14%;
   background-color: white;
   color:black;
+}
+
+.left {
+  width: 30%;
+  height: auto;
+  background: red;
+  float: left;
+}
+
+.right {
+  height: auto;
+  background: white;
+}
+
+img {
+  max-height: 300px;
 }
 
 p {
