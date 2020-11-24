@@ -22,7 +22,6 @@ import { MesFavorisComponent } from './mes-favoris/mes-favoris.component';
 import { MainComponent } from './main/main.component';
 import { RechercheRapideComponent } from './recherche-rapide/recherche-rapide.component';
 import { MovieComponent } from './movie/movie.component';
-import { TestComponent } from './test/test.component';
 import { PrimengModule } from './primeng/primeng.module';
 
 
@@ -45,7 +44,7 @@ import { PrimengModule } from './primeng/primeng.module';
     MainComponent,
     RechercheRapideComponent,
     MovieComponent,
-    TestComponent,
+
   ],
   imports: [
     BrowserModule,

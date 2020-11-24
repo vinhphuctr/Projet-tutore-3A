@@ -20,7 +20,7 @@
 
               <div [id]="item.id_video" style="visibility: hidden; margin-top:30px">
                 <!-- <star-rating value="5" totalstars="5" checkedcolor="red" uncheckedcolor="black" size="24px" readonly="false" (rate)="onRate($event)"></star-rating> -->
-                <p-rating [(ngModel)]="ratingValue" [cancel]="false" (onRate)="postRate($event, item)"></p-rating>
+                <p-rating [iconOnStyle]="{'color':'rgb(93,84,164)'}" [(ngModel)]="ratingValue" [cancel]="false" (onRate)="postRate($event, item)"></p-rating>
               </div>
                <!-- <div  *ngIf="item.id_video" > haha</div>
 
