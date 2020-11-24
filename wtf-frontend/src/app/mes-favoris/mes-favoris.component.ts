@@ -72,13 +72,11 @@ showHide(modRef) {
       {
         // Contenu caché, le montrer
         document.getElementById(modRef).style.visibility = "visible";
-        document.getElementById(modRef).style.height = "auto";			// Optionnel rétablir la hauteur
       }
       else
       {
         // Contenu visible, le cacher
         document.getElementById(modRef).style.visibility = "hidden";
-        document.getElementById(modRef).style.height = "0";			// Optionnel libérer l'espace
       }
 
 }
