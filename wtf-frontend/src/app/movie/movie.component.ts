@@ -43,16 +43,6 @@ export class MovieComponent implements OnInit {
   }
 
   showHide(modRef) {
-    // hide the <div> with id == modRef
-
-    // this.status = !this.status;
-    // // if(this.status ) {
-
-    // //   document.getElementById(modRef).style.display = 'none';
-    // // } else {
-    //   document.getElementById(modRef).style.display = 'block';
-    // //}
-    ;
 
     if (document.getElementById(modRef).style.visibility=="hidden")
       {

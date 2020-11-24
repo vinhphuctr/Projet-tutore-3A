@@ -16,20 +16,25 @@
       </div>
       <div style="position: relative; text-align: center; margin-top: 16px;">
         <button class="button" mat-stroked-button (click)="showHide(video.id_video)">SCOREZ !</button>
-        <div [id]="video.id_video" style="visibility: hidden; margin-top:30px">
-          <p-rating [(ngModel)]="ratingValue" [cancel]="false" (onRate)="postRate($event, video)"></p-rating>
+        <div [id]="video.id_video" style="visibility: hidden; margin-top:20px">
+          <p-rating [iconOnStyle]="{'color':'rgb(93,84,164)'}" [(ngModel)]="ratingValue" [cancel]="false" (onRate)="postRate($event, video)"></p-rating>
         </div>
       </div>
     </div>
-    <div style="width: 4%; height: 80%; background-color: green; float:left;"></div>
-    <div style="width: 74%; height: 80%; background-color: blue; float:right;">
-      <h1>{{video.titre | uppercase}}</h1>
-      <p>Affichage poster : {{video.poster}}</p>
-      <p>Voir le trailer sur Youtube {{video.trailer}}</p>
-      <p>Langue original :{{video.vo}}</p>
-      <p>Résumé : {{video.plot}}</p>
+    <div style="width: 4%; height: 80% float:left;"></div>
+    <div style="width: 74%; height: 80%; float:right;">
+      <h1>{{video.titre | uppercase}} ({{video.date_sortie | date:'yyyy'}})</h1>
+      <p><span class="purple">Durée : </span>103 min</p>
+      <p><span class="purple">Date de sortie :</span> {{video.date_sortie}}</p>
+      <p><span class="purple">Langue original : </span>{{video.vo}}</p>
+      <p><span class="purple">Catégorie : </span>Animation, Enfant, Famille</p>
+      <p><span class="purple">Société de production : </span>Pixar Animation Studios</p>
+      <p><span class="purple">Réalisateur: </span>Lee UnKrich</p>
+      <p><span class="purple">Stars : </span>Tom Hanks, Tim Allen, Joan Cusask</p>
+      <p><span class="purple">Diffusion : </span>Disney+</p>
+      <p><span class="purple">Synopsis : </span>{{video.plot}}</p>
     </div>
-    <div style="width: 100%; height: 50%; background-color: red; clear:both">-</div>
+    <div style="width: 100%; height: 1%; clear:both">-</div>
   </section>
 </div>
 
