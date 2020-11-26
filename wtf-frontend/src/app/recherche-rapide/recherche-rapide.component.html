@@ -16,7 +16,10 @@
                   <mat-icon>favorite</mat-icon>
                 </button>
                 <button  routerLink="/movie/{{item.id_video}}" mat-stroked-button id="button_left">Détails</button>
-                <button mat-stroked-button>Scorez !</button>
+                <button class="button" mat-stroked-button (click)="showHide(item.id_video)">Scorez</button>
+                <div [id]="item.id_video" style="visibility: hidden; margin:30px">
+                  <p-rating [iconOnStyle]="{'color':'rgb(93,84,164)'}" [(ngModel)]="ratingValue" [cancel]="false" (onRate)="postRate($event, video)"></p-rating>
+                </div>
               </div>
             </div>
           </div>

@@ -9,9 +9,7 @@ import { Video } from '../modeles/video';
 })
 export class RechercheRapideComponent implements OnInit {
 
-
-  @Input() childMessage: string;
-
+  ratingValue: number = 3;
   tabResultat : Video[];
 
 
@@ -22,6 +20,25 @@ export class RechercheRapideComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  postRate(event, item) {
+    console.log(event.value);
+    console.log(item);
+    this.showHide(item.id_video);
+  }
+
+  showHide(modRef) {
+
+    if (document.getElementById(modRef).style.visibility=="hidden")
+      {
+        // Contenu caché, le montrer
+        document.getElementById(modRef).style.visibility = "visible";
+      }
+      else
+      {
+        // Contenu visible, le cacher
+        document.getElementById(modRef).style.visibility = "hidden";
+      }
+}
 
 
 
