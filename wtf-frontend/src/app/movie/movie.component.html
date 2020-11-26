@@ -24,6 +24,10 @@
     <div style="width: 4%; height: 80% float:left;"></div>
     <div style="width: 74%; height: 80%; float:right;">
       <h1>{{video.titre | uppercase}} ({{video.date_sortie | date:'yyyy'}})</h1>
+      <div class="vignette">
+        <button class="button" mat-stroked-button (click)="showHide(video.id_video)">Film</button>
+      </div>
+      <p></p>
       <p><span class="purple">Durée : </span>103 min</p>
       <p><span class="purple">Date de sortie :</span> {{video.date_sortie}}</p>
       <p><span class="purple">Langue original : </span>{{video.vo}}</p>

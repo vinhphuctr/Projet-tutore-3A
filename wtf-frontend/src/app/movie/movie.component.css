@@ -29,7 +29,6 @@ p {
 }
 h1{
   display: inline-block;
-  padding-bottom: 40px;
   font-size : 30px;
   color : rgb(93,84,164);
   width: 60%;
@@ -42,6 +41,17 @@ h1{
   width: 74%;
   background-color: rgb(93,84,164);
   border-radius: 12px;
+  color: white;
+  padding: 0px 10px;
+  font-size: 20px;
+  font-weight: 100;
+}
+
+.vignette > .button{
+  border: white solid;
+  width: 10%;
+  background-color: rgb(93,84,164);
+  border-radius: 0px;
   color: white;
   padding: 0px 10px;
   font-size: 20px;
