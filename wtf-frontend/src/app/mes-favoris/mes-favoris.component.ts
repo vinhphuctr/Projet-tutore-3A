@@ -20,14 +20,13 @@ export class MesFavorisComponent implements OnInit {
 
     this.tabMesFavoris = this.FavorisService.getFavoris();
 
-    }
+  }
 
   ngOnInit(): void {
 
 
     console.log(this.connexionService.isActive())
     this.UtilisateurData = this.connexionService.getUser();
-
   }
 
   postRate(event, item) {

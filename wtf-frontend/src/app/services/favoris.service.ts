@@ -13,5 +13,21 @@ export class FavorisService {
     return FAVORIS;
   }
 
- 
+  deleteFavoris(item : any, utilisateur : any){
+    // Delete to database
+  }
+
+  addFavoris(item : any, utilisateur : any){
+    // Add to database
+  }
+
+  checkIfFav(item : any) : boolean{
+    let i = 0;
+    FAVORIS.forEach(element => {
+      if(element.id_video == item){
+        i++;
+      }
+    });
+    if(i > 0) return true; else return false;
+  }
 }

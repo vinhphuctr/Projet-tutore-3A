@@ -59,7 +59,7 @@ div#bloc2 {
 
 }
 
-#button_left{
+.button_left{
   margin-right: 2%;
 }
 
@@ -79,7 +79,7 @@ div#bloc2 {
 
 .mat-icon-button {
   background-color: rgb(93,84,164);
-  color: white;
+  color:  white;
 }
 
 
