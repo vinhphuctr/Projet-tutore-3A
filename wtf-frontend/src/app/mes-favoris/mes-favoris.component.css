@@ -1,7 +1,6 @@
 .main-content {
-  padding-bottom: 20%;
+  padding-bottom: 40%;
   padding-top: 3%;
-  background-color: white;
   color: black;
 }
 
@@ -14,9 +13,9 @@
   color : black ;
   display: block;
   height: 15px;
-  width: 16px;  
+  width: 16px;
   background-position: center;
-  background-color : red; 
+  background-color : red;
 }
 
 
@@ -73,7 +72,7 @@ div#bloc2 {
   margin-bottom: 100px;
 }
 
-#button_left {
+.button_left {
   margin-right: 2%;
 }
 
@@ -100,6 +99,8 @@ div#bloc2 {
 .boutonRecherche {
   padding-bottom: 80px;
 }
+
+
 
 
 
