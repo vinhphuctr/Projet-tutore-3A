@@ -9,9 +9,9 @@
 
 On va maintenant installer Angular et des modules qu'on utilise :
 
-npm install -g @angular/cli
-ng add @angular/material (CSS)
-npm install primeng (Stars)
+- npm install -g @angular/cli
+- ng add @angular/material (CSS)
+- npm install primeng (Stars)
 
 
 Lancez l'application en tapant la commande : ng serve --open
