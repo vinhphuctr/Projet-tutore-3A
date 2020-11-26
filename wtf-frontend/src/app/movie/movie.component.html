@@ -6,7 +6,7 @@
         <img routerLink="/movie/{{video.id_video}}" src="{{video.poster}}">
        </div>
        <div style="position: relative; text-align: center; margin-top: 10px;">
-        <button id="button_left" mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+        <button [id]="'fav_' + video.id_video " (click)="addFav(video.id_video)"  mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
           <mat-icon>favorite</mat-icon>
         </button>
       </div>
