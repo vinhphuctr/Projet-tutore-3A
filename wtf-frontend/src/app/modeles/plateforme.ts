@@ -1,6 +1,6 @@
 export class Plateforme {
 
-    id_plateforme: number;
+    idPlateforme: number;
     nom: string;
 
     /* Url de redirection */

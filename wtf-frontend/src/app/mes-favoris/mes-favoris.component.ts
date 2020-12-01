@@ -33,8 +33,8 @@ export class MesFavorisComponent implements OnInit {
 
   checkIfFav(){
     this.tabMesFavoris.forEach(item => {
-      if(this.FavorisService.checkIfFav(item.id_video) == true){
-        let s = "fav_" + item.id_video;
+      if(this.FavorisService.checkIfFav(item.idVideo) == true){
+        let s = "fav_" + item.idVideo;
         document.getElementById(s).style.color = "red";
       }
     });

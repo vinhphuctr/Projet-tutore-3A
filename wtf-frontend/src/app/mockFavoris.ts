@@ -1,27 +1,3 @@
 import { Video } from './modeles/video';
 
-export const FAVORIS: Video[] = [
-
-  {id_video: 1,
-    titre: "Le seigneur des anneaux I",
-    date_sortie: new Date(),
-    poster: "https://m.media-amazon.com/images/M/MV5BMTgxOTY4Mjc0MF5BMl5BanBnXkFtZTcwNTA4MDQyMw@@._V1_SX300.jpg",
-    plot: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    trailer: "https://www.google.com/search?q=calculatrice&oq=calculatrice&aqs=chrome..69i57j35i39j0l6.1230j0j7&sourceid=chrome&ie=UTF-8",
-    vo: "FR"},
-  {id_video: 2,
-      titre: "jull",
-      date_sortie: new Date(),
-      poster: "https://m.media-amazon.com/images/M/MV5BNjk4MzVlM2UtZGM0ZC00M2M1LThkMWEtZjUyN2U2ZTc0NmM5XkEyXkFqcGdeQXVyOTAzMTc2MjA@._V1_SX300.jpg",
-      plot: "histoir",
-      trailer: "youtube.fr",
-      vo: "FR"},
-      {id_video: 3,
-        titre: "ahdju",
-        date_sortie: new Date(),
-        poster: "https://m.media-amazon.com/images/M/MV5BNjk4MzVlM2UtZGM0ZC00M2M1LThkMWEtZjUyN2U2ZTc0NmM5XkEyXkFqcGdeQXVyOTAzMTc2MjA@._V1_SX300.jpg",
-        plot: "histoir",
-        trailer: "youtube.fr",
-        vo: "FR"}
-
-];
+export const FAVORIS: Video[] = [{"idVideo":1,"titre":"Peaky Blinders","dateSortie":{"date":"2013-12-12 00:00:00.000000","timezone_type":3,"timezone":"UTC"},"poster":"https:\/\/encrypted-tbn1.gstatic.com\/images?q=tbn:ANd9GcTGyDDzYHvg_BMX5bESg8Mky8zb5F89Zwkkd2KoAg1gnJqbQxIY","plot":"An epic gangster drama set in the lawless streets of 1920s Birmingham.","trailer":null,"vo":"en","production":{"id":3,"nom":"Paramount Pictures"},"personnes":[{"idPersonne":7000,"prenom":"Cilian","nom":"Murphy","nationalite":"Irish","role":{}}],"plateformes":[{"idPlateforme":1,"nom":"Netflix","redirection":"https:\/\/www.netflix.com\/","logo":"https:\/\/i.pinimg.com\/originals\/f6\/97\/4e\/f6974e017d3f6196c4cbe284ee3eaf4e.png"}]},{"idVideo":5,"titre":"Four Rooms","dateSortie":{"date":"1995-12-09 00:00:00.000000","timezone_type":3,"timezone":"UTC"},"poster":"\/eQs5hh9rxrk1m4xHsIz1w11Ngqb.jpg","plot":"It's Ted the Bellhop's first night on the job...and the hotel's very unusual guests are about to place him in some outrageous predicaments. It seems that this evening's room service is serving up one unbelievable happening after another.","trailer":null,"vo":"en","production":{"id":14,"nom":"TriStar Pictures"},"personnes":[{"idPersonne":11,"prenom":"","nom":"Henry Cavill","nationalite":"UK","role":{}},{"idPersonne":15,"prenom":"","nom":"Will Smith","nationalite":"US","role":{}}],"plateformes":[{"idPlateforme":1,"nom":"Netflix","redirection":"https:\/\/www.netflix.com\/","logo":"https:\/\/i.pinimg.com\/originals\/f6\/97\/4e\/f6974e017d3f6196c4cbe284ee3eaf4e.png"}]},{"idVideo":524,"titre":"Casino","dateSortie":{"date":"1995-11-22 00:00:00.000000","timezone_type":3,"timezone":"UTC"},"poster":"\/xo517ibXBDdYQY81j0WIG7BVcWq.jpg","plot":"The life of the gambling paradise \u00e2\u20ac\u201c Las Vegas \u00e2\u20ac\u201c and its dark mafia underbelly.","trailer":null,"vo":"en","production":{"id":12,"nom":"Columbia Pictures Corporation"},"personnes":[],"plateformes":[]},{"idVideo":710,"titre":"GoldenEye","dateSortie":{"date":"1995-11-16 00:00:00.000000","timezone_type":3,"timezone":"UTC"},"poster":"\/5c0ovjT41KnYIHYuF4AWsTe3sKh.jpg","plot":"James Bond must unmask the mysterious head of the Janus Syndicate and prevent the leader from utilizing the GoldenEye weapons system to inflict devastating revenge on Britain.","trailer":"http:\/\/www.mgm.com\/view\/movie\/757\/Goldeneye\/","vo":"en","production":null,"personnes":[],"plateformes":[]}]

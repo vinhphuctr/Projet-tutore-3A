@@ -21,15 +21,12 @@ const routes: Routes = [
   { path: "inscription", component: InscriptionComponent },
   { path: "quisommesnous",  component: QuiSommesNousComponent },
   { path: "faq", component: FaqComponent },
-  {path: "movie/:id", component:MovieComponent},
+  {path: "video/:id", component:MovieComponent},
   { path: "main",  component: MainComponent, canActivate:[connexionService] },
   { path: "monprofil", component: MonProfilComponent, canActivate:[connexionService] },
   { path: "mesfavoris", component: MesFavorisComponent, canActivate: [connexionService] },
   { path: "rechercherapide", component: RechercheRapideComponent },
-
-
 ];
-
 
 
 @NgModule({

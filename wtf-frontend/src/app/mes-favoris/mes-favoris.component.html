@@ -4,21 +4,21 @@
   <div aria-label="gallery">
     <ul>
       <li *ngFor="let item of tabMesFavoris">
-        <div class="blocFilm" [id]="'bloc_' + item.id_video">
+        <div class="blocFilm" [id]="'bloc_' + item.idVideo">
           <div id="bloc1">
-            <img routerLink="/movie/{{item.id_video}}" src="{{item.poster}}">
+            <img routerLink="/movie/{{item.idVideo}}" src="{{item.poster}}">
           </div>
           <div id="bloc2">
-            <p id="film">{{item.titre}} ({{item.date_sortie | date:'yyyy'}})</p>
+            <p id="film">{{item.titre}} ({{item.dateSortie.date | date:'yyyy'}})</p>
             <p id="genre">{{item.vo}}</p>
             <div class="boutonRecherche">
-              <button  [id]="'fav_' + item.id_video " (click)="addFav(item.id_video)" class="button_left" mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+              <button  [id]="'fav_' + item.idVideo " (click)="addFav(item.idVideo)" class="button_left" mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
                 <mat-icon>favorite</mat-icon>
               </button>
-              <button routerLink="/movie/{{item.id_video}}" mat-stroked-button class="button_left">Détails</button>
-              <button class="button" mat-stroked-button (click)="showHide(item.id_video)">Scorez</button>
-              <div [id]="item.id_video" style="visibility: hidden; margin:30px">
-                <p-rating [iconOnStyle]="{'color':'rgb(93,84,164)'}" [(ngModel)]="ratingValue" [cancel]="false" (onRate)="postRate($event, video)"></p-rating>
+              <button routerLink="/movie/{{item.idVideo}}" mat-stroked-button class="button_left">Détails</button>
+              <button class="button" mat-stroked-button (click)="showHide(item.idVideo)">Scorez</button>
+              <div [id]="item.idVideo" style="visibility: hidden; margin:30px">
+                <p-rating [iconOnStyle]="{'color':'rgb(93,84,164)'}" [(ngModel)]="ratingValue" [cancel]="false" (onRate)="postRate($event, item)"></p-rating>
               </div>
             </div>
           </div>

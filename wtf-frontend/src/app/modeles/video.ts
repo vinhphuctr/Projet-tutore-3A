@@ -1,12 +1,21 @@
+import { Plateforme } from './plateforme';
 import { Production } from './production';
+import { Personne } from './personne';
 
 export class Video {
 
-    id_video: number;
+    idVideo: number;
     titre: string;
-    date_sortie: Date;
+    dateSortie: {
+      date: String;
+      timezone_type: any;
+      timezone: String
+    };
     poster: string;
     plot: string;
     trailer: string;
     vo: string;
+    production:Production;
+    personnes : Array<Personne>;
+    plateformes : Array<Plateforme>
 }

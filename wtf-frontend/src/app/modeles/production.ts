@@ -1,6 +1,6 @@
 export class Production {
-    
-    id_production: number;
+
+    id: number;
     nom: string;
 
 }

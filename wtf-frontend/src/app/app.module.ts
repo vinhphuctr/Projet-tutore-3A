@@ -23,6 +23,7 @@ import { MainComponent } from './main/main.component';
 import { RechercheRapideComponent } from './recherche-rapide/recherche-rapide.component';
 import { MovieComponent } from './movie/movie.component';
 import { PrimengModule } from './primeng/primeng.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -58,7 +59,8 @@ import { PrimengModule } from './primeng/primeng.module';
     MatFormFieldModule,
     MatInputModule,
     FlexLayoutModule,
-    PrimengModule
+    PrimengModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

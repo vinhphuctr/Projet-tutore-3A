@@ -17,6 +17,7 @@ export class MovieComponent implements OnInit {
   ratingValue: number = 3;
   video : Video;
   UtilisateurData: Utilisateur;
+  isTrailer : boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,7 +31,9 @@ export class MovieComponent implements OnInit {
   ngOnInit(): void {
     this.getMovie();
     this.UtilisateurData = this.connexionService.getUser();
-
+    if(this.video.trailer == null){
+      this.isTrailer = false;
+    }
   }
 
   ngAfterViewInit()	: void{

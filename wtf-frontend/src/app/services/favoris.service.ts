@@ -22,7 +22,7 @@ export class FavorisService {
     let i = 0;
     for(i; i < this.tabMesFavoris.length; i++){
       console.log(i);
-      if(this.tabMesFavoris[i].id_video==item){
+      if(this.tabMesFavoris[i].idVideo==item){
           this.tabMesFavoris.splice(i,1);
           break;
       }
@@ -40,7 +40,7 @@ export class FavorisService {
   checkIfFav(item : any) : boolean{
     let i = 0;
     this.tabMesFavoris.forEach(element => {
-      if(element.id_video == item){
+      if(element.idVideo == item){
         i++;
       }
     });
