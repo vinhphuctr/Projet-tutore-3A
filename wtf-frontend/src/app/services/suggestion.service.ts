@@ -12,9 +12,11 @@ export class SuggestionService {
   constructor(private _httpClient : HttpClient) { }
 
   getSuggestions(){
+    /*
     let url = "http://wtfilm-api.herokuapp.com/api/video/get/all/";
     let result = this._httpClient.get<any>(url);
     console.log(result);
+    */
   }
 
   rechercheRapide(keyword: string) {
