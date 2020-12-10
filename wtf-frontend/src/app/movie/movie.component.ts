@@ -6,6 +6,7 @@ import { Utilisateur } from '../modeles/utilisateur';
 import {MovieService} from '../services/movie.service';
 import { connexionService } from '../services/connexion.service';
 import { FavorisService } from '../services/favoris.service';
+import { isNull } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-movie',
@@ -17,7 +18,8 @@ export class MovieComponent implements OnInit {
   ratingValue: number = 3;
   video : Video;
   UtilisateurData: Utilisateur;
-  isTrailer : boolean = true;
+  isTrailer : boolean = false;
+  starVisible : boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,12 +33,12 @@ export class MovieComponent implements OnInit {
   ngOnInit(): void {
     this.getMovie();
     this.UtilisateurData = this.connexionService.getUser();
-    if(this.video.trailer == null){
-      this.isTrailer = false;
-    }
   }
 
   ngAfterViewInit()	: void{
+    if(this.video.trailer !== "null"){
+      this.isTrailer = true;
+    }
     const id = +this.route.snapshot.paramMap.get('id');
     this.checkIfFav(id);
   }
@@ -54,7 +56,7 @@ export class MovieComponent implements OnInit {
   postRate(event, item) {
     console.log(event.value);
     console.log(item);
-    this.showHide(item.id_video);
+    this.showHide();
   }
 
   redirectUrl(trailer){
@@ -84,19 +86,8 @@ export class MovieComponent implements OnInit {
     }
   }
 
-  showHide(modRef) {
-
-    if (document.getElementById(modRef).style.visibility=="hidden")
-      {
-        // Contenu caché, le montrer
-        document.getElementById(modRef).style.visibility = "visible";
-      }
-      else
-      {
-        // Contenu visible, le cacher
-        document.getElementById(modRef).style.visibility = "hidden";
-      }
-
+  showHide() {
+    this.starVisible = !this.starVisible;
+  }
 }
 
-}

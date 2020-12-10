@@ -12,11 +12,11 @@
       </div>
       <div [hidden]="isTrailer"
       style="position: relative; text-align: center; margin-top: 30px;">
-        <button class="button" mat-stroked-button (click)="redirectUrl(video.trailer)">Bande-annonce</button>
+        <button class="button" mat-stroked-button (click)="redirectUrl(video.trailer)">Watch the Trailer</button>
       </div>
       <div style="position: relative; text-align: center; margin-top: 16px;">
-        <button class="button" mat-stroked-button (click)="showHide(video.idVideo)">SCOREZ !</button>
-        <div [id]="video.idVideo" style="visibility: hidden; margin-top:20px">
+        <button class="button" mat-stroked-button (click)="showHide()">SCORE !</button>
+        <div [id]="video.idVideo" [hidden]="starVisible" style= "margin-top:20px">
           <p-rating [iconOnStyle]="{'color':'rgb(93,84,164)'}" [(ngModel)]="ratingValue" [cancel]="false" (onRate)="postRate($event, video)"></p-rating>
         </div>
       </div>
@@ -25,23 +25,23 @@
     <div style="width: 74%; height: 80%; float:right;">
       <h1>{{video.titre | uppercase}} ({{video.dateSortie.date | date:'yyyy'}})</h1>
       <div class="vignette">
-        <button class="button" mat-stroked-button disabled>Film</button>
+        <button class="button" mat-stroked-button disabled>{{video.type |titlecase}}</button>
       </div>
       <p></p>
-      <p><span class="purple">Durée : </span>A recuperer</p>
+      <p><span class="purple">Durée : </span>En production</p>
       <p><span class="purple">Date de sortie :</span> {{video.dateSortie.date | date:'d/M/yyyy'}}</p>
       <p><span class="purple">Langue original : </span>{{video.vo}}</p>
-      <p><span class="purple">Catégorie : </span>A FAIRE COTE BACK</p>
+      <p><span class="purple">Catégorie : </span>En production</p>
       <p><span class="purple">Société de production : </span>{{video.production.nom}}</p>
-      <p><span class="purple">Réalisateur: </span>A FAIRE</p>
-      <p><span class="purple">Stars : </span>A FAIRE</p>
+      <p><span class="purple">Réalisateur: </span>En production</p>
+      <p><span class="purple">Stars : </span><li class="cards_item" *ngFor="let personne of video.personnes"><p>{{personne.prenom}} {{personne.nom}}</p></li></p>
       <p><span class="purple">Synopsis : </span>{{video.plot}}</p>
       <p style="margin-top: 3%">
         <ul class="cards">
           <li class="cards_item" *ngFor="let plateforme of video.plateformes">
             <div class="card">
               <div class="card_content">
-                <button mat-stroked-button><img src="{{plateforme.logo}}">
+                <button (click)="redirectUrl(plateforme.redirection)" mat-stroked-button><img src="{{plateforme.logo}}">
                 </button>
               </div>
             </div>

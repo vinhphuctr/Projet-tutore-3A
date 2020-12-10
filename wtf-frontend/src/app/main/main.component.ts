@@ -15,7 +15,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 export class MainComponent implements OnInit {
   parentMessage = "message from parent";
 
-  tabSuggestion : Video[];
+  tabSuggestion : Object;
   isRechercheRapide: boolean = false ;
   isRechercheAvance: boolean = false ;
   rechercheRapideForm: FormGroup;
@@ -26,7 +26,7 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.tabSuggestion = JSON.parse(this.suggestionService.getSuggestions());
+    this.tabSuggestion = this.suggestionService.getSuggestions();
     this.rechercheRapideForm = new FormGroup({
       recherche: new FormControl("", [Validators.required])
     })

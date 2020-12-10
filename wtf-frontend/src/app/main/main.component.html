@@ -6,7 +6,7 @@
   <div aria-label="gallery">
     <ul>
       <li *ngFor="let suggestion of tabSuggestion">
-        <img routerLink="/movie/{{suggestion.id_video}}" src="{{suggestion.poster}}"><button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+        <img routerLink="/video/{{suggestion.idVideo}}" src="{{suggestion.poster}}"><button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
         </button>
       </li>
     </ul>
@@ -27,20 +27,7 @@
     </div>
   </div>
   <div *ngIf="isRechercheAvance" class="rechercheAvance">
-    <!--
-     <div class="input-field col s8 nopad">
-       <form  (submit)="rechercheRapide()" [formGroup]="rechercheRapideForm">
-       <input class="form-control" matInput placeholder="Chercher votre film" formControlName="recherche">
-       <button type="submit" mat-icon-button>
-         <mat-icon>search</mat-icon>
-       </button>
-     </form>
-     </div>
-     -->
   </div>
-  <!--"hok"
-  <app-recherche-rapide [app-recherche-rapideMessage]="parentMessage"></app-recherche-rapide>-->
-
 </div>
 
 

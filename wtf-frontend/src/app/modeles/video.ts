@@ -5,6 +5,7 @@ import { Personne } from './personne';
 export class Video {
 
     idVideo: number;
+    type: string;
     titre: string;
     dateSortie: {
       date: String;
@@ -17,5 +18,6 @@ export class Video {
     vo: string;
     production:Production;
     personnes : Array<Personne>;
-    plateformes : Array<Plateforme>
+    plateformes : Array<Plateforme>;
+    categories : null;
 }

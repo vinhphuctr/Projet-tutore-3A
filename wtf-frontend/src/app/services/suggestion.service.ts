@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SUGGESTION } from '../mockSuggestion';
+import { HttpClient,HttpHeaders, HttpClientModule } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +9,12 @@ import { SUGGESTION } from '../mockSuggestion';
 export class SuggestionService {
 
 
-  constructor() {
-   }
-  getSuggestions()
-  {
-    return JSON.stringify(SUGGESTION);
+  constructor(private _httpClient : HttpClient) { }
+
+  getSuggestions(){
+    let url = "http://wtfilm-api.herokuapp.com/api/video/get/all/";
+    let result = this._httpClient.get<any>(url);
+    console.log(result);
   }
 
   rechercheRapide(keyword: string) {
