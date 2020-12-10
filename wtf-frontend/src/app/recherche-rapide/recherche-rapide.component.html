@@ -6,18 +6,18 @@
         <li *ngFor="let item of tabResultat">
           <div class="blocFilm">
           <div id="bloc1">
-            <img routerLink="/movie/{{item.id_video}}" src="{{item.poster}}">
+            <img routerLink="/movie/{{item[0].idVideo}}" src="{{item[0].poster}}">
             </div>
             <div id="bloc2">
-              <p id="film">{{item.titre}} ({{item.date_sortie | date:'yyyy'}})</p>
-              <p id="genre">{{item.vo}}</p>
+              <p id="film">{{item[0].titre}} ({{item[0].dateSortie | date:'yyyy'}})</p>
+              <p id="genre">{{item[0].vo}}</p>
               <div class="boutonRecherche">
-                <button [id]="'fav_' + item.id_video " (click)="addFav(item.id_video)" class="button_left" mat-icon-button color="warm" aria-label="Example icon-button with a heart icon">
+                <button [id]="'fav_' + item[0].id_video " (click)="addFav(item[0].id_video)" class="button_left" mat-icon-button color="warm" aria-label="Example icon-button with a heart icon">
                   <mat-icon>favorite</mat-icon>
                 </button>
-                <button  routerLink="/movie/{{item.id_video}}" mat-stroked-button class="button_left">Détails</button>
-                <button class="button" mat-stroked-button (click)="showHide(item.id_video)">Scorez</button>
-                <div [id]="item.id_video" style="visibility: hidden; margin:30px">
+                <button  routerLink="/movie/{{item[0].id_video}}" mat-stroked-button class="button_left">Détails</button>
+                <button class="button" mat-stroked-button (click)="showHide(item[0].id_video)">Scorez</button>
+                <div [id]="item[0].id_video" style="visibility: hidden; margin:30px">
                   <p-rating [iconOnStyle]="{'color':'rgb(93,84,164)'}" [(ngModel)]="ratingValue" [cancel]="false" (onRate)="postRate($event, video)"></p-rating>
                 </div>
               </div>

@@ -19,7 +19,17 @@ export class RechercheRapideComponent implements OnInit {
   UtilisateurData: Utilisateur;
 
   constructor(private suggestionService: SuggestionService, private connexionService: connexionService, private FavorisService: FavorisService) {
-    this.tabResultat = this.suggestionService.rechercheRapide(localStorage.getItem('keyword'));
+   
+    this.tabResultat = this.suggestionService.rechercheRapide(localStorage.getItem('keyword')); // tabResultat c'est du JSON
+    
+    
+    console.log("julie"); 
+    console.log(this.tabResultat); 
+
+    
+
+
+
     this.tabMesFavoris = this.FavorisService.getFavoris();
   }
 
