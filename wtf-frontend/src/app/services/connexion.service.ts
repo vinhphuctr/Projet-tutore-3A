@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UtilisateurService } from '../services/utilisateur.service';
-import { CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
+import { UtilisateurService } from '../services/utilisateur.service';import { CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';import { HttpClient } from '@angular/common/http';
 
 
 @Injectable()
@@ -12,7 +11,8 @@ export class connexionService implements CanActivate {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private _utilisateurService : UtilisateurService
+    private _utilisateurService : UtilisateurService,
+    private httpClient: HttpClient
   ) { }
 
 
@@ -22,19 +22,19 @@ export class connexionService implements CanActivate {
     let mdp = loginForm.value["password"];
 
     // Appel API
-    //
-        // Recupération id, nom, prénom , token
-        this._utilisateurService.setUser("1", "Julie", "HUA","julie.hua@gmail.com","France","0695221701","token");
 
-        // On récupère l'url de redirection
-        const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/main';
+    this.httpClient.post<any>('https://jsonplaceholder.typicode.com/posts', { 'email': identifiant, 'password' : mdp});
 
-        // On accède à la page souhaitée
-        this.router.navigate(['/main']);
+    // Recupération id, nom, prénom , token
+    this._utilisateurService.setUser("1", "Julie", "HUA","julie.hua@gmail.com","France","0695221701","token");
 
+    // On récupère l'url de redirection
+     const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/main';
 
-        //alert("Connexion échoué : le mot de passe/l'identifiant est incorrect");
+    // On accède à la page souhaitée
+    this.router.navigate(['/main']);
 
+    //alert("Connexion échoué : le mot de passe/l'identifiant est incorrect");
   }
 
   isAuthenticated() {
