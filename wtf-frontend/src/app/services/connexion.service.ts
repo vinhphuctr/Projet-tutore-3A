@@ -10,8 +10,6 @@ export class connexionService implements CanActivate {
 
   non_connecte: boolean = true;
 
-  tabUsers : Utilisateur[];
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -20,34 +18,31 @@ export class connexionService implements CanActivate {
 
 
   connexion(loginForm: any)  {
-    // Recupération des users existants
-    this._utilisateurService.getUsers().subscribe(tabUsers => this.tabUsers = tabUsers);
-
 
     console.log('Tentative de connexion');
+    let identifiant = loginForm.value["email"];
+    let mdp = loginForm.value["password"];
 
-    this.tabUsers.forEach(element => {
-      if (element.mail === loginForm.value["email"] && element.mdp == loginForm.value["password"]) {
+    // Appel API
+    //
         console.log('Connexion réussie');
 
-        this.setUser(element);
+        // Recupération id, nom, prénom , token
+        this.setUser("1", "Julie", "HUA","token");
 
         // On récupère l'url de redirection
         const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/main';
 
         // On accède à la page souhaitée
-        this.router.navigate([redirectUrl]);
+        this.router.navigate(['/main']);
 
-      } else {
-        alert("Connexion échoué : le mot de passe/l'identifiant est incorrect");
-      }
 
-    });
+        //alert("Connexion échoué : le mot de passe/l'identifiant est incorrect");
 
   }
 
   isAuthenticated() {
-    if (localStorage.getItem('user') != undefined) {
+    if (localStorage.getItem('token') != undefined) {
       return true;
     } else {
       return false
@@ -67,26 +62,25 @@ export class connexionService implements CanActivate {
   }
 
 
-  setUser(user: any) {
-    console.log(user);
-    localStorage.setItem('user', JSON.stringify(user));
+  setUser(idUser : string, nomUser : string, prenomUser : string, token : string) {
+
+    localStorage.setItem('user', JSON.stringify({'id' : idUser, 'nom':nomUser, 'prenom':prenomUser}));
+    localStorage.setItem('token', token);
   }
 
   clearUser() {
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
   }
-
 
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.isAuthenticated() == true) {
       return true;
     }
-    if(this.isAuthenticated() == false)
-    {
+    else {
       this.router.navigate(['/connexion']);
       return false;
-
     }
   }
 }
