@@ -28,15 +28,15 @@
         <button class="button" mat-stroked-button disabled>{{video?.type |titlecase}}</button>
       </div>
       <p></p>
-      <div *ngIf="isFilm">
-      <p><span class="purple">Durée : </span>En production</p>
+      <div *ngIf="video?.type=='film'">
+      <p><span class="purple">Durée : </span> En production</p>
       <p><span class="purple">Date de sortie :</span> {{video?.dateSortie.date | date:'d/M/yyyy'}}</p>
       <p><span class="purple">Langue original : </span>{{video?.vo}}</p>
-      <p><span class="purple">Catégorie : </span>En production</p>
+      <p><span class="purple">Catégorie : </span> En production</p>
       <p><span class="purple">Société de production : </span>{{video?.production.nom}}</p>
-      <p><span class="purple">Réalisateur: </span>En production</p>
-      <p><span class="purple">Stars : </span><li class="cards_item" *ngFor="let personne of video?.personnes"><p>{{personne.prenom}} {{personne.nom}}</p></li></p>
-      <p><span class="purple">Synopsis : </span>{{video?.plot}}</p>
+      <p><span class="purple">Réalisateur: </span> En production</p>
+      <p style="margin-bottom: 0;"><span class="purple">Stars : </span><li class="cards_item" *ngFor="let personne of video?.personnes"><p>{{personne.prenom}} {{personne.nom}}</p></li></p>
+      <p><span class="purple">Synopsis : </span> {{video?.plot}}</p>
       <p style="margin-top: 3%">
         <ul class="cards">
           <li class="cards_item" *ngFor="let plateforme of video?.plateformes">
@@ -49,6 +49,28 @@
           </li>
         </ul>
         </div>
+        <div *ngIf="video?.type=='serie'">
+          <p><span class="purple">Nombre de saisons :</span> 5</p>
+          <p><span class="purple">Nombre d'episodes :</span> 31</p>
+          <p><span class="purple">Date de sortie :</span> {{video?.dateSortie.date | date:'d/M/yyyy'}}</p>
+          <p><span class="purple">Langue original : </span>{{video?.vo}}</p>
+          <p><span class="purple">Catégorie : </span> En production</p>
+          <p><span class="purple">Société de production : </span>{{video?.production.nom}}</p>
+          <p><span class="purple">Réalisateur: </span> En production</p>
+          <p style="margin-bottom: 0;"><span class="purple">Stars : </span><li class="cards_item" *ngFor="let personne of video?.personnes"><p>{{personne.prenom}} {{personne.nom}}</p></li></p>
+          <p><span class="purple">Synopsis : </span>{{video?.plot}}</p>
+          <p style="margin-top: 3%">
+            <ul class="cards">
+              <li class="cards_item" *ngFor="let plateforme of video?.plateformes">
+                <div class="card">
+                  <div class="card_content">
+                    <button (click)="redirectUrl(plateforme.redirection)" mat-stroked-button><img src="{{plateforme?.logo}}">
+                    </button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            </div>
     </div>
     <div style="width: 100%; height: 1%; clear:both"></div>
   </section>

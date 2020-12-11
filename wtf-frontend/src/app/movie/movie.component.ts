@@ -20,7 +20,6 @@ export class MovieComponent implements OnInit {
   UtilisateurData: Utilisateur;
   isTrailer : boolean = false;
   starVisible : boolean = true;
-  isFilm : boolean = true;
   id : number;
 
   constructor(
@@ -44,8 +43,10 @@ export class MovieComponent implements OnInit {
     }
   }
 
+
   ngAfterViewChecked(): void{
     this.checkIfFav(this.id);
+
   }
 
   getMovie():void{
