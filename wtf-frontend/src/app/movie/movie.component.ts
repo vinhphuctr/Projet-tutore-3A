@@ -20,6 +20,8 @@ export class MovieComponent implements OnInit {
   UtilisateurData: Utilisateur;
   isTrailer : boolean = false;
   starVisible : boolean = true;
+  isFilm : boolean = true;
+  id : number;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,21 +33,23 @@ export class MovieComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.id = +this.route.snapshot.paramMap.get('id');
     this.getMovie();
     this.UtilisateurData = this.utilisateurService.getUser();
   }
 
-  ngAfterViewInit()	: void{
+  ngOnChanges() : void{
     if(this.video.trailer !== "null"){
       this.isTrailer = true;
     }
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.checkIfFav(id);
+  }
+
+  ngAfterViewChecked(): void{
+    this.checkIfFav(this.id);
   }
 
   getMovie():void{
-      const id = +this.route.snapshot.paramMap.get('id');
-      this._movieService.getMovie(id)
+      this._movieService.getMovie(this.id)
         .subscribe(video => this.video = video);
     }
 
@@ -65,7 +69,6 @@ export class MovieComponent implements OnInit {
 
   checkIfFav(item){
       if(this.FavorisService.checkIfFav(item) == true){
-        console.log("passé");
         let s = "fav_" + item;
         document.getElementById(s).style.color = "red";
       }

@@ -3,50 +3,52 @@
   <section class="container" style="padding-top: 3%;">
     <div style="width: 22%; height: 80%; float:left;">
       <div class="d" style="position: relative; text-align: center;">
-        <img src="{{video.poster}}">
+        <img src="{{video?.poster}}">
        </div>
        <div style="position: relative; text-align: center; margin-top: 10px;">
-        <button [id]="'fav_' + video.idVideo " (click)="addFav(video.idVideo)"  mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+        <button [id]="'fav_' + video?.idVideo " (click)="addFav(video.idVideo)"  mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
           <mat-icon>favorite</mat-icon>
         </button>
       </div>
-      <div [hidden]="isTrailer"
+      <div *ngIf="isTrailer"
       style="position: relative; text-align: center; margin-top: 30px;">
         <button class="button" mat-stroked-button (click)="redirectUrl(video.trailer)">Watch the Trailer</button>
       </div>
       <div style="position: relative; text-align: center; margin-top: 16px;">
         <button class="button" mat-stroked-button (click)="showHide()">SCORE !</button>
-        <div [id]="video.idVideo" [hidden]="starVisible" style= "margin-top:20px">
+        <div [id]="video?.idVideo" [hidden]="starVisible" style= "margin-top:20px">
           <p-rating [iconOnStyle]="{'color':'rgb(93,84,164)'}" [(ngModel)]="ratingValue" [cancel]="false" (onRate)="postRate($event, video)"></p-rating>
         </div>
       </div>
     </div>
     <div style="width: 4%; height: 80%; float:left;"></div>
     <div style="width: 74%; height: 80%; float:right;">
-      <h1>{{video.titre | uppercase}} ({{video.dateSortie.date | date:'yyyy'}})</h1>
+      <h1>{{video?.titre | uppercase}} ({{video?.dateSortie.date | date:'yyyy'}})</h1>
       <div class="vignette">
-        <button class="button" mat-stroked-button disabled>{{video.type |titlecase}}</button>
+        <button class="button" mat-stroked-button disabled>{{video?.type |titlecase}}</button>
       </div>
       <p></p>
+      <div *ngIf="isFilm">
       <p><span class="purple">Durée : </span>En production</p>
-      <p><span class="purple">Date de sortie :</span> {{video.dateSortie.date | date:'d/M/yyyy'}}</p>
-      <p><span class="purple">Langue original : </span>{{video.vo}}</p>
+      <p><span class="purple">Date de sortie :</span> {{video?.dateSortie.date | date:'d/M/yyyy'}}</p>
+      <p><span class="purple">Langue original : </span>{{video?.vo}}</p>
       <p><span class="purple">Catégorie : </span>En production</p>
-      <p><span class="purple">Société de production : </span>{{video.production.nom}}</p>
+      <p><span class="purple">Société de production : </span>{{video?.production.nom}}</p>
       <p><span class="purple">Réalisateur: </span>En production</p>
-      <p><span class="purple">Stars : </span><li class="cards_item" *ngFor="let personne of video.personnes"><p>{{personne.prenom}} {{personne.nom}}</p></li></p>
-      <p><span class="purple">Synopsis : </span>{{video.plot}}</p>
+      <p><span class="purple">Stars : </span><li class="cards_item" *ngFor="let personne of video?.personnes"><p>{{personne.prenom}} {{personne.nom}}</p></li></p>
+      <p><span class="purple">Synopsis : </span>{{video?.plot}}</p>
       <p style="margin-top: 3%">
         <ul class="cards">
-          <li class="cards_item" *ngFor="let plateforme of video.plateformes">
+          <li class="cards_item" *ngFor="let plateforme of video?.plateformes">
             <div class="card">
               <div class="card_content">
-                <button (click)="redirectUrl(plateforme.redirection)" mat-stroked-button><img src="{{plateforme.logo}}">
+                <button (click)="redirectUrl(plateforme.redirection)" mat-stroked-button><img src="{{plateforme?.logo}}">
                 </button>
               </div>
             </div>
           </li>
         </ul>
+        </div>
     </div>
     <div style="width: 100%; height: 1%; clear:both"></div>
   </section>
