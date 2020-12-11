@@ -12,7 +12,9 @@ export class MonprofilService {
 
   modifyUser(loginForm: any) {
     // Modifier back avec appel api pour modifier les informations de l'user
-    console.log(loginForm.value["telephone"]);
+    //
+    //
+    //
     // Modification localstorage user
     this.UtilisateurService.setUser(
       this.UtilisateurService.getId(),

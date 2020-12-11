@@ -18,14 +18,11 @@ export class connexionService implements CanActivate {
 
   connexion(loginForm: any)  {
 
-    console.log('Tentative de connexion');
     let identifiant = loginForm.value["email"];
     let mdp = loginForm.value["password"];
 
     // Appel API
     //
-        console.log('Connexion réussie');
-
         // Recupération id, nom, prénom , token
         this._utilisateurService.setUser("1", "Julie", "HUA","julie.hua@gmail.com","France","0695221701","token");
 

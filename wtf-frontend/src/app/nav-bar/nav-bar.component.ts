@@ -23,9 +23,8 @@ export class NavBarComponent implements OnInit {
   constructor(public nav: NavbarService, private connexionService: connexionService, private UtilisateurService : UtilisateurService) { }
 
   ngOnInit(): void {
-
     this.data$.subscribe(val => this.UtilisateurData = this.UtilisateurService.getUser());
-    this.data2$.subscribe(val => this.lettresInitiales = this.UtilisateurData.prenom.substr(0,1) + ' ' + this.UtilisateurData.nom.substr(0,1));
+    this.data2$.subscribe(val => this.lettresInitiales = this.UtilisateurData?.prenom.substr(0,1) + ' ' + this.UtilisateurData?.nom.substr(0,1));
 }
 
   logout() {

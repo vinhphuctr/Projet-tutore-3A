@@ -18,7 +18,7 @@
       <span class="example-spacer"></span>
       <span class="example-spacer"></span>
       <span class="example-spacer"></span>
-      <h2>{{UtilisateurData.prenom | uppercase}} {{UtilisateurData.nom | uppercase}}</h2>
+      <h2>{{UtilisateurData?.prenom | uppercase}} {{UtilisateurData?.nom | uppercase}}</h2>
       <span class="example-spacer"></span>
       <button (click)="logout()" mat-raised-button color="warn">Déconnexion</button>
     </mat-toolbar-row>
@@ -50,9 +50,9 @@
         <h3 style="color:rgb(231,28,2)" matSubheader (click)='sidenav.close()' [routerLink]="'/connexion'"><img src="https://cdn.discordapp.com/attachments/755462909911629907/766182897773182986/icon_Deconnexion.png">Déconnexion</h3>
       </button>
       <br />
- 
-      
-   
+
+
+
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
