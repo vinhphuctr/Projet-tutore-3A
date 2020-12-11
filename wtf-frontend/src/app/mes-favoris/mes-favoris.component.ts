@@ -1,8 +1,11 @@
 import { Component, OnInit} from '@angular/core';
 import { Utilisateur } from '../modeles/utilisateur';
-import { connexionService } from '../services/connexion.service';
 import { FavorisService } from '../services/favoris.service';
 import { Video } from '../modeles/video';
+import { interval } from 'rxjs';
+import { UtilisateurService } from '../services/utilisateur.service';
+
+
 
 @Component({
   selector: 'app-mes-favoris',
@@ -15,19 +18,43 @@ export class MesFavorisComponent implements OnInit {
   UtilisateurData: Utilisateur;
   tabMesFavoris: Video[];
   ratingValue: number = 3;
+  data$ = interval(10);
 
-  constructor(private connexionService: connexionService, private FavorisService: FavorisService) {
-
-    this.tabMesFavoris = this.FavorisService.getFavoris();
-
-    }
+  constructor(private FavorisService: FavorisService, private utilisateurService : UtilisateurService) {
+  }
 
   ngOnInit(): void {
+    this.UtilisateurData = this.utilisateurService.getUser();
+    this.tabMesFavoris = this.FavorisService.getFavoris();
+    this.data$.subscribe(val => this.tabMesFavoris = this.FavorisService.getFavoris());
+  }
 
+  ngAfterViewInit()	: void{
+    this.checkIfFav();
+  }
 
-    console.log(this.connexionService.isActive())
-    this.UtilisateurData = this.connexionService.getUser();
+  checkIfFav(){
+    this.tabMesFavoris.forEach(item => {
+      if(this.FavorisService.checkIfFav(item.idVideo) == true){
+        let s = "fav_" + item.idVideo;
+        document.getElementById(s).style.color = "red";
+      }
+    });
+  }
 
+  addFav(item){
+    console.log(item);
+    let s = "fav_" + item;
+    if(document.getElementById(s).style.color == "red") {
+      document.getElementById(s).style.color = "white";
+      this.FavorisService.deleteEnAttendant(item);
+      this.FavorisService.deleteFavoris(item, this.UtilisateurData);
+    }
+    else {
+      document.getElementById(s).style.color = "red";
+      this.FavorisService.addFavoris(item, this.UtilisateurData);
+      // On ajoute cette video de la BD Favoris
+    }
   }
 
   postRate(event, item) {

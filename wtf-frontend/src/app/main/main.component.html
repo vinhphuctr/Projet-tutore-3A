@@ -6,7 +6,7 @@
   <div aria-label="gallery">
     <ul>
       <li *ngFor="let suggestion of tabSuggestion">
-        <img routerLink="/movie/{{suggestion.id_video}}" src="{{suggestion.poster}}"><button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+        <img routerLink="/video/{{suggestion.idVideo}}" src="{{suggestion.poster}}"><button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
         </button>
       </li>
     </ul>
@@ -27,20 +27,26 @@
     </div>
   </div>
   <div *ngIf="isRechercheAvance" class="rechercheAvance">
-    <!--
-     <div class="input-field col s8 nopad">
-       <form  (submit)="rechercheRapide()" [formGroup]="rechercheRapideForm">
-       <input class="form-control" matInput placeholder="Chercher votre film" formControlName="recherche">
-       <button type="submit" mat-icon-button>
-         <mat-icon>search</mat-icon>
-       </button>
-     </form>
-     </div>
-     -->
+    <h3>Quel type de vidéo ?</h3>
+    <mat-radio-group>
+        <mat-radio-button value="1">Film</mat-radio-button>
+        <mat-radio-button value="2">Série</mat-radio-button>
+        <mat-radio-button value="3">Les 2</mat-radio-button>
+      </mat-radio-group>
+      <h3 style="padding-top: 30px;">Combien de temps avez vous ? (en minutes)</h3>
+      <mat-slider
+        class="example-margin"
+        [disabled]=false
+        [invert]=false
+        [max]=300
+        [min]=0
+        [step]=10
+        [thumbLabel]=true
+        [tickInterval]=10
+        [(ngModel)]="value"
+        [vertical]=false>
+    </mat-slider>
   </div>
-  <!--"hok"
-  <app-recherche-rapide [app-recherche-rapideMessage]="parentMessage"></app-recherche-rapide>-->
-
 </div>
 
 

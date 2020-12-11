@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-
+import { Observable } from 'rxjs';
 import { Video } from '../modeles/video';
-import { SUGGESTION } from '../mockSuggestion';
-
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MovieService {
 
-  constructor() { }
+  constructor(private _httpClient : HttpClient) { }
 
   getMovie(id: number): Observable<Video> {
-    // TODO: send the message _after_ fetching the hero
-    return of(SUGGESTION.find(video => video.id_video === id));
+
+    let url = "http://wtfilm-api.herokuapp.com/api/video/" + id;
+
+    return this._httpClient.get<Video>(url);
   }
 }

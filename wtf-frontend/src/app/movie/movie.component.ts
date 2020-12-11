@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Video } from '../modeles/video';
+import { Utilisateur } from '../modeles/utilisateur';
 import {MovieService} from '../services/movie.service';
+import { FavorisService } from '../services/favoris.service';
+import { UtilisateurService } from '../services/utilisateur.service';
+
 
 @Component({
   selector: 'app-movie',
@@ -13,18 +17,40 @@ export class MovieComponent implements OnInit {
 
   ratingValue: number = 3;
   video : Video;
+  UtilisateurData: Utilisateur;
+  isTrailer : boolean = false;
+  starVisible : boolean = true;
+  id : number;
+
   constructor(
     private route: ActivatedRoute,
     private _location: Location,
-    private _movieService: MovieService
-  ) {}
+    private _movieService: MovieService,
+    private FavorisService: FavorisService,
+    private utilisateurService : UtilisateurService,
+  ) {
+  }
 
   ngOnInit(): void {
+    this.id = +this.route.snapshot.paramMap.get('id');
     this.getMovie();
+    this.UtilisateurData = this.utilisateurService.getUser();
   }
+
+  ngOnChanges() : void{
+    if(this.video.trailer !== "null"){
+      this.isTrailer = true;
+    }
+  }
+
+
+  ngAfterViewChecked(): void{
+    this.checkIfFav(this.id);
+
+  }
+
   getMovie():void{
-      const id = +this.route.snapshot.paramMap.get('id');
-      this._movieService.getMovie(id)
+      this._movieService.getMovie(this.id)
         .subscribe(video => this.video = video);
     }
 
@@ -35,26 +61,37 @@ export class MovieComponent implements OnInit {
   postRate(event, item) {
     console.log(event.value);
     console.log(item);
-    this.showHide(item.id_video);
+    this.showHide();
   }
 
   redirectUrl(trailer){
     window.open(trailer);
   }
 
-  showHide(modRef) {
-
-    if (document.getElementById(modRef).style.visibility=="hidden")
-      {
-        // Contenu caché, le montrer
-        document.getElementById(modRef).style.visibility = "visible";
+  checkIfFav(item){
+      if(this.FavorisService.checkIfFav(item) == true){
+        let s = "fav_" + item;
+        document.getElementById(s).style.color = "red";
       }
-      else
-      {
-        // Contenu visible, le cacher
-        document.getElementById(modRef).style.visibility = "hidden";
-      }
+  }
 
+  addFav(item){
+    console.log(item);
+    let s = "fav_" + item;
+    console.log(s);
+    if(document.getElementById(s).style.color == "red") {
+      document.getElementById(s).style.color = "white";
+      this.FavorisService.deleteFavoris(item, this.UtilisateurData);
+    }
+    else {
+      document.getElementById(s).style.color = "red";
+      this.FavorisService.addFavoris(item, this.UtilisateurData);
+      // On ajoute cette video de la BD Favoris
+    }
+  }
+
+  showHide() {
+    this.starVisible = !this.starVisible;
+  }
 }
 
-}

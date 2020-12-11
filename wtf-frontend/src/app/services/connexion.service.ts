@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UtilisateurService } from '../services/utilisateur.service';
-import { Utilisateur } from '../modeles/utilisateur';
-import { CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
+import { UtilisateurService } from '../services/utilisateur.service';import { CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';import { HttpClient } from '@angular/common/http';
 
 
 @Injectable()
@@ -10,44 +8,37 @@ export class connexionService implements CanActivate {
 
   non_connecte: boolean = true;
 
-  tabUsers : Utilisateur[];
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private _utilisateurService : UtilisateurService
+    private _utilisateurService : UtilisateurService,
+    private httpClient: HttpClient
   ) { }
 
 
   connexion(loginForm: any)  {
-    // Recupération des users existants
-    this._utilisateurService.getUsers().subscribe(tabUsers => this.tabUsers = tabUsers);
 
+    let identifiant = loginForm.value["email"];
+    let mdp = loginForm.value["password"];
 
-    console.log('Tentative de connexion');
+    // Appel API
 
-    this.tabUsers.forEach(element => {
-      if (element.mail === loginForm.value["email"] && element.mdp == loginForm.value["password"]) {
-        console.log('Connexion réussie');
+    this.httpClient.post<any>('https://jsonplaceholder.typicode.com/posts', { 'email': identifiant, 'password' : mdp});
 
-        this.setUser(element);
+    // Recupération id, nom, prénom , token
+    this._utilisateurService.setUser("1", "Julie", "HUA","julie.hua@gmail.com","France","0695221701","token");
 
-        // On récupère l'url de redirection
-        const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/main';
+    // On récupère l'url de redirection
+     const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/main';
 
-        // On accède à la page souhaitée
-        this.router.navigate([redirectUrl]);
+    // On accède à la page souhaitée
+    this.router.navigate(['/main']);
 
-      } else {
-        alert("Connexion échoué : le mot de passe/l'identifiant est incorrect");
-      }
-
-    });
-
+    //alert("Connexion échoué : le mot de passe/l'identifiant est incorrect");
   }
 
-   isActive() {
-    if (localStorage.getItem('user') != undefined) {
+  isAuthenticated() {
+    if (localStorage.getItem('token') != undefined) {
       return true;
     } else {
       return false
@@ -58,37 +49,18 @@ export class connexionService implements CanActivate {
   logout() {
     console.log('Déconnexion');
 
-    this.clearUser();
+    this._utilisateurService.clearUser();
     this.router.navigate(['/']);
   }
 
-  getUser() {
-    return JSON.parse(localStorage.getItem('user'));
-  }
-
-
-  setUser(user: any) {
-    console.log(user);
-    localStorage.setItem('user', JSON.stringify(user));
-  }
-
-  clearUser() {
-    localStorage.removeItem('user');
-  }
-
-
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.isActive() == true) {
-      console.log('1');
+    if (this.isAuthenticated() == true) {
       return true;
     }
-    if(this.isActive() == false)
-    {
-      console.log('2');
-      alert('Veuillez vous identifier pour voir cette page');
+    else {
+      this.router.navigate(['/connexion']);
       return false;
-
     }
   }
 }

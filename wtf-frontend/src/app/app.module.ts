@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material/material.module';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSliderModule} from '@angular/material/slider';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,6 +25,8 @@ import { MainComponent } from './main/main.component';
 import { RechercheRapideComponent } from './recherche-rapide/recherche-rapide.component';
 import { MovieComponent } from './movie/movie.component';
 import { PrimengModule } from './primeng/primeng.module';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -51,14 +55,18 @@ import { PrimengModule } from './primeng/primeng.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    MatSliderModule,
     ReactiveFormsModule,
     MaterialModule,
+    MatRadioModule,
     MatExpansionModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     FlexLayoutModule,
-    PrimengModule
+    PrimengModule,
+    HttpClientModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

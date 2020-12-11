@@ -3,6 +3,8 @@ import { NavbarService } from '../services/navbar.service';
 import { connexionService } from '../services/connexion.service';
 import { Utilisateur } from '../modeles/utilisateur';
 import { interval } from 'rxjs';
+import { UtilisateurService } from '../services/utilisateur.service';
+
 
 @Component({
   selector: 'app-nav-bar',
@@ -18,12 +20,11 @@ export class NavBarComponent implements OnInit {
   data2$ = interval(1000);
 
 
-  constructor(public nav: NavbarService, private connexionService: connexionService) { }
+  constructor(public nav: NavbarService, private connexionService: connexionService, private UtilisateurService : UtilisateurService) { }
 
   ngOnInit(): void {
-
-    this.data$.subscribe(val => this.UtilisateurData = this.connexionService.getUser());
-    this.data2$.subscribe(val => this.lettresInitiales = this.UtilisateurData.prenom.substr(0,1) + ' ' + this.UtilisateurData.nom.substr(0,1));
+    this.data$.subscribe(val => this.UtilisateurData = this.UtilisateurService.getUser());
+    this.data2$.subscribe(val => this.lettresInitiales = this.UtilisateurData?.prenom.substr(0,1) + ' ' + this.UtilisateurData?.nom.substr(0,1));
 }
 
   logout() {
