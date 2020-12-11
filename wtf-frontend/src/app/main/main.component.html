@@ -27,6 +27,25 @@
     </div>
   </div>
   <div *ngIf="isRechercheAvance" class="rechercheAvance">
+    <h3>Quel type de vidéo ?</h3>
+    <mat-radio-group>
+        <mat-radio-button value="1">Film</mat-radio-button>
+        <mat-radio-button value="2">Série</mat-radio-button>
+        <mat-radio-button value="3">Les 2</mat-radio-button>
+      </mat-radio-group>
+      <h3 style="padding-top: 30px;">Combien de temps avez vous ? (en minutes)</h3>
+      <mat-slider
+        class="example-margin"
+        [disabled]=false
+        [invert]=false
+        [max]=300
+        [min]=0
+        [step]=10
+        [thumbLabel]=true
+        [tickInterval]=10
+        [(ngModel)]="value"
+        [vertical]=false>
+    </mat-slider>
   </div>
 </div>
 
