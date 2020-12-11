@@ -15,7 +15,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 export class MainComponent implements OnInit {
   parentMessage = "message from parent";
 
-  //tabSuggestion : Object;
+  tabSuggestion : Object;
   isRechercheRapide: boolean = false ;
   isRechercheAvance: boolean = false ;
   rechercheRapideForm: FormGroup;

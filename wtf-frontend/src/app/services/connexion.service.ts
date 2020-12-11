@@ -46,7 +46,7 @@ export class connexionService implements CanActivate {
 
   }
 
-   isActive() {
+  isAuthenticated() {
     if (localStorage.getItem('user') != undefined) {
       return true;
     } else {
@@ -79,14 +79,12 @@ export class connexionService implements CanActivate {
 
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    if (this.isActive() == true) {
-      console.log('1');
+    if (this.isAuthenticated() == true) {
       return true;
     }
-    if(this.isActive() == false)
+    if(this.isAuthenticated() == false)
     {
-      console.log('2');
-      alert('Veuillez vous identifier pour voir cette page');
+      this.router.navigate(['/connexion']);
       return false;
 
     }
