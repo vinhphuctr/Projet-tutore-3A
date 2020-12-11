@@ -4,6 +4,9 @@ import { connexionService } from '../services/connexion.service';
 import { FavorisService } from '../services/favoris.service';
 import { Video } from '../modeles/video';
 import { interval } from 'rxjs';
+import { UtilisateurService } from '../services/utilisateur.service';
+
+
 
 @Component({
   selector: 'app-mes-favoris',
@@ -18,11 +21,11 @@ export class MesFavorisComponent implements OnInit {
   ratingValue: number = 3;
   data$ = interval(10);
 
-  constructor(private connexionService: connexionService, private FavorisService: FavorisService) {
+  constructor(private connexionService: connexionService, private FavorisService: FavorisService, private utilisateurService : UtilisateurService) {
   }
 
   ngOnInit(): void {
-    this.UtilisateurData = this.connexionService.getUser();
+    this.UtilisateurData = this.utilisateurService.getUser();
     this.tabMesFavoris = this.FavorisService.getFavoris();
     this.data$.subscribe(val => this.tabMesFavoris = this.FavorisService.getFavoris());
   }

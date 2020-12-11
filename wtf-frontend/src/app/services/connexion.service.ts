@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UtilisateurService } from '../services/utilisateur.service';
-import { Utilisateur } from '../modeles/utilisateur';
 import { CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 
 
@@ -28,7 +27,7 @@ export class connexionService implements CanActivate {
         console.log('Connexion réussie');
 
         // Recupération id, nom, prénom , token
-        this.setUser("1", "Julie", "HUA","token");
+        this._utilisateurService.setUser("1", "Julie", "HUA","julie.hua@gmail.com","France","0695221701","token");
 
         // On récupère l'url de redirection
         const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/main';
@@ -53,24 +52,8 @@ export class connexionService implements CanActivate {
   logout() {
     console.log('Déconnexion');
 
-    this.clearUser();
+    this._utilisateurService.clearUser();
     this.router.navigate(['/']);
-  }
-
-  getUser() {
-    return JSON.parse(localStorage.getItem('user'));
-  }
-
-
-  setUser(idUser : string, nomUser : string, prenomUser : string, token : string) {
-
-    localStorage.setItem('user', JSON.stringify({'id' : idUser, 'nom':nomUser, 'prenom':prenomUser}));
-    localStorage.setItem('token', token);
-  }
-
-  clearUser() {
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
   }
 
 

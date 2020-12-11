@@ -4,6 +4,8 @@ import { Utilisateur } from '../modeles/utilisateur';
 import { connexionService } from '../services/connexion.service';
 import { Video } from '../modeles/video';
 import { FavorisService } from '../services/favoris.service';
+import { UtilisateurService } from '../services/utilisateur.service';
+
 
 
 @Component({
@@ -18,14 +20,14 @@ export class RechercheRapideComponent implements OnInit {
   tabMesFavoris: Video[];
   UtilisateurData: Utilisateur;
 
-  constructor(private suggestionService: SuggestionService, private connexionService: connexionService, private FavorisService: FavorisService) {
+  constructor(private suggestionService: SuggestionService,private UtilisateurService : UtilisateurService, private connexionService: connexionService, private FavorisService: FavorisService) {
 
     this.tabResultat = this.suggestionService.rechercheRapide(localStorage.getItem('keyword')); // tabResultat c'est du JSON
     this.tabMesFavoris = this.FavorisService.getFavoris();
   }
 
   ngOnInit(): void {
-    this.UtilisateurData = this.connexionService.getUser();
+    this.UtilisateurData = this.UtilisateurService.getUser();
   }
 
   ngAfterViewInit()	: void{

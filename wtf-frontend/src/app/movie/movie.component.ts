@@ -6,7 +6,8 @@ import { Utilisateur } from '../modeles/utilisateur';
 import {MovieService} from '../services/movie.service';
 import { connexionService } from '../services/connexion.service';
 import { FavorisService } from '../services/favoris.service';
-import { isNull } from '@angular/compiler/src/output/output_ast';
+import { UtilisateurService } from '../services/utilisateur.service';
+
 
 @Component({
   selector: 'app-movie',
@@ -26,13 +27,14 @@ export class MovieComponent implements OnInit {
     private _location: Location,
     private _movieService: MovieService,
     private connexionService: connexionService,
-    private FavorisService: FavorisService
+    private FavorisService: FavorisService,
+    private utilisateurService : UtilisateurService,
   ) {
   }
 
   ngOnInit(): void {
     this.getMovie();
-    this.UtilisateurData = this.connexionService.getUser();
+    this.UtilisateurData = this.utilisateurService.getUser();
   }
 
   ngAfterViewInit()	: void{
