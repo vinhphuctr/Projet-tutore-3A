@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { SUGGESTION } from '../mockSuggestion';
 import { HttpClient,HttpHeaders, HttpClientModule } from '@angular/common/http';
 
 
@@ -20,30 +19,30 @@ export class SuggestionService {
   }
 
 
- 
+
 
   rechercheRapide(keyword: string) {
     // this.getSuggestions();
     var Films = [];
 
-   let url =  "http://wtfilm-api.herokuapp.com/api/video/search/?titre=%"+keyword+"%"; 
-   
+   let url =  "http://wtfilm-api.herokuapp.com/api/video/search/?titre=%"+keyword+"%";
+
    fetch(url)
    .then(res => res.json())
    .then((out) => {
      console.log('Checkout this JSON! ', out);
-    
 
-     Films.push(out); 
 
-     
-   
-   
+     Films.push(out);
+
+
+
+
 
    })
-    
+
    .catch(err => { throw err });
-   return Films; 
+   return Films;
 
 
 

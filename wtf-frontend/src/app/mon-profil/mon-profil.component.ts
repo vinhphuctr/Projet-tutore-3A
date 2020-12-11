@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Utilisateur } from '../modeles/utilisateur';
 import { MonprofilService } from '../services/monprofil.service';
-import { Observable } from 'rxjs';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NavbarService } from '../services/navbar.service';
-import { connexionService } from '../services/connexion.service';
 import { UtilisateurService } from '../services/utilisateur.service';
 
 
@@ -21,7 +19,7 @@ export class MonProfilComponent implements OnInit {
   modifyUserForm: FormGroup;
   UtilisateurData: Utilisateur;
 
-    constructor(private MonprofilService: MonprofilService, private utilisateurService : UtilisateurService,private nav: NavbarService, private formBuilder: FormBuilder,private connexionService: connexionService) { }
+    constructor(private MonprofilService: MonprofilService, private utilisateurService : UtilisateurService,private nav: NavbarService) { }
 
     ngOnInit(): void {
       this.UtilisateurData = this.utilisateurService.getUser();

@@ -4,7 +4,6 @@ import { Location } from '@angular/common';
 import { Video } from '../modeles/video';
 import { Utilisateur } from '../modeles/utilisateur';
 import {MovieService} from '../services/movie.service';
-import { connexionService } from '../services/connexion.service';
 import { FavorisService } from '../services/favoris.service';
 import { UtilisateurService } from '../services/utilisateur.service';
 
@@ -26,7 +25,6 @@ export class MovieComponent implements OnInit {
     private route: ActivatedRoute,
     private _location: Location,
     private _movieService: MovieService,
-    private connexionService: connexionService,
     private FavorisService: FavorisService,
     private utilisateurService : UtilisateurService,
   ) {

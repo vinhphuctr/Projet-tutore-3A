@@ -1,6 +1,5 @@
 import { Component, OnInit} from '@angular/core';
 import { Utilisateur } from '../modeles/utilisateur';
-import { connexionService } from '../services/connexion.service';
 import { FavorisService } from '../services/favoris.service';
 import { Video } from '../modeles/video';
 import { interval } from 'rxjs';
@@ -21,7 +20,7 @@ export class MesFavorisComponent implements OnInit {
   ratingValue: number = 3;
   data$ = interval(10);
 
-  constructor(private connexionService: connexionService, private FavorisService: FavorisService, private utilisateurService : UtilisateurService) {
+  constructor(private FavorisService: FavorisService, private utilisateurService : UtilisateurService) {
   }
 
   ngOnInit(): void {
