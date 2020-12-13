@@ -19,6 +19,7 @@ export class MainComponent implements OnInit {
   isRechercheAvance: boolean = false ;
   rechercheRapideForm: FormGroup;
   slider_value : number = 180;
+  film_value : string = "both";
 
 
   constructor(private nav: NavbarService, private suggestionService: SuggestionService, private router: Router, private route: ActivatedRoute,) {
@@ -46,6 +47,10 @@ export class MainComponent implements OnInit {
     localStorage.setItem('keyword', this.rechercheRapideForm.value['recherche']);
     const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/rechercherapide';
     this.router.navigate([redirectUrl]);
+  }
+
+  rechercheAvancee(){
+    console.log(this.film_value, this.slider_value);
   }
 }
 
