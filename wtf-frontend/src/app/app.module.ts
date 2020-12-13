@@ -27,10 +27,7 @@ import { MovieComponent } from './movie/movie.component';
 import { PrimengModule } from './primeng/primeng.module';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
-
-
-
-
+import { PipesModule} from './pipe/pipes.module';
 
 
 @NgModule({
@@ -48,7 +45,6 @@ import { HttpClientModule } from '@angular/common/http';
     MainComponent,
     RechercheRapideComponent,
     MovieComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -66,7 +62,8 @@ import { HttpClientModule } from '@angular/common/http';
     FlexLayoutModule,
     PrimengModule,
     HttpClientModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    PipesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

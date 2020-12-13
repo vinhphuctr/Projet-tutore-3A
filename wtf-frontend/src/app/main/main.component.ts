@@ -18,6 +18,7 @@ export class MainComponent implements OnInit {
   isRechercheRapide: boolean = false ;
   isRechercheAvance: boolean = false ;
   rechercheRapideForm: FormGroup;
+  slider_value : number = 180;
 
 
   constructor(private nav: NavbarService, private suggestionService: SuggestionService, private router: Router, private route: ActivatedRoute,) {
