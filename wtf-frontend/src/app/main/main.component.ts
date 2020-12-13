@@ -38,6 +38,17 @@ export class MainComponent implements OnInit {
     this.isRechercheAvance = false;
   }
 
+  formatLabel(value: number) {
+    if (value < 60){
+      return value + "min"
+    }
+    if(value % 60 == 0){
+    return value / 60 + "h"
+    }
+    return (value / 60).toFixed(1).slice(0,1)+ "h" + value % 60 + "min"
+  }
+
+
   afficherAvance(){
     this.isRechercheAvance = true;
     this.isRechercheRapide = false;

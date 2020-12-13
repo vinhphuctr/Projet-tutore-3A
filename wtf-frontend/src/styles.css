@@ -8,3 +8,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; display: fl
 .mat-expansion-indicator::after {
   color: white;
 }
+
+.mat-slider-thumb-label {
+  background-color: rgb(93,84,164) !important;
+  transform: rotate(45deg) !important;
+  width: 80px !important;
+  height: 60px !important;
+}
+
+.mat-slider-thumb-label-text {
+  opacity: 1 !important;
+}
+
+

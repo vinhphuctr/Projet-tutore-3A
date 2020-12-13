@@ -33,9 +33,10 @@
         <mat-radio-button value="serie">Série</mat-radio-button>
         <mat-radio-button value="both">Les 2</mat-radio-button>
       </mat-radio-group>
-      <h3 style="padding-top: 50px;">Combien de temps avez vous ?</h3>
+      <h3 style="padding-top: 50px; padding-bottom: 20px;">Combien de temps avez vous ?</h3>
       <mat-slider
         class="example-margin"
+        [displayWith]="formatLabel"
         [disabled]=false
         [invert]=false
         [max]=180
@@ -46,8 +47,7 @@
         [(ngModel)]="slider_value"
         [vertical]=false>
     </mat-slider>
-    <span style="padding-left:20px; font-size: large;">{{slider_value | min}}</span>
-    <div>
+    <div style="padding-top: 50px;">
       <button (click)="rechercheAvancee()" mat-stroked-button>Lancer la recherche</button>
     </div>
   </div>
