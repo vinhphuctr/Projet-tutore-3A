@@ -13,9 +13,8 @@ export class ConnexionComponent implements OnInit {
 
   connexionForm: FormGroup;
 
-  constructor(private connexionService: connexionService,private nav: NavbarService, private formBuilder: FormBuilder) {
+  constructor(private connexionService: connexionService,private nav: NavbarService) {
     nav.hide();
-
   }
 
   ngOnInit() {

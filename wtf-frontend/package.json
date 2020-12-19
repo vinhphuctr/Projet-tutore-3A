@@ -33,6 +33,7 @@
     "angular-todo": "^1.0.0",
     "bootstrap": "^4.5.0",
     "component": "^1.1.0",
+    "moment": "^2.29.1",
     "ng-starrating": "^1.0.20",
     "primeicons": "^4.1.0",
     "primeng": "^11.0.0-rc.1",

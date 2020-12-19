@@ -131,11 +131,8 @@ background:  rgb(93,84,164);
 }
 
 .mat-slider-horizontal {
-  width: 500px;
+  width: 60%;
 }
 
-.mat-slider-vertical {
-  height: 400px;
-}
 
 

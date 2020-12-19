@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavbarService } from '../services/navbar.service';
+import { InscriptionService } from '../services/inscription.service';
+
 
 @Component({
   selector: 'app-inscription',
   templateUrl: './inscription.component.html',
-  styleUrls: ['./inscription.component.css']
+  styleUrls: ['./inscription.component.css'],
+  providers: [InscriptionService]
 })
 export class InscriptionComponent implements OnInit {
 
   inscriptionForm: FormGroup;
 
-  constructor(private nav: NavbarService) { this.nav.hide() }
+  constructor(private InscriptionService: InscriptionService ,private nav: NavbarService) { this.nav.hide() }
 
   ngOnInit(): void {
 
@@ -23,10 +26,13 @@ export class InscriptionComponent implements OnInit {
       date_naissance: new FormControl(Date, [Validators.required]),
       genre: new FormControl("", [Validators.required]),
       telephone: new FormControl("", [Validators.required]),
-      pays: new FormControl("", [Validators.required]),
-      date_inscription: new FormControl("")
+      pays: new FormControl("", [Validators.required])
     });
-    
+
+  }
+
+  inscription() {
+    this.InscriptionService.inscription(this.inscriptionForm);
   }
 
 }
