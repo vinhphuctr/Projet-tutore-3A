@@ -46,6 +46,14 @@
             </select>
         </mat-form-field>
     </p>
+    <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Votre date de naissance</mat-label>
+      <input matInput placeholder="03/11/1999" formControlName="date_naissance" [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </p>
     <div class="info_tiers">
         <div class="tel">
             <mat-form-field appearance="standard">
