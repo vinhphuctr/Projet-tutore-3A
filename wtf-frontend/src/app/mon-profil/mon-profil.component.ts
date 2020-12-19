@@ -29,16 +29,18 @@ export class MonProfilComponent implements OnInit {
       nom: new FormControl(this.UtilisateurData.nom, [Validators.required]),
       pays: new FormControl(this.UtilisateurData.pays, [Validators.required]),
       telephone: new FormControl(this.UtilisateurData.telephone, [Validators.required]),
-
-     // password: new FormControl("", [Validators.required])
+      date_naissance: new FormControl(this.UtilisateurData.date_naissance, [Validators.required]),
     })
-
-
   }
 
   modifyUser() {
-      this.MonprofilService.modifyUser(this.modifyUserForm);
+    this.UtilisateurData.email = this.modifyUserForm.value["email"];
+    this.UtilisateurData.prenom = this.modifyUserForm.value["prenom"];
+    this.UtilisateurData.nom = this.modifyUserForm.value["nom"];
+    this.UtilisateurData.pays = this.modifyUserForm.value["pays"];
+    this.UtilisateurData.telephone = this.modifyUserForm.value["telephone"];
+    this.UtilisateurData.date_naissance = this.modifyUserForm.value["date_naissance"];
+    this.MonprofilService.modifyUser(this.UtilisateurData);
   }
-
 }
 

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UtilisateurService } from '../services/utilisateur.service';
+import { HttpClient } from '@angular/common/http';
+import { Utilisateur } from '../modeles/utilisateur';
 
 
 @Injectable({
@@ -7,21 +9,23 @@ import { UtilisateurService } from '../services/utilisateur.service';
 })
 export class MonprofilService {
 
-  constructor(private UtilisateurService : UtilisateurService) {
+  constructor(private UtilisateurService : UtilisateurService,  private httpClient: HttpClient) {
   }
 
-  modifyUser(loginForm: any) {
-    // Modifier back avec appel api pour modifier les informations de l'user
-    //
-    //
-    //
+  modifyUser(user : Utilisateur) {
+    //Appel API, modification données serveur
+
+    //this.httpClient.post<any>('https://wtf-api-v1.herokuapp.com/api/inscription', { 'email': mail, 'password' : mdp, 'nom': nom, 'prenom':prenom, 'telephone':telephone, 'pays':pays, 'genre' : genre, 'date_naissance':date_naissance});
+
     // Modification localstorage user
     this.UtilisateurService.setUser(
-      loginForm.value["nom"],
-      loginForm.value["prenom"],
-      loginForm.value["email"],
-      loginForm.value["pays"],
-      loginForm.value["telephone"],
+      this.UtilisateurService.getId(),
+      user.nom,
+      user.prenom,
+      user.email,
+      user.pays,
+      user.telephone,
+      user.date_naissance,
       this.UtilisateurService.getToken())
   }
 }
