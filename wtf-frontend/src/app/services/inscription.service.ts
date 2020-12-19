@@ -29,15 +29,13 @@ export class InscriptionService {
     let genre = loginForm.value["genre"];
     let telephone = loginForm.value["telephone"];
     let pays = loginForm.value["pays"];
-    let date_inscription = moment().format("DD-MM-YYYY");
+    console.log(genre);
 
     // Appel API
 
-    this.httpClient.post<any>('https://wtf-api-v1.herokuapp.com/api/inscription', { 'email': mail, 'password' : mdp}).subscribe(res => {
-      console.log(res);
+    this.httpClient.post<any>('https://wtf-api-v1.herokuapp.com/api/inscription', { 'email': mail, 'password' : mdp, 'nom': nom, 'prenom':prenom, 'telephone':telephone, 'pays':pays, 'genre' : genre, 'date_naissance':date_naissance}).subscribe(res => {
       if(res.email == mail){
         // Inscription réussi
-        console.log("dedans");
         let connexionForm = new FormGroup({
           email: new FormControl(mail),
           password: new FormControl(mdp)

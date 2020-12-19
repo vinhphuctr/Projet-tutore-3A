@@ -22,13 +22,12 @@ export class connexionService implements CanActivate {
 
     let identifiant = loginForm.value["email"];
     let mdp = loginForm.value["password"];
-    console.log("ici");
 
     // Appel API
 
     this.httpClient.post<any>('https://wtf-api-v1.herokuapp.com/api/api-token-auth/', { 'email': identifiant, 'password' : mdp}).subscribe(res => {
       if(res.token != null){
-        this._utilisateurService.setUser(res.user.prenom, res.user.nom,res.user.email,res.user.pays,res.user.telephone,res.token);
+        this._utilisateurService.setUser(res.id,res.user.prenom, res.user.nom,res.user.email,res.user.pays,res.user.telephone, res.date_naissance, res.token);
          // On récupère l'url de redirection
          const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/main';
 

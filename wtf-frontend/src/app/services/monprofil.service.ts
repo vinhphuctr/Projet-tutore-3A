@@ -17,7 +17,6 @@ export class MonprofilService {
     //
     // Modification localstorage user
     this.UtilisateurService.setUser(
-      this.UtilisateurService.getId(),
       loginForm.value["nom"],
       loginForm.value["prenom"],
       loginForm.value["email"],
