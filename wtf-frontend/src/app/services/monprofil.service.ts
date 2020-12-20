@@ -15,7 +15,7 @@ export class MonprofilService {
   modifyUser(user : Utilisateur) {
     //Appel API, modification données serveur
 
-    //this.httpClient.post<any>('https://wtf-api-v1.herokuapp.com/api/inscription', { 'email': mail, 'password' : mdp, 'nom': nom, 'prenom':prenom, 'telephone':telephone, 'pays':pays, 'genre' : genre, 'date_naissance':date_naissance});
+    //this.httpClient.post<any>('https://wtf-api-v1.herokuapp.com/api/profil/', { 'email': mail, 'password' : mdp, 'nom': nom, 'prenom':prenom, 'telephone':telephone, 'pays':pays, 'genre' : genre, 'date_naissance':date_naissance});
 
     // Modification localstorage user
     this.UtilisateurService.setUser(

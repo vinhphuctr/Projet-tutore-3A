@@ -30,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PipesModule} from './pipe/pipes.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 
 @NgModule({
@@ -69,10 +70,11 @@ import { TokenInterceptor } from './auth/token.interceptor';
   ],
   providers: [
     {
-      provide: HTTP_INTERCEPTORS,
+      provide: {HTTP_INTERCEPTORS},
       useClass: TokenInterceptor,
       multi: true
-    }
+    },
+      {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
   ],
   bootstrap: [AppComponent]
 })
