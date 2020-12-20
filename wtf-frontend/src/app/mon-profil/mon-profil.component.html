@@ -34,32 +34,12 @@
                             <input  matInput placeholder="Pays" type="text" formControlName="pays">
                           </mat-form-field>
                         </div>
-                    
+
                         <div class="col-md-4">
                           <mat-form-field class="example-full-width">
                             <input  matInput placeholder="Téléphone" type="text" formControlName="telephone">
                           </mat-form-field>
                         </div>
-<p>
-                        <mat-form-field appearance="fill">
-                          <mat-label>Genre</mat-label>
-                          <select matNativeControl required formControlName="genre">
-                            <option value="Femme">Femme</option>
-                            <option value="Homme">Homme</option>
-                            <option value="Indeterminé">Autre</option>
-                          </select>
-                      </mat-form-field>
-                  </p>
-                  <p>
-                  <mat-form-field appearance="fill">
-                    <mat-label>Votre date de naissance</mat-label>
-                    <input matInput placeholder="03/11/1999" formControlName="date_naissance" [matDatepicker]="picker">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                  </mat-form-field>
-                </p>
-                      
-
                       </div>
                       <button mat-raised-button type="submit" class="btn btn-danger pull-right">Modifier mes informations</button>
                       <div class="clearfix"></div>

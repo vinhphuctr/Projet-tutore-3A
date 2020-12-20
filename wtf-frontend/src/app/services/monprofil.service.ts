@@ -15,13 +15,13 @@ export class MonprofilService {
   modifyUser(user : Utilisateur) {
     //Appel API, modification données serveur
 
-    this.httpClient.put<any>('https://wtf-api-v1.herokuapp.com/api/profil/'+this.UtilisateurService.getId(), { 'email': user.email, 'nom': user.nom, 'prenom':user.prenom, 'telephone':user.telephone, 'pays':user.pays, 'genre' : user.genre, 'date_naissance':user.date_naissance})
+    this.httpClient.put<any>('https://wtf-api-v1.herokuapp.com/api/profil/'+this.UtilisateurService.getId(), { 'email': user.email, 'nom': user.nom, 'prenom':user.prenom, 'telephone':user.telephone, 'pays':user.pays})
     // Modification localstorage user
     .subscribe(res => {
       console.log(res);
   });
 
-  
+
     this.UtilisateurService.setUser(
       this.UtilisateurService.getId(),
       user.nom,

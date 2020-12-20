@@ -29,8 +29,6 @@ export class MonProfilComponent implements OnInit {
       nom: new FormControl(this.UtilisateurData.nom, [Validators.required]),
       pays: new FormControl(this.UtilisateurData.pays, [Validators.required]),
       telephone: new FormControl(this.UtilisateurData.telephone, [Validators.required]),
-      date_naissance: new FormControl(this.UtilisateurData.date_naissance, [Validators.required]),
-      genre: new FormControl(this.UtilisateurData.genre, [Validators.required]),
     })
   }
 
@@ -40,8 +38,6 @@ export class MonProfilComponent implements OnInit {
     this.UtilisateurData.nom = this.modifyUserForm.value["nom"];
     this.UtilisateurData.pays = this.modifyUserForm.value["pays"];
     this.UtilisateurData.telephone = this.modifyUserForm.value["telephone"];
-    this.UtilisateurData.date_naissance = this.modifyUserForm.value["date_naissance"];
-    this.UtilisateurData.genre = this.modifyUserForm.value["genre"];
     this.MonprofilService.modifyUser(this.UtilisateurData);
   }
 }
