@@ -12,8 +12,10 @@ export class MovieService {
 
   getMovie(id: number): Observable<Video> {
 
-    let url = "http://wtfilm-api.herokuapp.com/api/video/" + id;
-
+    let url = "https://wtf-api-v1.herokuapp.com/api/films/" + id;
+    this._httpClient.get<Video>(url).subscribe(res => {
+     console.log(res)
+  });
     return this._httpClient.get<Video>(url);
   }
 }

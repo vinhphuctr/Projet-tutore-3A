@@ -46,7 +46,6 @@ export class MovieComponent implements OnInit {
 
   ngAfterViewChecked(): void{
     this.checkIfFav(this.id);
-
   }
 
   getMovie():void{

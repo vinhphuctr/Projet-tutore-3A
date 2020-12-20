@@ -42,9 +42,9 @@ export class RechercheRapideComponent implements OnInit {
 
   checkIfFav(){
     this.tabResultat.forEach(item => {
-      if(this.FavorisService.checkIfFav(item.idVideo) == true){
+      if(this.FavorisService.checkIfFav(item.id_video) == true){
         console.log("passé");
-        let s = "fav_" + item.idVideo;
+        let s = "fav_" + item.id_video;
         document.getElementById(s).style.color = "red";
       }
     });

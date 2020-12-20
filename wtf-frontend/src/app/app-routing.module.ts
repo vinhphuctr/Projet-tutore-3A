@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: "inscription", component: InscriptionComponent },
   { path: "quisommesnous",  component: QuiSommesNousComponent , canActivate: [connexionService]},
   { path: "faq", component: FaqComponent , canActivate: [connexionService]},
-  {path: "video/:id", component:MovieComponent, canActivate: [connexionService]},
+  {path: "film/:id", component:MovieComponent, canActivate: [connexionService]},
   { path: "main",  component: MainComponent, canActivate:[connexionService] },
   { path: "monprofil", component: MonProfilComponent, canActivate:[connexionService] },
   { path: "mesfavoris", component: MesFavorisComponent, canActivate: [connexionService] },
