@@ -71,6 +71,6 @@
         </div>
     </div>
     <div mat-dialog-actions style="text-align: center; margin-top: 3%;" class="mb-1">
-        <button mat-raised-button (click)="inscription()"> S'inscrire </button>
+        <button mat-raised-button (click)="inscription()" [disabled]="!inscriptionForm.valid" > S'inscrire </button>
   </div>
 </form>
