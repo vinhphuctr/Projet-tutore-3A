@@ -27,7 +27,6 @@ import { MovieComponent } from './movie/movie.component';
 import { PrimengModule } from './primeng/primeng.module';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
-import { PipesModule} from './pipe/pipes.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
@@ -66,7 +65,6 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     PrimengModule,
     HttpClientModule,
     MatCheckboxModule,
-    PipesModule,
   ],
   providers: [
     {

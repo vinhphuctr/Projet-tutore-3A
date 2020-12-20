@@ -25,14 +25,14 @@
     <div style="width: 75%; height: 80%; float:right;">
       <h1>{{video?.titre | uppercase}} ({{video?.date_sortie | date:'yyyy'}})</h1>
       <div class="vignette">
-        <button class="button" mat-stroked-button disabled>{{video?.trailer |titlecase}}</button>
+        <button class="button" mat-stroked-button disabled>FILM</button>
       </div>
       <p></p>
-      <p><span class="purple">Durée : </span> En production</p>
+      <p><span class="purple">Durée : </span> {{time}}</p>
       <p><span class="purple">Date de sortie :</span> {{video?.date_sortie | date:'d/M/yyyy'}}</p>
       <p><span class="purple">Langue original : </span>{{video?.vo}}</p>
-      <p><span class="purple">Catégorie : </span> En production</p>
-      <p><span class="purple">Société de production : </span>{{video?.production}}</p>
+      <p style="margin-bottom: 0;"><span class="purple">Catégorie : </span><li *ngFor="let categorie of video?.categories"><p>{{categorie.libelle}}</p></li></p>
+      <p style="margin-bottom: 0;"><span class="purple">Société de production : </span><li class="cards_item" *ngFor="let prod of video?.productions"><p>{{prod.nom}} {{prod.logo}}</p></li></p>
       <p><span class="purple">Réalisateur: </span> En production</p>
       <p style="margin-bottom: 0;"><span class="purple">Stars : </span><li class="cards_item" *ngFor="let acteur of video?.acteurs"><p>{{acteur.prenom}} {{acteur.nom}}</p></li></p>
       <p><span class="purple">Synopsis : </span> {{video?.plot}}</p>
@@ -48,6 +48,8 @@
           </li>
         </ul>
         </div>
+        <!--
+        <div>
           <p><span class="purple">Nombre de saisons :</span> 5</p>
           <p><span class="purple">Nombre d'episodes :</span> 31</p>
           <p><span class="purple">Date de sortie :</span> {{video?.date_sortie | date:'d/M/yyyy'}}</p>
@@ -68,6 +70,8 @@
                 </div>
               </li>
             </ul>
+          </div>
+        -->
     <div style="width: 100%; height: 1%; clear:both"></div>
   </section>
 </div>

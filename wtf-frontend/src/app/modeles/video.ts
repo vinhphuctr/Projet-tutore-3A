@@ -13,7 +13,7 @@ export class Video {
     vo: string;
     scores: [];
     duree: String;
-    production:Array<Production>;
+    productions:Array<Production>;
     acteurs : Array<Personne>;
     plateformes : Array<Plateforme>;
     categories : Array<Categorie>;

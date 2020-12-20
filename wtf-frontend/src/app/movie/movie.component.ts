@@ -21,6 +21,7 @@ export class MovieComponent implements OnInit {
   isTrailer : boolean = false;
   starVisible : boolean = true;
   id : number;
+  time : string;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +47,9 @@ export class MovieComponent implements OnInit {
 
   ngAfterViewChecked(): void{
     this.checkIfFav(this.id);
+    this.formatLabel(Number(this.video.duree));
   }
+
 
   getMovie():void{
       this._movieService.getMovie(this.id)
@@ -91,6 +94,16 @@ export class MovieComponent implements OnInit {
 
   showHide() {
     this.starVisible = !this.starVisible;
+  }
+
+  formatLabel(value: number) {
+    if (value < 60){
+      this.time = value + "min"
+    }
+    if(value % 60 == 0){
+    this.time = value / 60 + "h"
+    }
+    this.time = (value / 60).toFixed(1).slice(0,1)+ "h" + value % 60 + "min"
   }
 }
 
