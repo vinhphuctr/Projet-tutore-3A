@@ -42,16 +42,28 @@ export class connexionService implements CanActivate {
   }
 
   isAuthenticated() {
-    if (localStorage.getItem('token') != undefined && this.isLoggedIn() ) {
-      return true;
+    if (localStorage.getItem('token') != undefined) {
+      if(this.isLoggedIn()){
+        return true;
+      }
+      else {
+        console.log("token expiré");
+        this.refreshToken();
+      }
     } else {
       return false
     }
   }
 
-  public isLoggedIn() {
+  isLoggedIn() {
     return moment().isBefore(this.getExpiration());
   }
+
+  refreshToken(){
+    this.httpClient.post<any>('https://wtf-api-v1.herokuapp.com/api/api-token-refresh/', { 'token': this._utilisateurService.getToken()}).subscribe(res => {
+      this._utilisateurService.updateToken(res.token);
+  });
+}
 
   getExpiration() {
     const expiration = localStorage.getItem("expire_at");
@@ -63,6 +75,7 @@ export class connexionService implements CanActivate {
     this._utilisateurService.clearUser();
     this.router.navigate(['/']);
   }
+
 
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {

@@ -29,7 +29,6 @@ export class InscriptionService {
     let genre = loginForm.value["genre"];
     let telephone = loginForm.value["telephone"];
     let pays = loginForm.value["pays"];
-    console.log(genre);
 
     // Appel API
 

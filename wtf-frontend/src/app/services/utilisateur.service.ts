@@ -37,4 +37,8 @@ export class UtilisateurService {
   getToken(){
     return localStorage.getItem('token');
   }
+
+  updateToken(token: string){
+    localStorage.setItem('token', token);
+  }
 }

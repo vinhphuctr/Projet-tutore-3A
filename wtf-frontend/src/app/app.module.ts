@@ -28,6 +28,8 @@ import { PrimengModule } from './primeng/primeng.module';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
 import { PipesModule} from './pipe/pipes.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './auth/token.interceptor';
 
 
 @NgModule({
@@ -65,7 +67,13 @@ import { PipesModule} from './pipe/pipes.module';
     MatCheckboxModule,
     PipesModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
