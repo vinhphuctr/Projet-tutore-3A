@@ -3,7 +3,7 @@
   <section class="container" style="padding-top: 3%;">
     <div style="width: 22%; height: 80%; float:left;">
       <div class="d" style="position: relative; text-align: center;">
-        <img src="{{video?.poster}}">
+        <img src="http://image.tmdb.org/t/p/w780/{{video?.poster}}">
        </div>
        <div style="position: relative; text-align: center; margin-top: 10px;">
         <button [id]="'fav_' + video?.id_video " (click)="addFav(video.id_video)"  mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
@@ -32,7 +32,7 @@
       <p><span class="purple">Date de sortie :</span> {{video?.date_sortie | date:'d/M/yyyy'}}</p>
       <p><span class="purple">Langue original : </span>{{video?.vo}}</p>
       <p style="margin-bottom: 0;"><span class="purple">Catégorie : </span><li *ngFor="let categorie of video?.categories"><p>{{categorie.libelle}}</p></li></p>
-      <p style="margin-bottom: 0;"><span class="purple">Société de production : </span><li class="cards_item" *ngFor="let prod of video?.productions"><p>{{prod.nom}} {{prod.logo}}</p></li></p>
+      <p style="margin-bottom: 0;"><span class="purple">Société de production : </span><li class="cards_item" *ngFor="let prod of video?.productions"><p>{{prod.nom}}</p><img src="http://image.tmdb.org/t/p/w780/{{prod?.logo}}"></li></p>
       <p><span class="purple">Réalisateur: </span> En production</p>
       <p style="margin-bottom: 0;"><span class="purple">Stars : </span><li class="cards_item" *ngFor="let acteur of video?.acteurs"><p>{{acteur.prenom}} {{acteur.nom}}</p></li></p>
       <p><span class="purple">Synopsis : </span> {{video?.plot}}</p>
@@ -41,7 +41,7 @@
           <li class="cards_item" *ngFor="let plateforme of video?.plateformes">
             <div class="card">
               <div class="card_content">
-                <button (click)="redirectUrl(plateforme.redirection)" mat-stroked-button><img src="{{plateforme?.logo}}">
+                <button (click)="redirectUrl(plateforme.redirection)" mat-stroked-button><img src="http://image.tmdb.org/t/p/w780/{{plateforme?.logo}}">
                 </button>
               </div>
             </div>
