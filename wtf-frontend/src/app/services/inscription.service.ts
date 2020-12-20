@@ -21,13 +21,24 @@ export class InscriptionService {
 
   inscription(loginForm: any)  {
 
+    let mail = loginForm.value["email"];
+    let mdp = loginForm.value["password"];
+    let nom = loginForm.value["nom"];
+    let prenom = loginForm.value["prenom"];
+    let date_naissance = loginForm.value["date_naissance"];
+    let genre = loginForm.value["genre"];
+    let telephone = loginForm.value["telephone"];
+    let pays = loginForm.value["pays"];
+    console.log(genre);
+
     // Appel API
-    this.httpClient.post<any>('https://wtf-api-v1.herokuapp.com/api/inscription', { 'email': loginForm.value["email"], 'password' : loginForm.value["password"], 'nom': loginForm.value["nom"], 'prenom':loginForm.value["prenom"], 'telephone':loginForm.value["telephone"], 'pays':loginForm.value["pays"], 'genre' : loginForm.value["genre"], 'date_naissance':loginForm.value["date_naissance"]}).subscribe(res => {
-      if(res.email == loginForm.value["email"] && res.password == loginForm.value["password"]){
+
+    this.httpClient.post<any>('https://wtf-api-v1.herokuapp.com/api/inscription', { 'email': mail, 'password' : mdp, 'nom': nom, 'prenom':prenom, 'telephone':telephone, 'pays':pays, 'genre' : genre, 'date_naissance':date_naissance}).subscribe(res => {
+      if(res.email == mail){
         // Inscription réussi
         let connexionForm = new FormGroup({
-          email: new FormControl(loginForm.value["email"]),
-          password: new FormControl(loginForm.value["password"])
+          email: new FormControl(mail),
+          password: new FormControl(mdp)
         })
         this.connexionService.connexion(connexionForm);
       }
