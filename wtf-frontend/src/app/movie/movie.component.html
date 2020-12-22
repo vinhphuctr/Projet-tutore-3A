@@ -31,10 +31,10 @@
       <p><span class="purple">Durée : </span> {{time}}</p>
       <p><span class="purple">Date de sortie :</span> {{video?.date_sortie | date:'d/M/yyyy'}}</p>
       <p><span class="purple">Langue original : </span>{{video?.vo}}</p>
-      <p style="margin-bottom: 0;"><span class="purple">Catégorie : </span><li *ngFor="let categorie of video?.categories"><p>{{categorie.libelle}}</p></li></p>
-      <p style="margin-bottom: 0;"><span class="purple">Société de production : </span><li class="cards_item" *ngFor="let prod of video?.productions"><p>{{prod.nom}}</p><img src="http://image.tmdb.org/t/p/w780/{{prod?.logo}}"></li></p>
+      <p><span class="purple">Catégorie : </span><span *ngFor="let categorie of video?.categories"> {{categorie.libelle}},</span></p>
+      <p><span class="purple">Société de production : </span><span *ngFor="let prod of video?.productions"> {{prod.nom}},</span></p>
       <p><span class="purple">Réalisateur: </span> En production</p>
-      <p style="margin-bottom: 0;"><span class="purple">Stars : </span><li class="cards_item" *ngFor="let acteur of video?.acteurs"><p>{{acteur.prenom}} {{acteur.nom}}</p></li></p>
+      <p><span class="purple">Stars : </span><li class="cards_item" *ngFor="let acteur of video?.acteurs"><p>{{acteur.prenom}} {{acteur.nom}}</p></li></p>
       <p><span class="purple">Synopsis : </span> {{video?.plot}}</p>
       <p style="margin-top: 3%">
         <ul class="cards">
