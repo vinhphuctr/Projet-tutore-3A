@@ -31,6 +31,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MinuteSecondsPipe } from './helpers/MinuteSecondsPipe';
+import { SerieComponent } from './serie/serie.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { MinuteSecondsPipe } from './helpers/MinuteSecondsPipe';
     MainComponent,
     RechercheRapideComponent,
     MovieComponent,
-    MinuteSecondsPipe
+    MinuteSecondsPipe,
+    SerieComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +68,7 @@ import { MinuteSecondsPipe } from './helpers/MinuteSecondsPipe';
     FlexLayoutModule,
     PrimengModule,
     HttpClientModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ],
   providers: [
     {
