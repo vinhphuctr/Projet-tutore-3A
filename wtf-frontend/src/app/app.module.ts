@@ -30,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MinuteSecondsPipe } from './helpers/MinuteSecondsPipe';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     MainComponent,
     RechercheRapideComponent,
     MovieComponent,
+    MinuteSecondsPipe
   ],
   imports: [
     BrowserModule,
@@ -64,15 +66,14 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     FlexLayoutModule,
     PrimengModule,
     HttpClientModule,
-    MatCheckboxModule,
+    MatCheckboxModule
   ],
   providers: [
     {
-      provide: {HTTP_INTERCEPTORS},
+      provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true
-    },
-      {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+    }
   ],
   bootstrap: [AppComponent]
 })

@@ -4,18 +4,35 @@ import { UtilisateurService } from '../services/utilisateur.service';
 import { CanActivate, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import * as moment from "moment";
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Utilisateur } from '../modeles/utilisateur';
 
 @Injectable()
 export class connexionService implements CanActivate {
 
-  resultatConnexion : any;
+  resultatConnexion: any;
+  private currentUserSubject: BehaviorSubject<any>;
+  public currentUser: Observable<any>;
+  private currentTokenSubject: BehaviorSubject<string>;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private _utilisateurService : UtilisateurService,
     private httpClient: HttpClient
-  ) { }
+  ) {
+    this.currentUserSubject = new BehaviorSubject<Utilisateur>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUser = this.currentUserSubject.asObservable();
+    this.currentTokenSubject = new BehaviorSubject<string>(localStorage.getItem('token'));
+  }
+
+  getCurrentUser() {
+    return this.currentUserSubject.value;
+  }
+
+  getCurrentToken() {
+    return this.currentTokenSubject.value;
+  }
 
 
   connexion(loginForm: any)  {
@@ -25,7 +42,7 @@ export class connexionService implements CanActivate {
 
     // Appel API
 
-    this.httpClient.post<any>('https://wtf-api-v1.herokuapp.com/api/api-token-auth/', { 'email': identifiant, 'password' : mdp}).subscribe(res => {
+    this.httpClient.post<any>('https://wtf-api-v1.herokuapp.com/api-token-auth/', { 'email': identifiant, 'password' : mdp}).subscribe(res => {
       if(res.token != null){
         console.log(res);
         this._utilisateurService.setUser(res.user.id,res.user.prenom, res.user.nom,res.user.email,res.user.pays,res.user.telephone, res.date_naissance, res.token);

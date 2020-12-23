@@ -6,36 +6,54 @@ import { Utilisateur } from '../modeles/utilisateur';
 import {MovieService} from '../services/movie.service';
 import { FavorisService } from '../services/favoris.service';
 import { UtilisateurService } from '../services/utilisateur.service';
+import { Note } from '../modeles/note';
+import { MinuteSecondsPipe } from '../helpers/MinuteSecondsPipe';
+import { RatingService } from '../services/rating-service.service';
 
 
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
-  styleUrls: ['./movie.component.css']
+  styleUrls: ['./movie.component.css'],
 })
 export class MovieComponent implements OnInit {
 
-  ratingValue: number = 3;
   video : Video;
-  UtilisateurData: Utilisateur;
   isTrailer : boolean = false;
   starVisible : boolean = true;
   id : number;
-  time : string;
+  time: string;
+  actualRating: Note;
+  UtilisateurData: Utilisateur;
 
   constructor(
     private route: ActivatedRoute,
     private _location: Location,
     private _movieService: MovieService,
     private FavorisService: FavorisService,
-    private utilisateurService : UtilisateurService,
+    private utilisateurService: UtilisateurService,
+    private _ratingService: RatingService
   ) {
   }
 
   ngOnInit(): void {
     this.id = +this.route.snapshot.paramMap.get('id');
-    this.getMovie();
-    this.UtilisateurData = this.utilisateurService.getUser();
+    this._movieService.getMovie(this.id).subscribe((video: Video) => {
+      this.video = video;
+      if (this.video.rates.length === 0) {
+        this.actualRating = {
+          id: null,
+          user: 1,
+          note: 0,
+          film: this.video.id_video
+        }
+      } else {
+        this.actualRating = this.video.rates[0];
+      }
+    });
+
+    
+
   }
 
   ngOnChanges() : void{
@@ -45,25 +63,31 @@ export class MovieComponent implements OnInit {
   }
 
 
-  ngAfterViewChecked(): void{
+  /*ngAfterViewChecked(): void{
     this.checkIfFav(this.id);
     this.formatLabel(Number(this.video.duree));
-  }
+  }*/
 
 
-  getMovie():void{
+  /*getMovie():void{
       this._movieService.getMovie(this.id)
         .subscribe(video => this.video = video);
-    }
+    }*/
 
   goBack(): void {
     this._location.back();
   }
 
   postRate(event, item) {
-    console.log(event.value);
-    console.log(item);
-    this.showHide();
+    this.actualRating.film = this.video.id_video;
+    if (this.actualRating.id == null) {
+      this._ratingService.postRating(this.actualRating).subscribe(rate => {
+      });
+    } else {
+      this._ratingService.putRating(this.actualRating).subscribe(rate => {
+        rate.film = this.video.id_video;
+      })
+    }
   }
 
   redirectUrl(trailer){

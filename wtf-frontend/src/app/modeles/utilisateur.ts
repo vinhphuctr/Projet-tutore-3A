@@ -1,6 +1,6 @@
 export class Utilisateur {
 
-  id_utilisateur: number;
+  id: number;
   nom: string;
   prenom: string;
   date_inscription: string;
@@ -10,4 +10,5 @@ export class Utilisateur {
   genre: string;
   telephone: string;
   pays: string;
+
 }

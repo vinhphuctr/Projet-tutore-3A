@@ -1,6 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\mes-favoris",
+    "\\src\\app\\modeles",
+    "\\src\\app\\services"
   ],
+  "SelectedNode": "\\angular.json",
   "PreviewInSolutionExplorer": false
 }
