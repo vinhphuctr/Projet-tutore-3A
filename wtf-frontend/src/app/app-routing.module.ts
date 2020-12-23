@@ -11,6 +11,7 @@ import { MesFavorisComponent } from './mes-favoris/mes-favoris.component';
 import { connexionService } from './services/connexion.service';
 import { RechercheRapideComponent } from './recherche-rapide/recherche-rapide.component';
 import { MovieComponent } from './movie/movie.component';
+import { SerieComponent } from './serie/serie.component';
 
 
 
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: "quisommesnous",  component: QuiSommesNousComponent , canActivate: [connexionService]},
   { path: "faq", component: FaqComponent , canActivate: [connexionService]},
   {path: "film/:id", component:MovieComponent, canActivate: [connexionService]},
+  {path: "serie/:id", component:SerieComponent, canActivate: [connexionService]},
   { path: "main",  component: MainComponent, canActivate:[connexionService] },
   { path: "monprofil", component: MonProfilComponent, canActivate:[connexionService] },
   { path: "mesfavoris", component: MesFavorisComponent, canActivate: [connexionService] },

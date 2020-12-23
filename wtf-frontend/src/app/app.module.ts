@@ -30,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { SerieComponent } from './serie/serie.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     MainComponent,
     RechercheRapideComponent,
     MovieComponent,
+    SerieComponent,
   ],
   imports: [
     BrowserModule,
