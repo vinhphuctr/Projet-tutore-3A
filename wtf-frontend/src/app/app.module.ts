@@ -32,6 +32,7 @@ import { TokenInterceptor } from './auth/token.interceptor';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MinuteSecondsPipe } from './helpers/MinuteSecondsPipe';
 import { SerieComponent } from './serie/serie.component';
+import { SaisonComponent } from './saison/saison.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { SerieComponent } from './serie/serie.component';
     RechercheRapideComponent,
     MovieComponent,
     MinuteSecondsPipe,
-    SerieComponent
+    SerieComponent,
+    SaisonComponent
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Serie } from '../modeles/serie';
 import { Observable } from 'rxjs';
+import { connexionService } from './connexion.service';
+import { map, filter } from 'rxjs/operators';
 
 
 
@@ -10,14 +12,18 @@ import { Observable } from 'rxjs';
 })
 export class SerieService {
 
-  constructor(private _httpClient : HttpClient) {
+  constructor(private _httpClient: HttpClient, private _connexionService: connexionService) {
   }
   getSerie(id: number): Observable<Serie> {
-
     let url = "https://wtf-api-v1.herokuapp.com/api/series/" + id;
-    this._httpClient.get<Serie>(url).subscribe(res => {
-     console.log(res)
-  });
-    return this._httpClient.get<Serie>(url);
+    return this._httpClient.get<Serie>(url)
+      /*.pipe(map(res => {
+        res.rates = res.rates.filter(rate => {
+          return rate.user === this._connexionService.getCurrentUser().id;
+        })
+        return res
+      }));*/
   }
+
+
 }

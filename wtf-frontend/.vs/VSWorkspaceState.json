@@ -3,10 +3,12 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\mes-favoris",
     "\\src\\app\\modeles",
-    "\\src\\app\\services"
+    "\\src\\app\\saison",
+    "\\src\\app\\serie",
+    "\\src\\app\\services",
+    "\\src\\assets"
   ],
-  "SelectedNode": "\\angular.json",
+  "SelectedNode": "\\src\\app\\saison\\saison.component.css",
   "PreviewInSolutionExplorer": false
 }

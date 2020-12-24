@@ -23,32 +23,48 @@
     </div>
     <div style="width: 4%; height: 80%; float:left;"></div>
     <div style="width: 75%; height: 80%; float:right;">
-      <h1>{{serie?.titre | uppercase}} ({{serie?.date_sortie | date:'yyyy'}})</h1>
+    <h1> {{serie?.titre | uppercase}} ({{serie?.date_sortie | date:'yyyy'}})</h1>
       <div class="vignette">
         <button class="button" mat-stroked-button disabled>SERIE</button>
       </div>
       <p></p>
-          <p><span class="purple">Nombre de saisons :</span> 5</p>
-          <p><span class="purple">Nombre d'episodes :</span> 31</p>
-          <p><span class="purple">Date de sortie :</span> {{serie?.date_sortie | date:'d/M/yyyy'}}</p>
-          <p><span class="purple">Langue original : </span>{{serie?.vo}}</p>
-          <p><span class="purple">Catégorie : </span> En production</p>
-          <p><span class="purple">Société de production : </span>{{serie?.productions}}</p>
-          <p><span class="purple">Réalisateur: </span> En production</p>
-          <p style="margin-bottom: 0;"><span class="purple">Stars : </span><li class="cards_item" *ngFor="let acteur of serie?.acteurs"><p>{{acteur.prenom}} {{acteur.nom}}</p></li></p>
-          <p><span class="purple">Synopsis : </span>{{serie?.plot}}</p>
-          <p style="margin-top: 3%">
-            <ul class="cards">
-              <li class="cards_item" *ngFor="let plateforme of serie?.plateformes">
-                <div class="card">
-                  <div class="card_content">
-                    <button (click)="redirectUrl(plateforme.redirection)" mat-stroked-button><img src="{{plateforme?.logo}}">
-                    </button>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
+      <p><span class="purple">Nombre de saisons :</span> {{serie?.nb_saison}}</p>
+
+
+      -- Julie (il faut que Vinh vérifie) --
+    
+
+
+      <ul>
+        <li *ngFor="let item of serie?.saisons">
+          <a id="link" href="serie/{{serie?.id_video}}/{{item.num_saison}}" ng-click="value = 1"> {{item.nom}} </a>
+        </li>
+      </ul>
+
+
+
+
+      <p><span class="purple">Nombre d'episodes :</span> 31</p>
+      <p><span class="purple">Date de sortie :</span> {{serie?.date_sortie | date:'d/M/yyyy'}}</p>
+      <p><span class="purple">Langue original : </span>{{serie?.vo}}</p>
+      <p><span class="purple">Catégorie : </span> En production</p>
+      <p><span class="purple">Société de production : </span>{{serie?.productions}}</p>
+      <p><span class="purple">Réalisateur: </span> En production</p>
+      <p style="margin-bottom: 0;"><span class="purple">Stars : </span><li class="cards_item" *ngFor="let acteur of serie?.acteurs"><p>{{acteur.prenom}} {{acteur.nom}}</p></li></p>
+      <p><span class="purple">Synopsis : </span>{{serie?.plot}}</p>
+      <p style="margin-top: 3%">
+        <ul class="cards">
+          <li class="cards_item" *ngFor="let plateforme of serie?.plateformes">
+            <div class="card">
+              <div class="card_content">
+                <button (click)="redirectUrl(plateforme.redirection)" mat-stroked-button>
+                  <img src="{{plateforme?.logo}}">
+                </button>
+              </div>
+            </div>
+          </li>
+        </ul>
+    </div>
 
     <div style="width: 100%; height: 1%; clear:both"></div>
   </section>
