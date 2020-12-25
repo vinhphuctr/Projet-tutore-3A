@@ -5,9 +5,7 @@ import { Video } from '../modeles/video';
 import { Utilisateur } from '../modeles/utilisateur';
 import {MovieService} from '../services/movie.service';
 import { FavorisService } from '../services/favoris.service';
-import { UtilisateurService } from '../services/utilisateur.service';
 import { Note } from '../modeles/note';
-import { MinuteSecondsPipe } from '../helpers/MinuteSecondsPipe';
 import { RatingService } from '../services/rating-service.service';
 
 
@@ -31,7 +29,6 @@ export class MovieComponent implements OnInit {
     private _location: Location,
     private _movieService: MovieService,
     private FavorisService: FavorisService,
-    private utilisateurService: UtilisateurService,
     private _ratingService: RatingService
   ) {
   }
@@ -52,7 +49,7 @@ export class MovieComponent implements OnInit {
       }
     });
 
-    
+
 
   }
 

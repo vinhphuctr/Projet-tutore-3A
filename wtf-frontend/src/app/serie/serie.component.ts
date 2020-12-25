@@ -7,10 +7,7 @@ import { SerieService} from '../services/serie.service';
 import { FavorisService } from '../services/favoris.service';
 import { UtilisateurService } from '../services/utilisateur.service';
 import { Note } from '../modeles/note';
-import { MinuteSecondsPipe } from '../helpers/MinuteSecondsPipe';
 import { RatingService } from '../services/rating-service.service';
-
-import { BrowserModule } from '@angular/platform-browser'; 
 
 @Component({
   selector: 'app-serie',
@@ -37,37 +34,37 @@ export class SerieComponent implements OnInit {
   ngOnInit(): void {
     this.id = +this.route.snapshot.paramMap.get('id');
     this._serieService.getSerie(this.id).subscribe((serie: Serie) => {
-      
+
       this.getSerie();
-      
+
       this.serie = serie;
-      
+
       this.UtilisateurData = this.utilisateurService.getUser();
-      
+
       if (this.serie.rates.length === 0) {
-        
+
         this.actualRating = {
-          
+
           id: null,
-    
+
           user: 1,
-         
+
           note: 0,
-         
+
           film: this.serie.id_serie // voir avec Alexis, pas encore implémenter
         }
-       
-      } else {
-       
-        this.actualRating = this.serie.rates[0];
-        
-      }
-     
-    });
-   
-   
 
-   
+      } else {
+
+        this.actualRating = this.serie.rates[0];
+
+      }
+
+    });
+
+
+
+
 
   }
 
