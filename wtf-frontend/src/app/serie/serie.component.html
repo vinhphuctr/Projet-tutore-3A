@@ -32,7 +32,7 @@
 
 
       -- Julie (il faut que Vinh vérifie) --
-    
+
 
 
       <ul>
@@ -47,10 +47,10 @@
       <p><span class="purple">Nombre d'episodes :</span> 31</p>
       <p><span class="purple">Date de sortie :</span> {{serie?.date_sortie | date:'d/M/yyyy'}}</p>
       <p><span class="purple">Langue original : </span>{{serie?.vo}}</p>
-      <p><span class="purple">Catégorie : </span> En production</p>
-      <p><span class="purple">Société de production : </span>{{serie?.productions}}</p>
+      <p><span class="purple">Catégorie : </span><span *ngFor="let categorie of serie?.categories"> {{categorie.libelle}}<span *ngIf="categorie != serie?.categories[serie.categories.length - 1]">,</span></span></p>
+      <p><span class="purple">Société de production : </span><span *ngFor="let prod of serie?.productions"> {{prod.nom}}<span *ngIf="prod != serie?.productions[serie.productions.length - 1]">,</span></span></p>
       <p><span class="purple">Réalisateur: </span> En production</p>
-      <p style="margin-bottom: 0;"><span class="purple">Stars : </span><li class="cards_item" *ngFor="let acteur of serie?.acteurs"><p>{{acteur.prenom}} {{acteur.nom}}</p></li></p>
+      <p><span class="purple">Stars : </span><span *ngFor="let acteur of serie?.acteurs"> {{acteur.prenom}} {{acteur.nom}} <span *ngIf="acteur != serie?.acteurs[serie.acteurs.length - 1]">,</span></span></p>
       <p><span class="purple">Synopsis : </span>{{serie?.plot}}</p>
       <p style="margin-top: 3%">
         <ul class="cards">
