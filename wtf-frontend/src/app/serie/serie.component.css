@@ -124,3 +124,34 @@ h1{
   background-color: rgb(93,84,164);
   color: white;
 }
+
+
+mat-expansion-panel{
+  width: 30%;
+  margin-top: 16px;
+}
+
+mat-expansion-panel-header{
+  background-color: rgb(93,84,164);
+  height: auto;
+}
+
+h2{
+  font-size: 18px;
+  color: white;
+  padding-top:6px;
+}
+
+.disable_ripple{
+  background: rgb(93,84,164) !important;
+  }
+
+  .accordion {
+    padding-top: 20px;
+  }
+
+  a{
+    text-decoration: none;
+    color:black;
+    font-size: 12px;
+  }

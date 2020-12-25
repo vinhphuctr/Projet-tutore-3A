@@ -29,20 +29,18 @@
       </div>
       <p></p>
       <p><span class="purple">Nombre de saisons :</span> {{serie?.nb_saison}}</p>
-
-
-      -- Julie (il faut que Vinh vérifie) --
-
-
-
-      <ul>
-        <li *ngFor="let item of serie?.saisons">
-          <a id="link" href="serie/{{serie?.id_video}}/{{item.num_saison}}" ng-click="value = 1"> {{item.nom}} </a>
-        </li>
-      </ul>
-
-
-
+      <div style="padding-bottom: 20px;">
+      <mat-accordion>
+            <mat-expansion-panel *ngFor="let item of serie?.saisons">
+              <mat-expansion-panel-header class="disable_ripple">
+                <h2>
+                  {{item.nom}}
+                </h2>
+              </mat-expansion-panel-header>
+              <p class="accordion">WhatTheFilm propose une recommandation de trois films/séries en fonction des tendances du moment ou des intérêts de l'utilisateur</p>
+            </mat-expansion-panel>
+      </mat-accordion>
+      </div>
 
       <p><span class="purple">Nombre d'episodes :</span> 31</p>
       <p><span class="purple">Date de sortie :</span> {{serie?.date_sortie | date:'d/M/yyyy'}}</p>
