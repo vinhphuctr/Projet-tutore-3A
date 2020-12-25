@@ -40,5 +40,7 @@ export class UtilisateurService {
 
   updateToken(token: string){
     localStorage.setItem('token', token);
+    const expire_at  = moment().add(1, 'hour');
+    localStorage.setItem('expire_at', JSON.stringify(expire_at.valueOf()));
   }
 }

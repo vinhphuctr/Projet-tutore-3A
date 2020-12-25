@@ -44,7 +44,6 @@ export class connexionService implements CanActivate {
 
     this.httpClient.post<any>('https://wtf-api-v1.herokuapp.com/api/api-token-auth/', { 'email': identifiant, 'password' : mdp}).subscribe(res => {
       if(res.token != null){
-        console.log(res);
         this._utilisateurService.setUser(res.user.id,res.user.prenom, res.user.nom,res.user.email,res.user.pays,res.user.telephone, res.date_naissance, res.token);
          // On récupère l'url de redirection
          const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/main';
@@ -64,7 +63,6 @@ export class connexionService implements CanActivate {
         return true;
       }
       else {
-        console.log("token expiré");
         this.refreshToken();
       }
     } else {

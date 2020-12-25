@@ -14,7 +14,7 @@ export class MovieService {
 
   getMovie(id: number): Observable<Video> {
 
-    let url = "https://wtf-api-v1.herokuapp.com//films/" + id.toString();
+    let url = "https://wtf-api-v1.herokuapp.com/api/films/" + id.toString();
     return this._httpClient.get<Video>(url)
       .pipe(map(res => {
         res.rates = res.rates.filter(rate => {

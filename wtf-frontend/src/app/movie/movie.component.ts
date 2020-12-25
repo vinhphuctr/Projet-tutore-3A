@@ -48,9 +48,6 @@ export class MovieComponent implements OnInit {
         this.actualRating = this.video.rates[0];
       }
     });
-
-
-
   }
 
   ngOnChanges() : void{
