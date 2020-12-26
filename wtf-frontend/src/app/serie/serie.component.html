@@ -24,7 +24,7 @@
           </mat-expansion-panel-header>
           <p class="accordion">Nombre d'épisodes : {{ item.nb_episode}}</p>
           <p>
-            <p-rating [iconOnStyle]="{'color':'rgb(93,84,164)'}" [(ngModel)]="maNoteTemporaire" [cancel]="false" (onRate)="postRate($event, item)"></p-rating>
+            <p-rating [iconOnStyle]="{'color':'rgb(93,84,164)'}" [(ngModel)]="actualRating[item.id_saison].note" [cancel]="false" (onRate)="postRate($event, item)"></p-rating>
           </p>
         </mat-expansion-panel>
   </mat-accordion>

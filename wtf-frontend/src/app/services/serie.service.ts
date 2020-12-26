@@ -17,12 +17,16 @@ export class SerieService {
   getSerie(id: number): Observable<Serie> {
     let url = "https://wtf-api-v1.herokuapp.com/api/series/" + id;
     return this._httpClient.get<Serie>(url)
-      /*.pipe(map(res => {
-        res.rates = res.rates.filter(rate => {
-          return rate.user === this._connexionService.getCurrentUser().id;
-        })
+      .pipe(map(res => {
+        for (let saison of res.saisons) {
+         saison.rates = saison.rates.filter(rate => {
+            return rate.user === this._connexionService.getCurrentUser().id;
+          })
+        }
+        console.log(res); 
+
         return res
-      }));*/
+      }));
   }
 
 

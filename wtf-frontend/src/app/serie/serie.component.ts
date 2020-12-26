@@ -23,7 +23,7 @@ export class SerieComponent implements OnInit {
   id : number;
   time: string;
   maNoteTemporaire: number = 3;
-  actualRating : Note;
+  actualRating : Array<Note>;
   nbrEpisodesTotal : number = 0;
 
   constructor( private route: ActivatedRoute,
@@ -33,6 +33,8 @@ export class SerieComponent implements OnInit {
     private utilisateurService: UtilisateurService, private _ratingService: RatingService) { }
 
   ngOnInit(): void {
+
+
     this.id = +this.route.snapshot.paramMap.get('id');
     this._serieService.getSerie(this.id).subscribe((serie: Serie) => {
 
@@ -44,30 +46,51 @@ export class SerieComponent implements OnInit {
 
       for(let saison of this.serie.saisons){
         this.nbrEpisodesTotal += Number(saison.nb_episode);
-      }
+        if (saison.rates.length === 0) {
+          console.log('julie'); 
 
-      if (this.serie.rates.length === 0) {
+          /*this.actualRating[saison.id_saison] = {
 
-        this.actualRating = {
+            id: null,
 
-          id: null,
+            user: 1,
 
-          user: 1,
+            note: 0,
 
-          note: 0,
+            film: this.serie.id_serie
+          };*/
 
-          film: this.serie.id_serie // voir avec Alexis, pas encore implémenter
+          this.actualRating[0] = { id: null, user: 1, note: 0, film:5 }; 
+
+          console.log("julie h"); 
+
+          console.log(this.actualRating[saison.id_saison]); 
+        } else {
+
+          console.log('hua'); 
+          this.actualRating[saison.id_saison] = this.serie.rates[0];
         }
-      } else {
-        this.actualRating = this.serie.rates[0];
+        
+
       }
+
+      
+
+     
     });
+
+    
   }
 
   ngOnChanges() : void{
     if(this.serie.trailer !== "null"){
       this.isTrailer = true;
     }
+  }
+
+
+  ngAfterViewChecked(): void {
+    console.log(this.actualRating);
   }
 
 
@@ -86,7 +109,7 @@ export class SerieComponent implements OnInit {
     this._location.back();
   }
 
-  postRate(event, item) {
+  /*postRate(event, item) {
     this.actualRating.film = this.serie.id_serie;
     console.log(item);
     if (this.actualRating.id == null) {
@@ -98,7 +121,7 @@ export class SerieComponent implements OnInit {
         rate.film = this.serie.id_serie;
       })
     }
-  }
+  }*/
 
   redirectUrl(trailer){
     window.open(trailer);

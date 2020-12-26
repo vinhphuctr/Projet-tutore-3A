@@ -4,11 +4,11 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\modeles",
-    "\\src\\app\\saison",
+    "\\src\\app\\movie",
     "\\src\\app\\serie",
     "\\src\\app\\services",
     "\\src\\assets"
   ],
-  "SelectedNode": "\\src\\app\\saison\\saison.component.css",
+  "SelectedNode": "\\src\\app\\modeles\\serie.ts",
   "PreviewInSolutionExplorer": false
 }
