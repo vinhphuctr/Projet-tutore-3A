@@ -23,7 +23,7 @@ export class SerieComponent implements OnInit {
   id : number;
   time: string;
   maNoteTemporaire: number = 3;
-  actualRating : Array<Note>;
+  actualRating : Array<Note> = [];
   nbrEpisodesTotal : number = 0;
 
   constructor( private route: ActivatedRoute,
@@ -37,49 +37,23 @@ export class SerieComponent implements OnInit {
 
     this.id = +this.route.snapshot.paramMap.get('id');
     this._serieService.getSerie(this.id).subscribe((serie: Serie) => {
-
       this.getSerie();
-
       this.serie = serie;
-
       this.UtilisateurData = this.utilisateurService.getUser();
-
       for(let saison of this.serie.saisons){
         this.nbrEpisodesTotal += Number(saison.nb_episode);
         if (saison.rates.length === 0) {
-          console.log('julie'); 
-
-          /*this.actualRating[saison.id_saison] = {
-
+          this.actualRating[saison.id_saison] = {
             id: null,
-
             user: 1,
-
             note: 0,
-
             film: this.serie.id_serie
-          };*/
-
-          this.actualRating[0] = { id: null, user: 1, note: 0, film:5 }; 
-
-          console.log("julie h"); 
-
-          console.log(this.actualRating[saison.id_saison]); 
+          };
         } else {
-
-          console.log('hua'); 
           this.actualRating[saison.id_saison] = this.serie.rates[0];
         }
-        
-
       }
-
-      
-
-     
     });
-
-    
   }
 
   ngOnChanges() : void{
@@ -87,12 +61,6 @@ export class SerieComponent implements OnInit {
       this.isTrailer = true;
     }
   }
-
-
-  ngAfterViewChecked(): void {
-    console.log(this.actualRating);
-  }
-
 
 /*  ngAfterViewChecked(): void{
     this.checkIfFav(this.id);
@@ -109,19 +77,19 @@ export class SerieComponent implements OnInit {
     this._location.back();
   }
 
-  /*postRate(event, item) {
-    this.actualRating.film = this.serie.id_serie;
+  postRate(event, item) {
+    this.actualRating[item.id_saison].film = this.serie.id_serie;
     console.log(item);
-    if (this.actualRating.id == null) {
+    if (this.actualRating[item.id_saison].id == null) {
       this.showHide();
-      this._ratingService.postRating(this.actualRating).subscribe(rate => {
+      this._ratingService.postRatingSerie(this.actualRating[item.id_saison]).subscribe(rate => {
       });
     } else {
-      this._ratingService.putRating(this.actualRating).subscribe(rate => {
+      this._ratingService.putRatingSerie(this.actualRating[item.id_saison]).subscribe(rate => {
         rate.film = this.serie.id_serie;
       })
     }
-  }*/
+  }
 
   redirectUrl(trailer){
     window.open(trailer);

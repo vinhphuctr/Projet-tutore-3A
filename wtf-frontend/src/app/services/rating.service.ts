@@ -17,19 +17,19 @@ export class RatingService {
   getUserRating(video: Video){
     var id_user = localStorage.getItem('id');
     var num = Number(id_user);
-   var julie = []; 
-   
+   var julie = [];
+
     video.rates.filter(rate => {
       if (rate.user == num) {
        julie.push(rate);
-        console.log(rate); 
+        console.log(rate);
       // return rate;
       }
     })
-  //  console.log('julie'); 
-    return julie; 
-   
-  } 
+  //  console.log('julie');
+    return julie;
+
+  }
 
 
 
@@ -37,20 +37,20 @@ export class RatingService {
 
   getFilm(id: number): Observable<Video> {
 
-    var id_user = localStorage.getItem('id'); // get the id_user from the localStorage 
+    var id_user = localStorage.getItem('id'); // get the id_user from the localStorage
 
     let url = "https://wtf-api-v1.herokuapp.com/api/films/" + id;
 
     this._httpClient.get<Video>(url)
       .pipe(
-        map(res => res), // Don't forget to add this! 
+        map(res => res), // Don't forget to add this!
         filter(res => res.rates['user'] === id_user)
-         
+
     )
-   
+
 
     console.log("wang yi bo");
-   
+
     console.log("julie")
     return this._httpClient.get<Video>(url);
 
