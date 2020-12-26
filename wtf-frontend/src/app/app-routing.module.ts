@@ -12,7 +12,6 @@ import { connexionService } from './services/connexion.service';
 import { RechercheRapideComponent } from './recherche-rapide/recherche-rapide.component';
 import { MovieComponent } from './movie/movie.component';
 import { SerieComponent } from './serie/serie.component';
-import { SaisonComponent } from './saison/saison.component';
 
 
 const routes: Routes = [
@@ -27,8 +26,6 @@ const routes: Routes = [
   { path: "monprofil", component: MonProfilComponent, canActivate:[connexionService] },
   { path: "mesfavoris", component: MesFavorisComponent, canActivate: [connexionService] },
   { path: "rechercherapide", component: RechercheRapideComponent, canActivate: [connexionService] },
-  { path: "serie/:id/:saison", component: SaisonComponent , canActivate:[connexionService] }
-
 ];
 
 
