@@ -16,14 +16,15 @@ import { RatingService } from '../services/rating-service.service';
 })
 export class SerieComponent implements OnInit {
 
-  ratingValue: number = 3;
   serie : Serie;
   UtilisateurData: Utilisateur;
   isTrailer : boolean = false;
   starVisible : boolean = true;
   id : number;
   time: string;
-  actualRating: Note;
+  maNoteTemporaire: number = 3;
+  actualRating : Note;
+  nbrEpisodesTotal : number = 0;
 
   constructor( private route: ActivatedRoute,
     private _location: Location,
@@ -41,6 +42,10 @@ export class SerieComponent implements OnInit {
 
       this.UtilisateurData = this.utilisateurService.getUser();
 
+      for(let saison of this.serie.saisons){
+        this.nbrEpisodesTotal += Number(saison.nb_episode);
+      }
+
       if (this.serie.rates.length === 0) {
 
         this.actualRating = {
@@ -53,19 +58,10 @@ export class SerieComponent implements OnInit {
 
           film: this.serie.id_serie // voir avec Alexis, pas encore implémenter
         }
-
       } else {
-
         this.actualRating = this.serie.rates[0];
-
       }
-
     });
-
-
-
-
-
   }
 
   ngOnChanges() : void{

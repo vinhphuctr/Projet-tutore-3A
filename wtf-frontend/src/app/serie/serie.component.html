@@ -14,12 +14,21 @@
       style="position: relative; text-align: center; margin-top: 30px;">
         <button class="button" mat-stroked-button (click)="redirectUrl(serie.trailer)">Watch the Trailer</button>
       </div>
-      <div style="position: relative; text-align: center; margin-top: 16px;">
-        <button class="button" mat-stroked-button (click)="showHide()">SCORE !</button>
-        <div [id]="serie?.id_serie" [hidden]="starVisible" style= "margin-top:20px">
-          <p-rating [iconOnStyle]="{'color':'rgb(93,84,164)'}" [(ngModel)]="ratingValue" [cancel]="false" (onRate)="postRate($event, serie)"></p-rating>
-        </div>
-      </div>
+      <div style="position: relative; text-align: center; margin-top: 30px;">
+      <mat-accordion>
+        <mat-expansion-panel *ngFor="let item of serie?.saisons">
+          <mat-expansion-panel-header class="disable_ripple">
+            <h2>
+              {{item.nom}}
+            </h2>
+          </mat-expansion-panel-header>
+          <p class="accordion">Nombre d'épisodes : {{ item.nb_episode}}</p>
+          <p>
+            <p-rating [iconOnStyle]="{'color':'rgb(93,84,164)'}" [(ngModel)]="maNoteTemporaire" [cancel]="false" (onRate)="postRate($event, item)"></p-rating>
+          </p>
+        </mat-expansion-panel>
+  </mat-accordion>
+  </div>
     </div>
     <div style="width: 4%; height: 80%; float:left;"></div>
     <div style="width: 75%; height: 80%; float:right;">
@@ -29,20 +38,7 @@
       </div>
       <p></p>
       <p><span class="purple">Nombre de saisons :</span> {{serie?.nb_saison}}</p>
-      <div style="padding-bottom: 20px;">
-      <mat-accordion>
-            <mat-expansion-panel *ngFor="let item of serie?.saisons">
-              <mat-expansion-panel-header class="disable_ripple">
-                <h2>
-                  {{item.nom}}
-                </h2>
-              </mat-expansion-panel-header>
-              <p class="accordion">WhatTheFilm propose une recommandation de trois films/séries en fonction des tendances du moment ou des intérêts de l'utilisateur</p>
-            </mat-expansion-panel>
-      </mat-accordion>
-      </div>
-
-      <p><span class="purple">Nombre d'episodes :</span> 31</p>
+      <p><span class="purple">Nombre d'episodes :</span> {{ nbrEpisodesTotal }} </p>
       <p><span class="purple">Date de sortie :</span> {{serie?.date_sortie | date:'d/M/yyyy'}}</p>
       <p><span class="purple">Langue original : </span>{{serie?.vo}}</p>
       <p><span class="purple">Catégorie : </span><span *ngFor="let categorie of serie?.categories"> {{categorie.libelle}}<span *ngIf="categorie != serie?.categories[serie.categories.length - 1]">,</span></span></p>
