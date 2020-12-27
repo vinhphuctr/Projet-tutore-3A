@@ -53,7 +53,6 @@ export class SerieComponent implements OnInit {
           this.actualRating[saison.id_saison] = this.serie.rates[0];
         }
       }
-      console.log(this.actualRating)
     });
   }
 

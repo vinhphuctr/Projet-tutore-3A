@@ -24,7 +24,6 @@ export class SerieService {
           })
         }
         console.log(res);
-
         return res
       }));
   }
