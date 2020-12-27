@@ -24,7 +24,11 @@ export class SerieComponent implements OnInit {
   time: string;
   maNoteTemporaire: number = 3;
   actualRating : Array<NoteSerie> = [];
-  nbrEpisodesTotal : number = 0;
+  nbrEpisodesTotal: number = 0;
+  moyenneRatingBySaison: Array<number> = [];
+  moyenneRating: number; 
+
+  
 
   constructor( private route: ActivatedRoute,
     private _location: Location,
@@ -52,8 +56,15 @@ export class SerieComponent implements OnInit {
         } else {
           this.actualRating[saison.id_saison] = this.serie.rates[0];
         }
+        console.log(this._serieService.getTotalNotes(saison.id_saison)); 
+        console.log(this._serieService.getnbrNotes(saison.id_saison)); 
+        this.moyenneRatingBySaison[saison.id_saison] = this._serieService.getTotalNotes(saison.id_saison) / this._serieService.getnbrNotes(saison.id_saison);
+        console.log(this.moyenneRatingBySaison); 
+
       }
-      console.log(this.actualRating)
+      
+
+     
     });
   }
 

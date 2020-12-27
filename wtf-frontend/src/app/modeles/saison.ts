@@ -1,4 +1,4 @@
-import { Note } from './note';
+import { NoteSerie } from './note';
 
 export class Saison {
   id_saison: number;
@@ -6,6 +6,6 @@ export class Saison {
   nom: string;
   num_saison: number;
 
-  rates: Array<Note>; 
+  rates: Array<NoteSerie>; 
   
 }

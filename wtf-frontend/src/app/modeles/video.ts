@@ -2,7 +2,7 @@ import { Plateforme } from './plateforme';
 import { Production } from './production';
 import { Personne } from './personne';
 import { Categorie } from './categorie';
-import { Note} from './note';
+import { NoteFilm} from './note';
 
 export class Video {
 
@@ -12,7 +12,7 @@ export class Video {
     poster: string;
     plot: string;
     vo: string;
-    rates: Array<Note>;
+    rates: Array<NoteFilm>;
     duree: String;
     productions:Array<Production>;
     acteurs : Array<Personne>;

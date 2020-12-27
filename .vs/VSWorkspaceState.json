@@ -3,8 +3,12 @@
     "",
     "\\wtf-frontend",
     "\\wtf-frontend\\src",
-    "\\wtf-frontend\\src\\app"
+    "\\wtf-frontend\\src\\app",
+    "\\wtf-frontend\\src\\app\\modeles",
+    "\\wtf-frontend\\src\\app\\movie",
+    "\\wtf-frontend\\src\\app\\serie",
+    "\\wtf-frontend\\src\\app\\services"
   ],
-  "SelectedNode": "\\wtf-frontend\\src\\app\\app.component.ts",
+  "SelectedNode": "\\wtf-frontend\\src\\app\\serie\\serie.component.ts",
   "PreviewInSolutionExplorer": false
 }
