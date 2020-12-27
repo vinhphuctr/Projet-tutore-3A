@@ -62,9 +62,6 @@ export class SerieComponent implements OnInit {
         console.log(this.moyenneRatingBySaison); 
 
       }
-      
-
-     
     });
   }
 

@@ -49,8 +49,6 @@ export class MovieComponent implements OnInit {
         this.actualRating = this.video.rates[0];
       }
       this.moyenneRating = this._movieService.getTotalNotes() / this._movieService.getnbrNotes();
-      console.log(this.moyenneRating);
-
     });
   }
 
