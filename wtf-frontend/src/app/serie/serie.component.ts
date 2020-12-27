@@ -6,7 +6,7 @@ import { Utilisateur } from '../modeles/utilisateur';
 import { SerieService} from '../services/serie.service';
 import { FavorisService } from '../services/favoris.service';
 import { UtilisateurService } from '../services/utilisateur.service';
-import { Note } from '../modeles/note';
+import { NoteSerie } from '../modeles/note';
 import { RatingService } from '../services/rating-service.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class SerieComponent implements OnInit {
   id : number;
   time: string;
   maNoteTemporaire: number = 3;
-  actualRating : Array<Note> = [];
+  actualRating : Array<NoteSerie> = [];
   nbrEpisodesTotal : number = 0;
 
   constructor( private route: ActivatedRoute,
@@ -47,12 +47,13 @@ export class SerieComponent implements OnInit {
             id: null,
             user: 1,
             note: 0,
-            film: this.serie.id_serie
+            saison: saison.id_saison,
           };
         } else {
           this.actualRating[saison.id_saison] = this.serie.rates[0];
         }
       }
+      console.log(this.actualRating)
     });
   }
 
@@ -78,16 +79,14 @@ export class SerieComponent implements OnInit {
   }
 
   postRate(event, item) {
-    this.actualRating[item.id_saison].film = this.serie.id_serie;
-    console.log(item);
+    this.actualRating[item.id_saison].saison = item.id_saison;
     if (this.actualRating[item.id_saison].id == null) {
       this.showHide();
       this._ratingService.postRatingSerie(this.actualRating[item.id_saison]).subscribe(rate => {
       });
     } else {
       this._ratingService.putRatingSerie(this.actualRating[item.id_saison]).subscribe(rate => {
-        rate.film = this.serie.id_serie;
-      })
+      });
     }
   }
 

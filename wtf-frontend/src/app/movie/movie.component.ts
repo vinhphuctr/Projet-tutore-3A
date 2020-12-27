@@ -5,7 +5,7 @@ import { Video } from '../modeles/video';
 import { Utilisateur } from '../modeles/utilisateur';
 import {MovieService} from '../services/movie.service';
 import { FavorisService } from '../services/favoris.service';
-import { Note } from '../modeles/note';
+import { NoteFilm } from '../modeles/note';
 import { RatingService } from '../services/rating-service.service';
 
 
@@ -21,7 +21,7 @@ export class MovieComponent implements OnInit {
   starVisible : boolean = true;
   id : number;
   time: string;
-  actualRating: Note;
+  actualRating: NoteFilm;
   UtilisateurData: Utilisateur;
   moyenneRating : number;
 
