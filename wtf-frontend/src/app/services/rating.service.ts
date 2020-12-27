@@ -17,7 +17,7 @@ export class RatingService {
   getUserRating(video: Video){
     var id_user = localStorage.getItem('id');
     var num = Number(id_user);
-   var julie = [];
+    var julie = [];
 
     video.rates.filter(rate => {
       if (rate.user == num) {
@@ -31,10 +31,6 @@ export class RatingService {
 
   }
 
-
-
-
-
   getFilm(id: number): Observable<Video> {
 
     var id_user = localStorage.getItem('id'); // get the id_user from the localStorage
@@ -47,19 +43,8 @@ export class RatingService {
         filter(res => res.rates['user'] === id_user)
 
     )
-
-
-    console.log("wang yi bo");
-
-    console.log("julie")
     return this._httpClient.get<Video>(url);
-
-
-
-
-
-  }
-
+ }
 }
 
 

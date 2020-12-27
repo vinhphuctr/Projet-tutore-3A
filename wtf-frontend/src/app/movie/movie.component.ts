@@ -23,6 +23,7 @@ export class MovieComponent implements OnInit {
   time: string;
   actualRating: Note;
   UtilisateurData: Utilisateur;
+  moyenneRating : number;
 
   constructor(
     private route: ActivatedRoute,
@@ -47,6 +48,9 @@ export class MovieComponent implements OnInit {
       } else {
         this.actualRating = this.video.rates[0];
       }
+      this.moyenneRating = this._movieService.getTotalNotes() / this._movieService.getnbrNotes();
+      console.log(this.moyenneRating);
+
     });
   }
 

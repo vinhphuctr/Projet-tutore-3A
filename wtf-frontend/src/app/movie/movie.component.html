@@ -14,6 +14,10 @@
       style="position: relative; text-align: center; margin-top: 30px;">
         <button class="button" mat-stroked-button (click)="redirectUrl(video.trailer)">Watch the Trailer</button>
       </div>
+      <div *ngIf="moyenneRating"
+      style="position: relative; text-align: center; margin-top: 30px;">
+        <p style="text-align: center;">{{moyenneRating}} / 5</p>
+      </div>
       <div style="position: relative; text-align: center; margin-top: 16px;">
         <button class="button" mat-stroked-button (click)="showHide()">SCORE !</button>
         <div [id]="video?.id_video" [hidden]="starVisible" style= "margin-top:20px">

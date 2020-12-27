@@ -23,11 +23,9 @@ export class SerieService {
             return rate.user === this._connexionService.getCurrentUser().id;
           })
         }
-        console.log(res); 
+        console.log(res);
 
         return res
       }));
   }
-
-
 }
