@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders, HttpClientModule } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Serie } from '../modeles/serie';
+import { Video } from '../modeles/video';
+
 
 
 @Injectable({
@@ -21,43 +25,9 @@ export class SuggestionService {
 
 
 
-  rechercheRapide(keyword: string) {
-    // this.getSuggestions();
-    var Films = [];
+  rechercheRapide(keyword: string): Observable<Video[]> {
 
-   let url =  "http://wtfilm-api.herokuapp.com/api/video/search/?titre=%"+keyword+"%";
-
-   fetch(url)
-   .then(res => res.json())
-   .then((out) => {
-     console.log('Checkout this JSON! ', out);
-
-
-     Films.push(out);
-
-
-
-
-
-   })
-
-   .catch(err => { throw err });
-   return Films;
-
-
-
-  /*  for (var unFilm of SUGGESTION) {
-      var i = 0;
-      var tab = unFilm.titre.split('');
-      for (var caract of tab) {
-        var nomExtrait = unFilm.titre.substr(i, keyword.length)
-        if (nomExtrait.toLowerCase() == keyword.toLowerCase()) {
-          Films.push(unFilm);
-          break;
-        }
-        i = i + 1;
-      }
-    }*/
-    //return Films;
+   let url = "https://wtf-api-v1.herokuapp.com/api/films?titre=" + keyword;
+   return this._httpClient.get<Video[]>(url);
   }
 }

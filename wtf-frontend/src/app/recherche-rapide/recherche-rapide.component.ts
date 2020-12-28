@@ -15,18 +15,19 @@ import { UtilisateurService } from '../services/utilisateur.service';
 export class RechercheRapideComponent implements OnInit {
 
   ratingValue: number = 3;
-  tabResultat : Video[];
+  tabResultatFilms : Video[];
   tabMesFavoris: Video[];
   UtilisateurData: Utilisateur;
 
-  constructor(private suggestionService: SuggestionService,private UtilisateurService : UtilisateurService, private FavorisService: FavorisService) {
-
-    this.tabResultat = this.suggestionService.rechercheRapide(localStorage.getItem('keyword')); // tabResultat c'est du JSON
+  constructor(private _suggestionService: SuggestionService,private UtilisateurService : UtilisateurService, private FavorisService: FavorisService) {
     this.tabMesFavoris = this.FavorisService.getFavoris();
   }
 
   ngOnInit(): void {
     this.UtilisateurData = this.UtilisateurService.getUser();
+    this._suggestionService.rechercheRapide(localStorage.getItem('keyword')).subscribe((video: Video[]) => {
+      this.tabResultatFilms = video;
+    });
   }
 
   ngAfterViewInit()	: void{
@@ -41,7 +42,7 @@ export class RechercheRapideComponent implements OnInit {
   }
 
   checkIfFav(){
-    this.tabResultat.forEach(item => {
+    this.tabResultatFilms.forEach(item => {
       if(this.FavorisService.checkIfFav(item.id_video) == true){
         console.log("passé");
         let s = "fav_" + item.id_video;
