@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Video } from '../modeles/video';
@@ -25,6 +25,9 @@ export class MovieComponent implements OnInit {
   actualRating: NoteFilm;
   UtilisateurData: Utilisateur;
   moyenneRating : number;
+  @Input() set moyenne(value :number){
+    this.moyenneRating = value;
+  };
 
   constructor(
     private route: ActivatedRoute,
