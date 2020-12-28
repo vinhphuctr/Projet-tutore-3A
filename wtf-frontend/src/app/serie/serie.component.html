@@ -16,7 +16,7 @@
       </div>
       <div *ngIf="moyenneRating"
            style="position: relative; text-align: center; margin-top: 30px;">
-        <p style="text-align: center;">{{moyenneRating}} / 5</p>
+        <p style="text-align: center;">{{moyenneRating}} / 5 Julie</p>
       </div>
       <div style="position: relative; text-align: center; margin-top: 30px;">
         <mat-accordion>
@@ -27,6 +27,11 @@
               </h2>
             </mat-expansion-panel-header>
             <p class="accordion">Nombre d'épisodes : {{ item.nb_episode}}</p>
+
+
+            <p class="accordion"><center>{{ moyenneRatingBySaison[item.id_saison] }} /5</center></p>
+
+
             <p>
               <p-rating [iconOnStyle]="{'color':'rgb(93,84,164)'}" [(ngModel)]="actualRating[item.id_saison].note" [cancel]="false" (onRate)="postRate($event, item)"></p-rating>
             </p>

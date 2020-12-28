@@ -41,8 +41,11 @@ export class SerieComponent implements OnInit {
 
     this.id = +this.route.snapshot.paramMap.get('id');
     this._serieService.getSerie(this.id).subscribe((serie: Serie) => {
+     
       this.getSerie();
       this.serie = serie;
+
+   
       this.UtilisateurData = this.utilisateurService.getUser();
       for(let saison of this.serie.saisons){
         this.nbrEpisodesTotal += Number(saison.nb_episode);
@@ -54,14 +57,22 @@ export class SerieComponent implements OnInit {
             saison: saison.id_saison,
           };
         } else {
-          this.actualRating[saison.id_saison] = this.serie.rates[0];
+          this.actualRating[saison.id_saison] = saison.rates[0];
         }
         console.log(this._serieService.getTotalNotes(saison.id_saison));
         console.log(this._serieService.getnbrNotes(saison.id_saison));
         this.moyenneRatingBySaison[saison.id_saison] = this._serieService.getTotalNotes(saison.id_saison) / this._serieService.getnbrNotes(saison.id_saison);
-        console.log(this.moyenneRatingBySaison);
+
+
+        if (this.moyenneRating == null) {
+          this.moyenneRating = this.moyenneRatingBySaison[saison.id_saison];
+        }
+        else this.moyenneRating += this.moyenneRatingBySaison[saison.id_saison];
 
       }
+      console.log("série");
+     // this.moyenneRating = this.moyenneRating / this.moyenneRatingBySaison.length;
+      console.log(this.moyenneRating); 
     });
   }
 
