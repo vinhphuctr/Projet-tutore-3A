@@ -56,7 +56,7 @@ export class RechercheRapideComponent implements OnInit {
   }
 
   checkIfFav(){
-    this.tabResultatFilms.forEach(item => {
+    this.tabResultat.forEach(item => {
       if(this.FavorisService.checkIfFav(item.id_video) == true){
         console.log("passé");
         let s = "fav_" + item.id_video;
