@@ -28,22 +28,22 @@ export class SerieService {
       .pipe(map(res => {
         for (let saison of res.saisons) {
           saison.rates = saison.rates.filter(rate => {
-            this.totalNotes[saison.id_saison] = rate.note + this.totalNotes[saison.id_saison];
-            this.nbrNotes[saison.id_saison] = 1 + this.nbrNotes[saison.id_saison];
+            if(this.totalNotes[saison.id_saison] == null){
+              this.totalNotes[saison.id_saison] = rate.note;
+            }
+            else this.totalNotes[saison.id_saison] += rate.note;
 
-            console.log(typeof (rate.note));
-            console.log(typeof (this.totalNotes[saison.id_saison])); 
-
-           // console.log(this.totalNotes[saison.id_saison]);
-           // console.log(rate.note);
-
-            
-
-            
-            console.log(this.nbrNotes); 
+            if(this.nbrNotes[saison.id_saison] == null){
+              this.nbrNotes[saison.id_saison] = 1;
+            }
+            else {
+              this.nbrNotes[saison.id_saison] += 1;
+            }
             return rate.user === this._connexionService.getCurrentUser().id;
           })
         }
+        console.log(this.nbrNotes);
+        console.log(this.totalNotes);
         console.log(res);
         return res
       }));
