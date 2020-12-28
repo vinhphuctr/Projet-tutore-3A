@@ -15,9 +15,10 @@ import { UtilisateurService } from '../services/utilisateur.service';
 export class RechercheRapideComponent implements OnInit {
 
   ratingValue: number = 3;
-  tabResultatFilms : Video[];
+  tabResultat : Video[];
   tabMesFavoris: Video[];
   UtilisateurData: Utilisateur;
+  url : string;
 
   constructor(private _suggestionService: SuggestionService,private UtilisateurService : UtilisateurService, private FavorisService: FavorisService) {
     this.tabMesFavoris = this.FavorisService.getFavoris();
@@ -25,9 +26,22 @@ export class RechercheRapideComponent implements OnInit {
 
   ngOnInit(): void {
     this.UtilisateurData = this.UtilisateurService.getUser();
-    this._suggestionService.rechercheRapide(localStorage.getItem('keyword')).subscribe((video: Video[]) => {
-      this.tabResultatFilms = video;
-    });
+    if(localStorage.getItem('typeDeRecherche') == "rechercheRapide"){
+      this._suggestionService.rechercheRapide(localStorage.getItem('rechercheRapide')).subscribe((video: Video[]) => {
+        this.tabResultat = video;
+      });
+    }
+    else {
+      if(JSON.parse(localStorage.getItem('rechercheAvance')).filmOuSerie == "film"){
+        this.url = "/film/";
+      }
+      else {
+        this.url = "/serie/";
+      }
+      this._suggestionService.rechercheAvancee(JSON.parse(localStorage.getItem('rechercheAvance'))).subscribe((video: Video[]) => {
+        this.tabResultat = video;
+      });
+    }
   }
 
   ngAfterViewInit()	: void{

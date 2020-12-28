@@ -3,6 +3,7 @@ import { NavbarService } from '../services/navbar.service';
 import { SuggestionService} from '../services/suggestion.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { rechercheAvancee} from '../modeles/rechercheAvancee';
 
 
 
@@ -18,8 +19,9 @@ export class MainComponent implements OnInit {
   isRechercheRapide: boolean = false ;
   isRechercheAvance: boolean = false ;
   rechercheRapideForm: FormGroup;
+  rechercheAvanceeForm: FormGroup;
   slider_value : number = 180;
-  film_value : string = "both";
+  film_value : string = "film";
 
 
   constructor(private nav: NavbarService, private suggestionService: SuggestionService, private router: Router, private route: ActivatedRoute,) {
@@ -29,6 +31,11 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
    // this.tabSuggestion = this.suggestionService.getSuggestions();
     this.rechercheRapideForm = new FormGroup({
+      recherche: new FormControl("", [Validators.required])
+    })
+    this.rechercheAvanceeForm = new FormGroup({
+      film_value: new FormControl("", [Validators.required]),
+      slider_value: new FormControl("", [Validators.required]),
       recherche: new FormControl("", [Validators.required])
     })
   }
@@ -55,13 +62,22 @@ export class MainComponent implements OnInit {
   }
 
   rechercheRapide() {
-    localStorage.setItem('keyword', this.rechercheRapideForm.value['recherche']);
-    const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/rechercherapide';
+    localStorage.setItem('typeDeRecherche', "rechercheRapide" );
+    localStorage.setItem('rechercheRapide', this.rechercheRapideForm.value['recherche']);
+    const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/recherche';
     this.router.navigate([redirectUrl]);
   }
 
   rechercheAvancee(){
-    console.log(this.film_value, this.slider_value);
+    let recherche = new rechercheAvancee();
+    recherche.filmOuSerie = this.rechercheAvanceeForm.value['film_value'];
+    recherche.duree = this.rechercheAvanceeForm.value['slider_value'];
+    recherche.categories = null;
+    recherche.vo = "en";
+    localStorage.setItem('typeDeRecherche', "rechercheAvance" );
+    localStorage.setItem('rechercheAvance',  JSON.stringify(recherche));
+    const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/recherche';
+    this.router.navigate([redirectUrl]);
   }
 }
 

@@ -27,8 +27,9 @@
     </div>
   </div>
   <div *ngIf="isRechercheAvance" class="rechercheAvance">
+    <form (submit)="rechercheAvancee()" [formGroup]="rechercheAvanceeForm">
     <h3 >Quel type de vidéo ?</h3>
-    <mat-radio-group [value]="film_value" [(ngModel)]="film_value">
+    <mat-radio-group [value]="film_value" [(ngModel)]="film_value" formControlName="film_value">
         <mat-radio-button value="film">Film</mat-radio-button>
         <mat-radio-button value="serie">Série</mat-radio-button>
         <mat-radio-button value="both">Les 2</mat-radio-button>
@@ -45,11 +46,13 @@
         [thumbLabel]=true
         [tickInterval]=15
         [(ngModel)]="slider_value"
-        [vertical]=false>
+        [vertical]=false
+        formControlName="slider_value">
     </mat-slider>
     <div style="padding-top: 50px;">
-      <button (click)="rechercheAvancee()" mat-stroked-button>Lancer la recherche</button>
+      <button  type="submit"  mat-stroked-button>Lancer la recherche</button>
     </div>
+    </form>
   </div>
 </div>
 

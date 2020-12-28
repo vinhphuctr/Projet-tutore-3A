@@ -3,6 +3,7 @@ import { HttpClient,HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Serie } from '../modeles/serie';
 import { Video } from '../modeles/video';
+import { rechercheAvancee } from '../modeles/rechercheAvancee';
 
 
 
@@ -30,4 +31,26 @@ export class SuggestionService {
    let url = "https://wtf-api-v1.herokuapp.com/api/films?titre=" + keyword;
    return this._httpClient.get<Video[]>(url);
   }
+
+  rechercheAvancee(recherche : rechercheAvancee): Observable<Video[]> {
+    let url;
+    if(recherche.filmOuSerie == "film"){
+      url = "https://wtf-api-v1.herokuapp.com/api/films?";
+      /*
+      if(recherche.duree != null || recherche.duree != undefined){
+        url+= 'duree=' + recherche.duree;
+      }
+      */
+    }
+    else {
+      url = "https://wtf-api-v1.herokuapp.com/api/series?";
+    }
+    if(recherche.titre != null || recherche.titre != undefined){
+      url += "titre=" + recherche.titre;
+    }
+    if(recherche.vo != null || recherche.titre != undefined){
+      url += "vo=" + recherche.vo;
+    }
+    return this._httpClient.get<Video[]>(url);
+   }
 }

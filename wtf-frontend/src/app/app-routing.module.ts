@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: "main",  component: MainComponent, canActivate:[connexionService] },
   { path: "monprofil", component: MonProfilComponent, canActivate:[connexionService] },
   { path: "mesfavoris", component: MesFavorisComponent, canActivate: [connexionService] },
-  { path: "rechercherapide", component: RechercheRapideComponent, canActivate: [connexionService] },
+  { path: "recherche", component: RechercheRapideComponent, canActivate: [connexionService] },
 ];
 
 

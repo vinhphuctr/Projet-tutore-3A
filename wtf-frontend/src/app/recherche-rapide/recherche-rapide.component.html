@@ -3,23 +3,19 @@
   <button [routerLink]="'/main'" mat-stroked-button><mat-icon>arrow_left_alt</mat-icon>Page d'accueil</button>
   <div aria-label="gallery">
       <ul>
-        <li *ngFor="let film of tabResultatFilms">
+        <li *ngFor="let movie of tabResultat">
           <div class="blocFilm">
           <div id="bloc1">
-            <img routerLink="/film/{{film.id_video}}" src="http://image.tmdb.org/t/p/w780/{{film?.poster}}">
+            <img routerLink="{{url}}{{movie.id_video}}" src="http://image.tmdb.org/t/p/w780/{{movie?.poster}}">
             </div>
             <div id="bloc2">
-              <p id="film">{{film.titre}} ({{film.date_sortie | date:'yyyy'}})</p>
-              <p id="genre">{{film.vo |uppercase}}</p>
+              <p id="film">{{movie.titre}} ({{movie.date_sortie | date:'yyyy'}})</p>
+              <p id="genre">{{movie.vo |uppercase}}</p>
               <div class="boutonRecherche">
-                <button [id]="'fav_' + film.id_video " (click)="addFav(film.id_video)" class="button_left" mat-icon-button color="warm" aria-label="Example icon-button with a heart icon">
+                <button [id]="'fav_' + movie.id_video " (click)="addFav(movie.id_video)" class="button_left" mat-icon-button color="warm" aria-label="Example icon-button with a heart icon">
                   <mat-icon>favorite</mat-icon>
                 </button>
-                <button  routerLink="/film/{{film.id_video}}" mat-stroked-button class="button_left">Détails</button>
-                <button class="button" mat-stroked-button (click)="showHide(film.id_video)">Scorez</button>
-                <div [id]="film.id_video" style="visibility: hidden; margin:30px">
-                  <p-rating [iconOnStyle]="{'color':'rgb(93,84,164)'}" [(ngModel)]="ratingValue" [cancel]="false" (onRate)="postRate($event, film)"></p-rating>
-                </div>
+                <button  routerLink="{{url}}{{movie.id_video}}" mat-stroked-button class="button_left">Détails</button>
               </div>
             </div>
           </div>
