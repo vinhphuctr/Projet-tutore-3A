@@ -8,6 +8,7 @@ import { FavorisService } from '../services/favoris.service';
 import { UtilisateurService } from '../services/utilisateur.service';
 import { NoteSerie } from '../modeles/note';
 import { RatingService } from '../services/rating-service.service';
+import { connexionService } from '../services/connexion.service';
 
 @Component({
   selector: 'app-serie',
@@ -34,7 +35,9 @@ export class SerieComponent implements OnInit {
     private _location: Location,
     private _serieService: SerieService,
     private FavorisService: FavorisService,
-    private utilisateurService: UtilisateurService, private _ratingService: RatingService) { }
+    private utilisateurService: UtilisateurService,
+    private _ratingService: RatingService,
+    private authService: connexionService) { }
 
   ngOnInit(): void {
 
@@ -52,7 +55,7 @@ export class SerieComponent implements OnInit {
         if (saison.rates.length === 0) {
           this.actualRating[saison.id_saison] = {
             id: null,
-            user: 1,
+            user: this.authService.getCurrentUser().id,
             note: 0,
             saison: saison.id_saison,
           };
