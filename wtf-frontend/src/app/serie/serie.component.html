@@ -29,7 +29,7 @@
             <p class="accordion">Nombre d'épisodes : {{ item.nb_episode}}</p>
 
 
-            <p class="accordion"><center>{{ moyenneRatingBySaison[item.id_saison] }} /5</center></p>
+            <p *ngIf="moyenneRatingBySaison[item.id_saison]">{{ moyenneRatingBySaison[item.id_saison] }} /5</p>
 
 
             <p>
