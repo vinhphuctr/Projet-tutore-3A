@@ -7,6 +7,7 @@ import {MovieService} from '../services/movie.service';
 import { FavorisService } from '../services/favoris.service';
 import { NoteFilm } from '../modeles/note';
 import { RatingService } from '../services/rating-service.service';
+import { connexionService } from '../services/connexion.service';
 
 
 @Component({
@@ -30,7 +31,8 @@ export class MovieComponent implements OnInit {
     private _location: Location,
     private _movieService: MovieService,
     private FavorisService: FavorisService,
-    private _ratingService: RatingService
+    private _ratingService: RatingService,
+    private authService: connexionService
   ) {
   }
 
@@ -41,7 +43,7 @@ export class MovieComponent implements OnInit {
       if (this.video.rates.length === 0) {
         this.actualRating = {
           id: null,
-          user: 1,
+          user: this.authService.getCurrentUser().id,
           note: 0,
           film: this.video.id_video
         }
