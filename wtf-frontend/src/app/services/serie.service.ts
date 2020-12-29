@@ -59,5 +59,12 @@ export class SerieService {
   }
 
 
+  getAllSeries(): Observable<Serie> {
+    let url = "https://wtf-api-v1.herokuapp.com/api/series";
+    return this._httpClient.get<Serie>(url)
+     
+  }
+
+
 
 }

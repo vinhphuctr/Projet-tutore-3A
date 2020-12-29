@@ -34,6 +34,8 @@ export class SuggestionService {
 
   rechercheAvancee(recherche : rechercheAvancee): Observable<Video[]> {
     let url;
+    console.log('julie');
+    console.log(recherche); 
     if(recherche.filmOuSerie == "film"){
       url = "https://wtf-api-v1.herokuapp.com/api/films?";
       if(recherche.duree != null || recherche.duree != undefined){

@@ -1,6 +1,6 @@
 export class Categorie {
 
-    id_categorie: number;
+    id_categ: number;
     libelle: string;
 
 }

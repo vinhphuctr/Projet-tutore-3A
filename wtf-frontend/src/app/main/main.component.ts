@@ -3,7 +3,17 @@ import { NavbarService } from '../services/navbar.service';
 import { SuggestionService} from '../services/suggestion.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { rechercheAvancee} from '../modeles/rechercheAvancee';
+import { rechercheAvancee } from '../modeles/rechercheAvancee';
+import { ViewChild, ViewChildren, Renderer2, ElementRef, QueryList } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MovieService } from '../services/movie.service';
+import { SerieService } from '../services/serie.service';
+import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
+import { Observable, pipe } from 'rxjs';
+import { Video } from '../modeles/video';
+import { map } from 'rxjs/operators';
+import { Serie } from '../modeles/serie';
+import { Categorie } from '../modeles/categorie';
 
 
 
@@ -13,6 +23,7 @@ import { rechercheAvancee} from '../modeles/rechercheAvancee';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
+  @ViewChild('myButton') myButton: ElementRef;
   parentMessage = "message from parent";
 
   tabSuggestion : Object;
@@ -24,11 +35,16 @@ export class MainComponent implements OnInit {
   film_value : string = "film";
 
 
-  constructor(private nav: NavbarService, private suggestionService: SuggestionService, private router: Router, private route: ActivatedRoute,) {
+  constructor(private nav: NavbarService, private suggestionService: SuggestionService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private renderer: Renderer2,
+    private sanitizer: DomSanitizer, private _httpClient: HttpClient, private movieService: MovieService, private serieService: SerieService) {
     nav.show()
   }
 
   ngOnInit(): void {
+
+    this.shippingForm = this.fb.group({
+      signatureReq: ['film'],
+    })
    // this.tabSuggestion = this.suggestionService.getSuggestions();
     this.rechercheRapideForm = new FormGroup({
       recherche: new FormControl("", [Validators.required])
@@ -78,6 +94,117 @@ export class MainComponent implements OnInit {
     localStorage.setItem('rechercheAvance',  JSON.stringify(recherche));
     const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/recherche';
     this.router.navigate([redirectUrl]);
+  }
+
+  selected: string;
+  filter: any;
+
+  radioChange() {
+
+    this.filter['property'] = this.selected;
+    console.log(this.filter);
+    
+  }
+
+
+  shippingForm: FormGroup;
+  
+  
+  
+  lis: Serie;
+
+  liste: Array<Categorie> = []; 
+ 
+  
+  
+  changeRadioValue(): Observable<Video[]>{
+    console.log(this.shippingForm.get('signatureReq')); 
+    console.log(this.shippingForm.get('signatureReq').value); // value : movie, series, both
+    if (this.shippingForm.get('signatureReq').value == 'movie' || this.shippingForm.get('signatureReq').value == 'both') {
+
+      let url = "https://wtf-api-v1.herokuapp.com/api/films";
+      return this._httpClient.get<Video[]>(url);
+
+    }
+    
+   
+
+    if (this.shippingForm.get('signatureReq').value == 'series' || this.shippingForm.get('signatureReq').value == 'both') {
+
+      this.serieService.getAllSeries().subscribe((serie: Serie) => {
+
+        
+        for (let i = 0; i < serie.length; i++) {
+          
+
+          for (let m = 0; m < serie[i].categories.length; m++) {
+            console.log(serie[i].categories[m].libelle);
+
+           
+            this.liste.push(serie[i].categories[m]);
+
+             
+            
+           // this.liste.push(serie[i].categories[m]);
+
+          //  this.liste = this.liste.filter(liste => liste[serie[i].categories[m].id_categ] != liste[serie[i+1].categories[m].id_categ]);
+            
+           // this.liste[serie[i].categories[m].id_categ] += serie[i].categories[m].libelle; 
+           
+            //this.liste[serie[i].categories[m].id_categ] += serie[i].categories[m].libelle;
+
+          }
+        }
+
+         
+        let result :  Array<Categorie> = []; 
+
+        result = this.liste.reduce((unique, o) => {
+          if (!unique.some(obj => obj.id_categ === o.id_categ )) {
+            unique.push(o);
+          }
+          return unique;
+        }, []);
+        console.log(result.length);
+
+        var sentence_type = ` <div id="myid" style="color: rgb(93,84,164);  font-size: 22px;"> Quels catégories ? </div>  <form action="/action_page.php" > `;
+        var newContent; 
+
+        for (let i = 0; i < result.length; i++) {
+         
+                        
+
+          newContent += `
+            <input type="checkbox" id = "vehicle1" name = "vehicle1" value = "Bike" >
+               ` + result[i].libelle +` <br>`
+
+          
+
+         
+          
+        }
+
+        newContent += `<input type = "submit" value = "Valider" > </form>`; 
+        var final = sentence_type + newContent; 
+
+      
+        
+
+        this.renderer.setProperty(this.myButton.nativeElement, 'innerHTML', final);
+
+      });
+
+    
+    
+
+
+
+    
+
+    }
+
+    
+
   }
 }
 
