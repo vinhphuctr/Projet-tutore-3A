@@ -36,4 +36,11 @@ export class MovieService {
   getnbrNotes(){
     return this.nbrNotes;
   }
+
+
+  getAllMovies(): Observable<Video> {
+    let url = "https://wtf-api-v1.herokuapp.com/api/films";
+    return this._httpClient.get<Video>(url)
+
+  }
 }

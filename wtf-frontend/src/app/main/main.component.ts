@@ -26,13 +26,13 @@ export class MainComponent implements OnInit {
   @ViewChild('myButton') myButton: ElementRef;
   parentMessage = "message from parent";
 
-  tabSuggestion : Object;
-  isRechercheRapide: boolean = false ;
-  isRechercheAvance: boolean = false ;
+  tabSuggestion: Object;
+  isRechercheRapide: boolean = false;
+  isRechercheAvance: boolean = false;
   rechercheRapideForm: FormGroup;
   rechercheAvanceeForm: FormGroup;
-  slider_value : number = 180;
-  film_value : string = "film";
+  slider_value: number = 180;
+  film_value: string = "film";
 
 
   constructor(private nav: NavbarService, private suggestionService: SuggestionService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private renderer: Renderer2,
@@ -45,7 +45,7 @@ export class MainComponent implements OnInit {
     this.shippingForm = this.fb.group({
       signatureReq: ['film'],
     })
-   // this.tabSuggestion = this.suggestionService.getSuggestions();
+    // this.tabSuggestion = this.suggestionService.getSuggestions();
     this.rechercheRapideForm = new FormGroup({
       recherche: new FormControl("", [Validators.required])
     })
@@ -56,42 +56,42 @@ export class MainComponent implements OnInit {
     })
   }
 
-  afficherRapide(){
+  afficherRapide() {
     this.isRechercheRapide = true;
     this.isRechercheAvance = false;
   }
 
   formatLabel(value: number) {
-    if (value < 60){
+    if (value < 60) {
       return value + "min"
     }
-    if(value % 60 == 0){
-    return value / 60 + "h"
+    if (value % 60 == 0) {
+      return value / 60 + "h"
     }
-    return (value / 60).toFixed(1).slice(0,1)+ "h" + value % 60 + "min"
+    return (value / 60).toFixed(1).slice(0, 1) + "h" + value % 60 + "min"
   }
 
 
-  afficherAvance(){
+  afficherAvance() {
     this.isRechercheAvance = true;
     this.isRechercheRapide = false;
   }
 
   rechercheRapide() {
-    localStorage.setItem('typeDeRecherche', "rechercheRapide" );
+    localStorage.setItem('typeDeRecherche', "rechercheRapide");
     localStorage.setItem('rechercheRapide', this.rechercheRapideForm.value['recherche']);
     const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/recherche';
     this.router.navigate([redirectUrl]);
   }
 
-  rechercheAvancee(){
+  rechercheAvancee() {
     let recherche = new rechercheAvancee();
     recherche.filmOuSerie = this.rechercheAvanceeForm.value['film_value'];
     recherche.duree = this.rechercheAvanceeForm.value['slider_value'];
     recherche.categories = null;
     recherche.vo = "en";
-    localStorage.setItem('typeDeRecherche', "rechercheAvance" );
-    localStorage.setItem('rechercheAvance',  JSON.stringify(recherche));
+    localStorage.setItem('typeDeRecherche', "rechercheAvance");
+    localStorage.setItem('rechercheAvance', JSON.stringify(recherche));
     const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/recherche';
     this.router.navigate([redirectUrl]);
   }
@@ -103,64 +103,58 @@ export class MainComponent implements OnInit {
 
     this.filter['property'] = this.selected;
     console.log(this.filter);
-    
+
   }
 
 
   shippingForm: FormGroup;
-  
-  
-  
+
+
+
   lis: Serie;
 
-  liste: Array<Categorie> = []; 
- 
-  
-  
-  changeRadioValue(): Observable<Video[]>{
-    console.log(this.shippingForm.get('signatureReq')); 
+  liste: Array<Categorie> = [];
+
+  listeMovie: Array<Categorie> = [];
+
+  changeRadioValue(): void {
+    console.log(this.shippingForm.get('signatureReq'));
     console.log(this.shippingForm.get('signatureReq').value); // value : movie, series, both
-    if (this.shippingForm.get('signatureReq').value == 'movie' || this.shippingForm.get('signatureReq').value == 'both') {
+    if (this.shippingForm.get('signatureReq').value == 'movie') {
 
-      let url = "https://wtf-api-v1.herokuapp.com/api/films";
-      return this._httpClient.get<Video[]>(url);
 
-    }
-    
-   
+      this.movieService.getAllMovies().subscribe((video: Video) => {
 
-    if (this.shippingForm.get('signatureReq').value == 'series' || this.shippingForm.get('signatureReq').value == 'both') {
 
-      this.serieService.getAllSeries().subscribe((serie: Serie) => {
 
-        
-        for (let i = 0; i < serie.length; i++) {
-          
 
-          for (let m = 0; m < serie[i].categories.length; m++) {
-            console.log(serie[i].categories[m].libelle);
+        for (let i = 0; i < video.length; i++) {
 
-           
-            this.liste.push(serie[i].categories[m]);
 
-             
-            
-           // this.liste.push(serie[i].categories[m]);
+          for (let m = 0; m < video[i].categories.length; m++) {
+            console.log(video[i].categories[m].libelle);
 
-          //  this.liste = this.liste.filter(liste => liste[serie[i].categories[m].id_categ] != liste[serie[i+1].categories[m].id_categ]);
-            
-           // this.liste[serie[i].categories[m].id_categ] += serie[i].categories[m].libelle; 
-           
+
+            this.listeMovie.push(video[i].categories[m]);
+
+
+
+            // this.liste.push(serie[i].categories[m]);
+
+            //  this.liste = this.liste.filter(liste => liste[serie[i].categories[m].id_categ] != liste[serie[i+1].categories[m].id_categ]);
+
+            // this.liste[serie[i].categories[m].id_categ] += serie[i].categories[m].libelle; 
+
             //this.liste[serie[i].categories[m].id_categ] += serie[i].categories[m].libelle;
 
           }
         }
 
-         
-        let result :  Array<Categorie> = []; 
 
-        result = this.liste.reduce((unique, o) => {
-          if (!unique.some(obj => obj.id_categ === o.id_categ )) {
+        let result: Array<Categorie> = [];
+
+        result = this.listeMovie.reduce((unique, o) => {
+          if (!unique.some(obj => obj.id_categ === o.id_categ)) {
             unique.push(o);
           }
           return unique;
@@ -168,44 +162,198 @@ export class MainComponent implements OnInit {
         console.log(result.length);
 
         var sentence_type = ` <div id="myid" style="color: rgb(93,84,164);  font-size: 22px;"> Quels catégories ? </div>  <form action="/action_page.php" > `;
-        var newContent; 
+        var newContent;
 
         for (let i = 0; i < result.length; i++) {
-         
-                        
+
+
 
           newContent += `
             <input type="checkbox" id = "vehicle1" name = "vehicle1" value = "Bike" >
-               ` + result[i].libelle +` <br>`
+               ` + result[i].libelle + ` <br>`
 
-          
 
-         
-          
+
+
+
         }
 
-        newContent += `<input type = "submit" value = "Valider" > </form>`; 
-        var final = sentence_type + newContent; 
+        newContent += `<input type = "submit" value = "Valider" > </form>`;
+        var final = sentence_type + newContent;
 
-      
-        
+
+
 
         this.renderer.setProperty(this.myButton.nativeElement, 'innerHTML', final);
 
       });
 
-    
-    
 
-
-
-    
 
     }
 
-    
 
+
+    if (this.shippingForm.get('signatureReq').value == 'series') {
+
+      this.serieService.getAllSeries().subscribe((serie: Serie) => {
+
+
+        for (let i = 0; i < serie.length; i++) {
+
+
+          for (let m = 0; m < serie[i].categories.length; m++) {
+            console.log(serie[i].categories[m].libelle);
+
+
+            this.liste.push(serie[i].categories[m]);
+
+
+
+            // this.liste.push(serie[i].categories[m]);
+
+            //  this.liste = this.liste.filter(liste => liste[serie[i].categories[m].id_categ] != liste[serie[i+1].categories[m].id_categ]);
+
+            // this.liste[serie[i].categories[m].id_categ] += serie[i].categories[m].libelle; 
+
+            //this.liste[serie[i].categories[m].id_categ] += serie[i].categories[m].libelle;
+
+          }
+        }
+
+
+        let result: Array<Categorie> = [];
+
+        result = this.liste.reduce((unique, o) => {
+          if (!unique.some(obj => obj.id_categ === o.id_categ)) {
+            unique.push(o);
+          }
+          return unique;
+        }, []);
+        console.log(result.length);
+
+        var sentence_type = ` <div id="myid" style="color: rgb(93,84,164);  font-size: 22px;"> Quels catégories ? </div>  <form action="/action_page.php" > `;
+        var newContent;
+
+        for (let i = 0; i < result.length; i++) {
+
+
+
+          newContent += `
+            <input type="checkbox" id = "vehicle1" name = "vehicle1" value = "Bike" >
+               ` + result[i].libelle + ` <br>`
+
+
+
+
+
+        }
+
+        newContent += `<input type = "submit" value = "Valider" > </form>`;
+        var final = sentence_type + newContent;
+
+
+
+
+        this.renderer.setProperty(this.myButton.nativeElement, 'innerHTML', final);
+
+      });
+    }
+
+      // BOTH 
+      if (this.shippingForm.get('signatureReq').value == 'both') {
+
+        this.serieService.getAllSeries().subscribe((serie: Serie) => {
+
+
+          for (let i = 0; i < serie.length; i++) {
+
+
+            for (let m = 0; m < serie[i].categories.length; m++) {
+              console.log(serie[i].categories[m].libelle);
+
+
+              this.liste.push(serie[i].categories[m]);
+
+            }
+          }
+        this.movieService.getAllMovies().subscribe((video: Video) => {
+
+
+
+
+          for (let i = 0; i < video.length; i++) {
+
+
+            for (let m = 0; m < video[i].categories.length; m++) {
+              console.log(video[i].categories[m].libelle);
+
+
+              this.listeMovie.push(video[i].categories[m]);
+
+            }
+          }
+
+
+
+          let result: Array<Categorie> = [];
+          let resultat2: Array<Categorie> = [];
+         
+
+
+           
+
+       
+
+          result = this.liste.concat(this.listeMovie);
+          resultat2 = result.reduce((unique, o) => {
+            if (!unique.some(obj => obj.id_categ === o.id_categ)) {
+              unique.push(o);
+            }
+            return unique;
+          }, []);
+
+         
+
+            var sentence_type = ` <div id="myid" style="color: rgb(93,84,164);  font-size: 22px;"> Quels catégories ? </div>  <form action="/action_page.php" > `;
+            var newContent;
+
+            for (let i = 0; i < resultat2.length; i++) {
+
+
+
+              newContent += `
+            <input type="checkbox" id = "vehicle1" name = "vehicle1" value = "Bike" >
+               ` + resultat2[i].libelle + ` <br>`
+
+
+
+
+
+            }
+
+            newContent += `<input type = "submit" value = "Valider" > </form>`;
+            var final = sentence_type + newContent;
+
+
+
+
+            this.renderer.setProperty(this.myButton.nativeElement, 'innerHTML', final);
+
+          });
+
+        });
+
+
+
+
+
+
+      }
+
+
+
+    }
   }
-}
 
 
