@@ -8,6 +8,7 @@ import { FavorisService } from '../services/favoris.service';
 import { NoteFilm } from '../modeles/note';
 import { RatingService } from '../services/rating-service.service';
 import { connexionService } from '../services/connexion.service';
+import { of } from 'rxjs';
 
 
 @Component({
@@ -24,10 +25,8 @@ export class MovieComponent implements OnInit {
   time: string;
   actualRating: NoteFilm;
   UtilisateurData: Utilisateur;
-  moyenneRating : number;
-  @Input() set moyenne(value :number){
-    this.moyenneRating = value;
-  };
+  @Input() moyenneRating: number;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -53,7 +52,6 @@ export class MovieComponent implements OnInit {
       } else {
         this.actualRating = this.video.rates[0];
       }
-      this.moyenneRating = this._movieService.getTotalNotes() / this._movieService.getnbrNotes();
     });
   }
 
@@ -62,7 +60,6 @@ export class MovieComponent implements OnInit {
       this.isTrailer = true;
     }
   }
-
 
   /*ngAfterViewChecked(): void{
     this.checkIfFav(this.id);
@@ -83,10 +80,13 @@ export class MovieComponent implements OnInit {
     this.actualRating.film = this.video.id_video;
     if (this.actualRating.id == null) {
       this._ratingService.postRating(this.actualRating).subscribe(rate => {
+        this.video.rates.push(rate);
       });
     } else {
       this._ratingService.putRating(this.actualRating).subscribe(rate => {
         rate.film = this.video.id_video;
+        this.video.rates[0] = rate;
+        console.log(this.video);
       })
     }
   }

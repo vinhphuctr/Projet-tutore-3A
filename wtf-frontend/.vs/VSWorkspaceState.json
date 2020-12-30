@@ -5,10 +5,8 @@
     "\\src\\app",
     "\\src\\app\\modeles",
     "\\src\\app\\movie",
-    "\\src\\app\\serie",
-    "\\src\\app\\services",
     "\\src\\assets"
   ],
-  "SelectedNode": "\\src\\app\\modeles\\serie.ts",
+  "SelectedNode": "\\src\\app\\modeles",
   "PreviewInSolutionExplorer": false
 }
