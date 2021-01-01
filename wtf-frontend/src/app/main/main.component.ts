@@ -42,6 +42,20 @@ export class MainComponent implements OnInit {
   Categorie: boolean = false;
 
 
+  listeVideos: Array<Video> = [];
+
+  listeSeries: Array<Serie> = [];
+
+
+  liste_after_categories_movies: Array<Video> = [];
+
+
+
+  
+
+  
+
+
   constructor(private nav: NavbarService, private suggestionService: SuggestionService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private face: FormBuilder, private renderer: Renderer2,
     private sanitizer: DomSanitizer, private _httpClient: HttpClient, private movieService: MovieService, private serieService: SerieService) {
     nav.show()
@@ -139,10 +153,14 @@ export class MainComponent implements OnInit {
     console.log(this.shippingForm.get('signatureReq').value); // value : movie, series, both
     if (this.shippingForm.get('signatureReq').value == 'movie') {
 
-
+      localStorage.setItem('choix', 'movie');
       this.movieService.getAllMovies().subscribe((video: Video) => {
         for (let i = 0; i < video.length; i++) {
+
+          this.listeVideos.push(video[i]); 
           for (let m = 0; m < video[i].categories.length; m++) {
+
+           
             console.log(video[i].categories[m].libelle);
 
             this.listeMovie.push(video[i].categories[m]);
@@ -163,8 +181,12 @@ export class MainComponent implements OnInit {
       });
     }
     if (this.shippingForm.get('signatureReq').value == 'series') {
+
+      localStorage.setItem('choix', 'serie');
       this.serieService.getAllSeries().subscribe((serie: Serie) => {
         for (let i = 0; i < serie.length; i++) {
+
+          this.listeSeries.push(serie[i]);
           for (let m = 0; m < serie[i].categories.length; m++) {
             console.log(serie[i].categories[m].libelle);
             this.liste.push(serie[i].categories[m]);
@@ -185,12 +207,17 @@ export class MainComponent implements OnInit {
     }
 
       // BOTH
-      if (this.shippingForm.get('signatureReq').value == 'both') {
+    if (this.shippingForm.get('signatureReq').value == 'both') {
+
+      localStorage.setItem('choix', 'both');
 
         this.serieService.getAllSeries().subscribe((serie: Serie) => {
 
 
           for (let i = 0; i < serie.length; i++) {
+
+            this.listeSeries.push(serie[i]); 
+
 
 
             for (let m = 0; m < serie[i].categories.length; m++) {
@@ -203,10 +230,8 @@ export class MainComponent implements OnInit {
           }
         this.movieService.getAllMovies().subscribe((video: Video) => {
 
-
-
-
           for (let i = 0; i < video.length; i++) {
+            this.listeVideos.push(video[i]); 
 
 
             for (let m = 0; m < video[i].categories.length; m++) {
@@ -222,12 +247,7 @@ export class MainComponent implements OnInit {
 
           let result: Array<Categorie> = [];
           let resultat2: Array<Categorie> = [];
-
-
-
-
-
-
+        
 
           result = this.liste.concat(this.listeMovie);
           resultat2 = result.reduce((unique, o) => {
@@ -258,7 +278,42 @@ export class MainComponent implements OnInit {
   }
 
   SubmitCategorie(): void {
+
+    console.log(localStorage.getItem('choix'));
     console.log(this.CategorieForm.value);
+    console.log(this.CategorieForm.value.checkArray);
+
+    if (localStorage.getItem('choix') == 'movie') {
+      for (let i = 0; i < this.listeVideos.length; i++) {
+        for (let m = 0; m < this.listeVideos[i].categories.length; m++) {
+          for (let n = 0; n < this.CategorieForm.value.checkArray.length; n++) {
+
+            console.log(this.CategorieForm.value.length); 
+
+            if (this.CategorieForm.value.checkArray[n] == this.listeVideos[i].categories[m].id_categ) {
+
+              this.liste_after_categories_movies.push(this.listeVideos[i]);
+
+              
+              
+            }
+
+
+          }
+         
+       
+        }
+      }
+
+
+    }
+
+    console.log(this.listeVideos);
+
+    
+    console.log(this.liste_after_categories_movies);
+
+
   }
   }
 

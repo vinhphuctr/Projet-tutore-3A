@@ -4,7 +4,7 @@
     "\\wtf-frontend",
     "\\wtf-frontend\\src",
     "\\wtf-frontend\\src\\app",
-    "\\wtf-frontend\\src\\app\\auth",
+    "\\wtf-frontend\\src\\app\\connexion",
     "\\wtf-frontend\\src\\app\\main",
     "\\wtf-frontend\\src\\app\\modeles",
     "\\wtf-frontend\\src\\app\\movie",
