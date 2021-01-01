@@ -70,13 +70,11 @@
 
     <form [formGroup]="CategorieForm" #myCategorie formControlName="juju" (submit)="SubmitCategorie()">
 
-      <li *ngFor="let suggestion of julie">
-
-        <input type="checkbox" [attr.checked]="suggestion.Checked == true ? true : null"
-           (change)="suggestion.Checked = !suggestion.Checked"
-           [attr.disabled]="suggestion.Id==1 ? true : null" id={{suggestion.libelle}} name={{suggestion.libelle}} value={{suggestion.libelle}}>
-        {{suggestion.libelle}} <br />
-
+      <li *ngFor="let categorie of tabCategories">
+        <label>
+          <input type="checkbox" [value]="categorie.id_categ" (change)="onCheckboxChange($event)" />
+          {{categorie.libelle}}
+        </label>
       </li>
 
       <button  mat-stroked-button class="boutonRecherche">Soumettre ces catégories</button>

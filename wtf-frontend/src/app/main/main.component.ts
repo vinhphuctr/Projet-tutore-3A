@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarService } from '../services/navbar.service';
 import { SuggestionService} from '../services/suggestion.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { rechercheAvancee } from '../modeles/rechercheAvancee';
 import { ViewChild, ViewChildren, Renderer2, ElementRef, QueryList } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -33,7 +33,12 @@ export class MainComponent implements OnInit {
   rechercheAvanceeForm: FormGroup;
   slider_value: number = 180;
   film_value: string = "film";
-
+  shippingForm: FormGroup;
+  CategorieForm: FormGroup;
+  tabCategories: Array<Categorie> = [];
+  lis: Serie;
+  liste: Array<Categorie> = [];
+  listeMovie: Array<Categorie> = [];
   Categorie: boolean = false;
 
 
@@ -48,8 +53,8 @@ export class MainComponent implements OnInit {
       signatureReq: ['film'],
     })
 
-    this.CategorieForm = this.face.group({
-      juju: ['libelle'],
+    this.CategorieForm = this.fb.group({
+      checkArray: this.fb.array([], [Validators.required])
     })
     // this.tabSuggestion = this.suggestionService.getSuggestions();
     this.rechercheRapideForm = new FormGroup({
@@ -60,6 +65,23 @@ export class MainComponent implements OnInit {
       slider_value: new FormControl("", [Validators.required]),
       recherche: new FormControl("", [Validators.required])
     })
+  }
+
+  onCheckboxChange(e) {
+    const checkArray: FormArray = this.CategorieForm.get('checkArray') as FormArray;
+
+    if (e.target.checked) {
+      checkArray.push(new FormControl(e.target.value));
+    } else {
+      let i: number = 0;
+      checkArray.controls.forEach((item: FormControl) => {
+        if (item.value == e.target.value) {
+          checkArray.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
   }
 
   afficherRapide() {
@@ -112,20 +134,6 @@ export class MainComponent implements OnInit {
 
   }
 
-
-  shippingForm: FormGroup;
-  CategorieForm: FormGroup;
-
-
-  julie: Array<Categorie> = []; 
-
-
-  lis: Serie;
-
-  liste: Array<Categorie> = [];
-
-  listeMovie: Array<Categorie> = [];
-
   changeRadioValue(): void  {
     console.log(this.shippingForm.get('signatureReq'));
     console.log(this.shippingForm.get('signatureReq').value); // value : movie, series, both
@@ -133,24 +141,13 @@ export class MainComponent implements OnInit {
 
 
       this.movieService.getAllMovies().subscribe((video: Video) => {
-
-
-
-
         for (let i = 0; i < video.length; i++) {
-
-
           for (let m = 0; m < video[i].categories.length; m++) {
             console.log(video[i].categories[m].libelle);
 
-
             this.listeMovie.push(video[i].categories[m]);
-
-
           }
         }
-
-
         let result: Array<Categorie> = [];
 
         result = this.listeMovie.reduce((unique, o) => {
@@ -160,41 +157,20 @@ export class MainComponent implements OnInit {
           return unique;
         }, []);
         console.log(result.length);
-      
-        this.julie = result;
-        
-
-        var sentence_type = `<div id="myid" style="color: rgb(93,84,164);  font-size: 22px;"> Quels catégories ? `; 
+        this.tabCategories = result;
+        var sentence_type = `<div id="myid" style="color: rgb(93,84,164);  font-size: 22px;"> Quels catégories ? `;
         this.renderer.setProperty(this.myButton.nativeElement, 'innerHTML', sentence_type);
-
       });
-
-    
     }
-
-
-
     if (this.shippingForm.get('signatureReq').value == 'series') {
-
       this.serieService.getAllSeries().subscribe((serie: Serie) => {
-
-
         for (let i = 0; i < serie.length; i++) {
-
-
           for (let m = 0; m < serie[i].categories.length; m++) {
             console.log(serie[i].categories[m].libelle);
-
-
             this.liste.push(serie[i].categories[m]);
-
-
           }
         }
-
-
         let result: Array<Categorie> = [];
-
         result = this.liste.reduce((unique, o) => {
           if (!unique.some(obj => obj.id_categ === o.id_categ)) {
             unique.push(o);
@@ -202,24 +178,13 @@ export class MainComponent implements OnInit {
           return unique;
         }, []);
         console.log(result.length);
-
         var sentence_type = `<div id="myid" style="color: rgb(93,84,164);  font-size: 22px;"> Quels catégories ? </div><form [formGroup]="CategorieForm" #myCategorie (ngSubmit)="SubmitCategorie()">   `;
-   
-        this.julie = result;
-     
-      
-
-
-
+        this.tabCategories = result;
         this.renderer.setProperty(this.myButton.nativeElement, 'innerHTML', sentence_type);
-
       });
-
-
-
     }
 
-      // BOTH 
+      // BOTH
       if (this.shippingForm.get('signatureReq').value == 'both') {
 
         this.serieService.getAllSeries().subscribe((serie: Serie) => {
@@ -257,12 +222,12 @@ export class MainComponent implements OnInit {
 
           let result: Array<Categorie> = [];
           let resultat2: Array<Categorie> = [];
-         
 
 
-           
 
-       
+
+
+
 
           result = this.liste.concat(this.listeMovie);
           resultat2 = result.reduce((unique, o) => {
@@ -272,15 +237,15 @@ export class MainComponent implements OnInit {
             return unique;
           }, []);
 
-         
+
 
           var sentence_type = ` <div id="myid" style="color: rgb(93,84,164);  font-size: 22px;"> Quels catégories ? <form [formGroup]="CategorieForm" #myCategorie "> `;
-          
 
-       
-          this.julie = resultat2;
 
-       
+
+          this.tabCategories = resultat2;
+
+
 
 
             this.renderer.setProperty(this.myButton.nativeElement, 'innerHTML', sentence_type);
@@ -288,28 +253,13 @@ export class MainComponent implements OnInit {
           });
 
         });
-
-
-
-
-
-
       }
-
     this.Categorie = true;
-
   }
-
 
   SubmitCategorie(): void {
-
-    console.log(this.shippingForm.get('juju').value); 
+    console.log(this.CategorieForm.value);
   }
-
-  
-
-
-
   }
 
 
