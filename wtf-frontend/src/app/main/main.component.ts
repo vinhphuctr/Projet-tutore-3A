@@ -34,8 +34,10 @@ export class MainComponent implements OnInit {
   slider_value: number = 180;
   film_value: string = "film";
 
+  Categorie: boolean = false;
 
-  constructor(private nav: NavbarService, private suggestionService: SuggestionService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private renderer: Renderer2,
+
+  constructor(private nav: NavbarService, private suggestionService: SuggestionService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private face: FormBuilder, private renderer: Renderer2,
     private sanitizer: DomSanitizer, private _httpClient: HttpClient, private movieService: MovieService, private serieService: SerieService) {
     nav.show()
   }
@@ -44,6 +46,10 @@ export class MainComponent implements OnInit {
 
     this.shippingForm = this.fb.group({
       signatureReq: ['film'],
+    })
+
+    this.CategorieForm = this.face.group({
+      juju: ['libelle'],
     })
     // this.tabSuggestion = this.suggestionService.getSuggestions();
     this.rechercheRapideForm = new FormGroup({
@@ -108,7 +114,10 @@ export class MainComponent implements OnInit {
 
 
   shippingForm: FormGroup;
+  CategorieForm: FormGroup;
 
+
+  julie: Array<Categorie> = []; 
 
 
   lis: Serie;
@@ -117,7 +126,7 @@ export class MainComponent implements OnInit {
 
   listeMovie: Array<Categorie> = [];
 
-  changeRadioValue(): void {
+  changeRadioValue(): void  {
     console.log(this.shippingForm.get('signatureReq'));
     console.log(this.shippingForm.get('signatureReq').value); // value : movie, series, both
     if (this.shippingForm.get('signatureReq').value == 'movie') {
@@ -138,15 +147,6 @@ export class MainComponent implements OnInit {
             this.listeMovie.push(video[i].categories[m]);
 
 
-
-            // this.liste.push(serie[i].categories[m]);
-
-            //  this.liste = this.liste.filter(liste => liste[serie[i].categories[m].id_categ] != liste[serie[i+1].categories[m].id_categ]);
-
-            // this.liste[serie[i].categories[m].id_categ] += serie[i].categories[m].libelle; 
-
-            //this.liste[serie[i].categories[m].id_categ] += serie[i].categories[m].libelle;
-
           }
         }
 
@@ -160,36 +160,16 @@ export class MainComponent implements OnInit {
           return unique;
         }, []);
         console.log(result.length);
+      
+        this.julie = result;
+        
 
-        var sentence_type = ` <div id="myid" style="color: rgb(93,84,164);  font-size: 22px;"> Quels catégories ? </div>  <form action="/action_page.php" > `;
-        var newContent;
-
-        for (let i = 0; i < result.length; i++) {
-
-
-
-          newContent += `
-            <input type="checkbox" id = "vehicle1" name = "vehicle1" value = "Bike" >
-               ` + result[i].libelle + ` <br>`
-
-
-
-
-
-        }
-
-        newContent += `<input type = "submit" value = "Valider" > </form>`;
-        var final = sentence_type + newContent;
-
-
-
-
-        this.renderer.setProperty(this.myButton.nativeElement, 'innerHTML', final);
+        var sentence_type = `<div id="myid" style="color: rgb(93,84,164);  font-size: 22px;"> Quels catégories ? `; 
+        this.renderer.setProperty(this.myButton.nativeElement, 'innerHTML', sentence_type);
 
       });
 
-
-
+    
     }
 
 
@@ -209,15 +189,6 @@ export class MainComponent implements OnInit {
             this.liste.push(serie[i].categories[m]);
 
 
-
-            // this.liste.push(serie[i].categories[m]);
-
-            //  this.liste = this.liste.filter(liste => liste[serie[i].categories[m].id_categ] != liste[serie[i+1].categories[m].id_categ]);
-
-            // this.liste[serie[i].categories[m].id_categ] += serie[i].categories[m].libelle; 
-
-            //this.liste[serie[i].categories[m].id_categ] += serie[i].categories[m].libelle;
-
           }
         }
 
@@ -232,32 +203,20 @@ export class MainComponent implements OnInit {
         }, []);
         console.log(result.length);
 
-        var sentence_type = ` <div id="myid" style="color: rgb(93,84,164);  font-size: 22px;"> Quels catégories ? </div>  <form action="/action_page.php" > `;
-        var newContent;
-
-        for (let i = 0; i < result.length; i++) {
-
-
-
-          newContent += `
-            <input type="checkbox" id = "vehicle1" name = "vehicle1" value = "Bike" >
-               ` + result[i].libelle + ` <br>`
+        var sentence_type = `<div id="myid" style="color: rgb(93,84,164);  font-size: 22px;"> Quels catégories ? </div><form [formGroup]="CategorieForm" #myCategorie (ngSubmit)="SubmitCategorie()">   `;
+   
+        this.julie = result;
+     
+      
 
 
 
-
-
-        }
-
-        newContent += `<input type = "submit" value = "Valider" > </form>`;
-        var final = sentence_type + newContent;
-
-
-
-
-        this.renderer.setProperty(this.myButton.nativeElement, 'innerHTML', final);
+        this.renderer.setProperty(this.myButton.nativeElement, 'innerHTML', sentence_type);
 
       });
+
+
+
     }
 
       // BOTH 
@@ -315,30 +274,16 @@ export class MainComponent implements OnInit {
 
          
 
-            var sentence_type = ` <div id="myid" style="color: rgb(93,84,164);  font-size: 22px;"> Quels catégories ? </div>  <form action="/action_page.php" > `;
-            var newContent;
+          var sentence_type = ` <div id="myid" style="color: rgb(93,84,164);  font-size: 22px;"> Quels catégories ? <form [formGroup]="CategorieForm" #myCategorie "> `;
+          
 
-            for (let i = 0; i < resultat2.length; i++) {
+       
+          this.julie = resultat2;
 
-
-
-              newContent += `
-            <input type="checkbox" id = "vehicle1" name = "vehicle1" value = "Bike" >
-               ` + resultat2[i].libelle + ` <br>`
+       
 
 
-
-
-
-            }
-
-            newContent += `<input type = "submit" value = "Valider" > </form>`;
-            var final = sentence_type + newContent;
-
-
-
-
-            this.renderer.setProperty(this.myButton.nativeElement, 'innerHTML', final);
+            this.renderer.setProperty(this.myButton.nativeElement, 'innerHTML', sentence_type);
 
           });
 
@@ -351,9 +296,20 @@ export class MainComponent implements OnInit {
 
       }
 
+    this.Categorie = true;
+
+  }
 
 
-    }
+  SubmitCategorie(): void {
+
+    console.log(this.shippingForm.get('juju').value); 
+  }
+
+  
+
+
+
   }
 
 

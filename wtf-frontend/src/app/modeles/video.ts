@@ -19,5 +19,6 @@ export class Video {
     plateformes : Array<Plateforme>;
     categories : Array<Categorie>;
     trailer : String;
+    length: number;
 }
 

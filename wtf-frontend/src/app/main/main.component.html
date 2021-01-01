@@ -57,23 +57,39 @@
   <div *ngIf="isRechercheAvance" class="rechercheAvance">
     <form [formGroup]="shippingForm" #myButton>
       <h3>Quel type de vidéo ?</h3>
-
-
       <mat-radio-group formControlName="signatureReq" (change)="changeRadioValue()">
         <mat-radio-button [value]="'movie'">Film</mat-radio-button>
         <mat-radio-button [value]="'series'">Série</mat-radio-button>
         <mat-radio-button [value]="'both'">Les 2</mat-radio-button>
       </mat-radio-group>
-
-
     </form>
-
-
-
 
   </div>
 
- 
+  <div *ngIf="Categorie">
+
+    <form [formGroup]="CategorieForm" #myCategorie formControlName="juju" (submit)="SubmitCategorie()">
+
+      <li *ngFor="let suggestion of julie">
+
+        <input type="checkbox" [attr.checked]="suggestion.Checked == true ? true : null"
+           (change)="suggestion.Checked = !suggestion.Checked"
+           [attr.disabled]="suggestion.Id==1 ? true : null" id={{suggestion.libelle}} name={{suggestion.libelle}} value={{suggestion.libelle}}>
+        {{suggestion.libelle}} <br />
+
+      </li>
+
+      <button  mat-stroked-button class="boutonRecherche">Soumettre ces catégories</button>
+
+    </form>
+  </div>
+
+
+
+
+
+
+
 
 </div>
 

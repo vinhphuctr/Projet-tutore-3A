@@ -23,5 +23,6 @@ export class Serie {
   categories : Array<Categorie>;
   trailer: String;
   saisons: Array<Saison>; 
+    length: number;
 
 }
