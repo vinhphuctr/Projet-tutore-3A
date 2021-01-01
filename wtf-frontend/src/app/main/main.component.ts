@@ -288,7 +288,7 @@ export class MainComponent implements OnInit {
         for (let m = 0; m < this.listeVideos[i].categories.length; m++) {
           for (let n = 0; n < this.CategorieForm.value.checkArray.length; n++) {
 
-            console.log(this.CategorieForm.value.length); 
+            console.log(this.CategorieForm.value.checkArray.length); 
 
             if (this.CategorieForm.value.checkArray[n] == this.listeVideos[i].categories[m].id_categ) {
 
@@ -305,14 +305,25 @@ export class MainComponent implements OnInit {
         }
       }
 
+      let result: Array<Video> = [];
+      result = this.liste_after_categories_movies.reduce((unique, o) => {
+        if (!unique.some(obj => obj.titre === o.titre)) {
+          unique.push(o);
+        }
+        return unique;
+      }, []);
+
+      console.log(result); 
+
+      console.log(this.listeVideos);
+
+     
+
+
 
     }
 
-    console.log(this.listeVideos);
-
-    
-    console.log(this.liste_after_categories_movies);
-
+   
 
   }
   }
