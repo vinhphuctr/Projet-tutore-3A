@@ -20,5 +20,7 @@ export class Video {
     categories : Array<Categorie>;
     trailer : String;
     length: number;
+
+   results: Array<Video>;
 }
 

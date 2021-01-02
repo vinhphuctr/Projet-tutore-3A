@@ -25,7 +25,8 @@ import { Categorie } from '../modeles/categorie';
 export class MainComponent implements OnInit {
   @ViewChild('myButton') myButton: ElementRef;
   parentMessage = "message from parent";
-
+  @ViewChild('myCategorie') myCategorie: ElementRef;
+  @ViewChild('myLanguage') myLanguage: ElementRef;
   tabSuggestion: Object;
   isRechercheRapide: boolean = false;
   isRechercheAvance: boolean = false;
@@ -35,25 +36,25 @@ export class MainComponent implements OnInit {
   film_value: string = "film";
   shippingForm: FormGroup;
   CategorieForm: FormGroup;
+  languageForm: FormGroup;
   tabCategories: Array<Categorie> = [];
   lis: Serie;
   liste: Array<Categorie> = [];
   listeMovie: Array<Categorie> = [];
   Categorie: boolean = false;
-
-
+  vo: boolean = false;
+  language: boolean = false;
   listeVideos: Array<Video> = [];
-
   listeSeries: Array<Serie> = [];
+  liste_after_categories_movies: Video;
+  liste_after_categories_series: Array<Serie> = [];
+  tab_liste_vo_after_movie: Array<Video> = [];
+  tab_liste_vo_after_serie: Array<Serie> = [];
+  radioSelected : string = ''; 
+  listeCategorieTest: Array<Categorie> = [];
+  shipping: FormGroup;
+  tab_vo: Array<any> = [];
 
-
-  liste_after_categories_movies: Array<Video> = [];
-
-
-
-  
-
-  
 
 
   constructor(private nav: NavbarService, private suggestionService: SuggestionService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private face: FormBuilder, private renderer: Renderer2,
@@ -63,13 +64,22 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.shipping = this.fb.group({
+      signature: ['false'],
+    })
+
     this.shippingForm = this.fb.group({
       signatureReq: ['film'],
     })
-
+    this.languageForm = this.fb.group({
+      julie: ['film'],
+    })
     this.CategorieForm = this.fb.group({
       checkArray: this.fb.array([], [Validators.required])
     })
+
+
+   
     // this.tabSuggestion = this.suggestionService.getSuggestions();
     this.rechercheRapideForm = new FormGroup({
       recherche: new FormControl("", [Validators.required])
@@ -148,133 +158,54 @@ export class MainComponent implements OnInit {
 
   }
 
-  changeRadioValue(): void  {
+  changeRadioValue(): void {
     console.log(this.shippingForm.get('signatureReq'));
     console.log(this.shippingForm.get('signatureReq').value); // value : movie, series, both
+
+
     if (this.shippingForm.get('signatureReq').value == 'movie') {
 
-      localStorage.setItem('choix', 'movie');
-      this.movieService.getAllMovies().subscribe((video: Video) => {
-        for (let i = 0; i < video.length; i++) {
-
-          this.listeVideos.push(video[i]); 
-          for (let m = 0; m < video[i].categories.length; m++) {
-
-           
-            console.log(video[i].categories[m].libelle);
-
-            this.listeMovie.push(video[i].categories[m]);
-          }
-        }
-        let result: Array<Categorie> = [];
-
-        result = this.listeMovie.reduce((unique, o) => {
-          if (!unique.some(obj => obj.id_categ === o.id_categ)) {
-            unique.push(o);
-          }
-          return unique;
-        }, []);
-        console.log(result.length);
-        this.tabCategories = result;
-        var sentence_type = `<div id="myid" style="color: rgb(93,84,164);  font-size: 22px;"> Quels catégories ? `;
-        this.renderer.setProperty(this.myButton.nativeElement, 'innerHTML', sentence_type);
-      });
+      localStorage.setItem('choix', 'movie'); 
     }
     if (this.shippingForm.get('signatureReq').value == 'series') {
 
       localStorage.setItem('choix', 'serie');
-      this.serieService.getAllSeries().subscribe((serie: Serie) => {
-        for (let i = 0; i < serie.length; i++) {
 
-          this.listeSeries.push(serie[i]);
-          for (let m = 0; m < serie[i].categories.length; m++) {
-            console.log(serie[i].categories[m].libelle);
-            this.liste.push(serie[i].categories[m]);
-          }
-        }
-        let result: Array<Categorie> = [];
-        result = this.liste.reduce((unique, o) => {
-          if (!unique.some(obj => obj.id_categ === o.id_categ)) {
-            unique.push(o);
-          }
-          return unique;
-        }, []);
-        console.log(result.length);
-        var sentence_type = `<div id="myid" style="color: rgb(93,84,164);  font-size: 22px;"> Quels catégories ? </div><form [formGroup]="CategorieForm" #myCategorie (ngSubmit)="SubmitCategorie()">   `;
-        this.tabCategories = result;
-        this.renderer.setProperty(this.myButton.nativeElement, 'innerHTML', sentence_type);
-      });
+      // WARNING !!!! can you guys keep this part ? I'd appreciate it, thanks dude 
+      //this.serieService.getAllSeries().subscribe((serie: Serie) => {
+      //  for (let i = 0; i < serie.length; i++) {
+
+      //    this.listeSeries.push(serie[i]);
+      //    for (let m = 0; m < serie[i].categories.length; m++) {
+      //      console.log(serie[i].categories[m].libelle);
+      //      this.liste.push(serie[i].categories[m]);
+      //    }
+      //  }
+      //  let result: Array<Categorie> = [];
+      //  result = this.liste.reduce((unique, o) => {
+      //    if (!unique.some(obj => obj.id_categ === o.id_categ)) {
+      //      unique.push(o);
+      //    }
+      //    return unique;
+      //  }, []);
+      
+    //  });
     }
 
-      // BOTH
+    // BOTH
     if (this.shippingForm.get('signatureReq').value == 'both') {
 
       localStorage.setItem('choix', 'both');
-
-        this.serieService.getAllSeries().subscribe((serie: Serie) => {
-
-
-          for (let i = 0; i < serie.length; i++) {
-
-            this.listeSeries.push(serie[i]); 
-
-
-
-            for (let m = 0; m < serie[i].categories.length; m++) {
-              console.log(serie[i].categories[m].libelle);
-
-
-              this.liste.push(serie[i].categories[m]);
-
-            }
-          }
-        this.movieService.getAllMovies().subscribe((video: Video) => {
-
-          for (let i = 0; i < video.length; i++) {
-            this.listeVideos.push(video[i]); 
-
-
-            for (let m = 0; m < video[i].categories.length; m++) {
-              console.log(video[i].categories[m].libelle);
-
-
-              this.listeMovie.push(video[i].categories[m]);
-
-            }
-          }
-
-
-
-          let result: Array<Categorie> = [];
-          let resultat2: Array<Categorie> = [];
-        
-
-          result = this.liste.concat(this.listeMovie);
-          resultat2 = result.reduce((unique, o) => {
-            if (!unique.some(obj => obj.id_categ === o.id_categ)) {
-              unique.push(o);
-            }
-            return unique;
-          }, []);
-
-
-
-          var sentence_type = ` <div id="myid" style="color: rgb(93,84,164);  font-size: 22px;"> Quels catégories ? <form [formGroup]="CategorieForm" #myCategorie "> `;
-
-
-
-          this.tabCategories = resultat2;
-
-
-
-
-            this.renderer.setProperty(this.myButton.nativeElement, 'innerHTML', sentence_type);
-
-          });
-
-        });
-      }
+    }
     this.Categorie = true;
+    this.suggestionService.getAllCategories().subscribe((categorie: Categorie) => {
+      this.listeCategorieTest = categorie.results;
+      console.log(this.listeCategorieTest);
+      return this.listeCategorieTest; 
+    });
+    var sentence_type = ``;
+    this.renderer.setProperty(this.myButton.nativeElement, 'innerHTML', sentence_type);
+    
   }
 
   SubmitCategorie(): void {
@@ -282,50 +213,133 @@ export class MainComponent implements OnInit {
     console.log(localStorage.getItem('choix'));
     console.log(this.CategorieForm.value);
     console.log(this.CategorieForm.value.checkArray);
-
+    let array = []; 
+    array  = Array.from(this.CategorieForm.value.checkArray);
+    localStorage.setItem('categorie', JSON.stringify(array));
     if (localStorage.getItem('choix') == 'movie') {
-      for (let i = 0; i < this.listeVideos.length; i++) {
-        for (let m = 0; m < this.listeVideos[i].categories.length; m++) {
-          for (let n = 0; n < this.CategorieForm.value.checkArray.length; n++) {
-
-            console.log(this.CategorieForm.value.checkArray.length); 
-
-            if (this.CategorieForm.value.checkArray[n] == this.listeVideos[i].categories[m].id_categ) {
-
-              this.liste_after_categories_movies.push(this.listeVideos[i]);
-
-              
-              
-            }
-
-
-          }
-         
-       
-        }
-      }
-
-      let result: Array<Video> = [];
-      result = this.liste_after_categories_movies.reduce((unique, o) => {
-        if (!unique.some(obj => obj.titre === o.titre)) {
-          unique.push(o);
-        }
-        return unique;
-      }, []);
-
-      console.log(result); 
-
-      console.log(this.listeVideos);
-
-     
-
-
-
+      this.suggestionService.rechercheAvancee_Categorie_movies(this.CategorieForm.value.checkArray).subscribe((video: Video) => {
+        this.liste_after_categories_movies = video;
+        console.log(this.liste_after_categories_movies); 
+        return this.liste_after_categories_movies;
+      });
+    }
+    if (localStorage.getItem('choix') == 'serie') {
+      this.suggestionService.rechercheAvancee_Categorie_series(this.CategorieForm.value.checkArray).subscribe((serie: Serie[]) => {
+        this.liste_after_categories_series = serie;
+        console.log(this.liste_after_categories_series);
+        return this.liste_after_categories_series;
+      });
+    }
+    if (localStorage.getItem('choix') == 'both') {
+      this.suggestionService.rechercheAvancee_Categorie_movies(this.CategorieForm.value.checkArray).subscribe((video: Video) => {
+        this.liste_after_categories_movies = video;
+        console.log(this.liste_after_categories_movies);
+        return this.liste_after_categories_movies;
+      });
+      this.suggestionService.rechercheAvancee_Categorie_series(this.CategorieForm.value.checkArray).subscribe((serie: Serie[]) => {
+        this.liste_after_categories_series = serie;
+        console.log(this.liste_after_categories_series);
+        return this.liste_after_categories_series;
+      });
     }
 
-   
+
+
+
+    //if (localStorage.getItem('choix') == 'serie') {
+    //  for (let i = 0; i < this.listeSeries.length; i++) {
+    //    for (let m = 0; m < this.listeSeries[i].categories.length; m++) {
+    //      for (let n = 0; n < this.CategorieForm.value.checkArray.length; n++) {
+
+    //        console.log(this.CategorieForm.value.checkArray.length);
+
+    //        if (this.CategorieForm.value.checkArray[n] == this.listeSeries[i].categories[m].id_categ) {
+    //          this.liste_after_categories_series.push(this.listeSeries[i]);
+    //        }
+
+    //      }
+
+    //    }
+    //  }
+    //  let result: Array<Serie> = [];
+    //  result = this.liste_after_categories_series.reduce((unique, o) => {
+    //    if (!unique.some(obj => obj.titre === o.titre)) {
+    //      unique.push(o);
+    //    }
+    //    return unique;
+    //  }, []);
+    //  console.log(result);
+    //  console.log(this.listeSeries);
+    //}
+
+
+    this.language = true;
+    var sentence_type = ``;
+    this.renderer.setProperty(this.myCategorie.nativeElement, 'innerHTML', sentence_type);
+  }
+
+ 
+  // Radio Change Event
+  
+
+  changeLanguageValue() {
+    console.log(this.shipping.get('signature').value);
+    console.log(localStorage.getItem('choix'));
+
+    if (this.shipping.get('signature').value == 'vo') {
+      if (localStorage.getItem('choix') == 'movie') {
+        for (let i = 0; i < this.liste_after_categories_movies.results.length; i++) {
+          
+          console.log(this.liste_after_categories_movies.results[i].vo);
+        }
+
+      
+      }
+
+      // film le vo ça marche
+      if (localStorage.getItem('choix') == 'serie') {
+          for (let i = 0; i < this.liste_after_categories_series.length; i++) {
+            this.tab_vo[i] = this.liste_after_categories_series[i].vo;
+        }
+
+
+
+        }
+      if (localStorage.getItem('choix') == 'both') {
+        for (let i = 0; i < this.liste_after_categories_movies.length; i++) {
+          this.tab_vo[i] = this.liste_after_categories_movies[i].vo;
+        }
+
+        for (let i = 0; i < this.liste_after_categories_series.length; i++) {
+          this.tab_vo[i] = this.liste_after_categories_series[i].vo;
+        }
+
+        let result: Array<any> = [];
+        result = this.tab_vo.reduce((unique, o) => {
+          if (!unique.some(obj => obj === o)) {
+            unique.push(o);
+          }
+          return unique;
+        }, []);
+        console.log(result); 
+      }
+
+
+      console.log(this.tab_vo +'hua');
+      
+
+
+
+        this.vo = true;
+        var sentence_type = ``;
+        this.renderer.setProperty(this.myLanguage.nativeElement, 'innerHTML', sentence_type);
+
+
+
+
+      }
+    }
+
 
   }
-  }
-
 

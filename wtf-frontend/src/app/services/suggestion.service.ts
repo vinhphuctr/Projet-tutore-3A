@@ -3,6 +3,7 @@ import { HttpClient,HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Serie } from '../modeles/serie';
 import { Video } from '../modeles/video';
+import { Categorie } from '../modeles/categorie';
 import { rechercheAvancee } from '../modeles/rechercheAvancee';
 
 
@@ -11,6 +12,9 @@ import { rechercheAvancee } from '../modeles/rechercheAvancee';
   providedIn: 'root'
 })
 export class SuggestionService {
+
+  url: string;
+  url_serie: string; 
 
 
   constructor(private _httpClient : HttpClient) { }
@@ -45,12 +49,46 @@ export class SuggestionService {
     else {
       url = "https://wtf-api-v1.herokuapp.com/api/series?";
     }
-    if(recherche.titre != null || recherche.titre != undefined){
+  /*  if(recherche.titre != null || recherche.titre != undefined){
       url += "&titre=" + recherche.titre;
     }
     if(recherche.vo != null || recherche.titre != undefined){
       url += "&vo=" + recherche.vo;
-    }
+    }*/
     return this._httpClient.get<Video[]>(url);
-   }
+  }
+
+
+  getAllCategories(): Observable<Categorie> {
+
+    let url = "https://wtf-api-v1.herokuapp.com/api/categories"; 
+    return this._httpClient.get<Categorie>(url);
+  }
+
+
+  rechercheAvancee_Categorie_movies(tab_categorie: Array<number>): Observable<Video> {
+    // http://wtf-api-v1.herokuapp.com/api/series?categories=35&categories=12&
+    this.url = "https://wtf-api-v1.herokuapp.com/api/films?";
+
+    for (let i = 0; i < tab_categorie.length; i++) {
+      this.url += "categories=" + tab_categorie[i] + "&";
+
+    }
+
+    console.log(this.url);
+
+    return this._httpClient.get<Video>(this.url);
+  }
+  rechercheAvancee_Categorie_series(tab_categorie: Array<any>): Observable<Serie[]> {
+
+    this.url_serie = "https://wtf-api-v1.herokuapp.com/api/series?";
+
+    for (let i = 0; i < tab_categorie.length; i++) {
+      this.url_serie += "categories=" + tab_categorie[i] + "&";
+
+    }
+    return this._httpClient.get<Serie[]>(this.url_serie);
+  }
+
+
 }

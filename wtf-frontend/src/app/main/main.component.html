@@ -54,6 +54,8 @@
     </form>
   </div>-->
 
+ 
+
   <div *ngIf="isRechercheAvance" class="rechercheAvance">
     <form [formGroup]="shippingForm" #myButton>
       <h3>Quel type de vidéo ?</h3>
@@ -63,12 +65,42 @@
         <mat-radio-button [value]="'both'">Les 2</mat-radio-button>
       </mat-radio-group>
     </form>
-
   </div>
 
+  <div *ngIf="language" class="rechercheAvance">
+    <form [formGroup]="shipping" #myLanguage>
+      <h3>En quel langage souhaitez-vous voir ?</h3>
+      <mat-radio-group formControlName="signature" (change)="changeLanguageValue()">
+        <mat-radio-button [value]="'v'">Version dans votre langue</mat-radio-button>
+        <mat-radio-button [value]="'vo'">Version originale</mat-radio-button>
+        <mat-radio-button [value]="'both'">Peu importe</mat-radio-button>
+      </mat-radio-group>
+    </form>
+  </div>
   <div *ngIf="Categorie">
 
-    <form [formGroup]="CategorieForm" #myCategorie formControlName="juju" (submit)="SubmitCategorie()">
+    <form [formGroup]="CategorieForm" #myCategorie formControlName="juju" (submit)="SubmitCategorie()" #myCategorie>
+      <h3> Quels catégories ?</h3>
+      <li *ngFor="let categorie of listeCategorieTest">
+        <label>
+          <input type="checkbox" [value]="categorie.id_categ" (change)="onCheckboxChange($event)" />
+          {{categorie.libelle}}
+        </label>
+      </li>
+
+      <button mat-stroked-button class="boutonRecherche">Soumettre ces catégories</button>
+
+    </form>
+  </div>
+
+
+
+
+  <div *ngIf="vo">
+    hey
+
+    <!--<form [formGroup]="CategorieForm" #myCategorie formControlName="juju" (submit)="SubmitCategorie()" #myCategorie>
+      <h3> Quels catégories ?</h3>
 
       <li *ngFor="let categorie of tabCategories">
         <label>
@@ -77,9 +109,9 @@
         </label>
       </li>
 
-      <button  mat-stroked-button class="boutonRecherche">Soumettre ces catégories</button>
+      <button mat-stroked-button class="boutonRecherche">Soumettre ces catégories</button>
 
-    </form>
+    </form>-->
   </div>
 
 

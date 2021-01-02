@@ -1,7 +1,6 @@
 export class rechercheAvancee {
-  filmOuSerie: string;
-  titre: string;
-  duree: number;
-  categories: string;
+  filmOuSerie: string; // ok
+  duree: number; 
+  categories: string; // ok 
   vo: string;
 }
