@@ -26,9 +26,6 @@ export class MovieService {
           this.nbrNotes += 1;
           return rate.user === this._connexionService.getCurrentUser().id;
         })
-        if(res.rates.length > 0){
-          this.ancienneNote = res.rates[0].note;
-        }
         return res
       }));
   }
@@ -51,6 +48,10 @@ export class MovieService {
 
   getAncienneNote(){
     return this.ancienneNote;
+  }
+
+  setAncienneNote(note :number){
+    this.ancienneNote = note;
   }
 
 

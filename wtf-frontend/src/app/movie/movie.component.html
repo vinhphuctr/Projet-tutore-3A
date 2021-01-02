@@ -20,7 +20,7 @@
       <div style="position: relative; text-align: center; margin-top: 16px;">
         <button class="button" mat-stroked-button (click)="showHide()">SCORE !</button>
         <div [id]="video?.id_video" [hidden]="starVisible" style= "margin-top:20px">
-          <p-rating *ngIf="actualRating" [iconOnStyle]="{'color':'rgb(93,84,164)'}" [(ngModel)]="actualRating.note" [cancel]="false" (onRate)="postRate($event, video, actualRating.note)"></p-rating>
+          <p-rating *ngIf="actualRating" [iconOnStyle]="{'color':'rgb(93,84,164)'}" [(ngModel)]="actualRating.note" [cancel]="false" (onRate)="postRate($event, video)"></p-rating>
         </div>
       </div>
     </div>
