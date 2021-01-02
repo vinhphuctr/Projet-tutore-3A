@@ -8,7 +8,6 @@ import { FavorisService } from '../services/favoris.service';
 import { NoteFilm } from '../modeles/note';
 import { RatingService } from '../services/rating-service.service';
 import { connexionService } from '../services/connexion.service';
-import { of } from 'rxjs';
 
 
 @Component({
@@ -25,7 +24,7 @@ export class MovieComponent implements OnInit {
   time: string;
   actualRating: NoteFilm;
   UtilisateurData: Utilisateur;
-  @Input() moyenneRating: number;
+  moyenneRating: number;
 
 
   constructor(
@@ -52,6 +51,7 @@ export class MovieComponent implements OnInit {
       } else {
         this.actualRating = this.video.rates[0];
       }
+      this.moyenneRating = this._movieService.getTotalNotes() / this._movieService.getnbrNotes();
     });
   }
 
@@ -60,17 +60,6 @@ export class MovieComponent implements OnInit {
       this.isTrailer = true;
     }
   }
-
-  /*ngAfterViewChecked(): void{
-    this.checkIfFav(this.id);
-    this.formatLabel(Number(this.video.duree));
-  }*/
-
-
-  /*getMovie():void{
-      this._movieService.getMovie(this.id)
-        .subscribe(video => this.video = video);
-    }*/
 
   goBack(): void {
     this._location.back();
@@ -81,12 +70,26 @@ export class MovieComponent implements OnInit {
     if (this.actualRating.id == null) {
       this._ratingService.postRating(this.actualRating).subscribe(rate => {
         this.video.rates.push(rate);
+        this._movieService.setNbrNotes();
+        this._movieService.setTotalNotes(this.actualRating.note);
+        this.moyenneRating = this._movieService.getTotalNotes() / this._movieService.getnbrNotes();
       });
     } else {
       this._ratingService.putRating(this.actualRating).subscribe(rate => {
         rate.film = this.video.id_video;
         this.video.rates[0] = rate;
-        console.log(this.video);
+        console.log(this._movieService.getnbrNotes());
+        console.log(this._movieService.getTotalNotes());
+        console.log(this._movieService.getAncienneNote());
+        console.log(this.actualRating);
+        console.log("dazdza");
+        this._movieService.setTotalNotes(-this._movieService.getAncienneNote());
+        this._movieService.setTotalNotes(this.actualRating.note);
+        console.log(this._movieService.getnbrNotes());
+        console.log(this._movieService.getTotalNotes());
+        console.log(this._movieService.getAncienneNote());
+        console.log(this.actualRating);
+        this.moyenneRating = this._movieService.getTotalNotes() / this._movieService.getnbrNotes();
       })
     }
   }

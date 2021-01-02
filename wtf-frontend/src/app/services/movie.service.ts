@@ -12,6 +12,7 @@ export class MovieService {
 
   totalNotes : number = 0;
   nbrNotes : number = 0;
+  ancienneNote :number;
 
   constructor(private _httpClient: HttpClient, private _connexionService: connexionService) { }
 
@@ -25,6 +26,9 @@ export class MovieService {
           this.nbrNotes += 1;
           return rate.user === this._connexionService.getCurrentUser().id;
         })
+        if(res.rates.length > 0){
+          this.ancienneNote = res.rates[0].note;
+        }
         return res
       }));
   }
@@ -35,6 +39,18 @@ export class MovieService {
 
   getnbrNotes(){
     return this.nbrNotes;
+  }
+
+  setTotalNotes(note:number){
+    this.totalNotes = this.totalNotes + note;
+  }
+
+  setNbrNotes(){
+    this.nbrNotes = this.nbrNotes + 1;
+  }
+
+  getAncienneNote(){
+    return this.ancienneNote;
   }
 
 

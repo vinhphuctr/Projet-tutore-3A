@@ -29,6 +29,7 @@ export class RechercheRapideComponent implements OnInit {
     if(localStorage.getItem('typeDeRecherche') == "rechercheRapide"){
       this._suggestionService.rechercheRapide(localStorage.getItem('rechercheRapide')).subscribe((video: Video[]) => {
         this.tabResultat = video;
+        this.url = "/film/";
       });
     }
     else {

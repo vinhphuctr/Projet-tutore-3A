@@ -22,10 +22,7 @@ export class UtilisateurService {
   }
 
   clearUser() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expire_at');
-    localStorage.removeItem('currentUser');
-
+    localStorage.clear();
   }
   getToken(){
     return localStorage.getItem('token');
