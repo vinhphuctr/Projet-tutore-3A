@@ -62,8 +62,6 @@ export class SerieComponent implements OnInit {
         } else {
           this.actualRating[saison.id_saison] = saison.rates[0];
         }
-        console.log(this._serieService.getTotalNotes(saison.id_saison));
-        console.log(this._serieService.getnbrNotes(saison.id_saison));
         this.moyenneRatingBySaison[saison.id_saison] = Number((Number(this._serieService.getTotalNotes(saison.id_saison)) / Number(this._serieService.getnbrNotes(saison.id_saison))).toPrecision(2));
         console.log(this.moyenneRatingBySaison[saison.id_saison]);
         if(this.moyenneRatingBySaison[saison.id_saison]){
@@ -73,7 +71,6 @@ export class SerieComponent implements OnInit {
         }
       }
       this.moyenneRating = Number((this.totalRating / i).toPrecision(2));
-      console.log(this.moyenneRating);
     });
   }
 
@@ -103,14 +100,10 @@ export class SerieComponent implements OnInit {
     this.actualRating[item.id_saison].saison = item.id_saison;
     if (this.actualRating[item.id_saison].id == null) {
       this._ratingService.postRatingSerie(this.actualRating[item.id_saison]).subscribe(rate => {
-        console.log(this.moyenneRatingBySaison);
         this.actualRating[item.id_saison] = rate;
         this._serieService.setNbrNotes(item.id_saison);
         this._serieService.setTotalNotes(rate.note, item.id_saison);
-        console.log(this._serieService.getTotalNotes(item.id_saison));
-        console.log(this._serieService.getnbrNotes(item.id_saison));
         this.moyenneRatingBySaison[item.id_saison] = Number((Number(this._serieService.getTotalNotes(item.id_saison)) / Number(this._serieService.getnbrNotes(item.id_saison))).toPrecision(2));
-        console.log(this.moyenneRatingBySaison);
         let totalRating = 0;
         for(let saison of this.serie.saisons){
           if(this.moyenneRatingBySaison[saison.id_saison]){
