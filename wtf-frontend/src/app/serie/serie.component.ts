@@ -45,11 +45,10 @@ export class SerieComponent implements OnInit {
 
     this.id = +this.route.snapshot.paramMap.get('id');
     this._serieService.getSerie(this.id).subscribe((serie: Serie) => {
-     
-      this.getSerie();
-      this.serie = serie;
 
-   
+      this.serie = serie;
+      let i = 0;
+
       this.UtilisateurData = this.utilisateurService.getUser();
       for(let saison of this.serie.saisons){
         this.nbrEpisodesTotal += Number(saison.nb_episode);
@@ -63,26 +62,15 @@ export class SerieComponent implements OnInit {
         } else {
           this.actualRating[saison.id_saison] = saison.rates[0];
         }
-        console.log(this._serieService.getTotalNotes(saison.id_saison));
-        console.log(this._serieService.getnbrNotes(saison.id_saison));
-        this.moyenneRatingBySaison[saison.id_saison] = this._serieService.getTotalNotes(saison.id_saison) / this._serieService.getnbrNotes(saison.id_saison);
+        this.moyenneRatingBySaison[saison.id_saison] = Number((Number(this._serieService.getTotalNotes(saison.id_saison)) / Number(this._serieService.getnbrNotes(saison.id_saison))).toPrecision(2));
         console.log(this.moyenneRatingBySaison[saison.id_saison]);
-        if (this._serieService.getTotalNotes(saison.id_saison)) {
+        if(this.moyenneRatingBySaison[saison.id_saison]){
 
-          //if (this.moyenneRating == null) {
-          this.totalRating += Number(this.moyenneRatingBySaison[saison.id_saison]);
+          this.totalRating += Number(this.moyenneRatingBySaison[saison.id_saison].toPrecision(2));
+          i +=1;
         }
-        //}
-        
-       
-       
-
       }
-      console.log("série");
-      let i = serie.saisons.length;
-     
-      this.moyenneRating = this.totalRating / i; 
-      console.log(this.moyenneRating); 
+      this.moyenneRating = Number((this.totalRating / i).toPrecision(2));
     });
   }
 
@@ -108,16 +96,53 @@ export class SerieComponent implements OnInit {
   }
 
   postRate(event, item) {
+    let i = 0;
     this.actualRating[item.id_saison].saison = item.id_saison;
     if (this.actualRating[item.id_saison].id == null) {
-      this.showHide();
       this._ratingService.postRatingSerie(this.actualRating[item.id_saison]).subscribe(rate => {
+        this.actualRating[item.id_saison] = rate;
+        this._serieService.setNbrNotes(item.id_saison);
+        this._serieService.setTotalNotes(rate.note, item.id_saison);
+        this.moyenneRatingBySaison[item.id_saison] = Number((Number(this._serieService.getTotalNotes(item.id_saison)) / Number(this._serieService.getnbrNotes(item.id_saison))).toPrecision(2));
+        let totalRating = 0;
+        for(let saison of this.serie.saisons){
+          if(this.moyenneRatingBySaison[saison.id_saison]){
+            totalRating += Number(this.moyenneRatingBySaison[saison.id_saison]);
+            i+= 1;
+          }
+        }
+        this.moyenneRating = Number((totalRating / i).toPrecision(2));
       });
     } else {
       this._ratingService.putRatingSerie(this.actualRating[item.id_saison]).subscribe(rate => {
       });
     }
   }
+
+  /*
+   postRate(event, item) {
+    let ancienneNote = this._movieService.getAncienneNote();
+    this.actualRating.film = this.video.id_video;
+    if (this.actualRating.id == null) {
+      this._ratingService.postRating(this.actualRating).subscribe(rate => {
+        this.actualRating = rate;
+        this.video.rates.push(rate);
+        this._movieService.setNbrNotes();
+        this._movieService.setTotalNotes(rate.note);
+        this.moyenneRating = Number((this._movieService.getTotalNotes() / this._movieService.getnbrNotes()).toPrecision(2));
+        this._movieService.setAncienneNote(this.actualRating.note);
+      });
+    } else {
+      this._ratingService.putRating(this.actualRating).subscribe(rate => {
+        rate.film = this.video.id_video;
+        this.video.rates[0] = rate;
+        this._movieService.setTotalNotes(-ancienneNote);
+        this._movieService.setTotalNotes(this.actualRating.note);
+        this.moyenneRating = Number((this._movieService.getTotalNotes() / this._movieService.getnbrNotes()).toPrecision(2));
+      })
+      this._movieService.setAncienneNote(this.actualRating.note);
+    }
+  }*/
 
   redirectUrl(trailer){
     window.open(trailer);

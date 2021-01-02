@@ -16,7 +16,7 @@
       </div>
       <div *ngIf="moyenneRating"
            style="position: relative; text-align: center; margin-top: 30px;">
-        <p style="text-align: center;">{{moyenneRating | async}} / 5</p>
+        <p style="text-align: center;">{{moyenneRating }} / 5</p>
       </div>
       <div style="position: relative; text-align: center; margin-top: 30px;">
         <mat-accordion>
@@ -61,7 +61,7 @@
             <div class="card">
               <div class="card_content">
                 <button (click)="redirectUrl(plateforme.redirection)" mat-stroked-button>
-                  <img src="{{plateforme?.logo}}">
+                  <img src="http://image.tmdb.org/t/p/w780/{{plateforme?.logo}}">
                 </button>
               </div>
             </div>
