@@ -83,6 +83,12 @@ export class SerieComponent implements OnInit {
     }
   }
 
+  ngAfterViewChecked(): void{
+    this.checkIfFav(this.id);
+    this.formatLabel(Number(this.serie.duree));
+  }
+
+
   getSerie():void{
       this._serieService.getSerie(this.id)
         .subscribe(serie => this.serie = serie);
@@ -136,24 +142,26 @@ export class SerieComponent implements OnInit {
   }
 
   checkIfFav(item){
-      if(this.FavorisService.checkIfFavFilm(item) == true){
-        let s = "fav_" + item;
-        document.getElementById(s).style.color = "red";
-      }
-  }
-
-  addFav(item){
-    let s = "fav_" + item;
-    if(document.getElementById(s).style.color == "red") {
-      document.getElementById(s).style.color = "white";
-      this.FavorisService.deleteFavorisFilm(item);
-    }
-    else {
+    if(this.FavorisService.checkIfFavSerie(item) == true){
+      let s = "fav_" + item;
       document.getElementById(s).style.color = "red";
-      this.FavorisService.addFavorisFilm(item);
-      // On ajoute cette video de la BD Favoris
     }
+}
+
+addFav(item){
+  console.log(item);
+  let s = "fav_" + item;
+  console.log(s);
+  if(document.getElementById(s).style.color == "red") {
+    document.getElementById(s).style.color = "white";
+    this.FavorisService.deleteFavorisSerie(item);
   }
+  else {
+    document.getElementById(s).style.color = "red";
+    this.FavorisService.addFavorisSerie(item);
+    // On ajoute cette video de la BD Favoris
+  }
+}
 
   showHide() {
     this.starVisible = !this.starVisible;

@@ -6,8 +6,9 @@
         <img src="http://image.tmdb.org/t/p/w780/{{serie?.poster}}">
       </div>
       <div style="position: relative; text-align: center; margin-top: 10px;">
-        <button [id]="'fav_' + serie?.id_serie " (click)="addFav(serie.id_serie)" mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
-          <mat-icon>favorite</mat-icon>
+
+      <button [id]="'fav_' + serie?.id_video " (click)="addFav(serie?.id_video)" mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+        <mat-icon>favorite</mat-icon>
         </button>
       </div>
       <div *ngIf="isTrailer"

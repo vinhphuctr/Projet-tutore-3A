@@ -6,16 +6,37 @@
       <li *ngFor="let item of tabMesFavorisFilm">
         <div class="blocFilm" [id]="'bloc_' + item.film.id_video">
           <div id="bloc1">
-            <img routerLink="/movie/{{item.film.id_video}}" src="{{item.film.poster}}">
+            <img routerLink="/film/{{item.film.id_video}}" src="http://image.tmdb.org/t/p/w780/{{item?.film.poster}}">
           </div>
           <div id="bloc2">
             <p id="film">{{item.film.titre}} ({{item.film.date_sortie | date:'yyyy'}})</p>
-            <p id="genre">{{item.vo}}</p>
+            <p id="genre">{{item.film.vo}}</p>
             <div class="boutonRecherche">
-              <button  [id]="'fav_' + item.id_video " (click)="addFav(item.id_video)" class="button_left" mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+              <button  [id]="'fav_' + item.film.id_video " (click)="addFav(item.film.id_video)" class="button_left" mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
                 <mat-icon>favorite</mat-icon>
               </button>
-              <button routerLink="/movie/{{item.id_video}}" mat-stroked-button class="button_left">Détails</button>
+              <button routerLink="/film/{{item.film.id_video}}" mat-stroked-button class="button_left">Détails</button>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div aria-label="gallery">
+    <ul>
+      <li *ngFor="let item of tabMesFavorisSerie">
+        <div class="blocFilm" [id]="'serie' + item.film.id_video">
+          <div id="bloc1">
+            <img routerLink="/film/{{item.film.id_video}}" src="http://image.tmdb.org/t/p/w780/{{item?.film.poster}}">
+          </div>
+          <div id="bloc2">
+            <p id="film">{{item.film.titre}} ({{item.film.date_sortie | date:'yyyy'}})</p>
+            <p id="genre">{{item.film.vo}}</p>
+            <div class="boutonRecherche">
+              <button  [id]="'fav_' + item.film.id_video " (click)="addFav(item.film.id_video)" class="button_left" mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+                <mat-icon>favorite</mat-icon>
+              </button>
+              <button routerLink="/film/{{item.film.id_video}}" mat-stroked-button class="button_left">Détails</button>
             </div>
           </div>
         </div>

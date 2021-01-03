@@ -9,9 +9,9 @@ import { Video } from './video';
 
 export class Serie {
 
-  id_serie: number;
+  id_video: number;
   titre: string;
-  nb_saison: string; 
+  nb_saison: string;
   date_sortie: Date;
   poster: string;
   plot: string;
@@ -23,7 +23,7 @@ export class Serie {
   plateformes : Array<Plateforme>;
   categories : Array<Categorie>;
   trailer: String;
-  saisons: Array<Saison>; 
+  saisons: Array<Saison>;
   length: number;
   results: Array<Video>;
 

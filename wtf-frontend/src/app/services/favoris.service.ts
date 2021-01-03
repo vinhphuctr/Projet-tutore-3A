@@ -48,9 +48,14 @@ export class FavorisService {
     // Delete to database
   }
 
+  deleteFavorisSerie(item : any){
+    // Delete to database
+  }
+
+
   addFavorisFilm(item : any){
     console.log(this.getFavorisFilm());
-    return this._http.post<Video>(this.urlFilm, {"film" : item}).subscribe(res => {
+    return this._http.post<any>(this.urlFilm, {"film" : item}).subscribe(res => {
       console.log(this.tabMesFavorisFilm);
       this.tabMesFavorisFilm.push(res);
       console.log(this.tabMesFavorisFilm);
@@ -59,8 +64,12 @@ export class FavorisService {
   }
 
   addFavorisSerie(item : any){
-    return this._http.post<Video>(this.urlSerie, {"serie" : item}).subscribe(res => {
-      console.log(res);
+    console.log(this.getFavorisSerie());
+    return this._http.post<any>(this.urlSerie, {"serie" : item}).subscribe(res => {
+      console.log(this.tabMesFavorisSerie);
+      this.tabMesFavorisSerie.push(res);
+      console.log(this.tabMesFavorisSerie);
+      localStorage.setItem('series_favoris', JSON.stringify(this.tabMesFavorisSerie));
     });
   }
 

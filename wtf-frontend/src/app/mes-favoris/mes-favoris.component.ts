@@ -16,6 +16,7 @@ export class MesFavorisComponent implements OnInit {
 
   UtilisateurData: Utilisateur;
   tabMesFavorisFilm: any[];
+  tabMesFavorisSerie: any[];
   ratingValue: number = 3;
   data$ = interval(10);
 
@@ -25,17 +26,23 @@ export class MesFavorisComponent implements OnInit {
   ngOnInit(): void {
     this.UtilisateurData = this.utilisateurService.getUser();
     this.tabMesFavorisFilm = this.FavorisService.getFavorisFilm();
+    this.tabMesFavorisSerie = this.FavorisService.getFavorisSerie();
     this.data$.subscribe(val => this.tabMesFavorisFilm = this.FavorisService.getFavorisFilm());
+    this.data$.subscribe(val => this.tabMesFavorisSerie = this.FavorisService.getFavorisSerie());
   }
 
   ngAfterViewInit()	: void{
     this.checkIfFav();
   }
 
+  ngAfterViewChecked(): void{
+    this.checkIfFav();
+  }
+
   checkIfFav(){
     this.tabMesFavorisFilm.forEach(item => {
-      if(this.FavorisService.checkIfFavFilm(item.id_video) == true){
-        let s = "fav_" + item.id_video;
+      if(this.FavorisService.checkIfFavFilm(item.film.id_video) == true){
+        let s = "fav_" + item.film.id_video;
         document.getElementById(s).style.color = "red";
       }
     });
