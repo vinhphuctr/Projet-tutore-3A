@@ -54,7 +54,7 @@
     </form>
   </div>-->
 
- 
+
 
   <div *ngIf="isRechercheAvance" class="rechercheAvance">
     <form [formGroup]="shippingForm" #myButton>
@@ -113,12 +113,32 @@
   </div>
 
 
+  <div *ngIf="duree">
+    <h3 style="padding-top: 50px; padding-bottom: 20px;">Combien de temps avez vous ?</h3>
+    <form (submit)="OnChangeduree()" [formGroup]="dureeForm">
+      <mat-slider class="example-margin"
+                  [displayWith]="formatLabel"
+                  [disabled]=false
+                  [invert]=false
+                  [max]=max
+                  [min]=min
+                  [step]=5
+                  [thumbLabel]=true
+                  [tickInterval]=15
+                  [(ngModel)]="slider_value"
+                  [vertical]=false
+                  formControlName="slider_value">
+      </mat-slider>
+      <div style="padding-top: 50px;">
+        <button type="submit" mat-stroked-button class="boutonRecherche">Lancer la recherche</button>
+      </div>
+    </form>
+  </div>
 
 
 
 
 
-
-</div>
+  </div>
 
 
