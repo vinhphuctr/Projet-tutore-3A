@@ -5,6 +5,7 @@ import { Personne } from './personne';
 import { Categorie } from './categorie';
 import { NoteSerie } from './note';
 import { Saison } from './saison';
+import { Video } from './video';
 
 export class Serie {
 
@@ -23,6 +24,7 @@ export class Serie {
   categories : Array<Categorie>;
   trailer: String;
   saisons: Array<Saison>; 
-    length: number;
+  length: number;
+  results: Array<Video>;
 
 }
