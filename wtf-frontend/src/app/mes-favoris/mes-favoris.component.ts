@@ -16,6 +16,7 @@ export class MesFavorisComponent implements OnInit {
 
   UtilisateurData: Utilisateur;
   tabMesFavorisFilm: any[];
+  tabMesFavorisSerie: any[];
   ratingValue: number = 3;
   data$ = interval(10);
 
@@ -25,34 +26,57 @@ export class MesFavorisComponent implements OnInit {
   ngOnInit(): void {
     this.UtilisateurData = this.utilisateurService.getUser();
     this.tabMesFavorisFilm = this.FavorisService.getFavorisFilm();
+    this.tabMesFavorisSerie = this.FavorisService.getFavorisSerie();
     this.data$.subscribe(val => this.tabMesFavorisFilm = this.FavorisService.getFavorisFilm());
+    this.data$.subscribe(val => this.tabMesFavorisSerie = this.FavorisService.getFavorisSerie());
   }
 
   ngAfterViewInit()	: void{
     this.checkIfFav();
   }
 
+  ngAfterViewChecked(): void{
+    this.checkIfFav();
+  }
+
   checkIfFav(){
     this.tabMesFavorisFilm.forEach(item => {
-      if(this.FavorisService.checkIfFavFilm(item.id_video) == true){
-        let s = "fav_" + item.id_video;
+      if(this.FavorisService.checkIfFavFilm(item.film.id_video) == true){
+        let s = "film_" + item.film.id_video;
+        document.getElementById(s).style.color = "red";
+      }
+    });
+    this.tabMesFavorisSerie.forEach(item => {
+      if(this.FavorisService.checkIfFavSerie(item.serie.id_video) == true){
+        let s = "serie_" + item.serie.id_video;
         document.getElementById(s).style.color = "red";
       }
     });
   }
 
-  addFav(item){
-    console.log(item);
-    let s = "fav_" + item;
-    console.log(s);
-    if(document.getElementById(s).style.color == "red") {
-      document.getElementById(s).style.color = "white";
-      this.FavorisService.deleteFavorisFilm(item);
+  addFav(what, item){
+    let s;
+    if(what == 1){
+       s = "film_" + item;
     }
     else {
-      document.getElementById(s).style.color = "red";
-      this.FavorisService.addFavorisFilm(item);
-      // On ajoute cette video de la BD Favoris
+      s = "serie_" + item;
+    }
+    if(document.getElementById(s).style.color == "red") {
+      if(what == 1){
+        this.FavorisService.deleteFavorisFilm(item);
+      }
+      else {
+        this.FavorisService.deleteFavorisSerie(item);
+      }
+    }
+    else {
+      if(what == 1){
+        this.FavorisService.addFavorisFilm(item);
+      }
+      else {
+        this.FavorisService.addFavorisSerie(item);
+      }
     }
   }
 

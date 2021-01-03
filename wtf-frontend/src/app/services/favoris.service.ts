@@ -33,24 +33,50 @@ export class FavorisService {
     this.tabMesFavorisSerie = JSON.parse(localStorage.getItem('series_favoris'));
   }
 
-  deleteEnAttendant(item : any){
+  deleteFavorisFilm(item : any){
+
+    // BD DELETE
     let i = 0;
+    let key;
     for(i; i < this.tabMesFavorisFilm.length; i++){
-      console.log(i);
-      if(this.tabMesFavorisFilm[i].id_video==item){
-          this.tabMesFavorisFilm.splice(i,1);
-          break;
+      if(this.tabMesFavorisFilm[i].film.id_video==item){
+        key = this.tabMesFavorisFilm[i].id;
+        this.tabMesFavorisFilm.splice(i,1);
+        break;
       }
+    }
+    localStorage.setItem('films_favoris', JSON.stringify(this.tabMesFavorisFilm));
+
+    // Delete to database
+    return this._http.delete<any>(this.urlFilm + "/" + key).subscribe(res => {
+      console.log(res);
+    });
   }
 
-}
-  deleteFavorisFilm(item : any){
+  deleteFavorisSerie(item : any){
+
+    // Local
+    let i = 0;
+    let key;
+    for(i; i < this.tabMesFavorisSerie.length; i++){
+      if(this.tabMesFavorisSerie[i].serie.id_video==item){
+        key = this.tabMesFavorisSerie[i].id;
+         this.tabMesFavorisSerie.splice(i,1);
+           break;
+        }
+      }
+      localStorage.setItem('series_favoris', JSON.stringify(this.tabMesFavorisSerie));
+
     // Delete to database
+    return this._http.delete<any>(this.urlSerie + "/" + key).subscribe(res => {
+      console.log(res);
+    });
   }
+
 
   addFavorisFilm(item : any){
     console.log(this.getFavorisFilm());
-    return this._http.post<Video>(this.urlFilm, {"film" : item}).subscribe(res => {
+    return this._http.post<any>(this.urlFilm, {"film" : item}).subscribe(res => {
       console.log(this.tabMesFavorisFilm);
       this.tabMesFavorisFilm.push(res);
       console.log(this.tabMesFavorisFilm);
@@ -59,8 +85,12 @@ export class FavorisService {
   }
 
   addFavorisSerie(item : any){
-    return this._http.post<Video>(this.urlSerie, {"serie" : item}).subscribe(res => {
-      console.log(res);
+    console.log(this.getFavorisSerie());
+    return this._http.post<any>(this.urlSerie, {"serie" : item}).subscribe(res => {
+      console.log(this.tabMesFavorisSerie);
+      this.tabMesFavorisSerie.push(res);
+      console.log(this.tabMesFavorisSerie);
+      localStorage.setItem('series_favoris', JSON.stringify(this.tabMesFavorisSerie));
     });
   }
 
