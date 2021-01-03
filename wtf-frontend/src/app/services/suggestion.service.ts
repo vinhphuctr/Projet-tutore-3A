@@ -91,4 +91,23 @@ export class SuggestionService {
   }
 
 
+  rechercheAvancee_vo_categories_movies(tab_categorie: Array<any>, tab_vo: Array<any>): Observable<Video> {
+    this.url = "https://wtf-api-v1.herokuapp.com/api/films?";
+
+    for (let i = 0; i < tab_categorie.length; i++) {
+      this.url += "categories=" + tab_categorie[i] + "&";
+
+    }
+
+    for (let m = 0; m < tab_vo.length; m++) {
+      this.url += "vo=" + tab_vo[m] + "&"; 
+    }
+
+    console.log(this.url);
+
+    return this._httpClient.get<Video>(this.url);
+
+  }
+
+
 }

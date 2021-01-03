@@ -98,12 +98,12 @@
 
   <div *ngIf="vo">
     hey
-    <form [formGroup]="voForm" #myCategorie formControlName="vo" (submit)="SubmitVo()" #myvo>
+    <form [formGroup]="voForm" #myCategorie formControlName="voForm" (submit)="SubmitVo()" #myvo>
       <h3> Quels langues pour la vo ?</h3>
 
       <li *ngFor="let vo of tab_vo">
         <label>
-          <input type="checkbox" [value]="vo" (change)="onCheckboxvoChange($event)" />
+          <input type="checkbox" [value]="vo" (change)="onCheckbox2Change($event)" />
           {{vo}}
         </label>
       </li>

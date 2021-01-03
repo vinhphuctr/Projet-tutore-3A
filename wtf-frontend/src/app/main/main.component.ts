@@ -81,7 +81,7 @@ export class MainComponent implements OnInit {
       checkArray: this.fb.array([], [Validators.required])
     })
     this.voForm = this.fb.group({
-      checkArray: this.fb.array([], [Validators.required])
+      check: this.fb.array([], [Validators.required])
     })
 
    
@@ -99,12 +99,8 @@ export class MainComponent implements OnInit {
   onCheckboxChange(e) {
     const checkArray: FormArray = this.CategorieForm.get('checkArray') as FormArray;
 
-    const check: FormArray = this.voForm.get('checkArray') as FormArray;
-
     if (e.target.checked) {
       checkArray.push(new FormControl(e.target.value));
-
-      check.push(new FormControl(e.target.value));
     } else {
       let i: number = 0;
       checkArray.controls.forEach((item: FormControl) => {
@@ -114,9 +110,27 @@ export class MainComponent implements OnInit {
         }
         i++;
       });
+     
+    }
+  }
+
+
+
+  onCheckbox2Change(e) {
+  
+
+    const check: FormArray = this.voForm.get('check') as FormArray;
+
+    if (e.target.checked) {
+    
+
+      check.push(new FormControl(e.target.value));
+    } else {
+      let i: number = 0;
+      
       check.controls.forEach((item: FormControl) => {
         if (item.value == e.target.value) {
-          checkArray.removeAt(i);
+          check.removeAt(i);
           return;
         }
         i++;
@@ -372,12 +386,31 @@ export class MainComponent implements OnInit {
 
 
   SubmitVo(): void {
-    console.log(this.voForm.value.checkArray);
+    console.log(this.voForm.value.check);
     let array = []; 
-    array = Array.from(this.CategorieForm.value.checkArray);
+    array = Array.from(this.voForm.value.check);
     localStorage.setItem('vo', JSON.stringify(array));
+    if (localStorage.getItem('choix') == 'movie') {
+      this.suggestionService.rechercheAvancee_vo_categories_movies(this.CategorieForm.value.checkArray, JSON.parse(localStorage.getItem("vo"))).subscribe((video: Video) => {
+        this.liste_after_categories_movies = video;
+        let liste_duree = [];
+        for (let i = 0; i < this.liste_after_categories_movies.results.length; i++) {
 
-    // IL FAUT ENLEVER LES CARACTERISTIQUES NON ???
+          liste_duree.push(this.liste_after_categories_movies.results[i].duree);
+          console.log(this.liste_after_categories_movies.results[i].duree);
+
+        }
+
+        this.max = liste_duree.reduce((a, b) => Math.max(a, b));
+        this.min = liste_duree.reduce((a, b) => Math.min(a, b));
+        this.duree = true;
+        console.log(this.min + 'hey'); 
+      });
+
+    }
+
+   
+
     //this.language = true;
     //var sentence_type = ``;
     //this.renderer.setProperty(this.myCategorie.nativeElement, 'innerHTML', sentence_type);
