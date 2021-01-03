@@ -59,7 +59,6 @@ export class SerieComponent implements OnInit {
           this.actualRating[saison.id_saison] = saison.rates[0];
         }
         this.moyenneRatingBySaison[saison.id_saison] = Number((Number(this._serieService.getTotalNotes(saison.id_saison)) / Number(this._serieService.getnbrNotes(saison.id_saison))).toPrecision(2));
-        console.log(this.moyenneRatingBySaison[saison.id_saison]);
         if(this.moyenneRatingBySaison[saison.id_saison]){
 
           this.totalRating += Number(this.moyenneRatingBySaison[saison.id_saison].toPrecision(2));
@@ -80,7 +79,6 @@ export class SerieComponent implements OnInit {
     for(let saison of this.serie.saisons){
       if(saison.rates[0] != null){
         this._serieService.setAncienneNote(saison.id_saison, this.actualRating[saison.id_saison].note);
-        console.log(this._serieService.getAncienneNote(saison.id_saison));
       }
     }
   }
@@ -145,9 +143,7 @@ export class SerieComponent implements OnInit {
   }
 
   addFav(item){
-    console.log(item);
     let s = "fav_" + item;
-    console.log(s);
     if(document.getElementById(s).style.color == "red") {
       document.getElementById(s).style.color = "white";
       this.FavorisService.deleteFavoris(item, this.UtilisateurData);
