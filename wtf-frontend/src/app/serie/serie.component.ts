@@ -41,14 +41,10 @@ export class SerieComponent implements OnInit {
     private authService: connexionService) { }
 
   ngOnInit(): void {
-
-
     this.id = +this.route.snapshot.paramMap.get('id');
     this._serieService.getSerie(this.id).subscribe((serie: Serie) => {
-
       this.serie = serie;
       let i = 0;
-
       this.UtilisateurData = this.utilisateurService.getUser();
       for(let saison of this.serie.saisons){
         this.nbrEpisodesTotal += Number(saison.nb_episode);
@@ -80,11 +76,14 @@ export class SerieComponent implements OnInit {
     }
   }
 
-/*  ngAfterViewChecked(): void{
-    this.checkIfFav(this.id);
-    this.formatLabel(Number(this.serie.duree));
-  }*/
-
+  ngDoCheck()	{
+    for(let saison of this.serie.saisons){
+      if(saison.rates[0] != null){
+        this._serieService.setAncienneNote(saison.id_saison, this.actualRating[saison.id_saison].note);
+        console.log(this._serieService.getAncienneNote(saison.id_saison));
+      }
+    }
+  }
 
   getSerie():void{
       this._serieService.getSerie(this.id)
@@ -97,7 +96,9 @@ export class SerieComponent implements OnInit {
 
   postRate(event, item) {
     let i = 0;
+    let ancienneNote = this._serieService.getAncienneNote(item.id_saison);
     this.actualRating[item.id_saison].saison = item.id_saison;
+    console.log(ancienneNote);
     if (this.actualRating[item.id_saison].id == null) {
       this._ratingService.postRatingSerie(this.actualRating[item.id_saison]).subscribe(rate => {
         this.actualRating[item.id_saison] = rate;
@@ -115,34 +116,22 @@ export class SerieComponent implements OnInit {
       });
     } else {
       this._ratingService.putRatingSerie(this.actualRating[item.id_saison]).subscribe(rate => {
+        this.actualRating[item.id_saison] = rate;
+        this._serieService.setTotalNotes(-ancienneNote, item.id_saison);
+        this._serieService.setTotalNotes(rate.note, item.id_saison);
+        this.moyenneRatingBySaison[item.id_saison] = Number((Number(this._serieService.getTotalNotes(item.id_saison)) / Number(this._serieService.getnbrNotes(item.id_saison))).toPrecision(2));
+        let totalRating = 0;
+        for(let saison of this.serie.saisons){
+          if(this.moyenneRatingBySaison[saison.id_saison]){
+            totalRating += Number(this.moyenneRatingBySaison[saison.id_saison]);
+            i+= 1;
+          }
+        }
+        this.moyenneRating = Number((totalRating / i).toPrecision(2));
       });
     }
+    this._serieService.setAncienneNote(item.id_saison, this.actualRating[item.id_saison].note);
   }
-
-  /*
-   postRate(event, item) {
-    let ancienneNote = this._movieService.getAncienneNote();
-    this.actualRating.film = this.video.id_video;
-    if (this.actualRating.id == null) {
-      this._ratingService.postRating(this.actualRating).subscribe(rate => {
-        this.actualRating = rate;
-        this.video.rates.push(rate);
-        this._movieService.setNbrNotes();
-        this._movieService.setTotalNotes(rate.note);
-        this.moyenneRating = Number((this._movieService.getTotalNotes() / this._movieService.getnbrNotes()).toPrecision(2));
-        this._movieService.setAncienneNote(this.actualRating.note);
-      });
-    } else {
-      this._ratingService.putRating(this.actualRating).subscribe(rate => {
-        rate.film = this.video.id_video;
-        this.video.rates[0] = rate;
-        this._movieService.setTotalNotes(-ancienneNote);
-        this._movieService.setTotalNotes(this.actualRating.note);
-        this.moyenneRating = Number((this._movieService.getTotalNotes() / this._movieService.getnbrNotes()).toPrecision(2));
-      })
-      this._movieService.setAncienneNote(this.actualRating.note);
-    }
-  }*/
 
   redirectUrl(trailer){
     window.open(trailer);
