@@ -55,8 +55,10 @@ export class MainComponent implements OnInit {
   shipping: FormGroup;
   tab_vo: Array<any> = [] ;
   voForm: FormGroup;
-
-
+  duree: boolean = false;
+  max: number;
+  min: number; 
+  
 
   constructor(private nav: NavbarService, private suggestionService: SuggestionService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private face: FormBuilder, private renderer: Renderer2,
     private sanitizer: DomSanitizer, private _httpClient: HttpClient, private movieService: MovieService, private serieService: SerieService) {
@@ -291,10 +293,34 @@ export class MainComponent implements OnInit {
     var sentence_type = ``;
     this.renderer.setProperty(this.myCategorie.nativeElement, 'innerHTML', sentence_type);
   }
+
+
+  OnChangeduree() {
+    console.log(this.slider_value);
+  }
   // Radio Change Event
   changeLanguageValue() {
     console.log(this.shipping.get('signature').value);
     console.log(localStorage.getItem('choix'));
+
+    if (this.shipping.get('signature').value == 'v' || this.shipping.get('signature').value == 'both' && localStorage.getItem('choix')=='movie' ) {
+
+    
+      let liste_duree=[];
+      for (let i = 0; i < this.liste_after_categories_movies.results.length; i++) {
+
+        liste_duree.push(this.liste_after_categories_movies.results[i].duree);
+        console.log(this.liste_after_categories_movies.results[i].duree);
+        
+      }
+
+      this.max = liste_duree.reduce((a, b) => Math.max(a, b));
+      this.min = liste_duree.reduce((a, b) => Math.min(a, b));
+      this.duree = true;
+      console.log(this.min+'hey'); 
+    }
+
+    
 
     if (this.shipping.get('signature').value == 'vo') {
       if (localStorage.getItem('choix') == 'movie') {
@@ -350,6 +376,7 @@ export class MainComponent implements OnInit {
     let array = []; 
     array = Array.from(this.CategorieForm.value.checkArray);
     localStorage.setItem('vo', JSON.stringify(array));
+
     // IL FAUT ENLEVER LES CARACTERISTIQUES NON ???
     //this.language = true;
     //var sentence_type = ``;
