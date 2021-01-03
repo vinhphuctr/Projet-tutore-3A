@@ -42,24 +42,41 @@ export class MesFavorisComponent implements OnInit {
   checkIfFav(){
     this.tabMesFavorisFilm.forEach(item => {
       if(this.FavorisService.checkIfFavFilm(item.film.id_video) == true){
-        let s = "fav_" + item.film.id_video;
+        let s = "film_" + item.film.id_video;
+        document.getElementById(s).style.color = "red";
+      }
+    });
+    this.tabMesFavorisSerie.forEach(item => {
+      if(this.FavorisService.checkIfFavSerie(item.serie.id_video) == true){
+        let s = "serie_" + item.serie.id_video;
         document.getElementById(s).style.color = "red";
       }
     });
   }
 
-  addFav(item){
-    console.log(item);
-    let s = "fav_" + item;
-    console.log(s);
-    if(document.getElementById(s).style.color == "red") {
-      document.getElementById(s).style.color = "white";
-      this.FavorisService.deleteFavorisFilm(item);
+  addFav(what, item){
+    let s;
+    if(what == 1){
+       s = "film_" + item;
     }
     else {
-      document.getElementById(s).style.color = "red";
-      this.FavorisService.addFavorisFilm(item);
-      // On ajoute cette video de la BD Favoris
+      s = "serie_" + item;
+    }
+    if(document.getElementById(s).style.color == "red") {
+      if(what == 1){
+        this.FavorisService.deleteFavorisFilm(item);
+      }
+      else {
+        this.FavorisService.deleteFavorisSerie(item);
+      }
+    }
+    else {
+      if(what == 1){
+        this.FavorisService.addFavorisFilm(item);
+      }
+      else {
+        this.FavorisService.addFavorisSerie(item);
+      }
     }
   }
 

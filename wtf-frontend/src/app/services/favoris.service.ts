@@ -33,23 +33,44 @@ export class FavorisService {
     this.tabMesFavorisSerie = JSON.parse(localStorage.getItem('series_favoris'));
   }
 
-  deleteEnAttendant(item : any){
-    let i = 0;
-    for(i; i < this.tabMesFavorisFilm.length; i++){
-      console.log(i);
-      if(this.tabMesFavorisFilm[i].id_video==item){
-          this.tabMesFavorisFilm.splice(i,1);
-          break;
-      }
-  }
-
-}
   deleteFavorisFilm(item : any){
+
+    // BD DELETE
+    let i = 0;
+    let key;
+    for(i; i < this.tabMesFavorisFilm.length; i++){
+      if(this.tabMesFavorisFilm[i].film.id_video==item){
+        key = this.tabMesFavorisFilm[i].id;
+        this.tabMesFavorisFilm.splice(i,1);
+        break;
+      }
+    }
+    localStorage.setItem('films_favoris', JSON.stringify(this.tabMesFavorisFilm));
+
     // Delete to database
+    return this._http.delete<any>(this.urlFilm + "/" + key).subscribe(res => {
+      console.log(res);
+    });
   }
 
   deleteFavorisSerie(item : any){
+
+    // Local
+    let i = 0;
+    let key;
+    for(i; i < this.tabMesFavorisSerie.length; i++){
+      if(this.tabMesFavorisSerie[i].serie.id_video==item){
+        key = this.tabMesFavorisSerie[i].id;
+         this.tabMesFavorisSerie.splice(i,1);
+           break;
+        }
+      }
+      localStorage.setItem('series_favoris', JSON.stringify(this.tabMesFavorisSerie));
+
     // Delete to database
+    return this._http.delete<any>(this.urlSerie + "/" + key).subscribe(res => {
+      console.log(res);
+    });
   }
 
 
