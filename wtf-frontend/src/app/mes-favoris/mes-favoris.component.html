@@ -3,13 +3,13 @@
   <button [routerLink]="'/main'" mat-stroked-button><mat-icon>arrow_left_alt</mat-icon>Page d'accueil</button>
   <div aria-label="gallery">
     <ul>
-      <li *ngFor="let item of tabMesFavoris">
-        <div class="blocFilm" [id]="'bloc_' + item.id_video">
+      <li *ngFor="let item of tabMesFavorisFilm">
+        <div class="blocFilm" [id]="'bloc_' + item.film.id_video">
           <div id="bloc1">
-            <img routerLink="/movie/{{item.id_video}}" src="{{item.poster}}">
+            <img routerLink="/movie/{{item.film.id_video}}" src="{{item.film.poster}}">
           </div>
           <div id="bloc2">
-            <p id="film">{{item.titre}} ({{item.date_sortie | date:'yyyy'}})</p>
+            <p id="film">{{item.film.titre}} ({{item.film.date_sortie | date:'yyyy'}})</p>
             <p id="genre">{{item.vo}}</p>
             <div class="boutonRecherche">
               <button  [id]="'fav_' + item.id_video " (click)="addFav(item.id_video)" class="button_left" mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">

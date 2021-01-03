@@ -31,7 +31,9 @@ export class MonprofilService {
       user.pays,
       user.telephone,
       user.date_naissance,
-      this.UtilisateurService.getToken())
+      this.UtilisateurService.getToken(),
+      this.UtilisateurService.getFavFilms(),
+      this.UtilisateurService.getFavSeries())
   }
 
 

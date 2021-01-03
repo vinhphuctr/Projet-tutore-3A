@@ -136,7 +136,7 @@ export class SerieComponent implements OnInit {
   }
 
   checkIfFav(item){
-      if(this.FavorisService.checkIfFav(item) == true){
+      if(this.FavorisService.checkIfFavFilm(item) == true){
         let s = "fav_" + item;
         document.getElementById(s).style.color = "red";
       }
@@ -146,11 +146,11 @@ export class SerieComponent implements OnInit {
     let s = "fav_" + item;
     if(document.getElementById(s).style.color == "red") {
       document.getElementById(s).style.color = "white";
-      this.FavorisService.deleteFavoris(item, this.UtilisateurData);
+      this.FavorisService.deleteFavorisFilm(item);
     }
     else {
       document.getElementById(s).style.color = "red";
-      this.FavorisService.addFavoris(item, this.UtilisateurData);
+      this.FavorisService.addFavorisFilm(item);
       // On ajoute cette video de la BD Favoris
     }
   }

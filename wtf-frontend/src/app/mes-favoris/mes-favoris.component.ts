@@ -14,9 +14,8 @@ import { UtilisateurService } from '../services/utilisateur.service';
 })
 export class MesFavorisComponent implements OnInit {
 
-  name = 'Angular 5';
   UtilisateurData: Utilisateur;
-  tabMesFavoris: Video[];
+  tabMesFavorisFilm: any[];
   ratingValue: number = 3;
   data$ = interval(10);
 
@@ -25,8 +24,8 @@ export class MesFavorisComponent implements OnInit {
 
   ngOnInit(): void {
     this.UtilisateurData = this.utilisateurService.getUser();
-    this.tabMesFavoris = this.FavorisService.getFavoris();
-    this.data$.subscribe(val => this.tabMesFavoris = this.FavorisService.getFavoris());
+    this.tabMesFavorisFilm = this.FavorisService.getFavorisFilm();
+    this.data$.subscribe(val => this.tabMesFavorisFilm = this.FavorisService.getFavorisFilm());
   }
 
   ngAfterViewInit()	: void{
@@ -34,8 +33,8 @@ export class MesFavorisComponent implements OnInit {
   }
 
   checkIfFav(){
-    this.tabMesFavoris.forEach(item => {
-      if(this.FavorisService.checkIfFav(item.id_video) == true){
+    this.tabMesFavorisFilm.forEach(item => {
+      if(this.FavorisService.checkIfFavFilm(item.id_video) == true){
         let s = "fav_" + item.id_video;
         document.getElementById(s).style.color = "red";
       }
@@ -45,14 +44,14 @@ export class MesFavorisComponent implements OnInit {
   addFav(item){
     console.log(item);
     let s = "fav_" + item;
+    console.log(s);
     if(document.getElementById(s).style.color == "red") {
       document.getElementById(s).style.color = "white";
-      this.FavorisService.deleteEnAttendant(item);
-      this.FavorisService.deleteFavoris(item, this.UtilisateurData);
+      this.FavorisService.deleteFavorisFilm(item);
     }
     else {
       document.getElementById(s).style.color = "red";
-      this.FavorisService.addFavoris(item, this.UtilisateurData);
+      this.FavorisService.addFavorisFilm(item);
       // On ajoute cette video de la BD Favoris
     }
   }

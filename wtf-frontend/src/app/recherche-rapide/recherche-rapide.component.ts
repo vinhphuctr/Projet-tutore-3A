@@ -21,7 +21,7 @@ export class RechercheRapideComponent implements OnInit {
   url : string;
 
   constructor(private _suggestionService: SuggestionService,private UtilisateurService : UtilisateurService, private FavorisService: FavorisService) {
-    this.tabMesFavoris = this.FavorisService.getFavoris();
+    this.tabMesFavoris = this.FavorisService.getFavorisFilm();
   }
 
   ngOnInit(): void {
@@ -58,7 +58,7 @@ export class RechercheRapideComponent implements OnInit {
 
   checkIfFav(){
     this.tabResultat.forEach(item => {
-      if(this.FavorisService.checkIfFav(item.id_video) == true){
+      if(this.FavorisService.checkIfFavFilm(item.id_video) == true){
         console.log("passé");
         let s = "fav_" + item.id_video;
         document.getElementById(s).style.color = "red";
@@ -72,11 +72,11 @@ export class RechercheRapideComponent implements OnInit {
     console.log(s);
     if(document.getElementById(s).style.color == "red") {
       document.getElementById(s).style.color = "white";
-      this.FavorisService.deleteFavoris(item, this.UtilisateurData);
+      this.FavorisService.deleteFavorisFilm(item);
     }
     else {
       document.getElementById(s).style.color = "red";
-      this.FavorisService.addFavoris(item, this.UtilisateurData);
+      this.FavorisService.addFavorisFilm(item);
       // On ajoute cette video de la BD Favoris
     }
   }

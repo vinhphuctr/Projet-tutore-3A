@@ -58,6 +58,11 @@ export class MovieComponent implements OnInit {
     this._movieService.setAncienneNote(this.actualRating.note);
   }
 
+   ngAfterViewChecked(): void{
+    this.checkIfFav(this.id);
+    this.formatLabel(Number(this.video.duree));
+  }
+
 
   ngOnChanges() : void{
     if(this.video.trailer !== "null"){
@@ -98,7 +103,7 @@ export class MovieComponent implements OnInit {
   }
 
   checkIfFav(item){
-      if(this.FavorisService.checkIfFav(item) == true){
+      if(this.FavorisService.checkIfFavFilm(item) == true){
         let s = "fav_" + item;
         document.getElementById(s).style.color = "red";
       }
@@ -110,11 +115,11 @@ export class MovieComponent implements OnInit {
     console.log(s);
     if(document.getElementById(s).style.color == "red") {
       document.getElementById(s).style.color = "white";
-      this.FavorisService.deleteFavoris(item, this.UtilisateurData);
+      this.FavorisService.deleteFavorisFilm(item);
     }
     else {
       document.getElementById(s).style.color = "red";
-      this.FavorisService.addFavoris(item, this.UtilisateurData);
+      this.FavorisService.addFavorisFilm(item);
       // On ajoute cette video de la BD Favoris
     }
   }
