@@ -22,5 +22,6 @@ export class Video {
     length: number;
 
    results: Array<Video>;
+    count: number;
 }
 

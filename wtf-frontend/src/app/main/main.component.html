@@ -98,20 +98,18 @@
 
   <div *ngIf="vo">
     hey
+    <form [formGroup]="voForm" #myCategorie formControlName="vo" (submit)="SubmitVo()" #myvo>
+      <h3> Quels langues pour la vo ?</h3>
 
-    <!--<form [formGroup]="CategorieForm" #myCategorie formControlName="juju" (submit)="SubmitCategorie()" #myCategorie>
-      <h3> Quels catégories ?</h3>
-
-      <li *ngFor="let categorie of tabCategories">
+      <li *ngFor="let vo of tab_vo">
         <label>
-          <input type="checkbox" [value]="categorie.id_categ" (change)="onCheckboxChange($event)" />
-          {{categorie.libelle}}
+          <input type="checkbox" [value]="vo" (change)="onCheckboxvoChange($event)" />
+          {{vo}}
         </label>
       </li>
+      <button mat-stroked-button class="boutonRecherche">Soumettre ces préférences</button>
 
-      <button mat-stroked-button class="boutonRecherche">Soumettre ces catégories</button>
-
-    </form>-->
+    </form>
   </div>
 
 

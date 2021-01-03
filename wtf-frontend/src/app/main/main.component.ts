@@ -47,13 +47,14 @@ export class MainComponent implements OnInit {
   listeVideos: Array<Video> = [];
   listeSeries: Array<Serie> = [];
   liste_after_categories_movies: Video;
-  liste_after_categories_series: Array<Serie> = [];
+  liste_after_categories_series: Serie;
   tab_liste_vo_after_movie: Array<Video> = [];
   tab_liste_vo_after_serie: Array<Serie> = [];
   radioSelected : string = ''; 
   listeCategorieTest: Array<Categorie> = [];
   shipping: FormGroup;
-  tab_vo: Array<any> = [];
+  tab_vo: Array<any> = [] ;
+  voForm: FormGroup;
 
 
 
@@ -77,7 +78,9 @@ export class MainComponent implements OnInit {
     this.CategorieForm = this.fb.group({
       checkArray: this.fb.array([], [Validators.required])
     })
-
+    this.voForm = this.fb.group({
+      checkArray: this.fb.array([], [Validators.required])
+    })
 
    
     // this.tabSuggestion = this.suggestionService.getSuggestions();
@@ -94,11 +97,22 @@ export class MainComponent implements OnInit {
   onCheckboxChange(e) {
     const checkArray: FormArray = this.CategorieForm.get('checkArray') as FormArray;
 
+    const check: FormArray = this.voForm.get('checkArray') as FormArray;
+
     if (e.target.checked) {
       checkArray.push(new FormControl(e.target.value));
+
+      check.push(new FormControl(e.target.value));
     } else {
       let i: number = 0;
       checkArray.controls.forEach((item: FormControl) => {
+        if (item.value == e.target.value) {
+          checkArray.removeAt(i);
+          return;
+        }
+        i++;
+      });
+      check.controls.forEach((item: FormControl) => {
         if (item.value == e.target.value) {
           checkArray.removeAt(i);
           return;
@@ -224,7 +238,7 @@ export class MainComponent implements OnInit {
       });
     }
     if (localStorage.getItem('choix') == 'serie') {
-      this.suggestionService.rechercheAvancee_Categorie_series(this.CategorieForm.value.checkArray).subscribe((serie: Serie[]) => {
+      this.suggestionService.rechercheAvancee_Categorie_series(this.CategorieForm.value.checkArray).subscribe((serie: Serie) => {
         this.liste_after_categories_series = serie;
         console.log(this.liste_after_categories_series);
         return this.liste_after_categories_series;
@@ -236,7 +250,7 @@ export class MainComponent implements OnInit {
         console.log(this.liste_after_categories_movies);
         return this.liste_after_categories_movies;
       });
-      this.suggestionService.rechercheAvancee_Categorie_series(this.CategorieForm.value.checkArray).subscribe((serie: Serie[]) => {
+      this.suggestionService.rechercheAvancee_Categorie_series(this.CategorieForm.value.checkArray).subscribe((serie: Serie) => {
         this.liste_after_categories_series = serie;
         console.log(this.liste_after_categories_series);
         return this.liste_after_categories_series;
@@ -277,11 +291,7 @@ export class MainComponent implements OnInit {
     var sentence_type = ``;
     this.renderer.setProperty(this.myCategorie.nativeElement, 'innerHTML', sentence_type);
   }
-
- 
   // Radio Change Event
-  
-
   changeLanguageValue() {
     console.log(this.shipping.get('signature').value);
     console.log(localStorage.getItem('choix'));
@@ -289,46 +299,39 @@ export class MainComponent implements OnInit {
     if (this.shipping.get('signature').value == 'vo') {
       if (localStorage.getItem('choix') == 'movie') {
         for (let i = 0; i < this.liste_after_categories_movies.results.length; i++) {
-          
+
+          this.tab_vo.push(this.liste_after_categories_movies.results[i].vo); 
           console.log(this.liste_after_categories_movies.results[i].vo);
         }
-
-      
       }
 
       // film le vo ça marche
       if (localStorage.getItem('choix') == 'serie') {
-          for (let i = 0; i < this.liste_after_categories_series.length; i++) {
-            this.tab_vo[i] = this.liste_after_categories_series[i].vo;
+        for (let i = 0; i < this.liste_after_categories_series.results.length; i++) {
+            this.tab_vo.push(this.liste_after_categories_series.results[i].vo);
         }
-
-
 
         }
       if (localStorage.getItem('choix') == 'both') {
         for (let i = 0; i < this.liste_after_categories_movies.length; i++) {
-          this.tab_vo[i] = this.liste_after_categories_movies[i].vo;
+          this.tab_vo.push(this.liste_after_categories_movies[i].vo);
         }
 
         for (let i = 0; i < this.liste_after_categories_series.length; i++) {
-          this.tab_vo[i] = this.liste_after_categories_series[i].vo;
+          this.tab_vo.push(this.liste_after_categories_series[i].vo);
         }
 
-        let result: Array<any> = [];
-        result = this.tab_vo.reduce((unique, o) => {
-          if (!unique.some(obj => obj === o)) {
-            unique.push(o);
-          }
-          return unique;
-        }, []);
-        console.log(result); 
+       
       }
-
-
-      console.log(this.tab_vo +'hua');
-      
-
-
+      console.log(this.tab_vo); 
+    
+      this.tab_vo = this.tab_vo.reduce((unique, o) => {
+        if (!unique.some(obj => obj === o)) {
+          unique.push(o);
+        }
+        return unique;
+      }, []);
+      console.log(this.tab_vo); 
 
         this.vo = true;
         var sentence_type = ``;
@@ -338,7 +341,20 @@ export class MainComponent implements OnInit {
 
 
       }
-    }
+  }
+
+
+
+  SubmitVo(): void {
+    console.log(this.voForm.value.checkArray);
+    let array = []; 
+    array = Array.from(this.CategorieForm.value.checkArray);
+    localStorage.setItem('vo', JSON.stringify(array));
+    // IL FAUT ENLEVER LES CARACTERISTIQUES NON ???
+    //this.language = true;
+    //var sentence_type = ``;
+    //this.renderer.setProperty(this.myCategorie.nativeElement, 'innerHTML', sentence_type);
+  }
 
 
   }

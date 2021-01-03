@@ -79,7 +79,7 @@ export class SuggestionService {
 
     return this._httpClient.get<Video>(this.url);
   }
-  rechercheAvancee_Categorie_series(tab_categorie: Array<any>): Observable<Serie[]> {
+  rechercheAvancee_Categorie_series(tab_categorie: Array<any>): Observable<Serie> {
 
     this.url_serie = "https://wtf-api-v1.herokuapp.com/api/series?";
 
@@ -87,7 +87,7 @@ export class SuggestionService {
       this.url_serie += "categories=" + tab_categorie[i] + "&";
 
     }
-    return this._httpClient.get<Serie[]>(this.url_serie);
+    return this._httpClient.get<Serie>(this.url_serie);
   }
 
 
