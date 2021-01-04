@@ -108,6 +108,17 @@ export class SuggestionService {
     return this._httpClient.get<Video>(this.url);
 
   }
+
+  rechercheAvancee_final_1(tab_categorie: Array<any>, duree: string): Observable<Video> {
+    this.url = "https://wtf-api-v1.herokuapp.com/api/films?duree<=" + duree;
+    this.url += "";
+    for (let i = 0; i < tab_categorie.length; i++) {
+      this.url += "&categories=" + tab_categorie[i] + "&";
+
+    }
+    console.log(this.url); 
+    return this._httpClient.get<Video>(this.url);
+  }
   // I'm gonna start the stuff for selecting the video and then going to another research, isn't it fabulous ?
 
 

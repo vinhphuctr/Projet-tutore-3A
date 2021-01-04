@@ -316,12 +316,17 @@ export class MainComponent implements OnInit {
     var sentence_type = ``;
     this.renderer.setProperty(this.myCategorie.nativeElement, 'innerHTML', sentence_type);
   }
-
-
   OnChangeduree() {
     console.log(this.slider_value);
+    localStorage.setItem('duree', JSON.stringify(this.slider_value));
+    //rechercheAvancee_final_1
+    this.suggestionService.rechercheAvancee_final_1(JSON.parse(localStorage.getItem('categorie')), localStorage.getItem('duree')).subscribe((video: Video) => {
+      //this.liste_after_categories_series = serie;
+      //console.log(this.liste_after_categories_series);
+      //return this.liste_after_categories_series;
+    });
+
   }
-  // Radio Change Event
   changeLanguageValue() {
     
     console.log(this.shipping.get('signature').value);
@@ -341,6 +346,7 @@ export class MainComponent implements OnInit {
       this.max = liste_duree.reduce((a, b) => Math.max(a, b));
       this.min = liste_duree.reduce((a, b) => Math.min(a, b));
       this.duree = true;
+      this.language = false; 
       console.log(this.min+'hey'); 
     }
 
@@ -414,6 +420,7 @@ export class MainComponent implements OnInit {
         this.max = liste_duree.reduce((a, b) => Math.max(a, b));
         this.min = liste_duree.reduce((a, b) => Math.min(a, b));
         this.duree = true;
+        this.language = false; 
         console.log(this.min + 'hey'); 
       });
 
