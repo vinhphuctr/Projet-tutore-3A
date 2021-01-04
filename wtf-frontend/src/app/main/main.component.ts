@@ -141,6 +141,10 @@ export class MainComponent implements OnInit {
   afficherRapide() {
     this.isRechercheRapide = true;
     this.isRechercheAvance = false;
+    this.Categorie = false;
+    this.language = false;
+    this.vo = false;
+    this.duree = false;
   }
 
   formatLabel(value: number) {
@@ -157,6 +161,10 @@ export class MainComponent implements OnInit {
   afficherAvance() {
     this.isRechercheAvance = true;
     this.isRechercheRapide = false;
+    this.language = false;
+    this.Categorie = false;
+    this.vo = false;
+    this.duree = false; 
   }
 
   rechercheRapide() {
@@ -189,6 +197,7 @@ export class MainComponent implements OnInit {
   }
 
   changeRadioValue(): void {
+    this.isRechercheRapide = false;
     console.log(this.shippingForm.get('signatureReq'));
     console.log(this.shippingForm.get('signatureReq').value); // value : movie, series, both
 
@@ -302,8 +311,8 @@ export class MainComponent implements OnInit {
     //  console.log(this.listeSeries);
     //}
 
-
-    this.language = true;
+  
+    this.language = true; 
     var sentence_type = ``;
     this.renderer.setProperty(this.myCategorie.nativeElement, 'innerHTML', sentence_type);
   }
@@ -314,6 +323,7 @@ export class MainComponent implements OnInit {
   }
   // Radio Change Event
   changeLanguageValue() {
+    
     console.log(this.shipping.get('signature').value);
     console.log(localStorage.getItem('choix'));
 

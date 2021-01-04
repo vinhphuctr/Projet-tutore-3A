@@ -108,6 +108,10 @@ export class SuggestionService {
     return this._httpClient.get<Video>(this.url);
 
   }
+  // I'm gonna start the stuff for selecting the video and then going to another research, isn't it fabulous ?
+
+
+
 
 
 }
