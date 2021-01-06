@@ -57,7 +57,8 @@ export class MainComponent implements OnInit {
   voForm: FormGroup;
   duree: boolean = false;
   max: number;
-  min: number; 
+  min: number;
+  dureeForm: FormGroup; 
   
 
   constructor(private nav: NavbarService, private suggestionService: SuggestionService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private face: FormBuilder, private renderer: Renderer2,
@@ -84,16 +85,20 @@ export class MainComponent implements OnInit {
       check: this.fb.array([], [Validators.required])
     })
 
+    this.dureeForm = new FormGroup({
+      slider_value: new FormControl("", [Validators.required])
+    })
+
    
     // this.tabSuggestion = this.suggestionService.getSuggestions();
     this.rechercheRapideForm = new FormGroup({
       recherche: new FormControl("", [Validators.required])
     })
-    this.rechercheAvanceeForm = new FormGroup({
-      film_value: new FormControl("", [Validators.required]),
-      slider_value: new FormControl("", [Validators.required]),
-      recherche: new FormControl("", [Validators.required])
-    })
+    //this.rechercheAvanceeForm = new FormGroup({
+    //  film_value: new FormControl("", [Validators.required]),
+    //  slider_value: new FormControl("", [Validators.required]),
+    //  recherche: new FormControl("", [Validators.required])
+    //})
   }
 
   onCheckboxChange(e) {
@@ -204,11 +209,11 @@ export class MainComponent implements OnInit {
 
     if (this.shippingForm.get('signatureReq').value == 'movie') {
 
-      localStorage.setItem('choix', 'movie'); 
+      localStorage.setItem('choix', 'films'); 
     }
     if (this.shippingForm.get('signatureReq').value == 'series') {
 
-      localStorage.setItem('choix', 'serie');
+      localStorage.setItem('choix', 'series');
 
       // WARNING !!!! can you guys keep this part ? I'd appreciate it, thanks dude 
       //this.serieService.getAllSeries().subscribe((serie: Serie) => {
@@ -255,14 +260,14 @@ export class MainComponent implements OnInit {
     let array = []; 
     array  = Array.from(this.CategorieForm.value.checkArray);
     localStorage.setItem('categorie', JSON.stringify(array));
-    if (localStorage.getItem('choix') == 'movie') {
+    if (localStorage.getItem('choix') == 'films') {
       this.suggestionService.rechercheAvancee_Categorie_movies(this.CategorieForm.value.checkArray).subscribe((video: Video) => {
         this.liste_after_categories_movies = video;
         console.log(this.liste_after_categories_movies); 
         return this.liste_after_categories_movies;
       });
     }
-    if (localStorage.getItem('choix') == 'serie') {
+    if (localStorage.getItem('choix') == 'series') {
       this.suggestionService.rechercheAvancee_Categorie_series(this.CategorieForm.value.checkArray).subscribe((serie: Serie) => {
         this.liste_after_categories_series = serie;
         console.log(this.liste_after_categories_series);
@@ -317,14 +322,28 @@ export class MainComponent implements OnInit {
     this.renderer.setProperty(this.myCategorie.nativeElement, 'innerHTML', sentence_type);
   }
   OnChangeduree() {
+    this.slider_value  = this.dureeForm.value['slider_value'];
+
     console.log(this.slider_value);
     localStorage.setItem('duree', JSON.stringify(this.slider_value));
     //rechercheAvancee_final_1
-    this.suggestionService.rechercheAvancee_final_1(JSON.parse(localStorage.getItem('categorie')), localStorage.getItem('duree')).subscribe((video: Video) => {
-      //this.liste_after_categories_series = serie;
-      //console.log(this.liste_after_categories_series);
-      //return this.liste_after_categories_series;
-    });
+    // si vo est vide
+    if (localStorage.getItem('vo') == "") {
+      this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'),JSON.parse(localStorage.getItem('categorie')), localStorage.getItem('duree')).subscribe((video: Video) => {
+        //this.liste_after_categories_series = serie;
+        //console.log(this.liste_after_categories_series);
+        //return this.liste_after_categories_series;
+      });
+    }
+    else {
+      console.log('julie');
+      this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'),JSON.parse(localStorage.getItem('categorie')), localStorage.getItem('duree'),JSON.parse(localStorage.getItem('vo'))).subscribe((video: Video) => {
+        //this.liste_after_categories_series = serie;
+        //console.log(this.liste_after_categories_series);
+        //return this.liste_after_categories_series;
+      });
+    }
+    // si le vo n'est pas vide
 
   }
   changeLanguageValue() {
@@ -332,28 +351,41 @@ export class MainComponent implements OnInit {
     console.log(this.shipping.get('signature').value);
     console.log(localStorage.getItem('choix'));
 
-    if (this.shipping.get('signature').value == 'v' || this.shipping.get('signature').value == 'both' && localStorage.getItem('choix')=='movie' ) {
+    if (this.shipping.get('signature').value == 'v' || this.shipping.get('signature').value == 'both') {
+      if (localStorage.getItem('choix') == 'films') {
 
-    
-      let liste_duree=[];
-      for (let i = 0; i < this.liste_after_categories_movies.results.length; i++) {
-
-        liste_duree.push(this.liste_after_categories_movies.results[i].duree);
-        console.log(this.liste_after_categories_movies.results[i].duree);
         
-      }
+        localStorage.setItem('vo', "");
 
-      this.max = liste_duree.reduce((a, b) => Math.max(a, b));
-      this.min = liste_duree.reduce((a, b) => Math.min(a, b));
-      this.duree = true;
-      this.language = false; 
-      console.log(this.min+'hey'); 
+
+        let liste_duree=[];
+        for (let i = 0; i < this.liste_after_categories_movies.results.length; i++) {
+
+          liste_duree.push(this.liste_after_categories_movies.results[i].duree);
+          console.log(this.liste_after_categories_movies.results[i].duree);
+
+        }
+
+        this.max = liste_duree.reduce((a, b) => Math.max(a, b));
+        this.min = liste_duree.reduce((a, b) => Math.min(a, b));
+        this.duree = true;
+        this.language = false; 
+        console.log(this.min+'hey'); 
+      }
+      else {
+        this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'),JSON.parse(localStorage.getItem('categorie'))).subscribe((serie: Serie) => {
+          //this.liste_after_categories_series = serie;
+          //console.log(this.liste_after_categories_series);
+          //return this.liste_after_categories_series;
+        });
+        // IMPLEMENTATION 
+      }
     }
 
     
 
     if (this.shipping.get('signature').value == 'vo') {
-      if (localStorage.getItem('choix') == 'movie') {
+      if (localStorage.getItem('choix') == 'films') {
         for (let i = 0; i < this.liste_after_categories_movies.results.length; i++) {
 
           this.tab_vo.push(this.liste_after_categories_movies.results[i].vo); 
@@ -362,7 +394,7 @@ export class MainComponent implements OnInit {
       }
 
       // film le vo ça marche
-      if (localStorage.getItem('choix') == 'serie') {
+      if (localStorage.getItem('choix') == 'series') {
         for (let i = 0; i < this.liste_after_categories_series.results.length; i++) {
             this.tab_vo.push(this.liste_after_categories_series.results[i].vo);
         }
@@ -406,7 +438,7 @@ export class MainComponent implements OnInit {
     let array = []; 
     array = Array.from(this.voForm.value.check);
     localStorage.setItem('vo', JSON.stringify(array));
-    if (localStorage.getItem('choix') == 'movie') {
+    if (localStorage.getItem('choix') == 'films') {
       this.suggestionService.rechercheAvancee_vo_categories_movies(this.CategorieForm.value.checkArray, JSON.parse(localStorage.getItem("vo"))).subscribe((video: Video) => {
         this.liste_after_categories_movies = video;
         let liste_duree = [];
@@ -424,6 +456,17 @@ export class MainComponent implements OnInit {
         console.log(this.min + 'hey'); 
       });
 
+    }
+
+    if (localStorage.getItem('choix') == 'series') {
+
+     
+
+      this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'), JSON.parse(localStorage.getItem('categorie')),JSON.parse(localStorage.getItem('vo'))).subscribe((serie: Serie) => {
+        //this.liste_after_categories_series = serie;
+        //console.log(this.liste_after_categories_series);
+        //return this.liste_after_categories_series;
+      });
     }
 
    
