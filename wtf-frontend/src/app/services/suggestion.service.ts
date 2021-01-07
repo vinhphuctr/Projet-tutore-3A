@@ -5,6 +5,10 @@ import { Serie } from '../modeles/serie';
 import { Video } from '../modeles/video';
 import { Categorie } from '../modeles/categorie';
 import { rechercheAvancee } from '../modeles/rechercheAvancee';
+import { rechercheFilm } from '../modeles/rechercheFIlm';
+import { rechercheSerie } from '../modeles/rechercheSerie';
+
+
 
 
 
@@ -14,7 +18,7 @@ import { rechercheAvancee } from '../modeles/rechercheAvancee';
 export class SuggestionService {
 
   url: string;
-  url_serie: string; 
+  url_serie: string;
 
 
   constructor(private _httpClient : HttpClient) { }
@@ -27,19 +31,18 @@ export class SuggestionService {
     */
   }
 
-
-
-
-  rechercheRapide(keyword: string): Observable<Video[]> {
-
-   let url = "https://wtf-api-v1.herokuapp.com/api/films?titre=" + keyword;
-   return this._httpClient.get<Video[]>(url);
+  rechercheRapide(url: string): Observable<rechercheFilm> {
+   return this._httpClient.get<rechercheFilm>(url);
   }
+
+  rechercheRapideSerie(url: string): Observable<rechercheSerie> {
+    return this._httpClient.get<rechercheSerie>(url);
+   }
 
   rechercheAvancee(recherche : rechercheAvancee): Observable<Video[]> {
     let url;
     console.log('julie');
-    console.log(recherche); 
+    console.log(recherche);
     if(recherche.filmOuSerie == "film"){
       url = "https://wtf-api-v1.herokuapp.com/api/films?";
       if(recherche.duree != null || recherche.duree != undefined){
@@ -61,7 +64,7 @@ export class SuggestionService {
 
   getAllCategories(): Observable<Categorie> {
 
-    let url = "https://wtf-api-v1.herokuapp.com/api/categories"; 
+    let url = "https://wtf-api-v1.herokuapp.com/api/categories";
     return this._httpClient.get<Categorie>(url);
   }
 
@@ -100,7 +103,7 @@ export class SuggestionService {
     }
 
     for (let m = 0; m < tab_vo.length; m++) {
-      this.url += "vo=" + tab_vo[m] + "&"; 
+      this.url += "vo=" + tab_vo[m] + "&";
     }
 
     console.log(this.url);
@@ -109,17 +112,17 @@ export class SuggestionService {
 
   }
 
-  rechercheAvancee_final_1(type: string,tab_categorie: Array<any>, duree: string); 
+  rechercheAvancee_final_1(type: string,tab_categorie: Array<any>, duree: string);
   rechercheAvancee_final_1(type: string,tab_categorie: Array<any>, duree: string, vo: Array<any>);
   rechercheAvancee_final_1(type: string, tab_categorie: Array<any>);
-  rechercheAvancee_final_1(type: string, tab_categorie: Array<any>, vo : Array<any>); 
+  rechercheAvancee_final_1(type: string, tab_categorie: Array<any>, vo : Array<any>);
   rechercheAvancee_final_1(type: string, tab_categorie: Array<any>, duree?: string | Array<any>, vo?: Array<any> | string) { // an error occurs if we don't specifiate that a type can be changed...
     this.url = "https://wtf-api-v1.herokuapp.com/api/";
     this.url += type;
-  
+
    // this.url = "https://wtf-api-v1.herokuapp.com/api/films?duree<=" + duree;
     this.url += "?";
-   
+
     for (let i = 0; i < tab_categorie.length; i++) {
         this.url += "&categories=" + tab_categorie[i] + "";
 
@@ -145,7 +148,7 @@ export class SuggestionService {
 
         }
       }
-     
+
     }
     console.log(this.url);
 
@@ -159,7 +162,7 @@ export class SuggestionService {
   }
 
   //rechercheAvancee_final_1(tab_categorie: Array<any>, duree: string): Observable<Video> {
-    
+
   //}
 
   //rechercheAvancee_final_1(tab_categorie: Array<any>, duree: string,vo : Array<any>): Observable<Video> {

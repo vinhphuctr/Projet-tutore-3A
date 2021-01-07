@@ -31,6 +31,7 @@ export class MainComponent implements OnInit {
   isRechercheRapide: boolean = false;
   isRechercheAvance: boolean = false;
   rechercheRapideForm: FormGroup;
+  rechercheRapideSerieForm: FormGroup;
   rechercheAvanceeForm: FormGroup;
   slider_value: number = 180;
   film_value: string = "film";
@@ -50,7 +51,7 @@ export class MainComponent implements OnInit {
   liste_after_categories_series: Serie;
   tab_liste_vo_after_movie: Array<Video> = [];
   tab_liste_vo_after_serie: Array<Serie> = [];
-  radioSelected : string = ''; 
+  radioSelected : string = '';
   listeCategorieTest: Array<Categorie> = [];
   shipping: FormGroup;
   tab_vo: Array<any> = [] ;
@@ -58,8 +59,8 @@ export class MainComponent implements OnInit {
   duree: boolean = false;
   max: number;
   min: number;
-  dureeForm: FormGroup; 
-  
+  dureeForm: FormGroup;
+
 
   constructor(private nav: NavbarService, private suggestionService: SuggestionService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private face: FormBuilder, private renderer: Renderer2,
     private sanitizer: DomSanitizer, private _httpClient: HttpClient, private movieService: MovieService, private serieService: SerieService) {
@@ -89,16 +90,12 @@ export class MainComponent implements OnInit {
       slider_value: new FormControl("", [Validators.required])
     })
 
-   
-    // this.tabSuggestion = this.suggestionService.getSuggestions();
     this.rechercheRapideForm = new FormGroup({
       recherche: new FormControl("", [Validators.required])
     })
-    //this.rechercheAvanceeForm = new FormGroup({
-    //  film_value: new FormControl("", [Validators.required]),
-    //  slider_value: new FormControl("", [Validators.required]),
-    //  recherche: new FormControl("", [Validators.required])
-    //})
+    this.rechercheRapideSerieForm = new FormGroup({
+      recherche: new FormControl("", [Validators.required])
+    })
   }
 
   onCheckboxChange(e) {
@@ -115,24 +112,24 @@ export class MainComponent implements OnInit {
         }
         i++;
       });
-     
+
     }
   }
 
 
 
   onCheckbox2Change(e) {
-  
+
 
     const check: FormArray = this.voForm.get('check') as FormArray;
 
     if (e.target.checked) {
-    
+
 
       check.push(new FormControl(e.target.value));
     } else {
       let i: number = 0;
-      
+
       check.controls.forEach((item: FormControl) => {
         if (item.value == e.target.value) {
           check.removeAt(i);
@@ -169,12 +166,20 @@ export class MainComponent implements OnInit {
     this.language = false;
     this.Categorie = false;
     this.vo = false;
-    this.duree = false; 
+    this.duree = false;
   }
 
   rechercheRapide() {
     localStorage.setItem('typeDeRecherche', "rechercheRapide");
-    localStorage.setItem('rechercheRapide', this.rechercheRapideForm.value['recherche']);
+    localStorage.setItem("filmOuSerie", "film");
+    localStorage.setItem('rechercheRapide', "https://wtf-api-v1.herokuapp.com/api/films?titre=" + this.rechercheRapideForm.value['recherche']);
+    const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/recherche';
+    this.router.navigate([redirectUrl]);
+  }
+  rechercheRapideSerie() {
+    localStorage.setItem('typeDeRecherche', "rechercheRapide");
+    localStorage.setItem("filmOuSerie", "serie");
+    localStorage.setItem('rechercheRapide', "https://wtf-api-v1.herokuapp.com/api/series?titre=" + this.rechercheRapideSerieForm.value['recherche']);
     const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/recherche';
     this.router.navigate([redirectUrl]);
   }
@@ -209,13 +214,13 @@ export class MainComponent implements OnInit {
 
     if (this.shippingForm.get('signatureReq').value == 'movie') {
 
-      localStorage.setItem('choix', 'films'); 
+      localStorage.setItem('choix', 'films');
     }
     if (this.shippingForm.get('signatureReq').value == 'series') {
 
       localStorage.setItem('choix', 'series');
 
-      // WARNING !!!! can you guys keep this part ? I'd appreciate it, thanks dude 
+      // WARNING !!!! can you guys keep this part ? I'd appreciate it, thanks dude
       //this.serieService.getAllSeries().subscribe((serie: Serie) => {
       //  for (let i = 0; i < serie.length; i++) {
 
@@ -232,7 +237,7 @@ export class MainComponent implements OnInit {
       //    }
       //    return unique;
       //  }, []);
-      
+
     //  });
     }
 
@@ -245,11 +250,11 @@ export class MainComponent implements OnInit {
     this.suggestionService.getAllCategories().subscribe((categorie: Categorie) => {
       this.listeCategorieTest = categorie.results;
       console.log(this.listeCategorieTest);
-      return this.listeCategorieTest; 
+      return this.listeCategorieTest;
     });
     var sentence_type = ``;
     this.renderer.setProperty(this.myButton.nativeElement, 'innerHTML', sentence_type);
-    
+
   }
 
   SubmitCategorie(): void {
@@ -257,13 +262,13 @@ export class MainComponent implements OnInit {
     console.log(localStorage.getItem('choix'));
     console.log(this.CategorieForm.value);
     console.log(this.CategorieForm.value.checkArray);
-    let array = []; 
+    let array = [];
     array  = Array.from(this.CategorieForm.value.checkArray);
     localStorage.setItem('categorie', JSON.stringify(array));
     if (localStorage.getItem('choix') == 'films') {
       this.suggestionService.rechercheAvancee_Categorie_movies(this.CategorieForm.value.checkArray).subscribe((video: Video) => {
         this.liste_after_categories_movies = video;
-        console.log(this.liste_after_categories_movies); 
+        console.log(this.liste_after_categories_movies);
         return this.liste_after_categories_movies;
       });
     }
@@ -316,8 +321,8 @@ export class MainComponent implements OnInit {
     //  console.log(this.listeSeries);
     //}
 
-  
-    this.language = true; 
+
+    this.language = true;
     var sentence_type = ``;
     this.renderer.setProperty(this.myCategorie.nativeElement, 'innerHTML', sentence_type);
   }
@@ -347,14 +352,14 @@ export class MainComponent implements OnInit {
 
   }
   changeLanguageValue() {
-    
+
     console.log(this.shipping.get('signature').value);
     console.log(localStorage.getItem('choix'));
 
     if (this.shipping.get('signature').value == 'v' || this.shipping.get('signature').value == 'both') {
       if (localStorage.getItem('choix') == 'films') {
 
-        
+
         localStorage.setItem('vo', "");
 
 
@@ -369,8 +374,8 @@ export class MainComponent implements OnInit {
         this.max = liste_duree.reduce((a, b) => Math.max(a, b));
         this.min = liste_duree.reduce((a, b) => Math.min(a, b));
         this.duree = true;
-        this.language = false; 
-        console.log(this.min+'hey'); 
+        this.language = false;
+        console.log(this.min+'hey');
       }
       else {
         this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'),JSON.parse(localStorage.getItem('categorie'))).subscribe((serie: Serie) => {
@@ -378,17 +383,17 @@ export class MainComponent implements OnInit {
           //console.log(this.liste_after_categories_series);
           //return this.liste_after_categories_series;
         });
-        // IMPLEMENTATION 
+        // IMPLEMENTATION
       }
     }
 
-    
+
 
     if (this.shipping.get('signature').value == 'vo') {
       if (localStorage.getItem('choix') == 'films') {
         for (let i = 0; i < this.liste_after_categories_movies.results.length; i++) {
 
-          this.tab_vo.push(this.liste_after_categories_movies.results[i].vo); 
+          this.tab_vo.push(this.liste_after_categories_movies.results[i].vo);
           console.log(this.liste_after_categories_movies.results[i].vo);
         }
       }
@@ -409,17 +414,17 @@ export class MainComponent implements OnInit {
           this.tab_vo.push(this.liste_after_categories_series[i].vo);
         }
 
-       
+
       }
-      console.log(this.tab_vo); 
-    
+      console.log(this.tab_vo);
+
       this.tab_vo = this.tab_vo.reduce((unique, o) => {
         if (!unique.some(obj => obj === o)) {
           unique.push(o);
         }
         return unique;
       }, []);
-      console.log(this.tab_vo); 
+      console.log(this.tab_vo);
 
         this.vo = true;
         var sentence_type = ``;
@@ -435,7 +440,7 @@ export class MainComponent implements OnInit {
 
   SubmitVo(): void {
     console.log(this.voForm.value.check);
-    let array = []; 
+    let array = [];
     array = Array.from(this.voForm.value.check);
     localStorage.setItem('vo', JSON.stringify(array));
     if (localStorage.getItem('choix') == 'films') {
@@ -452,15 +457,15 @@ export class MainComponent implements OnInit {
         this.max = liste_duree.reduce((a, b) => Math.max(a, b));
         this.min = liste_duree.reduce((a, b) => Math.min(a, b));
         this.duree = true;
-        this.language = false; 
-        console.log(this.min + 'hey'); 
+        this.language = false;
+        console.log(this.min + 'hey');
       });
 
     }
 
     if (localStorage.getItem('choix') == 'series') {
 
-     
+
 
       this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'), JSON.parse(localStorage.getItem('categorie')),JSON.parse(localStorage.getItem('vo'))).subscribe((serie: Serie) => {
         //this.liste_after_categories_series = serie;
@@ -469,7 +474,7 @@ export class MainComponent implements OnInit {
       });
     }
 
-   
+
 
     //this.language = true;
     //var sentence_type = ``;
