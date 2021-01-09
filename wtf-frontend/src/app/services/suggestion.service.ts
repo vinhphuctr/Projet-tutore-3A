@@ -39,28 +39,13 @@ export class SuggestionService {
     return this._httpClient.get<rechercheSerie>(url);
    }
 
-  rechercheAvancee(recherche : rechercheAvancee): Observable<Video[]> {
-    let url;
-    console.log('julie');
-    console.log(recherche);
-    if(recherche.filmOuSerie == "film"){
-      url = "https://wtf-api-v1.herokuapp.com/api/films?";
-      if(recherche.duree != null || recherche.duree != undefined){
-        url+= '&duree_max=' + recherche.duree;
-      }
-    }
-    else {
-      url = "https://wtf-api-v1.herokuapp.com/api/series?";
-    }
-  /*  if(recherche.titre != null || recherche.titre != undefined){
-      url += "&titre=" + recherche.titre;
-    }
-    if(recherche.vo != null || recherche.titre != undefined){
-      url += "&vo=" + recherche.vo;
-    }*/
-    return this._httpClient.get<Video[]>(url);
-  }
+  rechercheAvancee(url: string): Observable<rechercheFilm> {
+    return this._httpClient.get<rechercheFilm>(url);
+   }
 
+   rechercheAvanceeSerie(url: string): Observable<rechercheSerie> {
+    return this._httpClient.get<rechercheSerie>(url);
+   }
 
   getAllCategories(): Observable<Categorie> {
 
@@ -148,41 +133,8 @@ export class SuggestionService {
 
         }
       }
-
     }
     console.log(this.url);
-
-    if (type == "films") {
-      return this._httpClient.get<Video>(this.url);
-    }
-
-    if (type == "series") {
-      return this._httpClient.get<Serie>(this.url);
-    }
+    return this.url;
   }
-
-  //rechercheAvancee_final_1(tab_categorie: Array<any>, duree: string): Observable<Video> {
-
-  //}
-
-  //rechercheAvancee_final_1(tab_categorie: Array<any>, duree: string,vo : Array<any>): Observable<Video> {
-  //  this.url = "https://wtf-api-v1.herokuapp.com/api/films?duree<=" + duree;
-  //  this.url += "";
-  //  for (let i = 0; i < tab_categorie.length; i++) {
-  //    this.url += "&categories=" + tab_categorie[i] + "&";
-
-  //  }
-  //  for (let i = 0; i < vo.length; i++) {
-  //    this.url += "&vo=" + vo[i] + "&";
-
-  //  }
-  //  console.log(this.url);
-  //  return this._httpClient.get<Video>(this.url);
-  //}
-  // I'm gonna start the stuff for selecting the video and then going to another research, isn't it fabulous ?
-
-
-
-
-
 }

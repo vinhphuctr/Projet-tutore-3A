@@ -26,7 +26,7 @@ export class RechercheRapideComponent implements OnInit {
   UtilisateurData: Utilisateur;
   previous : string;
   next : string;
-  nbrResultats : Number = 0;
+  nbrResultats : Number;
   url : string;
   film: Boolean;
   data$ = interval(10);
@@ -49,7 +49,6 @@ export class RechercheRapideComponent implements OnInit {
           this.previous = res.previous;
           this.next = res.next;
           this.nbrResultats = res.count;
-          this.checkIfFav();
         });
       }
       else {
@@ -64,14 +63,26 @@ export class RechercheRapideComponent implements OnInit {
       }
     }
     else {
-      if(JSON.parse(localStorage.getItem('rechercheAvance')).filmOuSerie == "film"){
+      if(localStorage.getItem('filmOuSerie') == "film"){
         this.url = "/film/";
-        this._suggestionService.rechercheAvancee(JSON.parse(localStorage.getItem('rechercheAvance'))).subscribe((video: Video[]) => {
-          this.tabFilm = video;
+        this.film = true;
+        console.log("d");
+        this._suggestionService.rechercheAvancee(localStorage.getItem('rechercheAvance')).subscribe((res: rechercheFilm) => {
+          this.tabFilm = res.results;
+          this.previous = res.previous;
+          this.next = res.next;
+          this.nbrResultats = res.count;
         });
       }
       else {
         this.url = "/serie/";
+        this.film = false;
+        this._suggestionService.rechercheRapideSerie(localStorage.getItem('rechercheAvance')).subscribe((res: rechercheSerie) => {
+          this.tabSerie = res.results;
+          this.previous = res.previous;
+          this.next = res.next;
+          this.nbrResultats = res.count;
+        });
       }
     }
   }

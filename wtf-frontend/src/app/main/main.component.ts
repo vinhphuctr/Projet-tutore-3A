@@ -185,13 +185,13 @@ export class MainComponent implements OnInit {
   }
 
   rechercheAvancee() {
-    let recherche = new rechercheAvancee();
-    recherche.filmOuSerie = this.rechercheAvanceeForm.value['film_value'];
-    recherche.duree = this.rechercheAvanceeForm.value['slider_value'];
-    recherche.categories = null;
-    recherche.vo = "en";
+    if(localStorage.getItem("choix") == "series"){
+      localStorage.setItem("filmOuSerie", "serie");
+    }
+    else {
+      localStorage.setItem("filmOuSerie", "film");
+    }
     localStorage.setItem('typeDeRecherche', "rechercheAvance");
-    localStorage.setItem('rechercheAvance', JSON.stringify(recherche));
     const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/recherche';
     this.router.navigate([redirectUrl]);
   }
@@ -292,36 +292,6 @@ export class MainComponent implements OnInit {
       });
     }
 
-
-
-
-    //if (localStorage.getItem('choix') == 'serie') {
-    //  for (let i = 0; i < this.listeSeries.length; i++) {
-    //    for (let m = 0; m < this.listeSeries[i].categories.length; m++) {
-    //      for (let n = 0; n < this.CategorieForm.value.checkArray.length; n++) {
-
-    //        console.log(this.CategorieForm.value.checkArray.length);
-
-    //        if (this.CategorieForm.value.checkArray[n] == this.listeSeries[i].categories[m].id_categ) {
-    //          this.liste_after_categories_series.push(this.listeSeries[i]);
-    //        }
-
-    //      }
-
-    //    }
-    //  }
-    //  let result: Array<Serie> = [];
-    //  result = this.liste_after_categories_series.reduce((unique, o) => {
-    //    if (!unique.some(obj => obj.titre === o.titre)) {
-    //      unique.push(o);
-    //    }
-    //    return unique;
-    //  }, []);
-    //  console.log(result);
-    //  console.log(this.listeSeries);
-    //}
-
-
     this.language = true;
     var sentence_type = ``;
     this.renderer.setProperty(this.myCategorie.nativeElement, 'innerHTML', sentence_type);
@@ -334,19 +304,16 @@ export class MainComponent implements OnInit {
     //rechercheAvancee_final_1
     // si vo est vide
     if (localStorage.getItem('vo') == "") {
-      this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'),JSON.parse(localStorage.getItem('categorie')), localStorage.getItem('duree')).subscribe((video: Video) => {
+      localStorage.setItem('rechercheAvance', this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'), JSON.parse(localStorage.getItem('categorie')),JSON.parse(localStorage.getItem('vo'))));
+      this.rechercheAvancee();
         //this.liste_after_categories_series = serie;
         //console.log(this.liste_after_categories_series);
         //return this.liste_after_categories_series;
-      });
     }
     else {
       console.log('julie');
-      this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'),JSON.parse(localStorage.getItem('categorie')), localStorage.getItem('duree'),JSON.parse(localStorage.getItem('vo'))).subscribe((video: Video) => {
-        //this.liste_after_categories_series = serie;
-        //console.log(this.liste_after_categories_series);
-        //return this.liste_after_categories_series;
-      });
+      localStorage.setItem('rechercheAvance', this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'), JSON.parse(localStorage.getItem('categorie')),JSON.parse(localStorage.getItem('vo'))));
+      this.rechercheAvancee();
     }
     // si le vo n'est pas vide
 
@@ -378,11 +345,11 @@ export class MainComponent implements OnInit {
         console.log(this.min+'hey');
       }
       else {
-        this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'),JSON.parse(localStorage.getItem('categorie'))).subscribe((serie: Serie) => {
+        localStorage.setItem('rechercheAvance', this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'), JSON.parse(localStorage.getItem('categorie'))));
+        this.rechercheAvancee();
           //this.liste_after_categories_series = serie;
           //console.log(this.liste_after_categories_series);
           //return this.liste_after_categories_series;
-        });
         // IMPLEMENTATION
       }
     }
@@ -429,10 +396,6 @@ export class MainComponent implements OnInit {
         this.vo = true;
         var sentence_type = ``;
         this.renderer.setProperty(this.myLanguage.nativeElement, 'innerHTML', sentence_type);
-
-
-
-
       }
   }
 
@@ -453,29 +416,21 @@ export class MainComponent implements OnInit {
           console.log(this.liste_after_categories_movies.results[i].duree);
 
         }
-
         this.max = liste_duree.reduce((a, b) => Math.max(a, b));
         this.min = liste_duree.reduce((a, b) => Math.min(a, b));
         this.duree = true;
         this.language = false;
         console.log(this.min + 'hey');
       });
-
     }
 
     if (localStorage.getItem('choix') == 'series') {
-
-
-
-      this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'), JSON.parse(localStorage.getItem('categorie')),JSON.parse(localStorage.getItem('vo'))).subscribe((serie: Serie) => {
+        localStorage.setItem('rechercheAvance', this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'), JSON.parse(localStorage.getItem('categorie')),JSON.parse(localStorage.getItem('vo'))));
+        this.rechercheAvancee();
         //this.liste_after_categories_series = serie;
         //console.log(this.liste_after_categories_series);
         //return this.liste_after_categories_series;
-      });
-    }
-
-
-
+      }
     //this.language = true;
     //var sentence_type = ``;
     //this.renderer.setProperty(this.myCategorie.nativeElement, 'innerHTML', sentence_type);
