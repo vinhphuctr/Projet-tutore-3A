@@ -58,7 +58,8 @@ export class MainComponent implements OnInit {
   duree: boolean = false;
   max: number;
   min: number;
-  dureeForm: FormGroup; 
+  dureeForm: FormGroup;
+ 
   
 
   constructor(private nav: NavbarService, private suggestionService: SuggestionService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private face: FormBuilder, private renderer: Renderer2,
@@ -81,6 +82,8 @@ export class MainComponent implements OnInit {
     this.CategorieForm = this.fb.group({
       checkArray: this.fb.array([], [Validators.required])
     })
+
+  
     this.voForm = this.fb.group({
       check: this.fb.array([], [Validators.required])
     })

@@ -79,16 +79,16 @@
   </div>
   <div *ngIf="Categorie">
 
-    <form [formGroup]="CategorieForm" #myCategorie formControlName="juju" (submit)="SubmitCategorie()" #myCategorie>
+    <form [formGroup]="CategorieForm" novalidate name="myForm"  #myCategorie formControlName="juju" (submit)="SubmitCategorie()" #myCategorie>
       <h3> Quels catégories ?</h3>
       <li *ngFor="let categorie of listeCategorieTest">
         <label>
-          <input type="checkbox" [value]="categorie.id_categ" (change)="onCheckboxChange($event)" />
+          <input type="checkbox" ng-required="!(categorie.libelle)" [value]="categorie.id_categ"  ng-model="categorie.libelle" (change)="onCheckboxChange($event)" />
           {{categorie.libelle}}
         </label>
       </li>
 
-      <button mat-stroked-button class="boutonRecherche">Soumettre ces catégories</button>
+      <button mat-stroked-button class="boutonRecherche" ng-disabled="myForm.$invalid">Soumettre ces catégories</button>
 
     </form>
   </div>
