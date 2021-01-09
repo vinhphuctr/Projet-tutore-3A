@@ -1,12 +1,29 @@
 <div class="main-content">
 
   <h1 matSubheader><img id="etoile" src="https://media.discordapp.net/attachments/757219550663147592/769167745320484944/etoile.png?width=668&height=670">Commencez votre scoring now !</h1>
-  <h3>Nos recommandations</h3>
-
+  <h3>Tendance Films</h3>
   <div aria-label="gallery">
     <ul>
-      <li *ngFor="let suggestion of tabSuggestion">
-        <img routerLink="/video/{{suggestion.idVideo}}" src="{{suggestion.poster}}"><button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+      <li *ngFor="let suggestion of tabTendanceFilm">
+        <img routerLink="/film/{{suggestion.id_video}}" src="{{suggestion.poster}}"><button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+        </button>
+      </li>
+    </ul>
+  </div>
+  <h3>Tendance Séries</h3>
+  <div aria-label="gallery">
+    <ul>
+      <li *ngFor="let suggestion of tabTendanceSerie">
+        <img routerLink="/serie/{{suggestion.id_video}}" src="{{suggestion.poster}}"><button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
+        </button>
+      </li>
+    </ul>
+  </div>
+  <h3>Par ce que vous avez liké</h3>
+  <div aria-label="gallery">
+    <ul>
+      <li *ngFor="let suggestion of tabTendanceFilmLike">
+        <img routerLink="/film/{{suggestion.id_video}}" src="{{suggestion.poster}}"><button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
         </button>
       </li>
     </ul>
@@ -24,6 +41,7 @@
           <mat-icon>search</mat-icon>
         </button>
       </form>
+      <p></p>
       <form (submit)="rechercheRapideSerie()" [formGroup]="rechercheRapideSerieForm">
         <input class="form-control" matInput placeholder="Chercher des séries" formControlName="recherche">
         <button type="submit" mat-icon-button>

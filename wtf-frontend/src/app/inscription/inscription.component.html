@@ -39,7 +39,7 @@
     <p>
         <mat-form-field appearance="fill">
             <mat-label>Genre</mat-label>
-            <select matNativeControl required formControlName="genre">
+            <select matNativeControl formControlName="genre">
               <option value="Femme">Femme</option>
               <option value="Homme">Homme</option>
               <option value="Indeterminé">Autre</option>
@@ -54,19 +54,20 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
   </p>
+  <p>
+    <mat-form-field appearance="fill">
+        <mat-label>Pays</mat-label>
+        <select matNativeControl formControlName="pays">
+          <option [ngValue]="country" *ngFor="let country of countries">{{ country }}</option>
+        </select>
+    </mat-form-field>
+</p>
     <div class="info_tiers">
         <div class="tel">
             <mat-form-field appearance="standard">
             <mat-label>Téléphone</mat-label>
             <input matInput formControlName="telephone">
             <mat-icon matSuffix color="primary">phone_iphone</mat-icon>
-            </mat-form-field>
-        </div>
-        <div class="pays">
-            <mat-form-field appearance="standard">
-            <mat-label>Pays</mat-label>
-            <input matInput formControlName="pays">
-            <mat-icon matSuffix color="primary">flag</mat-icon>
             </mat-form-field>
         </div>
     </div>

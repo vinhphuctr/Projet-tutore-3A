@@ -27,7 +27,9 @@ export class MainComponent implements OnInit {
   parentMessage = "message from parent";
   @ViewChild('myCategorie') myCategorie: ElementRef;
   @ViewChild('myLanguage') myLanguage: ElementRef;
-  tabSuggestion: Object;
+  tabTendanceFilm: Array<Video>;
+  tabTendanceFilmLike: Array<Video>;
+  tabTendanceSerie: Array<Serie>;
   isRechercheRapide: boolean = false;
   isRechercheAvance: boolean = false;
   rechercheRapideForm: FormGroup;
@@ -65,6 +67,7 @@ export class MainComponent implements OnInit {
   constructor(private nav: NavbarService, private suggestionService: SuggestionService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private face: FormBuilder, private renderer: Renderer2,
     private sanitizer: DomSanitizer, private _httpClient: HttpClient, private movieService: MovieService, private serieService: SerieService) {
     nav.show()
+    //this.tabTendanceFilm = this.suggestionService.getTendanceFilms();
   }
 
   ngOnInit(): void {

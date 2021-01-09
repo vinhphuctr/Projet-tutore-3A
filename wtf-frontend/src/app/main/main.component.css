@@ -13,18 +13,13 @@ h1{
   color : rgb(93,84,164);
 }
 
-.h3 {
-  font-size: 22px;
-  color: rgb(93,84,164);
-}
-
 h3{
   font-size : 22px;
   color : rgb(93,84,164);
 }
 
 .titreRecherche {
-  margin-top: 3%;
+  margin-top: 5%;
 }
 
 .boutonRecherche {
@@ -70,7 +65,7 @@ width: 100px;
 [aria-label="gallery"] {
   margin-left: auto;
   margin-right: auto;
-  padding: 1rem;
+  margin-bottom: 40px;
   width: 62%;
   overflow-x: scroll;
 }

@@ -13,6 +13,7 @@ import { InscriptionService } from '../services/inscription.service';
 export class InscriptionComponent implements OnInit {
 
   inscriptionForm: FormGroup;
+  countries : ["USA","FRANCE", "GUADELOUPE"];
 
   constructor(private InscriptionService: InscriptionService ,private nav: NavbarService) { this.nav.hide() }
 
@@ -25,7 +26,7 @@ export class InscriptionComponent implements OnInit {
       prenom: new FormControl("", [Validators.required]),
       date_naissance: new FormControl(Date, [Validators.required]),
       genre: new FormControl("", [Validators.required]),
-      telephone: new FormControl("", [Validators.required]),
+      telephone: new FormControl("", [Validators.required, Validators.minLength(8), Validators.maxLength(16)]),
       pays: new FormControl("", [Validators.required])
     });
 

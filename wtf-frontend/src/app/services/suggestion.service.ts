@@ -23,12 +23,8 @@ export class SuggestionService {
 
   constructor(private _httpClient : HttpClient) { }
 
-  getSuggestions(){
-    /*
-    let url = "http://wtfilm-api.herokuapp.com/api/video/get/all/";
-    let result = this._httpClient.get<any>(url);
-    console.log(result);
-    */
+  getTendanceFilms(): Observable<Video>{
+    return this._httpClient.get<Video>("https://wtf-api-v1.herokuapp.com/api/categories");
   }
 
   rechercheRapide(url: string): Observable<rechercheFilm> {
