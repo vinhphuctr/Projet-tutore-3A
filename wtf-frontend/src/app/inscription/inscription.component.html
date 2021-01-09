@@ -58,7 +58,7 @@
     <mat-form-field appearance="fill">
         <mat-label>Pays</mat-label>
         <select matNativeControl formControlName="pays">
-          <option [ngValue]="country" *ngFor="let country of countries">{{ country }}</option>
+          <option [ngValue]="country" *ngFor="let country of countries">{{ country.name }}</option>
         </select>
     </mat-form-field>
 </p>
