@@ -7,6 +7,7 @@ import { FavorisService } from '../services/favoris.service';
 import { UtilisateurService } from '../services/utilisateur.service';
 import { rechercheFilm } from '../modeles/rechercheFIlm';
 import { rechercheSerie } from '../modeles/rechercheSerie';
+import { interval } from 'rxjs';
 
 
 
@@ -20,20 +21,25 @@ export class RechercheRapideComponent implements OnInit {
   ratingValue: number = 3;
   tabFilm : Video[];
   tabSerie : Serie[];
-  tabMesFavoris: Video[];
+  tabMesFavorisFilm: any[] = [];
+  tabMesFavorisSerie: any[] = [];
   UtilisateurData: Utilisateur;
   previous : string;
   next : string;
   nbrResultats : Number = 0;
   url : string;
   film: Boolean;
+  data$ = interval(10);
 
   constructor(private _suggestionService: SuggestionService,private UtilisateurService : UtilisateurService, private FavorisService: FavorisService) {
-    this.tabMesFavoris = this.FavorisService.getFavorisFilm();
+    this.tabMesFavorisFilm = this.FavorisService.getFavorisFilm();
+    this.tabMesFavorisSerie = this.FavorisService.getFavorisSerie();
   }
 
   ngOnInit(): void {
     this.UtilisateurData = this.UtilisateurService.getUser();
+    this.data$.subscribe(val => this.tabMesFavorisFilm = this.FavorisService.getFavorisFilm());
+    this.data$.subscribe(val => this.tabMesFavorisSerie = this.FavorisService.getFavorisSerie());
     if(localStorage.getItem('typeDeRecherche') == "rechercheRapide"){
       if(localStorage.getItem('filmOuSerie') == "film"){
         this.film = true;
@@ -43,6 +49,7 @@ export class RechercheRapideComponent implements OnInit {
           this.previous = res.previous;
           this.next = res.next;
           this.nbrResultats = res.count;
+          this.checkIfFav();
         });
       }
       else {
@@ -69,10 +76,14 @@ export class RechercheRapideComponent implements OnInit {
     }
   }
 
+
   ngAfterViewInit()	: void{
     this.checkIfFav();
   }
 
+  ngAfterViewChecked(): void{
+    this.checkIfFav();
+  }
 
   postRate(event, item) {
     console.log(event.value);
@@ -81,13 +92,27 @@ export class RechercheRapideComponent implements OnInit {
   }
 
   checkIfFav(){
+    if(localStorage.getItem('filmOuSerie') == "film"){
+      if(this.tabFilm !== undefined){
     this.tabFilm.forEach(item => {
       if(this.FavorisService.checkIfFavFilm(item.id_video) == true){
-        console.log("passé");
-        let s = "fav_" + item.id_video;
+        let s = "film_" + item.id_video;
         document.getElementById(s).style.color = "red";
       }
     });
+  }
+  }
+  else {
+    if(this.tabSerie !== undefined){
+
+    this.tabSerie.forEach(item => {
+      if(this.FavorisService.checkIfFavSerie(item.id_video) == true){
+        let s = "serie_" + item.id_video;
+        document.getElementById(s).style.color = "red";
+      }
+    });
+  }
+}
   }
 
   nextPage(){
@@ -104,18 +129,30 @@ export class RechercheRapideComponent implements OnInit {
     this.ngOnInit();
   }
 
-  addFav(item){
-    console.log(item);
-    let s = "fav_" + item;
-    console.log(s);
-    if(document.getElementById(s).style.color == "red") {
-      document.getElementById(s).style.color = "white";
-      this.FavorisService.deleteFavorisFilm(item);
+  addFav(what, item){
+    this.checkIfFav();
+    let s;
+    if(what == 1){
+       s = "film_" + item;
     }
     else {
-      document.getElementById(s).style.color = "red";
-      this.FavorisService.addFavorisFilm(item);
-      // On ajoute cette video de la BD Favoris
+      s = "serie_" + item;
+    }
+    if(document.getElementById(s).style.color == "red") {
+      if(what == 1){
+        this.FavorisService.deleteFavorisFilm(item);
+      }
+      else {
+        this.FavorisService.deleteFavorisSerie(item);
+      }
+    }
+    else {
+      if(what == 1){
+        this.FavorisService.addFavorisFilm(item);
+      }
+      else {
+        this.FavorisService.addFavorisSerie(item);
+      }
     }
   }
 

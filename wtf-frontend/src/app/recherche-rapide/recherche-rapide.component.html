@@ -16,7 +16,7 @@
               <p id="film">{{movie.titre}} ({{movie.date_sortie | date:'yyyy'}})</p>
               <p id="genre">{{movie.vo |uppercase}}</p>
               <div class="boutonRecherche">
-                <button [id]="'fav_' + movie.id_video " (click)="addFav(movie.id_video)" class="button_left" mat-icon-button color="warm" aria-label="Example icon-button with a heart icon">
+                <button [id]="'film_' + movie.id_video " (click)="addFav(1,movie.id_video)" class="button_left" mat-icon-button color="warm" aria-label="Example icon-button with a heart icon">
                   <mat-icon>favorite</mat-icon>
                 </button>
                 <button  routerLink="{{url}}{{movie.id_video}}" mat-stroked-button class="button_left">Détails</button>
@@ -35,7 +35,7 @@
               <p id="film">{{serie.titre}} ({{serie.date_sortie | date:'yyyy'}})</p>
               <p id="genre">{{serie.vo |uppercase}}</p>
               <div class="boutonRecherche">
-                <button [id]="'fav_' + serie.id_video " (click)="addFav(serie.id_video)" class="button_left" mat-icon-button color="warm" aria-label="Example icon-button with a heart icon">
+                <button  [id]="'serie_' + serie.id_video " (click)="addFav(2,serie.id_video)" class="button_left" mat-icon-button color="warm" aria-label="Example icon-button with a heart icon">
                   <mat-icon>favorite</mat-icon>
                 </button>
                 <button  routerLink="{{url}}{{serie.id_video}}" mat-stroked-button class="button_left">Détails</button>
