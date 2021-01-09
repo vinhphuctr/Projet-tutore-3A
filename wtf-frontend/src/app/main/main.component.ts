@@ -14,11 +14,14 @@ import { Video } from '../modeles/video';
 import { map } from 'rxjs/operators';
 import { Serie } from '../modeles/serie';
 import { Categorie } from '../modeles/categorie';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+
 
 
 
 @Component({
-  selector: 'app-main',
+  selector: 'app-main', 
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
@@ -27,10 +30,13 @@ export class MainComponent implements OnInit {
   parentMessage = "message from parent";
   @ViewChild('myCategorie') myCategorie: ElementRef;
   @ViewChild('myLanguage') myLanguage: ElementRef;
-  tabSuggestion: Object;
+  tabTendanceFilm: Array<Video>;
+  tabTendanceFilmLike: Array<Video>;
+  tabTendanceSerie: Array<Serie>;
   isRechercheRapide: boolean = false;
   isRechercheAvance: boolean = false;
   rechercheRapideForm: FormGroup;
+  rechercheRapideSerieForm: FormGroup;
   rechercheAvanceeForm: FormGroup;
   slider_value: number = 180;
   film_value: string = "film";
@@ -50,7 +56,7 @@ export class MainComponent implements OnInit {
   liste_after_categories_series: Serie;
   tab_liste_vo_after_movie: Array<Video> = [];
   tab_liste_vo_after_serie: Array<Serie> = [];
-  radioSelected : string = ''; 
+  radioSelected : string = '';
   listeCategorieTest: Array<Categorie> = [];
   shipping: FormGroup;
   tab_vo: Array<any> = [] ;
@@ -59,12 +65,13 @@ export class MainComponent implements OnInit {
   max: number;
   min: number;
   dureeForm: FormGroup;
- 
-  
+
+  alerte: boolean; 
 
   constructor(private nav: NavbarService, private suggestionService: SuggestionService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private face: FormBuilder, private renderer: Renderer2,
-    private sanitizer: DomSanitizer, private _httpClient: HttpClient, private movieService: MovieService, private serieService: SerieService) {
+    private sanitizer: DomSanitizer, private _httpClient: HttpClient, private movieService: MovieService, private serieService: SerieService,private _snackBar: MatSnackBar) {
     nav.show()
+    //this.tabTendanceFilm = this.suggestionService.getTendanceFilms();
   }
 
   ngOnInit(): void {
@@ -92,16 +99,12 @@ export class MainComponent implements OnInit {
       slider_value: new FormControl("", [Validators.required])
     })
 
-   
-    // this.tabSuggestion = this.suggestionService.getSuggestions();
     this.rechercheRapideForm = new FormGroup({
       recherche: new FormControl("", [Validators.required])
     })
-    //this.rechercheAvanceeForm = new FormGroup({
-    //  film_value: new FormControl("", [Validators.required]),
-    //  slider_value: new FormControl("", [Validators.required]),
-    //  recherche: new FormControl("", [Validators.required])
-    //})
+    this.rechercheRapideSerieForm = new FormGroup({
+      recherche: new FormControl("", [Validators.required])
+    })
   }
 
   onCheckboxChange(e) {
@@ -118,24 +121,24 @@ export class MainComponent implements OnInit {
         }
         i++;
       });
-     
+
     }
   }
 
 
 
   onCheckbox2Change(e) {
-  
+
 
     const check: FormArray = this.voForm.get('check') as FormArray;
 
     if (e.target.checked) {
-    
+
 
       check.push(new FormControl(e.target.value));
     } else {
       let i: number = 0;
-      
+
       check.controls.forEach((item: FormControl) => {
         if (item.value == e.target.value) {
           check.removeAt(i);
@@ -172,24 +175,37 @@ export class MainComponent implements OnInit {
     this.language = false;
     this.Categorie = false;
     this.vo = false;
-    this.duree = false; 
+    this.duree = false;
+    localStorage.removeItem('choix');
+    localStorage.removeItem('categorie');
+    localStorage.removeItem('vo');
+    localStorage.removeItem('duree');
+    localStorage.removeItem('rechercheAvance');
   }
 
   rechercheRapide() {
     localStorage.setItem('typeDeRecherche', "rechercheRapide");
-    localStorage.setItem('rechercheRapide', this.rechercheRapideForm.value['recherche']);
+    localStorage.setItem("filmOuSerie", "film");
+    localStorage.setItem('rechercheRapide', "https://wtf-api-v1.herokuapp.com/api/films?titre=" + this.rechercheRapideForm.value['recherche']);
+    const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/recherche';
+    this.router.navigate([redirectUrl]);
+  }
+  rechercheRapideSerie() {
+    localStorage.setItem('typeDeRecherche', "rechercheRapide");
+    localStorage.setItem("filmOuSerie", "serie");
+    localStorage.setItem('rechercheRapide', "https://wtf-api-v1.herokuapp.com/api/series?titre=" + this.rechercheRapideSerieForm.value['recherche']);
     const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/recherche';
     this.router.navigate([redirectUrl]);
   }
 
   rechercheAvancee() {
-    let recherche = new rechercheAvancee();
-    recherche.filmOuSerie = this.rechercheAvanceeForm.value['film_value'];
-    recherche.duree = this.rechercheAvanceeForm.value['slider_value'];
-    recherche.categories = null;
-    recherche.vo = "en";
+    if(localStorage.getItem("choix") == "series"){
+      localStorage.setItem("filmOuSerie", "serie");
+    }
+    else {
+      localStorage.setItem("filmOuSerie", "film");
+    }
     localStorage.setItem('typeDeRecherche', "rechercheAvance");
-    localStorage.setItem('rechercheAvance', JSON.stringify(recherche));
     const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/recherche';
     this.router.navigate([redirectUrl]);
   }
@@ -212,13 +228,13 @@ export class MainComponent implements OnInit {
 
     if (this.shippingForm.get('signatureReq').value == 'movie') {
 
-      localStorage.setItem('choix', 'films'); 
+      localStorage.setItem('choix', 'films');
     }
     if (this.shippingForm.get('signatureReq').value == 'series') {
 
       localStorage.setItem('choix', 'series');
 
-      // WARNING !!!! can you guys keep this part ? I'd appreciate it, thanks dude 
+      // WARNING !!!! can you guys keep this part ? I'd appreciate it, thanks dude
       //this.serieService.getAllSeries().subscribe((serie: Serie) => {
       //  for (let i = 0; i < serie.length; i++) {
 
@@ -235,38 +251,47 @@ export class MainComponent implements OnInit {
       //    }
       //    return unique;
       //  }, []);
-      
+
     //  });
     }
 
     // BOTH
-    if (this.shippingForm.get('signatureReq').value == 'both') {
-
-      localStorage.setItem('choix', 'both');
-    }
+  
     this.Categorie = true;
     this.suggestionService.getAllCategories().subscribe((categorie: Categorie) => {
       this.listeCategorieTest = categorie.results;
       console.log(this.listeCategorieTest);
-      return this.listeCategorieTest; 
+      return this.listeCategorieTest;
     });
     var sentence_type = ``;
     this.renderer.setProperty(this.myButton.nativeElement, 'innerHTML', sentence_type);
-    
+
   }
 
   SubmitCategorie(): void {
+   
 
     console.log(localStorage.getItem('choix'));
     console.log(this.CategorieForm.value);
     console.log(this.CategorieForm.value.checkArray);
-    let array = []; 
+    let array = [];
     array  = Array.from(this.CategorieForm.value.checkArray);
     localStorage.setItem('categorie', JSON.stringify(array));
+
+    if (localStorage.getItem('categorie') == "[]") {
+      this.alerte = true;
+
+      this._snackBar.open('Erreur : vous devez choisir au moins une des catégories présentes pour pouvoir profiter de notre sélection', 'fermer', {
+        duration: 2000000,
+        horizontalPosition:'center',
+        verticalPosition:'top',
+      });
+    }
+    else {
     if (localStorage.getItem('choix') == 'films') {
       this.suggestionService.rechercheAvancee_Categorie_movies(this.CategorieForm.value.checkArray).subscribe((video: Video) => {
         this.liste_after_categories_movies = video;
-        console.log(this.liste_after_categories_movies); 
+        console.log(this.liste_after_categories_movies);
         return this.liste_after_categories_movies;
       });
     }
@@ -277,52 +302,12 @@ export class MainComponent implements OnInit {
         return this.liste_after_categories_series;
       });
     }
-    if (localStorage.getItem('choix') == 'both') {
-      this.suggestionService.rechercheAvancee_Categorie_movies(this.CategorieForm.value.checkArray).subscribe((video: Video) => {
-        this.liste_after_categories_movies = video;
-        console.log(this.liste_after_categories_movies);
-        return this.liste_after_categories_movies;
-      });
-      this.suggestionService.rechercheAvancee_Categorie_series(this.CategorieForm.value.checkArray).subscribe((serie: Serie) => {
-        this.liste_after_categories_series = serie;
-        console.log(this.liste_after_categories_series);
-        return this.liste_after_categories_series;
-      });
+   
+      this.language = true;
+      var sentence_type = ``;
+      this.renderer.setProperty(this.myCategorie.nativeElement, 'innerHTML', sentence_type);
     }
-
-
-
-
-    //if (localStorage.getItem('choix') == 'serie') {
-    //  for (let i = 0; i < this.listeSeries.length; i++) {
-    //    for (let m = 0; m < this.listeSeries[i].categories.length; m++) {
-    //      for (let n = 0; n < this.CategorieForm.value.checkArray.length; n++) {
-
-    //        console.log(this.CategorieForm.value.checkArray.length);
-
-    //        if (this.CategorieForm.value.checkArray[n] == this.listeSeries[i].categories[m].id_categ) {
-    //          this.liste_after_categories_series.push(this.listeSeries[i]);
-    //        }
-
-    //      }
-
-    //    }
-    //  }
-    //  let result: Array<Serie> = [];
-    //  result = this.liste_after_categories_series.reduce((unique, o) => {
-    //    if (!unique.some(obj => obj.titre === o.titre)) {
-    //      unique.push(o);
-    //    }
-    //    return unique;
-    //  }, []);
-    //  console.log(result);
-    //  console.log(this.listeSeries);
-    //}
-
-  
-    this.language = true; 
-    var sentence_type = ``;
-    this.renderer.setProperty(this.myCategorie.nativeElement, 'innerHTML', sentence_type);
+    
   }
   OnChangeduree() {
     this.slider_value  = this.dureeForm.value['slider_value'];
@@ -332,32 +317,29 @@ export class MainComponent implements OnInit {
     //rechercheAvancee_final_1
     // si vo est vide
     if (localStorage.getItem('vo') == "") {
-      this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'),JSON.parse(localStorage.getItem('categorie')), localStorage.getItem('duree')).subscribe((video: Video) => {
+      localStorage.setItem('rechercheAvance', this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'), JSON.parse(localStorage.getItem('categorie')),JSON.parse(localStorage.getItem('vo'))));
+      this.rechercheAvancee();
         //this.liste_after_categories_series = serie;
         //console.log(this.liste_after_categories_series);
         //return this.liste_after_categories_series;
-      });
     }
     else {
       console.log('julie');
-      this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'),JSON.parse(localStorage.getItem('categorie')), localStorage.getItem('duree'),JSON.parse(localStorage.getItem('vo'))).subscribe((video: Video) => {
-        //this.liste_after_categories_series = serie;
-        //console.log(this.liste_after_categories_series);
-        //return this.liste_after_categories_series;
-      });
+      localStorage.setItem('rechercheAvance', this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'), JSON.parse(localStorage.getItem('categorie')),JSON.parse(localStorage.getItem('vo'))));
+      this.rechercheAvancee();
     }
     // si le vo n'est pas vide
 
   }
   changeLanguageValue() {
-    
+
     console.log(this.shipping.get('signature').value);
     console.log(localStorage.getItem('choix'));
-
+    
     if (this.shipping.get('signature').value == 'v' || this.shipping.get('signature').value == 'both') {
       if (localStorage.getItem('choix') == 'films') {
 
-        
+
         localStorage.setItem('vo', "");
 
 
@@ -372,26 +354,26 @@ export class MainComponent implements OnInit {
         this.max = liste_duree.reduce((a, b) => Math.max(a, b));
         this.min = liste_duree.reduce((a, b) => Math.min(a, b));
         this.duree = true;
-        this.language = false; 
-        console.log(this.min+'hey'); 
+        this.language = false;
+        console.log(this.min+'hey');
       }
       else {
-        this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'),JSON.parse(localStorage.getItem('categorie'))).subscribe((serie: Serie) => {
+        localStorage.setItem('rechercheAvance', this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'), JSON.parse(localStorage.getItem('categorie'))));
+        this.rechercheAvancee();
           //this.liste_after_categories_series = serie;
           //console.log(this.liste_after_categories_series);
           //return this.liste_after_categories_series;
-        });
-        // IMPLEMENTATION 
+        // IMPLEMENTATION
       }
     }
 
-    
+
 
     if (this.shipping.get('signature').value == 'vo') {
       if (localStorage.getItem('choix') == 'films') {
         for (let i = 0; i < this.liste_after_categories_movies.results.length; i++) {
 
-          this.tab_vo.push(this.liste_after_categories_movies.results[i].vo); 
+          this.tab_vo.push(this.liste_after_categories_movies.results[i].vo);
           console.log(this.liste_after_categories_movies.results[i].vo);
         }
       }
@@ -403,34 +385,20 @@ export class MainComponent implements OnInit {
         }
 
         }
-      if (localStorage.getItem('choix') == 'both') {
-        for (let i = 0; i < this.liste_after_categories_movies.length; i++) {
-          this.tab_vo.push(this.liste_after_categories_movies[i].vo);
-        }
-
-        for (let i = 0; i < this.liste_after_categories_series.length; i++) {
-          this.tab_vo.push(this.liste_after_categories_series[i].vo);
-        }
-
-       
-      }
-      console.log(this.tab_vo); 
     
+      console.log(this.tab_vo);
+
       this.tab_vo = this.tab_vo.reduce((unique, o) => {
         if (!unique.some(obj => obj === o)) {
           unique.push(o);
         }
         return unique;
       }, []);
-      console.log(this.tab_vo); 
+      console.log(this.tab_vo);
 
         this.vo = true;
         var sentence_type = ``;
         this.renderer.setProperty(this.myLanguage.nativeElement, 'innerHTML', sentence_type);
-
-
-
-
       }
   }
 
@@ -438,7 +406,7 @@ export class MainComponent implements OnInit {
 
   SubmitVo(): void {
     console.log(this.voForm.value.check);
-    let array = []; 
+    let array = [];
     array = Array.from(this.voForm.value.check);
     localStorage.setItem('vo', JSON.stringify(array));
     if (localStorage.getItem('choix') == 'films') {
@@ -451,29 +419,21 @@ export class MainComponent implements OnInit {
           console.log(this.liste_after_categories_movies.results[i].duree);
 
         }
-
         this.max = liste_duree.reduce((a, b) => Math.max(a, b));
         this.min = liste_duree.reduce((a, b) => Math.min(a, b));
         this.duree = true;
-        this.language = false; 
-        console.log(this.min + 'hey'); 
+        this.language = false;
+        console.log(this.min + 'hey');
       });
-
     }
 
     if (localStorage.getItem('choix') == 'series') {
-
-     
-
-      this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'), JSON.parse(localStorage.getItem('categorie')),JSON.parse(localStorage.getItem('vo'))).subscribe((serie: Serie) => {
+        localStorage.setItem('rechercheAvance', this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'), JSON.parse(localStorage.getItem('categorie')),JSON.parse(localStorage.getItem('vo'))));
+        this.rechercheAvancee();
         //this.liste_after_categories_series = serie;
         //console.log(this.liste_after_categories_series);
         //return this.liste_after_categories_series;
-      });
-    }
-
-   
-
+      }
     //this.language = true;
     //var sentence_type = ``;
     //this.renderer.setProperty(this.myCategorie.nativeElement, 'innerHTML', sentence_type);

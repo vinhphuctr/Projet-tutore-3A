@@ -5,6 +5,10 @@ import { Serie } from '../modeles/serie';
 import { Video } from '../modeles/video';
 import { Categorie } from '../modeles/categorie';
 import { rechercheAvancee } from '../modeles/rechercheAvancee';
+import { rechercheFilm } from '../modeles/rechercheFIlm';
+import { rechercheSerie } from '../modeles/rechercheSerie';
+
+
 
 
 
@@ -14,54 +18,34 @@ import { rechercheAvancee } from '../modeles/rechercheAvancee';
 export class SuggestionService {
 
   url: string;
-  url_serie: string; 
+  url_serie: string;
 
 
   constructor(private _httpClient : HttpClient) { }
 
-  getSuggestions(){
-    /*
-    let url = "http://wtfilm-api.herokuapp.com/api/video/get/all/";
-    let result = this._httpClient.get<any>(url);
-    console.log(result);
-    */
+  getTendanceFilms(): Observable<Video>{
+    return this._httpClient.get<Video>("https://wtf-api-v1.herokuapp.com/api/categories");
   }
 
-
-
-
-  rechercheRapide(keyword: string): Observable<Video[]> {
-
-   let url = "https://wtf-api-v1.herokuapp.com/api/films?titre=" + keyword;
-   return this._httpClient.get<Video[]>(url);
+  rechercheRapide(url: string): Observable<rechercheFilm> {
+   return this._httpClient.get<rechercheFilm>(url);
   }
 
-  rechercheAvancee(recherche : rechercheAvancee): Observable<Video[]> {
-    let url;
-    console.log('julie');
-    console.log(recherche); 
-    if(recherche.filmOuSerie == "film"){
-      url = "https://wtf-api-v1.herokuapp.com/api/films?";
-      if(recherche.duree != null || recherche.duree != undefined){
-        url+= '&duree_max=' + recherche.duree;
-      }
-    }
-    else {
-      url = "https://wtf-api-v1.herokuapp.com/api/series?";
-    }
-  /*  if(recherche.titre != null || recherche.titre != undefined){
-      url += "&titre=" + recherche.titre;
-    }
-    if(recherche.vo != null || recherche.titre != undefined){
-      url += "&vo=" + recherche.vo;
-    }*/
-    return this._httpClient.get<Video[]>(url);
-  }
+  rechercheRapideSerie(url: string): Observable<rechercheSerie> {
+    return this._httpClient.get<rechercheSerie>(url);
+   }
 
+  rechercheAvancee(url: string): Observable<rechercheFilm> {
+    return this._httpClient.get<rechercheFilm>(url);
+   }
+
+   rechercheAvanceeSerie(url: string): Observable<rechercheSerie> {
+    return this._httpClient.get<rechercheSerie>(url);
+   }
 
   getAllCategories(): Observable<Categorie> {
 
-    let url = "https://wtf-api-v1.herokuapp.com/api/categories"; 
+    let url = "https://wtf-api-v1.herokuapp.com/api/categories";
     return this._httpClient.get<Categorie>(url);
   }
 
@@ -100,7 +84,7 @@ export class SuggestionService {
     }
 
     for (let m = 0; m < tab_vo.length; m++) {
-      this.url += "vo=" + tab_vo[m] + "&"; 
+      this.url += "vo=" + tab_vo[m] + "&";
     }
 
     console.log(this.url);
@@ -109,17 +93,17 @@ export class SuggestionService {
 
   }
 
-  rechercheAvancee_final_1(type: string,tab_categorie: Array<any>, duree: string); 
+  rechercheAvancee_final_1(type: string,tab_categorie: Array<any>, duree: string);
   rechercheAvancee_final_1(type: string,tab_categorie: Array<any>, duree: string, vo: Array<any>);
   rechercheAvancee_final_1(type: string, tab_categorie: Array<any>);
-  rechercheAvancee_final_1(type: string, tab_categorie: Array<any>, vo : Array<any>); 
+  rechercheAvancee_final_1(type: string, tab_categorie: Array<any>, vo : Array<any>);
   rechercheAvancee_final_1(type: string, tab_categorie: Array<any>, duree?: string | Array<any>, vo?: Array<any> | string) { // an error occurs if we don't specifiate that a type can be changed...
     this.url = "https://wtf-api-v1.herokuapp.com/api/";
     this.url += type;
-  
+
    // this.url = "https://wtf-api-v1.herokuapp.com/api/films?duree<=" + duree;
     this.url += "?";
-   
+
     for (let i = 0; i < tab_categorie.length; i++) {
         this.url += "&categories=" + tab_categorie[i] + "";
 
@@ -145,41 +129,8 @@ export class SuggestionService {
 
         }
       }
-     
     }
     console.log(this.url);
-
-    if (type == "films") {
-      return this._httpClient.get<Video>(this.url);
-    }
-
-    if (type == "series") {
-      return this._httpClient.get<Serie>(this.url);
-    }
+    return this.url;
   }
-
-  //rechercheAvancee_final_1(tab_categorie: Array<any>, duree: string): Observable<Video> {
-    
-  //}
-
-  //rechercheAvancee_final_1(tab_categorie: Array<any>, duree: string,vo : Array<any>): Observable<Video> {
-  //  this.url = "https://wtf-api-v1.herokuapp.com/api/films?duree<=" + duree;
-  //  this.url += "";
-  //  for (let i = 0; i < tab_categorie.length; i++) {
-  //    this.url += "&categories=" + tab_categorie[i] + "&";
-
-  //  }
-  //  for (let i = 0; i < vo.length; i++) {
-  //    this.url += "&vo=" + vo[i] + "&";
-
-  //  }
-  //  console.log(this.url);
-  //  return this._httpClient.get<Video>(this.url);
-  //}
-  // I'm gonna start the stuff for selecting the video and then going to another research, isn't it fabulous ?
-
-
-
-
-
 }

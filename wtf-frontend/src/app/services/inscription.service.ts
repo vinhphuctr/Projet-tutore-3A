@@ -28,7 +28,7 @@ export class InscriptionService {
     let date_naissance = loginForm.value["date_naissance"];
     let genre = loginForm.value["genre"];
     let telephone = loginForm.value["telephone"];
-    let pays = loginForm.value["pays"];
+    let pays = loginForm.value["pays"].name;
 
     // Appel API
 
