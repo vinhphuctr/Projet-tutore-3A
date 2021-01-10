@@ -21,7 +21,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
-  selector: 'app-main', 
+  selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
@@ -66,7 +66,7 @@ export class MainComponent implements OnInit {
   min: number;
   dureeForm: FormGroup;
 
-  alerte: boolean; 
+  alerte: boolean;
 
   constructor(private nav: NavbarService, private suggestionService: SuggestionService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private face: FormBuilder, private renderer: Renderer2,
     private sanitizer: DomSanitizer, private _httpClient: HttpClient, private movieService: MovieService, private serieService: SerieService,private _snackBar: MatSnackBar) {
@@ -90,7 +90,7 @@ export class MainComponent implements OnInit {
       checkArray: this.fb.array([], [Validators.required])
     })
 
-  
+
     this.voForm = this.fb.group({
       check: this.fb.array([], [Validators.required])
     })
@@ -256,7 +256,7 @@ export class MainComponent implements OnInit {
     }
 
     // BOTH
-  
+
     this.Categorie = true;
     this.suggestionService.getAllCategories().subscribe((categorie: Categorie) => {
       this.listeCategorieTest = categorie.results;
@@ -269,7 +269,7 @@ export class MainComponent implements OnInit {
   }
 
   SubmitCategorie(): void {
-   
+
 
     console.log(localStorage.getItem('choix'));
     console.log(this.CategorieForm.value);
@@ -302,30 +302,32 @@ export class MainComponent implements OnInit {
         return this.liste_after_categories_series;
       });
     }
-   
+
       this.language = true;
       var sentence_type = ``;
       this.renderer.setProperty(this.myCategorie.nativeElement, 'innerHTML', sentence_type);
     }
-    
+
   }
   OnChangeduree() {
     this.slider_value  = this.dureeForm.value['slider_value'];
-
     console.log(this.slider_value);
     localStorage.setItem('duree', JSON.stringify(this.slider_value));
     //rechercheAvancee_final_1
     // si vo est vide
+    console.log("avant");
     if (localStorage.getItem('vo') == "") {
-      localStorage.setItem('rechercheAvance', this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'), JSON.parse(localStorage.getItem('categorie')),JSON.parse(localStorage.getItem('vo'))));
+      console.log("1");
+      localStorage.setItem('rechercheAvance', this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'), JSON.parse(localStorage.getItem('categorie')),localStorage.getItem('duree')));
       this.rechercheAvancee();
+      console.log("2");
         //this.liste_after_categories_series = serie;
         //console.log(this.liste_after_categories_series);
         //return this.liste_after_categories_series;
     }
     else {
       console.log('julie');
-      localStorage.setItem('rechercheAvance', this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'), JSON.parse(localStorage.getItem('categorie')),JSON.parse(localStorage.getItem('vo'))));
+      localStorage.setItem('rechercheAvance', this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'), JSON.parse(localStorage.getItem('categorie')),localStorage.getItem('duree'), JSON.parse(localStorage.getItem('vo'))));
       this.rechercheAvancee();
     }
     // si le vo n'est pas vide
@@ -335,7 +337,7 @@ export class MainComponent implements OnInit {
 
     console.log(this.shipping.get('signature').value);
     console.log(localStorage.getItem('choix'));
-    
+
     if (this.shipping.get('signature').value == 'v' || this.shipping.get('signature').value == 'both') {
       if (localStorage.getItem('choix') == 'films') {
 
@@ -385,7 +387,7 @@ export class MainComponent implements OnInit {
         }
 
         }
-    
+
       console.log(this.tab_vo);
 
       this.tab_vo = this.tab_vo.reduce((unique, o) => {

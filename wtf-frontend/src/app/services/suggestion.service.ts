@@ -100,8 +100,6 @@ export class SuggestionService {
   rechercheAvancee_final_1(type: string, tab_categorie: Array<any>, duree?: string | Array<any>, vo?: Array<any> | string) { // an error occurs if we don't specifiate that a type can be changed...
     this.url = "https://wtf-api-v1.herokuapp.com/api/";
     this.url += type;
-
-   // this.url = "https://wtf-api-v1.herokuapp.com/api/films?duree<=" + duree;
     this.url += "?";
 
     for (let i = 0; i < tab_categorie.length; i++) {
