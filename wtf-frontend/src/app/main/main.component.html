@@ -76,10 +76,16 @@
     <form [formGroup]="CategorieForm" novalidate name="myForm" #myCategorie formControlName="juju" (submit)="SubmitCategorie()" #myCategorie>
       <h3> Quels catégories ?</h3>
       <li *ngFor="let categorie of listeCategorieTest">
-        <label>
+        <!--<label>
           <input type="checkbox" [value]="categorie.id_categ" ng-model="categorie.libelle" (change)="onCheckboxChange($event)" />
           {{categorie.libelle}}
-        </label>
+        </label>-->
+
+
+        <section class="example-section">
+          <mat-checkbox class="example-margin" [value]="categorie.id_categ" ng-model="categorie.libelle" (change)="onCheckboxChange($event)"> {{categorie.libelle}}</mat-checkbox>
+          
+        </section>
       </li>
 
       <button mat-stroked-button class="boutonRecherche">Soumettre ces catégories</button>
