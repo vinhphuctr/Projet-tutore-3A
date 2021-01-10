@@ -109,7 +109,6 @@ export class MainComponent implements OnInit {
 
   onCheckboxChange(e) {
 
-    console.log(e);
     const checkArray: FormArray = this.CategorieForm.get('checkArray') as FormArray;
 
     if (e.checked==true) {
@@ -134,15 +133,14 @@ export class MainComponent implements OnInit {
 
     const check: FormArray = this.voForm.get('check') as FormArray;
 
-    if (e.target.checked) {
+    if (e.checked) {
 
 
-      check.push(new FormControl(e.target.value));
+      check.push(new FormControl(e.source.value));
     } else {
       let i: number = 0;
-
       check.controls.forEach((item: FormControl) => {
-        if (item.value == e.target.value) {
+        if (item.value == e.source.value) {
           check.removeAt(i);
           return;
         }
@@ -218,13 +216,12 @@ export class MainComponent implements OnInit {
   radioChange() {
 
     this.filter['property'] = this.selected;
-    console.log(this.filter);
+
 
   }
 
   changeRadioValue(): void {
     this.isRechercheRapide = false;
-    console.log(this.shippingForm.get('signatureReq'));
     console.log(this.shippingForm.get('signatureReq').value); // value : movie, series, both
 
 
@@ -262,7 +259,6 @@ export class MainComponent implements OnInit {
     this.Categorie = true;
     this.suggestionService.getAllCategories().subscribe((categorie: Categorie) => {
       this.listeCategorieTest = categorie.results;
-      console.log(this.listeCategorieTest);
       return this.listeCategorieTest;
     });
     var sentence_type = ``;
@@ -271,10 +267,6 @@ export class MainComponent implements OnInit {
   }
 
   SubmitCategorie(): void {
-
-
-    console.log(localStorage.getItem('choix'));
-    console.log(this.CategorieForm.value);
     console.log(this.CategorieForm.value.checkArray);
     let array = [];
     array  = Array.from(this.CategorieForm.value.checkArray);
@@ -293,14 +285,12 @@ export class MainComponent implements OnInit {
     if (localStorage.getItem('choix') == 'films') {
       this.suggestionService.rechercheAvancee_Categorie_movies(this.CategorieForm.value.checkArray).subscribe((video: Video) => {
         this.liste_after_categories_movies = video;
-        console.log(this.liste_after_categories_movies);
         return this.liste_after_categories_movies;
       });
     }
     if (localStorage.getItem('choix') == 'series') {
       this.suggestionService.rechercheAvancee_Categorie_series(this.CategorieForm.value.checkArray).subscribe((serie: Serie) => {
         this.liste_after_categories_series = serie;
-        console.log(this.liste_after_categories_series);
         return this.liste_after_categories_series;
       });
     }
@@ -317,18 +307,14 @@ export class MainComponent implements OnInit {
     localStorage.setItem('duree', JSON.stringify(this.slider_value));
     //rechercheAvancee_final_1
     // si vo est vide
-    console.log("avant");
     if (localStorage.getItem('vo') == "") {
-      console.log("1");
       localStorage.setItem('rechercheAvance', this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'), JSON.parse(localStorage.getItem('categorie')),localStorage.getItem('duree')));
       this.rechercheAvancee();
-      console.log("2");
         //this.liste_after_categories_series = serie;
         //console.log(this.liste_after_categories_series);
         //return this.liste_after_categories_series;
     }
     else {
-      console.log('julie');
       localStorage.setItem('rechercheAvance', this.suggestionService.rechercheAvancee_final_1(localStorage.getItem('choix'), JSON.parse(localStorage.getItem('categorie')),localStorage.getItem('duree'), JSON.parse(localStorage.getItem('vo'))));
       this.rechercheAvancee();
     }
@@ -338,7 +324,6 @@ export class MainComponent implements OnInit {
   changeLanguageValue() {
 
     console.log(this.shipping.get('signature').value);
-    console.log(localStorage.getItem('choix'));
 
     if (this.shipping.get('signature').value == 'v' || this.shipping.get('signature').value == 'both') {
       if (localStorage.getItem('choix') == 'films') {
