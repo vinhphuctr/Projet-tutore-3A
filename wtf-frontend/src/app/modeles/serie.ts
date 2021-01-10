@@ -26,5 +26,6 @@ export class Serie {
   saisons: Array<Saison>;
   length: number;
   results: Array<Video>;
+  directeurs: Array<Personne>;
 
 }

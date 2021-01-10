@@ -20,7 +20,7 @@ export class Video {
     categories : Array<Categorie>;
     trailer : String;
     length: number;
-
+    directeurs: Array<Personne>;
    results: Array<Video>;
     count: number;
 }

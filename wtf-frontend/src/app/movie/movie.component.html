@@ -34,10 +34,10 @@
       <p><span class="purple">Durée : </span> {{ video?.duree|minuteSeconds }}</p>
       <p><span class="purple">Date de sortie :</span> {{video?.date_sortie | date:'d/M/yyyy'}}</p>
       <p><span class="purple">Langue original : </span>{{video?.vo}}</p>
-      <p><span class="purple">Catégorie : </span><span *ngFor="let categorie of video?.categories"> {{categorie.libelle}}<span *ngIf="categorie != video?.categories[video.categories.length - 1]">,</span></span></p>
-      <p><span class="purple">Société de production : </span><span *ngFor="let prod of video?.productions"> {{prod.nom}}<span *ngIf="prod != video?.productions[video.productions.length - 1]">,</span></span></p>
-      <p><span class="purple">Réalisateur: </span> En production</p>
-      <p><span class="purple">Stars : </span><span *ngFor="let acteur of video?.acteurs"> {{acteur.prenom}} {{acteur.nom}} <span *ngIf="acteur != video?.acteurs[video.acteurs.length - 1]">,</span></span></p>
+      <p *ngIf="video?.categories.length > 0"><span class="purple">Catégorie : </span><span *ngFor="let categorie of video?.categories"> {{categorie.libelle}}<span *ngIf="categorie != video?.categories[video.categories.length - 1]">,</span></span></p>
+      <p *ngIf="video?.productions.length > 0"><span class="purple">Société de production : </span><span *ngFor="let prod of video?.productions"> {{prod.nom}}<span *ngIf="prod != video?.productions[video.productions.length - 1]">,</span></span></p>
+      <p *ngIf="video?.directeurs.length > 0"><span class="purple">Réalisateur: </span><span *ngFor="let directeur of video?.directeurs"> {{directeur.nom}}<span *ngIf="directeur != video?.directeurs[video.directeurs.length - 1]">,</span></span></p>
+      <p *ngIf="video?.acteurs.length > 0"><span class="purple">Stars : </span><span *ngFor="let acteur of video?.acteurs"> {{acteur.prenom}} {{acteur.nom}} <span *ngIf="acteur != video?.acteurs[video.acteurs.length - 1]">,</span></span></p>
       <p><span class="purple">Synopsis : </span> {{video?.plot}}</p>
       <p style="margin-top: 3%">
         <ul class="cards">
