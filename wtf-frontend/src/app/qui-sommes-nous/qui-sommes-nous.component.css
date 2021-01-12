@@ -104,7 +104,7 @@ mat-toolbar {
 }
 
 .mentionslegales{
-  font-size: 14x;
+  font-size: 18x;
 }
 
 
@@ -122,7 +122,7 @@ p{
 }
 
 .titre{
-  font-size: 28px;
+  font-size: 35px;
 }
 
 .example-card {
@@ -136,13 +136,42 @@ p{
 
 }
 
-.photo-alexis {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+.photo-julien {
+  background-image: url('/assets/images/julien.jpg');
   background-size: cover;
-  width:150px;
-  height: 150px;
+  width:220px;
+  height: 220px;
 }
-
+.photo-alexis {
+  background-image: url('/assets/images/alexis.jpg');
+  background-size: cover;
+  width:220px;
+  height: 220px;
+}
+.photo-remi {
+  background-image: url('/assets/images/remi.jpg');
+  background-size: cover;
+  width:220px;
+  height: 220px;
+}
+.photo-julie {
+  background-image: url('/assets/images/julie.jpg');
+  background-size: cover;
+  width:220px;
+  height: 220px;
+}
+.photo-bap {
+  background-image: url('/assets/images/bap.jpg');
+  background-size: cover;
+  width:220px;
+  height: 220px;
+}
+.photo-vinh {
+  background-image: url('/assets/images/vinh.jpg');
+  background-size: cover;
+  width:220px;
+  height: 220px;
+}
 
 .alignleft {
   float: left;
