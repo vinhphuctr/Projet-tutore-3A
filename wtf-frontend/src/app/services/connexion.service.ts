@@ -99,6 +99,7 @@ export class connexionService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (this.isAuthenticated() == true) {
+      window.scroll(0,0);
       return true;
     }
     else {
