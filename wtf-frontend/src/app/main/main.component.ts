@@ -19,8 +19,8 @@ import { map } from 'rxjs/operators';
 import { Serie } from '../modeles/serie';
 import { Categorie } from '../modeles/categorie';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-
+import { suggestionFav } from '../modeles/suggestionFav';
+import { suggestionRate } from '../modeles/suggestionRate';
 
 
 
@@ -35,8 +35,9 @@ export class MainComponent implements OnInit {
   parentMessage = "message from parent";
   @ViewChild('myCategorie') myCategorie: ElementRef;
   @ViewChild('myLanguage') myLanguage: ElementRef;
+  tabSuggestionsFavorisFilm: suggestionFav;
+  tabSuggestionsRatingFilm: suggestionRate;
   tabTendanceFilm: Array<Video>;
-  tabTendanceFilmLike: Array<Video>;
   tabTendanceSerie: Array<Serie>;
   isRechercheRapide: boolean = false;
   isRechercheAvance: boolean = false;
@@ -76,7 +77,6 @@ export class MainComponent implements OnInit {
   constructor(private nav: NavbarService, private suggestionService: SuggestionService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private face: FormBuilder, private renderer: Renderer2,
     private sanitizer: DomSanitizer, private _httpClient: HttpClient, private movieService: MovieService, private serieService: SerieService,private _snackBar: MatSnackBar) {
     nav.show()
-    //this.tabTendanceFilm = this.suggestionService.getTendanceFilms();
   }
 
   ngOnInit(): void {
@@ -110,6 +110,15 @@ export class MainComponent implements OnInit {
     this.rechercheRapideSerieForm = new FormGroup({
       recherche: new FormControl("", [Validators.required])
     })
+    this.suggestionService.getSuggestionsFavorisFilms().subscribe((res: any) => {
+      this.tabSuggestionsFavorisFilm = res.favoris_suggestion;
+    });
+    this.suggestionService.getTendancesFilms().subscribe((res: any) => {
+      this.tabTendanceFilm = res;
+    });
+    this.suggestionService.getSuggestionRatingFilm().subscribe((res: any) => {
+      this.tabSuggestionsRatingFilm = res.rating_suggestion;
+    });
   }
 
   onCheckboxChange(e) {
