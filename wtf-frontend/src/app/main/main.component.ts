@@ -30,6 +30,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
+
   @ViewChild('myButton') myButton: ElementRef;
   parentMessage = "message from parent";
   @ViewChild('myCategorie') myCategorie: ElementRef;

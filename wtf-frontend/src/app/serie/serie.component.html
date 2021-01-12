@@ -12,8 +12,11 @@
   <button class="return" (click)="goBack()" mat-stroked-button><mat-icon>arrow_left_alt</mat-icon>Retour</button>
   <section class="container" style="padding-top: 3%;">
     <div style="width: 22%; height: 80%; float:left;">
-      <div class="d" style="position: relative; text-align: center;">
+      <div *ngIf="serie?.poster" class="d" style="position: relative; text-align: center;">
         <img src="http://image.tmdb.org/t/p/w780/{{serie?.poster}}">
+      </div>
+      <div *ngIf="!serie?.poster" class="d" style="position: relative; text-align: center;">
+        <img src="/assets/images/wtf_unique_final_trans.png">
       </div>
       <div style="position: relative; text-align: center; margin-top: 10px;">
 

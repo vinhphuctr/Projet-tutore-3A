@@ -21,7 +21,8 @@
         <li *ngFor="let movie of tabFilm">
           <div class="blocFilm">
           <div id="bloc1">
-            <img routerLink="{{url}}{{movie.id_video}}" src="http://image.tmdb.org/t/p/w780/{{movie?.poster}}">
+            <img *ngIf="movie?.poster" routerLink="{{url}}{{movie.id_video}}" src="http://image.tmdb.org/t/p/w780/{{movie?.poster}}">
+            <img *ngIf="!movie?.poster" routerLink="{{url}}{{movie.id_video}}" src="/assets/images/wtf_unique_final_trans.png">
             </div>
             <div id="bloc2">
               <p id="film">{{movie.titre}} ({{movie.date_sortie | date:'yyyy'}})</p>
@@ -40,7 +41,8 @@
         <li *ngFor="let serie of tabSerie">
           <div class="blocFilm">
           <div id="bloc1">
-            <img routerLink="{{url}}{{serie.id_video}}" src="http://image.tmdb.org/t/p/w780/{{serie?.poster}}">
+            <img *ngIf="serie?.poster" routerLink="{{url}}{{serie.id_video}}" src="http://image.tmdb.org/t/p/w780/{{serie?.poster}}">
+            <img *ngIf="!serie?.poster" routerLink="{{url}}{{serie.id_video}}" src="/assets/images/wtf_unique_final_trans.png">
             </div>
             <div id="bloc2">
               <p id="film">{{serie.titre}} ({{serie.date_sortie | date:'yyyy'}})</p>

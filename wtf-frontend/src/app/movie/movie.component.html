@@ -12,9 +12,12 @@
   <button class="return" (click)="goBack()" mat-stroked-button><mat-icon>arrow_left_alt</mat-icon>Retour</button>
   <section class="container" style="padding-top: 3%;">
     <div style="width: 22%; height: 80%; float:left;">
-      <div class="d" style="position: relative; text-align: center;">
+      <div *ngIf="video?.poster" class="d" style="position: relative; text-align: center;">
         <img src="http://image.tmdb.org/t/p/w780/{{video?.poster}}">
-       </div>
+      </div>
+      <div *ngIf="!video?.poster" class="d" style="position: relative; text-align: center;">
+        <img src="/assets/images/wtf_unique_final_trans.png">
+      </div>
        <div style="position: relative; text-align: center; margin-top: 10px;">
         <button [id]="'fav_' + video?.id_video " (click)="addFav(video?.id_video)"  mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
           <mat-icon>favorite</mat-icon>
