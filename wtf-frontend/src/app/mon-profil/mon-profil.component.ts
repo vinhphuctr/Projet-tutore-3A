@@ -1,12 +1,13 @@
+// Composant Mon Profil
+// par Julie HUA & un peu Julien GODEST
+// Permet à l'utilisateur de voir ses paramètres qu'il a indiqué lors de l'inscription et même la possibilité de modifier certains critères.
+
 import { Component, OnInit } from '@angular/core';
 import { Utilisateur } from '../modeles/utilisateur';
 import { MonprofilService } from '../services/monprofil.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NavbarService } from '../services/navbar.service';
 import { UtilisateurService } from '../services/utilisateur.service';
-
-
-
 
 @Component({
   selector: 'app-mon-profil',

@@ -1,3 +1,7 @@
+// Composant FAQ
+// par Julien GODEST & Julie HUA
+// Relatif à la page foire au question accessible par un bouton dans le footer
+
 import { Component, OnInit } from '@angular/core';
 import { NavbarService } from '../services/navbar.service';
 

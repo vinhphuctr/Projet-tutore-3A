@@ -1,3 +1,7 @@
+// Composant Nav Bar
+// par Julien GODEST & Julie HUA
+// Bar en haut de la page affichant le nom + prenom de l'utilisateur et bouton de deconnexion. Il y a un menu en haut à gauche qui permet d'accéder à de nouvelles pages.
+
 import { Component, OnInit} from '@angular/core';
 import { NavbarService } from '../services/navbar.service';
 import { connexionService } from '../services/connexion.service';

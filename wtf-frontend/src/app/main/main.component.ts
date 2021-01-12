@@ -1,3 +1,7 @@
+// Composant Main
+// par Julie HUA & Julien GODEST
+// Page d'accueil quand l'utilisateur est connecté, affichage des suggestions et les boutons recherche rapide/avancée
+
 import { Component, OnInit } from '@angular/core';
 import { NavbarService } from '../services/navbar.service';
 import { SuggestionService} from '../services/suggestion.service';

@@ -1,3 +1,7 @@
+// Composant Recherche
+// par Julien GODEST
+// Page cible à la suite d'une recherche (rapide ou avancée), liste des résultats trouvés avec pagination si trop de résultats (50 résultats par page).
+
 import { Component, OnInit, Input} from '@angular/core';
 import { SuggestionService } from '../services/suggestion.service';
 import { Utilisateur } from '../modeles/utilisateur';
@@ -8,8 +12,6 @@ import { UtilisateurService } from '../services/utilisateur.service';
 import { rechercheFilm } from '../modeles/rechercheFIlm';
 import { rechercheSerie } from '../modeles/rechercheSerie';
 import { interval } from 'rxjs';
-
-
 
 @Component({
   selector: 'app-recherche-rapide',

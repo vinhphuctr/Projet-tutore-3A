@@ -1,3 +1,8 @@
+// Composant Série
+// par Julien GODEST
+// Page détaillant une série (accessible avec la route /serie/:id), affichage du poster, date, acteurs, plateformes, catégories ET possibilité de noter chaque saison!
+// Affichage de la moyenne par saison donné par tous nos utilisateurs, et également une moyenne globale de la série.
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';

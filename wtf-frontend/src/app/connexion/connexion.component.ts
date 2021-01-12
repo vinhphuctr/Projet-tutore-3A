@@ -1,3 +1,7 @@
+// Composant Connexion
+// par Julien GODEST
+// Gère la connexion d'un utilisateur sur le site
+
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { connexionService } from '../services/connexion.service';

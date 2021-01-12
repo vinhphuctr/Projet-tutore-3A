@@ -1,9 +1,14 @@
+// Composant token Interceptor
+// par Julien GODEST
+// Gère le token d'authentification qui est créé à la connexion d'un utilisateur, ce token représente l'utilisateur dans tout les appels à l'API.
+
 import { Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor,
+  HttpInterceptor,
+
   HttpHeaders
 } from '@angular/common/http';
 import { UtilisateurService } from '../services/utilisateur.service';

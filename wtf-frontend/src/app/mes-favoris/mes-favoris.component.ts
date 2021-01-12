@@ -1,10 +1,14 @@
+// Composant Favoris
+// par Julien GODEST
+// Page listant les favoris de l'utilisateur, avec la possibilité de supprimer le film/série de nos favoris et aussi d'aller voir la fiche technique de la vidéo.
+
+
 import { Component, OnInit} from '@angular/core';
 import { Utilisateur } from '../modeles/utilisateur';
 import { FavorisService } from '../services/favoris.service';
 import { Video } from '../modeles/video';
 import { interval } from 'rxjs';
 import { UtilisateurService } from '../services/utilisateur.service';
-
 
 
 @Component({

@@ -1,3 +1,7 @@
+// Composant Inscription
+// par Julien GODEST & Alexis PETRAZ
+// Permet de créer un nouveau compte utilisateur en remplissant un formulaire simple
+
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavbarService } from '../services/navbar.service';

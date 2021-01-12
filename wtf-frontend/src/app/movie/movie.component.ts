@@ -1,3 +1,8 @@
+// Composant Film
+// par Julien GODEST
+// Page détaillant un film (accessible avec la route /film/:id), affichage du poster, date, acteurs, plateformes, catégories ET possibilité de noter !
+// Affichage de la moyenne de ce film donné par tous nos utilisateurs
+
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';

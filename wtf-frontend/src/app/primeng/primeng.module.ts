@@ -1,3 +1,7 @@
+// Composant Primeng
+// Composant récupéré sur le site de Material (pas créé par nous)
+// Créé des étoiles utiles pour noter un film
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenubarModule } from 'primeng/menubar';

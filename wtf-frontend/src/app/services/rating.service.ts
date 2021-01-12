@@ -4,7 +4,6 @@ import { Video } from '../modeles/video';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { filter } from 'rxjs/operators';
-import { Note } from '../modeles/note';
 
 @Injectable({
   providedIn: 'root'
