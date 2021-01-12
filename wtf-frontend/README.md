@@ -1,27 +1,19 @@
-# WtfFrontend
+# Installation de WTF-Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.1.
+- Installer Visual Studio Code (IDE)
+- Installer Git bash 
+- git clone https://github.com/vinhphuctr/Projet-tutore-3A.git
+- Ouvrir une invite de commande cmd et se déplacer dans le repertoire wtf-frontend
+- Installer Node.js (pour savoir si tu l'a tape node -v)
+- Verifier que tu as npm (pour savoir tape npm -v)
 
-## Development server
+On va maintenant installer Angular et des modules qu'on utilise :
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- npm install -g @angular/cli
+- ng add @angular/material (CSS)
+- npm install primeng (Stars)
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Lancez l'application en tapant la commande : ng serve --open
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Pour tout problème contactez l'équipe FrontEnd (Julien/Julie).

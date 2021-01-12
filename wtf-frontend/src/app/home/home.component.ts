@@ -1,3 +1,7 @@
+// Composant Home
+// par Alexis PETRAZ
+// Premiere page quand on arrive sur le site non connecté, affichage au milieu de l'écran du logo de What The Film
+
 import { Component, OnInit } from '@angular/core';
 import { NavbarService } from '../services/navbar.service';
 
@@ -9,7 +13,11 @@ import { NavbarService } from '../services/navbar.service';
 export class HomeComponent implements OnInit {
 
 
-  constructor(private nav: NavbarService) { nav.hide() }
+  constructor(private nav: NavbarService) {
+
+    nav.hide()
+
+  }
 
   ngOnInit(): void {
   }

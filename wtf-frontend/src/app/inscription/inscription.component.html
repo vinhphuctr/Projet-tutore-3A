@@ -1,6 +1,16 @@
-<div class="header">
-    <h1>INSCRIPT<img id="img_carac" src="/assets/images/wtf_unique_final_trans.png" width="26">N</h1>
-    <button mat-button><mat-icon>arrow_left_alt</mat-icon>Page d'accueil</button>
+<head><script type='text/javascript'>
+  window.__lo_site_id = 272670;
+
+    (function() {
+      var wa = document.createElement('script'); wa.type = 'text/javascript'; wa.async = true;
+      wa.src = 'https://d10lpsik1i8c69.cloudfront.net/w.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wa, s);
+      })();
+    </script>
+    </head>
+    <div class="header">
+    <h1>INSCRIPTI<img id="img_carac" src="/assets/images/wtf_unique_final_trans.png" width="26">N</h1>
+    <button [routerLink]="'/connexion'" mat-button><mat-icon>arrow_left_alt</mat-icon>Page de connexion</button>
 </div>
 
 <form class="form" [formGroup]="inscriptionForm">
@@ -39,13 +49,29 @@
     <p>
         <mat-form-field appearance="fill">
             <mat-label>Genre</mat-label>
-            <select matNativeControl required>
+            <select matNativeControl formControlName="genre">
               <option value="Femme">Femme</option>
               <option value="Homme">Homme</option>
-              <option value="Indeterminé">Indeterminé</option>
+              <option value="Autre">Autre</option>
             </select>
         </mat-form-field>
     </p>
+    <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Votre date de naissance</mat-label>
+      <input matInput placeholder="03/11/1999" formControlName="date_naissance" [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field appearance="fill">
+        <mat-label>Pays</mat-label>
+        <select matNativeControl formControlName="pays">
+          <option [ngValue]="country" *ngFor="let country of countries">{{ country.name }}</option>
+        </select>
+    </mat-form-field>
+</p>
     <div class="info_tiers">
         <div class="tel">
             <mat-form-field appearance="standard">
@@ -54,15 +80,8 @@
             <mat-icon matSuffix color="primary">phone_iphone</mat-icon>
             </mat-form-field>
         </div>
-        <div class="pays">
-            <mat-form-field appearance="standard">
-            <mat-label>Pays</mat-label>
-            <input matInput formControlName="pays">
-            <mat-icon matSuffix color="primary">flag</mat-icon>
-            </mat-form-field>
-        </div>
     </div>
     <div mat-dialog-actions style="text-align: center; margin-top: 3%;" class="mb-1">
-        <button mat-raised-button type="submit" [disabled]="!inscriptionForm.valid"> S'inscrire </button>
+        <button mat-raised-button (click)="inscription()" [disabled]="!inscriptionForm.valid" > S'inscrire </button>
   </div>
 </form>

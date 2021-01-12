@@ -1,4 +1,9 @@
+// Composant Qui Sommes Nous
+// par Julien GODEST & Julie HUA
+// Page de présentation des membres de l'équipe et du projet
+
 import { Component, OnInit } from '@angular/core';
+import { NavbarService } from '../services/navbar.service';
 
 @Component({
   selector: 'app-qui-sommes-nous',
@@ -7,7 +12,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuiSommesNousComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(private nav: NavbarService) { nav.show() }
 
   ngOnInit(): void {
   }
