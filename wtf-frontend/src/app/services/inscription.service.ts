@@ -1,3 +1,8 @@
+// Service Inscription
+// par Julien GODEST
+// Récupère le formulaire d'inscription et appel l'API pour créer un nouvel utilisateur, si c'est OK on le connecte directement
+
+
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UtilisateurService } from '../services/utilisateur.service';

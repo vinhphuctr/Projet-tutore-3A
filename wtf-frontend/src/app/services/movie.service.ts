@@ -1,3 +1,8 @@
+// Service Film
+// par Julien GODEST
+// Récupère un film en particulier ou tous, fonctions permettant le calcul de la moyenne (Total Notes / Nombre de notes)
+
+
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';

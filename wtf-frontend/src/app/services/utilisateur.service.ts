@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+// Service Utilisateur
+// par Julien GODEST
+// Get et Set les informations personnelles de l'utilisateur ainsi qu'actualiser son token si celui est expiré (au bout d'une heure sur WhatTheFilm)
+
 import { Video } from '../modeles/video';
 import { FavorisService } from './favoris.service';
 import * as moment from "moment";

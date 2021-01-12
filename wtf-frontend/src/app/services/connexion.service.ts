@@ -1,3 +1,7 @@
+// Service Connexion
+// par Julien GODEST
+// Appel à l'API pour tester la connexion d'un utilisateur, si OK on recupère le token et les informations de l'utilisateur et on mets tout dans le localStorage
+
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UtilisateurService } from '../services/utilisateur.service';

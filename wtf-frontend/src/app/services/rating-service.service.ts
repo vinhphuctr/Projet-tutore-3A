@@ -1,3 +1,7 @@
+// Service Rating
+// par Alexis PETRAZ & Julie HUA
+// Appel à l'API pour créé une nouvelle note ou modifier une note déjà existante que ce soit pour un film ou une série
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { connexionService } from './connexion.service';

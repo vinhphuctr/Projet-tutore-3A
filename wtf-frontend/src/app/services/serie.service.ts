@@ -1,3 +1,7 @@
+// Service Serie
+// par Julien GODEST
+// Récupère une serie en particulier ou toutes, fonctions permettant le calcul de la moyenne (Total Notes / Nombre de notes)
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Serie } from '../modeles/serie';

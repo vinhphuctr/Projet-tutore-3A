@@ -1,3 +1,7 @@
+// Service Favoris
+// par Julien GODEST
+// Récupère ou modifie les favoris mis dans le localStorage, Appel à l'API pour ajouter/supprimer un favoris, fonction CheckIfFav() pour vérifier à l'affichage si la vidéo fait partie des favoris de l'utilisateur actuel
+
 import { Injectable } from '@angular/core';
 import { Video } from '../modeles/video';
 import { Serie } from '../modeles/serie';

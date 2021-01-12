@@ -1,3 +1,9 @@
+// Service Suggestion
+// par Julien GODEST
+// Gère 2 choses : 1- les appels à l'API pour récupérer les résultats d'une recherche rapide ou avancée
+// 2- Appel l'API pour obtenir les suggestions/tendances pour notre utilisateur
+
+
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -7,9 +13,6 @@ import { Categorie } from '../modeles/categorie';
 import { rechercheAvancee } from '../modeles/rechercheAvancee';
 import { rechercheFilm } from '../modeles/rechercheFIlm';
 import { rechercheSerie } from '../modeles/rechercheSerie';
-
-
-
 
 
 @Injectable({

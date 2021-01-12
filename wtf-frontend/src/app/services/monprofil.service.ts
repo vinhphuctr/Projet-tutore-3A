@@ -1,3 +1,8 @@
+// Service MonProfil
+// par Julien GODEST
+// Modifie les informations de l'utilisateur dans le Store
+
+
 import { Injectable } from '@angular/core';
 import { UtilisateurService } from '../services/utilisateur.service';
 import { HttpClient } from '@angular/common/http';
