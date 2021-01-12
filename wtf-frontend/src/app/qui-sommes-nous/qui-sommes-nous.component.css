@@ -47,6 +47,10 @@ p {
   background: rgb(93,84,164) !important;
 }
 
+.des {
+  font-size: 22px;
+}
+
 a {
   text-decoration: none;
   color: black;
