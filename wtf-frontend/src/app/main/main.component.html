@@ -65,7 +65,6 @@
     <form [formGroup]="shipping" #myLanguage>
       <h3>En quel langage souhaitez-vous voir ?</h3>
       <mat-radio-group formControlName="signature" (change)="changeLanguageValue()">
-        <mat-radio-button [value]="'v'">Version dans votre langue</mat-radio-button>
         <mat-radio-button [value]="'vo'">Version originale</mat-radio-button>
         <mat-radio-button [value]="'both'">Peu importe</mat-radio-button>
       </mat-radio-group>
@@ -75,19 +74,24 @@
 
     <form [formGroup]="CategorieForm" novalidate name="myForm" #myCategorie formControlName="juju" (submit)="SubmitCategorie()" #myCategorie>
       <h3> Quels catégories ?</h3>
-      <li *ngFor="let categorie of listeCategorieTest">
-        <!--<label>
-          <input type="checkbox" [value]="categorie.id_categ" ng-model="categorie.libelle" (change)="onCheckboxChange($event)" />
-          {{categorie.libelle}}
-        </label>-->
 
+      <div fxLayout="row" fxLayoutGap="32px" fxLayoutAlign="center center"  fxLayoutWrap="wrap" class="serv">
+        <li *ngFor="let categorie of listeCategorieTest">
+          <!--<label>
+    <input type="checkbox" [value]="categorie.id_categ" ng-model="categorie.libelle" (change)="onCheckboxChange($event)" />
+    {{categorie.libelle}}
+  </label>-->
+          <h4>
+            <section class="example-section">
+              <mat-checkbox class="cardListItem" [value]="categorie.id_categ" ng-model="categorie.libelle" (change)="onCheckboxChange($event)">
+                {{categorie.libelle}}
+              </mat-checkbox>
 
-        <section class="example-section">
-          <mat-checkbox class="example-margin" [value]="categorie.id_categ" ng-model="categorie.libelle" (change)="onCheckboxChange($event)"> {{categorie.libelle}}</mat-checkbox>
+            </section>
+          </h4>
           
-        </section>
-      </li>
-
+        </li>
+      </div>
       <button mat-stroked-button class="boutonRecherche">Soumettre ces catégories</button>
 
     </form>

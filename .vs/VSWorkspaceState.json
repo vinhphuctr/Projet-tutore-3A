@@ -2,15 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\wtf-frontend",
+    "\\wtf-frontend\\e2e\\src",
     "\\wtf-frontend\\src",
     "\\wtf-frontend\\src\\app",
-    "\\wtf-frontend\\src\\app\\main",
-    "\\wtf-frontend\\src\\app\\modeles",
-    "\\wtf-frontend\\src\\app\\movie",
-    "\\wtf-frontend\\src\\app\\recherche-rapide",
     "\\wtf-frontend\\src\\app\\serie",
     "\\wtf-frontend\\src\\app\\services"
   ],
-  "SelectedNode": "\\wtf-frontend\\src\\app\\main\\main.component.ts",
+  "SelectedNode": "\\wtf-frontend\\src\\app\\serie\\serie.component.ts",
   "PreviewInSolutionExplorer": false
 }

@@ -10,10 +10,20 @@
   -ms-user-select: none;
   user-select: none;
 }
-
+.cardListItem {
+  list-style: none;
+  flex: 0 0 33.333333%;
+}
 li {
   list-style: none;
 }
+
+.serv{
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+}
+
 
   /* Hide the browser's default checkbox */
   .container input {
