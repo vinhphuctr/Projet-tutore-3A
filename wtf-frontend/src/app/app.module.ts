@@ -29,9 +29,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './auth/token.interceptor';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MinuteSecondsPipe } from './helpers/MinuteSecondsPipe';
 import { SerieComponent } from './serie/serie.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -69,6 +70,8 @@ import { SerieComponent } from './serie/serie.component';
     PrimengModule,
     HttpClientModule,
     MatCheckboxModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
   ],
   providers: [
     {

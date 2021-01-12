@@ -31,6 +31,7 @@ export class RechercheRapideComponent implements OnInit {
   nbrResultats : Number;
   url : string;
   film: Boolean;
+  spinner: Boolean = true;
   data$ = interval(10);
 
   constructor(private _suggestionService: SuggestionService,private UtilisateurService : UtilisateurService, private FavorisService: FavorisService) {
@@ -51,6 +52,7 @@ export class RechercheRapideComponent implements OnInit {
           this.previous = res.previous;
           this.next = res.next;
           this.nbrResultats = res.count;
+          this.spinner = false;
         });
       }
       else {
@@ -61,6 +63,7 @@ export class RechercheRapideComponent implements OnInit {
           this.previous = res.previous;
           this.next = res.next;
           this.nbrResultats = res.count;
+          this.spinner = false;
         });
       }
     }
@@ -74,6 +77,7 @@ export class RechercheRapideComponent implements OnInit {
           this.previous = res.previous;
           this.next = res.next;
           this.nbrResultats = res.count;
+          this.spinner = false;
         });
       }
       else {
@@ -84,6 +88,7 @@ export class RechercheRapideComponent implements OnInit {
           this.previous = res.previous;
           this.next = res.next;
           this.nbrResultats = res.count;
+          this.spinner = false;
         });
       }
     }
@@ -132,6 +137,7 @@ export class RechercheRapideComponent implements OnInit {
     if(localStorage.getItem('typeDeRecherche') == "rechercheRapide"){
       localStorage.setItem('rechercheRapide', this.next);
     }
+    this.spinner = true;
     this.ngOnInit();
   }
 
@@ -139,6 +145,7 @@ export class RechercheRapideComponent implements OnInit {
     if(localStorage.getItem('typeDeRecherche') == "rechercheRapide"){
       localStorage.setItem('rechercheRapide', this.previous);
     }
+    this.spinner = true;
     this.ngOnInit();
   }
 

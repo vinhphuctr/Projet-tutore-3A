@@ -21,3 +21,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; display: fl
 }
 
 
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: rgb(93,84,164) !important;
+}
+

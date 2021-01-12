@@ -13,6 +13,7 @@
   <h1 matSubheader>Nombre de résultats : {{nbrResultats}}</h1>
   <button [routerLink]="'/main'" mat-stroked-button><mat-icon>arrow_left_alt</mat-icon>Page d'accueil</button>
   <div aria-label="gallery">
+    <mat-spinner style="margin-left: 20%; margin-bottom: 10%;" *ngIf="spinner"></mat-spinner>
     <div>
       <button *ngIf="previous" (click)="previousPage()" mat-stroked-button><mat-icon>arrow_left_alt</mat-icon>Précédent</button>
       <button *ngIf="next" (click)="nextPage()" mat-stroked-button><mat-icon>arrow_right_alt</mat-icon>Suivant</button>
