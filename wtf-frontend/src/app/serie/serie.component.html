@@ -8,7 +8,10 @@
       })();
     </script>
     </head>
-    <div class="main-content">
+    <div *ngIf="spinner" class="main-content">
+      <mat-spinner style="margin-left: 20%; margin-bottom: 10%;"></mat-spinner>
+    </div>
+    <div  *ngIf="!spinner" class="main-content">
   <button class="return" (click)="goBack()" mat-stroked-button><mat-icon>arrow_left_alt</mat-icon>Retour</button>
   <section class="container" style="padding-top: 3%;">
     <div style="width: 22%; height: 80%; float:left;">

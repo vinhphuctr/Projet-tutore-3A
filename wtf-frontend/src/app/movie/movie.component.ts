@@ -30,6 +30,7 @@ export class MovieComponent implements OnInit {
   actualRating: NoteFilm;
   UtilisateurData: Utilisateur;
   moyenneRating: number;
+  spinner : Boolean = true;
 
 
   constructor(
@@ -56,6 +57,7 @@ export class MovieComponent implements OnInit {
       } else {
         this.actualRating = this.video.rates[0];
       }
+      this.spinner = false;
       this.moyenneRating = Number((this._movieService.getTotalNotes() / this._movieService.getnbrNotes()).toPrecision(2));
     });
   }
