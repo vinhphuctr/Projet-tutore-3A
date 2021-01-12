@@ -34,8 +34,7 @@ export class SerieComponent implements OnInit {
   moyenneRatingBySaison: Array<number> = [];
   totalRating: number = 0;
   moyenneRating: number = 0;
-
-
+  spinner : Boolean = true;
 
   constructor( private route: ActivatedRoute,
     private _location: Location,
@@ -71,6 +70,7 @@ export class SerieComponent implements OnInit {
         }
       }
       this.moyenneRating = Number((this.totalRating / i).toPrecision(2));
+      this.spinner = false;
     });
   }
 

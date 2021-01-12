@@ -13,6 +13,9 @@ import { Categorie } from '../modeles/categorie';
 import { rechercheAvancee } from '../modeles/rechercheAvancee';
 import { rechercheFilm } from '../modeles/rechercheFIlm';
 import { rechercheSerie } from '../modeles/rechercheSerie';
+import { suggestionFav } from '../modeles/suggestionFav';
+import { suggestionRate } from '../modeles/suggestionRate';
+
 
 
 @Injectable({
@@ -26,8 +29,16 @@ export class SuggestionService {
 
   constructor(private _httpClient : HttpClient) { }
 
-  getTendanceFilms(): Observable<Video>{
-    return this._httpClient.get<Video>("https://wtf-api-v1.herokuapp.com/api/categories");
+  getSuggestionsFavorisFilms(): Observable<suggestionFav>{
+    return this._httpClient.get<suggestionFav>("https://wtf-api-v1.herokuapp.com/api/suggestion-favoris");
+  }
+
+  getTendancesFilms(): Observable<Array<Video>>{
+    return this._httpClient.get<Array<Video>>("https://wtf-api-v1.herokuapp.com/api/tendance");
+  }
+
+  getSuggestionRatingFilm(): Observable<suggestionRate>{
+    return this._httpClient.get<suggestionRate>("  https://wtf-api-v1.herokuapp.com/api/suggestion-rating");
   }
 
   rechercheRapide(url: string): Observable<rechercheFilm> {

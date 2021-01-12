@@ -1,30 +1,30 @@
 <div class="main-content">
 
   <h1 matSubheader><img id="etoile" src="https://media.discordapp.net/attachments/757219550663147592/769167745320484944/etoile.png?width=668&height=670">Commencez votre scoring now !</h1>
-  <h3>Tendance Films</h3>
+  <h3 style="font-size: 26px;">Les tendances Films...</h3>
   <div aria-label="gallery">
     <ul>
       <li *ngFor="let suggestion of tabTendanceFilm">
-        <img routerLink="/film/{{suggestion.id_video}}" src="{{suggestion.poster}}"><button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
-        </button>
+        <img *ngIf="suggestion?.poster" routerLink="/film/{{suggestion.id_video}}" src="http://image.tmdb.org/t/p/w780/{{suggestion.poster}}">
+        <img *ngIf="!suggestion?.poster" routerLink="/film/{{suggestion.id_video}}" src="/assets/images/wtf_unique_final_trans.png">
       </li>
     </ul>
   </div>
-  <h3>Tendance Séries</h3>
+  <h3 style="margin-top: 4%; font-size: 26px;">Selon vos Films favoris...</h3>
   <div aria-label="gallery">
     <ul>
-      <li *ngFor="let suggestion of tabTendanceSerie">
-        <img routerLink="/serie/{{suggestion.id_video}}" src="{{suggestion.poster}}"><button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
-        </button>
+      <li *ngFor="let suggestion of tabSuggestionsFavorisFilm">
+        <img *ngIf="suggestion?.poster" routerLink="/film/{{suggestion.id_video}}" src="http://image.tmdb.org/t/p/w780/{{suggestion.poster}}">
+        <img *ngIf="!suggestion?.poster" routerLink="/film/{{suggestion.id_video}}" src="/assets/images/wtf_unique_final_trans.png">
       </li>
     </ul>
   </div>
-  <h3>Par ce que vous avez liké</h3>
+  <h3 style="margin-top: 4%; font-size: 26px;">Suggestion de Films selon vos rating...</h3>
   <div aria-label="gallery">
     <ul>
-      <li *ngFor="let suggestion of tabTendanceFilmLike">
-        <img routerLink="/film/{{suggestion.id_video}}" src="{{suggestion.poster}}"><button mat-icon-button color="warn" aria-label="Example icon-button with a heart icon">
-        </button>
+      <li *ngFor="let suggestion of tabSuggestionsRatingFilm">
+        <img *ngIf="suggestion?.poster" routerLink="/film/{{suggestion.id_video}}" src="http://image.tmdb.org/t/p/w780/{{suggestion.poster}}">
+        <img *ngIf="!suggestion?.poster" routerLink="/film/{{suggestion.id_video}}" src="/assets/images/wtf_unique_final_trans.png">
       </li>
     </ul>
   </div>
@@ -75,6 +75,7 @@
     <form [formGroup]="CategorieForm" novalidate name="myForm" #myCategorie formControlName="juju" (submit)="SubmitCategorie()" #myCategorie>
       <h3> Quels catégories ?</h3>
 
+
       <div fxLayout="row" fxLayoutGap="32px" fxLayoutAlign="center center"  fxLayoutWrap="wrap" class="serv">
         <li *ngFor="let categorie of listeCategorieTest">
           <!--<label>
@@ -92,6 +93,7 @@
           
         </li>
       </div>
+
       <button mat-stroked-button class="boutonRecherche">Soumettre ces catégories</button>
 
     </form>
