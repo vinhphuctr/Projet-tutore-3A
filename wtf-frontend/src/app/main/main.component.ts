@@ -111,13 +111,13 @@ export class MainComponent implements OnInit {
       recherche: new FormControl("", [Validators.required])
     })
     this.suggestionService.getSuggestionsFavorisFilms().subscribe((res: any) => {
-      this.tabSuggestionsFavorisFilm = res.favoris_suggestion;
+      this.tabSuggestionsFavorisFilm = res.rating_suggestion;
     });
     this.suggestionService.getTendancesFilms().subscribe((res: any) => {
       this.tabTendanceFilm = res;
     });
     this.suggestionService.getSuggestionRatingFilm().subscribe((res: any) => {
-      this.tabSuggestionsRatingFilm = res.rating_suggestion;
+      this.tabSuggestionsRatingFilm = res.favoris_suggestion;
     });
   }
 

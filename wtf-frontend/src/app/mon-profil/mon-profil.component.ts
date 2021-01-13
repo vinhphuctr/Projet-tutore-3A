@@ -19,6 +19,7 @@ import { UtilisateurService } from '../services/utilisateur.service';
 export class MonProfilComponent implements OnInit {
   modifyUserForm: FormGroup;
   UtilisateurData: Utilisateur;
+  valide : Boolean = false;
 
     constructor(private MonprofilService: MonprofilService, private utilisateurService : UtilisateurService,private nav: NavbarService) { }
 
@@ -33,6 +34,12 @@ export class MonProfilComponent implements OnInit {
     })
   }
 
+  sleep(ms) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+  }
+
   modifyUser() {
     this.UtilisateurData.email = this.modifyUserForm.value["email"];
     this.UtilisateurData.prenom = this.modifyUserForm.value["prenom"];
@@ -40,6 +47,8 @@ export class MonProfilComponent implements OnInit {
     this.UtilisateurData.pays = this.modifyUserForm.value["pays"];
     this.UtilisateurData.telephone = this.modifyUserForm.value["telephone"];
     this.MonprofilService.modifyUser(this.UtilisateurData);
+    this.valide = true;
+    setTimeout(() => {  this.valide = false; }, 1000);
   }
 }
 
