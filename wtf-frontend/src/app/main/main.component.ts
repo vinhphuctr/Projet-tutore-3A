@@ -2,6 +2,7 @@
 // par Julie HUA & Julien GODEST
 // Page d'accueil quand l'utilisateur est connecté, affichage des suggestions et les boutons recherche rapide/avancée
 
+// importation des modules
 import { Component, OnInit } from '@angular/core';
 import { NavbarService } from '../services/navbar.service';
 import { SuggestionService} from '../services/suggestion.service';
@@ -22,56 +23,71 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { suggestionFav } from '../modeles/suggestionFav';
 import { suggestionRate } from '../modeles/suggestionRate';
 
-
-
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-
+  // Julie : références des éléments div 
   @ViewChild('myButton') myButton: ElementRef;
-  parentMessage = "message from parent";
   @ViewChild('myCategorie') myCategorie: ElementRef;
   @ViewChild('myLanguage') myLanguage: ElementRef;
+
+  // Tableau de suggestion (selon les favoris, selon les rates)
   tabSuggestionsFavorisFilm: suggestionFav;
   tabSuggestionsRatingFilm: suggestionRate;
+
+  // tableau de tendances des films et des séries 
   tabTendanceFilm: Array<Video>;
   tabTendanceSerie: Array<Serie>;
+
+  // booléen recherche rapide/avancé
   isRechercheRapide: boolean = false;
   isRechercheAvance: boolean = false;
-  rechercheRapideForm: FormGroup;
-  rechercheRapideSerieForm: FormGroup;
-  rechercheAvanceeForm: FormGroup;
-  slider_value: number = 180;
-  film_value: string = "film";
-  shippingForm: FormGroup;
-  CategorieForm: FormGroup;
-  languageForm: FormGroup;
-  tabCategories: Array<Categorie> = [];
-  lis: Serie;
-  liste: Array<Categorie> = [];
-  listeMovie: Array<Categorie> = [];
+
+  // booléen utilisés pour l'affichage des div en HTML si true, initialisé à false
   Categorie: boolean = false;
   vo: boolean = false;
   language: boolean = false;
-  listeVideos: Array<Video> = [];
-  listeSeries: Array<Serie> = [];
+
+  // formulaire 
+  rechercheRapideForm: FormGroup;
+  rechercheRapideSerieForm: FormGroup;
+  rechercheAvanceeForm: FormGroup;
+  shippingForm: FormGroup;
+  CategorieForm: FormGroup;
+  languageForm: FormGroup;
+  voForm: FormGroup;
+  shipping: FormGroup;
+  dureeForm: FormGroup;
+
+  slider_value: number = 180;
+  film_value: string = "film";
+
+  // tableau de type Catégorie
+  tabCategories: Array<Categorie> = [];
+  listeMovie: Array<Categorie> = [];
+  listeCategorieTest: Array<Categorie> = [];
+  liste: Array<Categorie> = [];
+
+  // objet de type série/video(pour film)
+  lis: Serie;
   liste_after_categories_movies: Video;
   liste_after_categories_series: Serie;
+
+  // tableau de type série/vidéo(pour film)
+  listeVideos: Array<Video> = [];
+  listeSeries: Array<Serie> = [];
   tab_liste_vo_after_movie: Array<Video> = [];
   tab_liste_vo_after_serie: Array<Serie> = [];
+
+
   radioSelected : string = '';
-  listeCategorieTest: Array<Categorie> = [];
-  shipping: FormGroup;
   tab_vo: Array<any> = [] ;
-  voForm: FormGroup;
   duree: boolean = false;
   max: number;
   min: number;
-  dureeForm: FormGroup;
-
   alerte: boolean;
 
   constructor(private nav: NavbarService, private suggestionService: SuggestionService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private face: FormBuilder, private renderer: Renderer2,
