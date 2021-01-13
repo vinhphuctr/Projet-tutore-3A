@@ -42,16 +42,17 @@ export class MainComponent implements OnInit {
   tabTendanceFilm: Array<Video>;
   tabTendanceSerie: Array<Serie>;
 
-  // booléen recherche rapide/avancé
+  // Julie : booléen recherche rapide/avancé
   isRechercheRapide: boolean = false;
   isRechercheAvance: boolean = false;
 
-  // booléen utilisés pour l'affichage des div en HTML si true, initialisé à false
+  // Julie : booléen utilisés pour l'affichage des div en HTML si true, initialisé à false
   Categorie: boolean = false;
   vo: boolean = false;
   language: boolean = false;
+  duree: boolean = false;
 
-  // formulaire 
+  // Julie : formulaire 
   rechercheRapideForm: FormGroup;
   rechercheRapideSerieForm: FormGroup;
   rechercheAvanceeForm: FormGroup;
@@ -61,35 +62,35 @@ export class MainComponent implements OnInit {
   voForm: FormGroup;
   shipping: FormGroup;
   dureeForm: FormGroup;
-
-  slider_value: number = 180;
-  film_value: string = "film";
-
-  // tableau de type Catégorie
+ 
+  // Julie : tableau de type Catégorie
   tabCategories: Array<Categorie> = [];
   listeMovie: Array<Categorie> = [];
   listeCategorieTest: Array<Categorie> = [];
   liste: Array<Categorie> = [];
 
-  // objet de type série/video(pour film)
+  // Julie : objet de type série/video(pour film)
   lis: Serie;
   liste_after_categories_movies: Video;
   liste_after_categories_series: Serie;
 
-  // tableau de type série/vidéo(pour film)
+  // Julie : tableau de type série/vidéo(pour film)
   listeVideos: Array<Video> = [];
   listeSeries: Array<Serie> = [];
   tab_liste_vo_after_movie: Array<Video> = [];
   tab_liste_vo_after_serie: Array<Serie> = [];
 
+  // Julie : min et max de la durée provenant du tableau des films sélectionnés
+  max: number;
+  min: number;
 
   radioSelected : string = '';
   tab_vo: Array<any> = [] ;
-  duree: boolean = false;
-  max: number;
-  min: number;
   alerte: boolean;
+  slider_value: number = 180;
+  film_value: string = "film";
 
+  // constructeur
   constructor(private nav: NavbarService, private suggestionService: SuggestionService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder, private face: FormBuilder, private renderer: Renderer2,
     private sanitizer: DomSanitizer, private _httpClient: HttpClient, private movieService: MovieService, private serieService: SerieService,private _snackBar: MatSnackBar) {
     nav.show()
@@ -97,10 +98,10 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // initialisation des formulaires déclarés dans le constructeur
     this.shipping = this.fb.group({
       signature: ['false'],
     })
-
     this.shippingForm = this.fb.group({
       signatureReq: ['film'],
     })
@@ -110,22 +111,20 @@ export class MainComponent implements OnInit {
     this.CategorieForm = this.fb.group({
       checkArray: this.fb.array([], [Validators.required])
     })
-
-
     this.voForm = this.fb.group({
       check: this.fb.array([], [Validators.required])
     })
-
     this.dureeForm = new FormGroup({
       slider_value: new FormControl("", [Validators.required])
     })
-
     this.rechercheRapideForm = new FormGroup({
       recherche: new FormControl("", [Validators.required])
     })
     this.rechercheRapideSerieForm = new FormGroup({
       recherche: new FormControl("", [Validators.required])
     })
+
+
     this.suggestionService.getSuggestionsFavorisFilms().subscribe((res: any) => {
       this.tabSuggestionsFavorisFilm = res.favoris_suggestion;
     });
@@ -137,10 +136,10 @@ export class MainComponent implements OnInit {
     });
   }
 
+  // évènement onChange pour les checkbox concernant les catégories
+  // si la catégorie est coché (checked) alors elle est ajouté dans un tableau qui provient du formulaire 
   onCheckboxChange(e) {
-
     const checkArray: FormArray = this.CategorieForm.get('checkArray') as FormArray;
-
     if (e.checked==true) {
       checkArray.push(new FormControl(e.source.value));
     } else {
