@@ -171,6 +171,9 @@ width: 100px;
 [aria-label="gallery"] img {
   max-height: 300px;
   max-width: 200px;
+  min-height: 300px;
+  min-height: 300px;
+  box-shadow: 5px 5px 15px 5px rgba(0,0,0,0.44);
 }
 
 /* Let's get this party started */
