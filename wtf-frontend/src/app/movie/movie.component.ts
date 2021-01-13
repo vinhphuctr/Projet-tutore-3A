@@ -13,6 +13,7 @@ import { FavorisService } from '../services/favoris.service';
 import { NoteFilm } from '../modeles/note';
 import { RatingService } from '../services/rating-service.service';
 import { connexionService } from '../services/connexion.service';
+import {TooltipPosition} from '@angular/material/tooltip';
 
 
 @Component({
