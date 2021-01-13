@@ -17,6 +17,9 @@ export class RatingService {
   urlSaison: string = "https://wtf-api-v1.herokuapp.com/api/series/saison/rating"
   constructor(private _http: HttpClient, private _authService: connexionService) { }
 
+
+  // Julie : Fonction qui prends en paramètre la note d'un FILM
+  // et qu'on envoit en post à l'API 
   postRating(note: NoteFilm) {
     return this._http.post<NoteFilm>(this.urlFilm, note);
   }

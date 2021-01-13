@@ -1,5 +1,5 @@
 // Service MonProfil
-// par Julien GODEST
+// par HUA Julie
 // Modifie les informations de l'utilisateur dans le Store
 
 
